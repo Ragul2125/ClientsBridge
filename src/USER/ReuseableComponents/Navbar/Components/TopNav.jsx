@@ -67,7 +67,12 @@ const TopNav = () => {
             onChange={(e) => setgsearch(e.target.value)}
           />
         </div>
-        <div onClick={() => navigate("/client/profile")} className="profile">
+        <div
+          onClick={() =>
+            navigate(`/${localStorage.getItem("role").toLowerCase()}/myProfile`)
+          }
+          className="profile"
+        >
           <img
             src={userData?.profilePic}
             className="profileImg"

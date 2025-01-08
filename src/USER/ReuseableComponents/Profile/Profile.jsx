@@ -1,57 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./profile.css";
-// import Profiledp from './assets/Pdp.png'
-import icon from "../../assets/userdp.svg";
-import { LiaStarSolid } from "react-icons/lia";
-import image1 from "../../assets/userdp.svg";
-import image from "../../assets/userdp.svg";
-import image2 from "../../assets/userdp.svg";
-import image3 from "../../assets/userdp.svg";
-import image4 from "../../assets/userdp.svg";
-import image5 from "../../assets/userdp.svg";
-// -------------for-rating----------------
-// ---------------install-MUI--------------
-// npm install @mui/material @emotion/react @emotion/styled
 import Rating from "@mui/material/Rating";
 
 import { FaRegEdit } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
+import axios from "axios";
 
 const Profile = () => {
-  // ----------------personal-details--------------------------
-  const [profileData, setProfileData] = useState({
-    name: "Ragul",
-    username: "ragul@123",
-    role: "Freelancer",
-    description: "Description about them",
-    email: "abc@gmail.com",
-  });
-
-  // -------------------professional-details---------------------
-  const [professionalDetails, setProfessionalDetails] = useState([
-    {
-      ownerName: "John Doe",
-      managerName: "Jane Smith",
-      city: "New York",
-      state: "NY",
-      zipCode: "10001",
-      country: "USA",
-      gstNumber: "GST123456789",
-      licenseNumber: "LIC987654321",
-      sizeOfCompany: 150, // number of employees
-      address: "123 Main Street, New York, NY 10001",
-      phoneNo: 97654567878,
-    },
-  ]);
-
-  // ---------------Editing-----------------------------
-
-  // --------------personal-content-edit-------------------------
-
+  const [profileData, setProfileData] = useState({});
+  const [userData, setUserData] = useState({});
+  const [projects, setProjects] = useState({});
+  const [loading, setLoading] = useState({});
+  const [newUser, setNewUser] = useState({});
+  const [newProfile, setNewProfile] = useState({});
   const [isEditablePersonal, setIsEditablePersonal] = useState(false);
 
   const toggleEditModePersonal = () => {
     setIsEditablePersonal(!isEditablePersonal);
+    setNewUser(userData);
   };
 
   const personalContentChange = (e, field) => {
@@ -90,121 +56,7 @@ const Profile = () => {
     setIsEditablePersonal(false);
     setIsEditableProfessional(false);
   };
-  // ---------------Review-array-------------------
-  const [reviews, setReviews] = useState([
-    {
-      description:
-        "This product exceeded my expectations in every way. The build quality is fantastic, and it works like a charm. I highly recommend it to anyone looking for something reliable.",
-      byUsername: "Alice",
-      stars: 5,
-    },
-    {
-      description:
-        "The product is okay, but I feel it could have been better for the price. It does its job, but the quality seems a bit off.",
-      byUsername: "Bob",
-      stars: 3,
-      dp: icon,
-    },
-    {
-      description:
-        "I was disappointed with this purchase. It didn't perform as advertised, and I ended up returning it after a week.",
-      byUsername: "Charlie",
-      stars: 2,
-      dp: icon,
-    },
-    {
-      description:
-        "Amazing experience! The customer service was top-notch, and the product itself is worth every penny.",
-      byUsername: "Diana",
-      stars: 5,
-      dp: icon,
-    },
-    {
-      description:
-        "The service was okay, but it could be improved. The product arrived late, but it works fine.",
-      byUsername: "Eve",
-      stars: 3,
-      dp: icon,
-    },
-    {
-      description:
-        "Very satisfying purchase. I use this daily, and it has made my life much easier. Great value for the money!",
-      byUsername: "Frank",
-      stars: 4,
-      dp: icon,
-    },
-    {
-      description:
-        "Terrible experience. The product broke after just two uses, and I couldn't get a refund.",
-      byUsername: "Grace",
-      stars: 1,
-      dp: icon,
-    },
-    {
-      description:
-        "Highly recommend this! It works flawlessly and even better than I imagined. I'm very happy with this purchase.",
-      byUsername: "Henry",
-      stars: 5,
-      dp: icon,
-    },
-    {
-      description:
-        "Terrible experience. The product broke after just two uses, and I couldn't get a refund.",
-      byUsername: "Grace",
-      stars: 1,
-      dp: icon,
-    },
-    {
-      description:
-        "Highly recommend this! It works flawlessly and even better than I imagined. I'm very happy with this purchase.",
-      byUsername: "Henry",
-      stars: 5,
-      dp: icon,
-    },
-  ]);
-  // ------------------project-image-----------------
-  const projects = [
-    {
-      id: 1,
-      name: "Portfolio",
-      description:
-        "An image is a visual representation. An image can be two-dimensional, such as a drawing, painting, or photograph, or three-dimensional, such as a carving or sculpture.",
-      images: [image1, image2, image3, image4, image5],
-      skillsUsed: ["HTML", "CSS"],
-    },
-    {
-      id: 2,
-      name: "E-commerce Website",
-      description:
-        "A project to build a scalable e-commerce platform with payment integration, product listing, and a secure backend.",
-      images: [image1, image, image3, image4, image5],
-      skillsUsed: ["React", "Node.js", "MongoDB"],
-    },
-    {
-      id: 3,
-      name: "Blog Platform",
-      description:
-        "A content-focused blog platform that allows users to write, edit, and share articles, including a commenting system.",
-      images: [image1, image2, image3, image4, image5],
-      skillsUsed: ["Vue.js", "Firebase", "Tailwind CSS"],
-    },
-    {
-      id: 4,
-      name: "Weather App",
-      description:
-        "A weather forecasting app displaying current conditions, hourly, and weekly forecasts using an external API.",
-      images: [image1, image2, image3, image4, image5],
-      skillsUsed: ["JavaScript", "OpenWeather API", "Bootstrap"],
-    },
-    {
-      id: 5,
-      name: "Social Media App",
-      description:
-        "A social networking app allowing users to create profiles, post updates, follow others, and engage through likes and comments.",
-      images: [image3, image2, image1, image4, image5],
-      skillsUsed: ["Flutter", "Firebase", "Dart"],
-    },
-  ];
+
   // -------------------project-image-changer-----------------
   const [projectImage, setProjectImage] = useState("");
   const [idA, setIdA] = useState("");
@@ -213,11 +65,84 @@ const Profile = () => {
     setIdA(id);
     setProjectImage(newImage);
   };
-  // --------------------ratings-stars---------------------
-  // -----for--review-------
-  const maxRating = 5;
-  // -------------ratings----------
-  const rating = 4.5;
+
+  // Fetch profile data
+  const fetchProfile = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/profile/myProfile`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setProfileData(response.data.profileId);
+      setUserData(response.data);
+      setProjects(response.data.profileId.projects);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Update profile description
+  const updateProfileUsers = async (newUser) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/profile/updateUserDetails`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+        {
+          newUser,
+        }
+      );
+      if (response.status == 200) {
+        setUserData(response.data);
+      }
+    } catch (error) {
+      showPopup(
+        error.response?.data?.message || "Failed to update profile",
+        "error"
+      );
+    }
+  };
+  // Update profile description
+  const updateProfileDetails = async (newProfile) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/profile/updateProdileDetails`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+        {
+          newProfile,
+        }
+      );
+      if (response.status == 200) {
+        setProfileData(response.data);
+      }
+    } catch (error) {
+      showPopup(
+        error.response?.data?.message || "Failed to update profile",
+        "error"
+      );
+    }
+  };
+
+  // Initial fetch on component mount
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <>
@@ -236,7 +161,7 @@ const Profile = () => {
             </div>
             <div className=" profile-container-personal-details-user ">
               <div className="profile-container-personal-details-content-dp">
-                <img src={icon} />
+                <img src={userData.profilePic} />
               </div>
               <div className="profile-container-personal-details-content-user-fields">
                 <div className="name">
@@ -247,7 +172,7 @@ const Profile = () => {
                       suppressContentEditableWarning={true}
                       onBlur={(e) => personalContentChange(e, "name")}
                     >
-                      {profileData.name}
+                      {userData.name}
                     </p>
                   </div>
                 </div>
@@ -259,7 +184,7 @@ const Profile = () => {
                       suppressContentEditableWarning={true}
                       onBlur={(e) => personalContentChange(e, "username")}
                     >
-                      {profileData.username}
+                      {userData.userName}
                     </p>
                   </div>
                 </div>
@@ -271,7 +196,7 @@ const Profile = () => {
                       suppressContentEditableWarning={true}
                       onBlur={(e) => personalContentChange(e, "role")}
                     >
-                      {profileData.role}
+                      {userData.role}
                     </p>
                   </div>
                 </div>
@@ -287,9 +212,9 @@ const Profile = () => {
             <div className="profile-container-personal-details-content-user-mails-description">
               <div className="mail-ratings">
                 <div className="mail">
-                  <h3>Mail ID</h3>
+                  <h3>Role</h3>
                   <div>
-                    <p>{profileData.email}</p>
+                    <p>{userData.role}</p>
                   </div>
                 </div>
                 <div className="ratings">
@@ -297,7 +222,7 @@ const Profile = () => {
                   <div className="star">
                     <Rating
                       name="half-rating-read"
-                      defaultValue={rating}
+                      defaultValue={profileData.ratings}
                       precision={0.5}
                       readOnly
                       sx={{ fontSize: 30 }}
@@ -313,7 +238,7 @@ const Profile = () => {
                     suppressContentEditableWarning={true}
                     onBlur={(e) => personalContentChange(e, "description")}
                   >
-                    {profileData.description}
+                    {userData.description}
                   </p>
                 </div>
               </div>
@@ -337,83 +262,83 @@ const Profile = () => {
                 <FaRegEdit /> {isEditableProfessional ? "Cancel" : "Edit"}
               </span>
             </div>
-            {professionalDetails.map((professional, index) => (
-              <div className="professional-details-content" key={index}>
-                <div className="professional-details-content-left">
-                  <div className="ownerName">
-                    <h3>Owner Name</h3>
-                    <p
-                      contentEditable={isEditableProfessional}
-                      suppressContentEditableWarning={true}
-                      onBlur={(e) =>
-                        ProfessionalContentChange(e, "ownerName", index)
-                      }
-                    >
-                      {professional.ownerName}
-                    </p>
-                  </div>
-                  <div className="managerName">
-                    <h3>Manager Name</h3>
-                    <p
-                      contentEditable={isEditableProfessional}
-                      suppressContentEditableWarning={true}
-                      onBlur={(e) =>
-                        ProfessionalContentChange(e, "managerName", index)
-                      }
-                    >
-                      {professional.managerName}
-                    </p>
-                  </div>
-                  <div className="city">
-                    <h3>City</h3>
-                    <p
-                      contentEditable={isEditableProfessional}
-                      suppressContentEditableWarning={true}
-                      onBlur={(e) =>
-                        ProfessionalContentChange(e, "city", index)
-                      }
-                    >
-                      {professional.city}
-                    </p>
-                  </div>
-                  <div className="state">
-                    <h3>State</h3>
-                    <p
-                      contentEditable={isEditableProfessional}
-                      suppressContentEditableWarning={true}
-                      onBlur={(e) =>
-                        ProfessionalContentChange(e, "state", index)
-                      }
-                    >
-                      {professional.state}
-                    </p>
-                  </div>
-                  <div className="zipCode">
-                    <h3>Zip Code</h3>
-                    <p
-                      contentEditable={isEditableProfessional}
-                      suppressContentEditableWarning={true}
-                      onBlur={(e) =>
-                        ProfessionalContentChange(e, "zipCode", index)
-                      }
-                    >
-                      {professional.zipCode}
-                    </p>
-                  </div>
-                  <div className="country">
-                    <h3>Country</h3>
-                    <p
-                      contentEditable={isEditableProfessional}
-                      suppressContentEditableWarning={true}
-                      onBlur={(e) =>
-                        ProfessionalContentChange(e, "country", index)
-                      }
-                    >
-                      {professional.country}
-                    </p>
-                  </div>
+            <div className="professional-details-content">
+              <div className="professional-details-content-left">
+                {userData.role == "Company" && (
+                  <>
+                    <div className="ownerName">
+                      <h3>Owner Name</h3>
+                      <p
+                        contentEditable={isEditableProfessional}
+                        suppressContentEditableWarning={true}
+                        onBlur={(e) =>
+                          ProfessionalContentChange(e, "ownerName", index)
+                        }
+                      >
+                        {profileData.ownerName}
+                      </p>
+                    </div>
+                    <div className="managerName">
+                      <h3>Manager Name</h3>
+                      <p
+                        contentEditable={isEditableProfessional}
+                        suppressContentEditableWarning={true}
+                        onBlur={(e) =>
+                          ProfessionalContentChange(e, "managerName", index)
+                        }
+                      >
+                        {profileData.managerName}
+                      </p>
+                    </div>
+                  </>
+                )}
+                <div className="city">
+                  <h3>City</h3>
+                  <p
+                    contentEditable={isEditableProfessional}
+                    suppressContentEditableWarning={true}
+                    onBlur={(e) => ProfessionalContentChange(e, "city", index)}
+                  >
+                    {profileData.city}
+                  </p>
                 </div>
-                <div className="professional-details-content-right">
+                <div className="state">
+                  <h3>State</h3>
+                  <p
+                    contentEditable={isEditableProfessional}
+                    suppressContentEditableWarning={true}
+                    onBlur={(e) => ProfessionalContentChange(e, "state", index)}
+                  >
+                    {profileData.state}
+                  </p>
+                </div>
+                <div className="zipCode">
+                  <h3>Zip Code</h3>
+                  <p
+                    contentEditable={isEditableProfessional}
+                    suppressContentEditableWarning={true}
+                    onBlur={(e) =>
+                      ProfessionalContentChange(e, "zipCode", index)
+                    }
+                  >
+                    {profileData.zipCode}
+                  </p>
+                </div>
+                <div className="country">
+                  <h3>Country</h3>
+                  <p
+                    contentEditable={isEditableProfessional}
+                    suppressContentEditableWarning={true}
+                    onBlur={(e) =>
+                      ProfessionalContentChange(e, "country", index)
+                    }
+                  >
+                    {profileData.country}
+                  </p>
+                </div>
+              </div>
+              <div className="professional-details-content-right">
+                {userData.role == "Company" && (
                   <div className="gstNumber">
                     <h3>GST Number</h3>
                     <p
@@ -423,9 +348,11 @@ const Profile = () => {
                         ProfessionalContentChange(e, "gstNumber", index)
                       }
                     >
-                      {professional.gstNumber}
+                      {profileData.gstNumber}
                     </p>
                   </div>
+                )}
+                {userData.role == "Company" && (
                   <div className="licenseNumber">
                     <h3>License Number</h3>
                     <p
@@ -435,9 +362,11 @@ const Profile = () => {
                         ProfessionalContentChange(e, "licenseNumber", index)
                       }
                     >
-                      {professional.licenseNumber}
+                      {profileData.licenseNumber}
                     </p>
                   </div>
+                )}
+                {userData.role == "Company" && (
                   <div className="size">
                     <h3>Company Size</h3>
                     <p
@@ -447,36 +376,37 @@ const Profile = () => {
                         ProfessionalContentChange(e, "sizeOfCompany", index)
                       }
                     >
-                      {professional.sizeOfCompany}
+                      {profileData.size}
                     </p>
                   </div>
-                  <div className="address">
-                    <h3>Address</h3>
-                    <p
-                      contentEditable={isEditableProfessional}
-                      suppressContentEditableWarning={true}
-                      onBlur={(e) =>
-                        ProfessionalContentChange(e, "address", index)
-                      }
-                    >
-                      {professional.address}
-                    </p>
-                  </div>
-                  <div className="phoneNumber">
-                    <h3>Phone Number</h3>
-                    <p
-                      contentEditable={isEditableProfessional}
-                      suppressContentEditableWarning={true}
-                      onBlur={(e) =>
-                        ProfessionalContentChange(e, "phoneNo", index)
-                      }
-                    >
-                      {professional.phoneNo}
-                    </p>
-                  </div>
+                )}
+
+                <div className="address">
+                  <h3>Date of Birth</h3>
+                  <p
+                    contentEditable={isEditableProfessional}
+                    suppressContentEditableWarning={true}
+                    onBlur={(e) =>
+                      ProfessionalContentChange(e, "address", index)
+                    }
+                  >
+                    {profileData.dob.substring(0, 10)}
+                  </p>
+                </div>
+                <div className="phoneNumber">
+                  <h3>Phone Number</h3>
+                  <p
+                    contentEditable={isEditableProfessional}
+                    suppressContentEditableWarning={true}
+                    onBlur={(e) =>
+                      ProfessionalContentChange(e, "phoneNo", index)
+                    }
+                  >
+                    {profileData.phoneNumber}
+                  </p>
                 </div>
               </div>
-            ))}
+            </div>
 
             <div className="btn">
               {isEditableProfessional && (
@@ -491,13 +421,13 @@ const Profile = () => {
           <div className="profile-container-review">
             <h2>Reviews</h2>
             <div className="review-container">
-              {reviews.map((r, index) => (
+              {profileData?.reviews?.map((r, index) => (
                 <div className="review-cards" key={index}>
                   <div className="review-profile">
-                    <img src={icon} alt="" />
+                    <img src={r.reviewByUserId.profilePic} alt="" />
                     <div className="username-stars">
                       <div className="username">
-                        <p>{r.byUsername}</p>
+                        <p>{r.reviewByUserId.name}</p>
                       </div>
                       <div className="stars">
                         <p>
@@ -527,14 +457,14 @@ const Profile = () => {
             </div>
 
             <div className="projects-container">
-              {projects.map((details, index) => (
+              {profileData?.projects?.map((details, index) => (
                 <div className="projects-cards" key={index}>
                   <div className="projects-images">
                     <div className="viewing-image">
                       {/* Display the clicked image here */}
                       <img
                         src={
-                          details.id == idA ? projectImage : details.images[0]
+                          details._id == idA ? projectImage : details.images[0]
                         }
                         alt="Project Main View"
                       />
@@ -544,7 +474,7 @@ const Profile = () => {
                       {details.images.map((img, imgIndex) => (
                         <div className="carousel-image" key={imgIndex}>
                           <img
-                            onClick={() => changeProjectImage(img, details.id)}
+                            onClick={() => changeProjectImage(img, details._id)}
                             src={img}
                           />
                         </div>
