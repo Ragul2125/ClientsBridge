@@ -20,9 +20,9 @@ export default function ProfileOverview() {
 
   useEffect(() => {
     // Determine job type based on path
-    if (location.pathname.includes("/company/jobs/ongoing")) {
+    if (location.pathname.includes("/jobs/ongoing")) {
       setJobs("ongoing");
-    } else if (location.pathname.includes("/company/jobs/completed")) {
+    } else if (location.pathname.includes("/jobs/completed")) {
       setJobs("completed");
     }
 
@@ -60,42 +60,65 @@ export default function ProfileOverview() {
   return (
     <main className="client-oncooverview-main">
       <section className="client-profileoverview-inner client-oncooverview-inner">
-        <img
-          className="client-profileoverview-inner-dp"
-          src={jobDetails?.clientID?.profilePic}
-          alt="User"
-        />
+        {/* <img className="client-profileoverview-inner-dp" src={dp} alt="User" /> */}
         <p className="client-profileoverview-inner-title">
-          {jobDetails?.clientID?.name || "Unknown Client"}
+          <h1>{jobDetails.postTitle}</h1>
           <span className="client-profileoverview-inner-time">
-            {jobDetails?.clientID?.userName}
+            3 hours ago{" "}
           </span>
         </p>
-        <p className="client-profileoverview-inner-threedot">...</p>
 
+        {/* --------------------------------------------------------------------DESC------------------ */}
         <div className="client-profileoverview-inner-des">
-          <p className="client-profileoverview-inner-des-head">Project Title</p>
-          <p className="client-profileoverview-inner-des-subtxt">
-            <span className="client-profileoverview-inner-des-subhead">
-              Name of the Project:{" "}
-            </span>
-            {jobDetails?.postTitle || "N/A"}
-          </p>
+          {/* <p className="client-profileoverview-inner-des-head">jobDetails Title</p>
+                    <p className="client-profileoverview-inner-des-subtxt">
+                        <span className='client-profileoverview-inner-des-subhead'>Name of the jobDetails: </span> Mobile E-Commerce Application
+                    </p> */}
 
           <p className="client-profileoverview-inner-des-head">Overview</p>
           <p className="client-profileoverview-inner-des-subtxt">
-            <span className="client-profileoverview-inner-des-subhead">
-              Objective:{" "}
-            </span>
-            {jobDetails?.description || "N/A"}
+            {jobDetails.description}
           </p>
+          <div className="client-profileoverview-inner-side-byside">
+            <div>
+              {" "}
+              <p className="client-profileoverview-inner-des-head">Deadline</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+                {jobDetails.deadline.substring(0, 10)}
+              </p>
+            </div>
+            <div>
+              <p className="client-profileoverview-inner-des-head">Budget</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+                {jobDetails.budget}
+              </p>
+            </div>
+            <div>
+              <p className="client-profileoverview-inner-des-head">Category</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+                {jobDetails.category}
+              </p>
+            </div>
+          </div>
 
-          <p className="client-profileoverview-inner-des-head">
-            Project Status
+          <p className="client-profileoverview-inner-des-head">Tags</p>
+          <p className="client-profileoverview-inner-des-tags">
+            {jobDetails.tags.map((tag, i) => (
+              <p className="job-tag-seps">{tag}</p>
+            ))}
           </p>
-          <p className="client-profileoverview-inner-des-subtxt">
-            {jobDetails?.status || "N/A"}
-          </p>
+          {jobDetails.files.length > 0 && (
+            <>
+              <p className="client-profileoverview-inner-des-head">Files</p>
+              <p className="client-profileoverview-inner-des-file">
+                {jobDetails.files.map((file, i) => (
+                  <p>
+                    <a href={file}>file {i + 1}</a>
+                  </p>
+                ))}
+              </p>
+            </>
+          )}
         </div>
       </section>
       <section className="client-oncooverview-side side1">
@@ -108,7 +131,7 @@ export default function ProfileOverview() {
           {jobDetails?.clientID?.name}
         </p>
         <p className="client-oncooverview-side-type">
-          {jobDetails?.clientID?.userName}
+          @{jobDetails?.clientID?.userName}
         </p>
         <p className="client-oncooverview-side-cost">
           {jobDetails?.clientID?.description}
@@ -119,7 +142,7 @@ export default function ProfileOverview() {
         <section className="client-oncooverview-side side2">
           <p className="client-oncooverview-side-deadline">Project Deadline</p>
           <p className="client-oncooverview-side-enddate">
-            {jobDetails?.deadline || "N/A"}
+            {jobDetails?.deadline.substring(0, 10) || "N/A"}
           </p>
           <p className="client-oncooverview-side-subtxt">
             Message {jobDetails?.clientId?.name || "Client"}

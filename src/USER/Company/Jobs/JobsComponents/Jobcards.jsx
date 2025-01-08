@@ -16,11 +16,11 @@ export default function ActiveJobs() {
 
   // Determine job status based on the URL path
   let jobstatus = "";
-  if (location.pathname.includes("/company/jobs/bidded")) {
+  if (location.pathname.includes("jobs/bidded")) {
     jobstatus = "bidded";
-  } else if (location.pathname.includes("/company/jobs/ongoing")) {
+  } else if (location.pathname.includes("jobs/ongoing")) {
     jobstatus = "ongoing";
-  } else if (location.pathname.includes("/company/jobs/completed")) {
+  } else if (location.pathname.includes("jobs/completed")) {
     jobstatus = "completed";
   }
 
@@ -141,7 +141,13 @@ export default function ActiveJobs() {
             <div
               key={job._id}
               className="client-jobs-active-card"
-              onClick={() => navigate(`/company/jobs/${jobstatus}/${job._id}`)}
+              onClick={() =>
+                navigate(
+                  `/${localStorage
+                    .getItem("role")
+                    .toLowerCase()}/jobs/${jobstatus}/${job._id}`
+                )
+              }
             >
               <img className="client-jobs-active-card-img" src={dp} alt="dp" />
               <p className="client-jobs-active-card-title">

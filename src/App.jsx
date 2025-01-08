@@ -7,6 +7,7 @@ import Chat from "./admin/testChat/Chat";
 import ClientLayout from "./USER/Client/CLIENTSLAYOUT";
 import CompanyLayout from "./USER/Company/COMPANYLAYOUT";
 import Sec from "../src/USER/ReuseableComponents/Success/Success";
+import Profile from "./USER/ReuseableComponents/Profile/Profile";
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +17,7 @@ function App() {
         <Route path="/admin/*" element={<AdminPanel />} />
         <Route path="/callback/:token/:role" element={<Callback />} />
         <Route path="/client/*" element={<ClientLayout />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/company/*" element={<CompanyLayout />} />
         <Route path="/freelancer/*" element={<CompanyLayout />} />
         <Route path="/success" element={<Sec />} />
