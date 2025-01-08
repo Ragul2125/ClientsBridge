@@ -3,46 +3,59 @@ import './Dashboard.css';
 import ov1 from '../../assets/overview1.svg';
 
 // -------------------------------------- Icons --------------------------->
-import { IoIosTrendingUp } from "react-icons/io";
+import { IoIosTrendingDown, IoIosTrendingUp } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios'; // Import Axios
 
 export default function Dashboard() {
-    const projectHistoryData = [
-        {
-            projectName: 'Project A',
-            orderId: 'ORD12345',
-            status: 'Completed',
-            deadline: '2025-01-10',
-            imgSrc: ov1,
-        },
-        {
-            projectName: 'Project B',
-            orderId: 'ORD67890',
-            status: 'Ongoing',
-            deadline: '2025-01-15',
-            imgSrc: ov1,
-        },
-        {
-            projectName: 'Project C',
-            orderId: 'ORD54321',
-            status: 'Pending',
-            deadline: '2025-01-20',
-            imgSrc: ov1,
-        },
-        {
-            projectName: 'Project D',
-            orderId: 'ORD58321',
-            status: 'Pending',
-            deadline: '2025-08-20',
-            imgSrc: ov1,
-        }
-    ];
+    const [statistics, setStatistics] = useState({
+        pending: { count: 0, status: '', value: '' },
+        active: { count: 0, status: '', value: '' },
+        ongoing: { count: 0, status: '', value: '' },
+    });
+
+    const [projectHistory, setProjectHistory] = useState([]);
 
     const statusColors = {
-        Completed: '#5d975d',
-        Ongoing: '#d92c2c',
-        Pending: '#8181eb',
+        accepted:'blue',
+        completed: 'green',
+        ongoing: '#d92c2c',
+        pending: 'red',
     };
+
+    useEffect(() => {
+        // Fetch Statistics using Axios
+        const fetchStatistics = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/clStats/statistics`,{
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                  }); // Backend route for project history
+                setStatistics(response.data);
+            } catch (error) {
+                console.error('Error fetching project history:', error);
+            }
+        };
+
+        // Fetch Project History using Axios
+        const fetchProjectHistory = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/jobs`,{
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                  }); // Backend route for project history
+                setProjectHistory(response.data);
+            } catch (error) {
+                console.error('Error fetching project history:', error);
+            }
+        };
+
+        fetchStatistics();
+        fetchProjectHistory();
+    }, []);
 
     return (
         <>
@@ -52,24 +65,33 @@ export default function Dashboard() {
                 <section className='client-dashboard-overview-section'>
                     <div className='client-dashboard-overview-card'>
                         <p className='client-dashboard-overview-card-head'>Unassigned Jobs</p>
-                        <p className='client-dashboard-overview-card-count'>10</p>
+                        <p className='client-dashboard-overview-card-count'>{statistics.pending.count}</p>
                         <img className='client-dashboard-overview-card-img' src={ov1} alt="ov1" />
-                        <p className='client-dashboard-overview-card-growth'><span><IoIosTrendingUp /> </span> 10% Up from yesterday</p>
+                        <p className='client-dashboard-overview-card-growth'>
+                            <span className={statistics.pending.status === "increasing" ? "growww" : "downnn"}>{statistics.pending.status === "increasing" ? <IoIosTrendingUp/>: <IoIosTrendingDown/>} </span> 
+                            {statistics.pending.value} {statistics.pending.status === "increasing" ? "Up" : "Down"} from last month
+                        </p>
                         <Link to='/client/jobs/unassigned' className='client-dashboard-overview-card-btn'>View details</Link>
                     </div>
                     <div className='client-dashboard-overview-card'>
                         <p className='client-dashboard-overview-card-head'>Ongoing Jobs</p>
-                        <p className='client-dashboard-overview-card-count'>4</p>
+                        <p className='client-dashboard-overview-card-count'>{statistics.ongoing.count}</p>
                         <img className='client-dashboard-overview-card-img' src={ov1} alt="ov1" />
-                        <p className='client-dashboard-overview-card-growth'><span><IoIosTrendingUp /> </span> 1.2% Up from yesterday</p>
+                        <p className='client-dashboard-overview-card-growth'>
+                            <span className={statistics.ongoing.status === "increasing" ? "growww" : "downnn"}>{statistics.ongoing.status === "increasing" ? <IoIosTrendingUp/>: <IoIosTrendingDown/>} </span> 
+                            {statistics.ongoing.value} {statistics.ongoing.status === "increasing" ? "Up" : "Down"} from last month
+                        </p>
                         <Link to='/client/jobs/ongoing' className='client-dashboard-overview-card-btn'>View details</Link>
                     </div>
                     <div className='client-dashboard-overview-card'>
-                        <p className='client-dashboard-overview-card-head'>Completed Jobs</p>
-                        <p className='client-dashboard-overview-card-count'>7</p>
+                        <p className='client-dashboard-overview-card-head'>Active Jobs</p>
+                        <p className='client-dashboard-overview-card-count'>{statistics.active.count}</p>
                         <img className='client-dashboard-overview-card-img' src={ov1} alt="ov1" />
-                        <p className='client-dashboard-overview-card-growth'><span><IoIosTrendingUp /> </span> 8% Up from yesterday</p>
-                        <Link to='/client/jobs/completed' className='client-dashboard-overview-card-btn'>View details</Link>
+                        <p className='client-dashboard-overview-card-growth'>
+                            <span className={statistics.active.status === "increasing" ? "growww" : "downnn"}>{statistics.active.status === "increasing" ? <IoIosTrendingUp/>: <IoIosTrendingDown/>} </span> 
+                            {statistics.active.value} {statistics.active.status === "increasing" ? "Up" : "Down"} from last month
+                        </p>
+                        <Link to='/client/jobs/active' className='client-dashboard-overview-card-btn'>View details</Link>
                     </div>
                 </section>
                 {/* -----------------------------PROJECT HISTORY TABLE---------------------------- */}
@@ -86,17 +108,17 @@ export default function Dashboard() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {projectHistoryData.map((project, index) => (
+                                {projectHistory.map((project, index) => (
                                     <tr key={index}>
                                         <td className='client-dashboard-project-history-table-imgcon'>
-                                            <img src={project.imgSrc} alt="" />
-                                            {project.projectName}
+                                            <img src={ov1} alt="" />
+                                            {project.postTitle}
                                         </td>
-                                        <td>{project.orderId}</td>
+                                        <td>{project.category}</td>
                                         <td style={{color: statusColors[project.status] || 'black'}} >
                                             {project.status}
                                         </td>
-                                        <td>{project.deadline}</td>
+                                        <td>{project.deadline.substring(0,10)}</td>
                                     </tr>
                                 ))}
                             </tbody>

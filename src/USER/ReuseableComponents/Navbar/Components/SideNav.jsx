@@ -58,7 +58,7 @@ export default function SideNav() {
     },
   ];
 
-  const menuItems = location.pathname.includes("client") ? array1 : array2;
+  const menuItems = location.pathname.toLowerCase().includes("client") ? array1 : array2;
 
   return (
     <div className={`Sidenav ${isExpanded ? "expanded" : ""}`}>

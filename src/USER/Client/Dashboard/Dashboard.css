@@ -57,6 +57,7 @@
     align-self: center;
 }
 
+
 .client-dashboard-overview-card-growth {
     grid-area: growth;
     font-size: medium;
@@ -65,7 +66,12 @@
 
     span {
         font-size: large;
+    }
+    .growww{
         color: rgb(41, 223, 41);
+    }
+    .downnn{
+        color: rgb(223, 41, 41);
     }
 }
 
