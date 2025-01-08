@@ -1,0 +1,14 @@
+.client-layout {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.client-content {
+    width: calc(100% - 70px);
+    height: calc(100% - 55px);
+    /* background-color: goldenrod; */
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}

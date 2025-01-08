@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+
+/* font-family: "Nunito Sans"; */
+/* font-family: "Nunito Sans",sans-serif; */
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  color: transparent;
+  display: none;
+}
+
+input,
+textarea,
+button,
+select {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.admin-container {
+  a,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    text-decoration: none;
+
+    white-space: nowrap;
+  }
+}
+:root {
+  --white: #f4f5f9;
+  /* background-color:var(--white); */
+  --blue: #0b0b45;
+  /* background-color:var(--blue); */
+  --blugrad: linear-gradient(to top left, var(--blue) 30%, #0303c2);
+}
+
+.admin-container {
+  display: flex;
+  background-color: var(--white);
+}
+
+/* ----------notformobile----------- */
+.notformobile {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: black;
+  color: #8f8f8f;
+  z-index: 111111;
+  display: grid;
+  place-items: center;
+}
+
+@media (min-width: 1100px) {
+  .notformobile {
+    display: none;
+  }
+}
+
+.mobiletop {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .mobiletop {
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    padding: 0.7em 1em;
+    background-color: var(--blue);
+  }
+
+  .logocon {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 0.3em;
+    color: white;
+  }
+
+  /* .logocon img{
+  height: 1.7em;
+} */
+  .userdp {
+    width: 2em;
+  }
+}
+
+/* ----------notformobile----------- */
+.notformobile {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: black;
+  color: #8f8f8f;
+  z-index: 111111;
+  display: grid;
+  place-items: center;
+}
+
+@media (min-width: 1100px) {
+  .notformobile {
+    display: none;
+  }
+}
+
+.mobiletop {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .mobiletop {
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    padding: 0.7em 1em;
+    background-color: var(--blue);
+  }
+
+  .logocon {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 0.3em;
+    color: white;
+  }
+
+  /* .logocon img{
+  height: 1.7em;
+} */
+  .userdp {
+    width: 2em;
+  }
+}

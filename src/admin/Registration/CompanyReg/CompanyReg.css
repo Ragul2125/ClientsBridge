@@ -1,0 +1,310 @@
+.freelancerreg-container {
+  width: calc(100vw - 260px);
+  /* height: 666px; */
+  flex-grow: 1;
+  margin-top: auto;
+  background-color: var(--white);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  /* gap: 2.5em; */
+  row-gap: 2em;
+  overflow-y: auto;
+  padding: 0 1em;
+  padding-bottom: 2em;
+  scroll-behavior: smooth;
+}
+
+@keyframes cup {
+  from {
+    opacity: 0.5;
+    filter: blur(10px);
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.freelancer-card {
+  /* min-width: 240px; */
+  aspect-ratio: 1/1.1;
+  width: calc(100% / 4.7);
+  /* width: 260px; */
+  padding: 3em 2em;
+  background-color: #ffffff;
+  border-radius: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.4em;
+  background-image: url("../../../assets/image/Pattern.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  animation: cup 0.4s ease-in;
+}
+
+.freelancerdp {
+  /* max-width: 6em; */
+  max-width: 50%;
+  margin-bottom: 1em;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #007bff;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  text-transform: uppercase;
+}
+
+.freelancerdp img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.freelancerusername {
+  font-weight: 500;
+}
+
+.freelancerprofession {
+  font-size: smaller;
+  color: gray;
+}
+
+.freelancerviewbtn {
+  margin-top: 1em;
+  font-size: smaller;
+  color: #ffffff;
+  padding: 0.8em 3.5em;
+  border-radius: 50px;
+  background-color: var(--blue);
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.freelancerviewbtn:hover {
+  background-color: #0b0087b0;
+}
+
+@media (max-width: 1100px) {
+  .freelancerreg-container {
+    width: 100vw;
+    row-gap: 0.5em;
+    padding: 0.3em;
+    margin-bottom: 3em;
+  }
+
+  .freelancer-card {
+    width: calc(100% / 2.1);
+    padding: 1.5em 2em;
+  }
+
+  .freelancerdp {
+    margin-bottom: 0.5em;
+  }
+
+  .freelancerviewbtn {
+    margin-top: 0;
+  }
+}
+
+/* ---------------------------FreelancerProfile-container-------------- */
+@keyframes scroll-up {
+  0% {
+    transform: translateY(50%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.FreelancerProfile-container {
+  flex-grow: 1;
+  background-color: #ffffff;
+  margin: 0 2em;
+  margin-top: 2em;
+  border-radius: 15px 15px 0 0;
+  padding: 2em;
+  display: flex;
+  gap: 2em;
+  animation: scroll-up 0.2s ease;
+}
+
+.freelancerprodp {
+  height: 20em;
+  aspect-ratio: 1;
+  align-self: start;
+  margin: 0.7em 1.3em;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #007bff;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  text-transform: uppercase;
+}
+
+.freelancerprodp img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.freelancerprodetails-container {
+  font-family: poppins;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-self: start;
+  gap: 1em;
+  flex-grow: 1;
+  margin-right: 1em;
+  background-color: #ffffff;
+}
+
+.freelancerprodetails {
+  width: calc(100% / 2.1);
+  margin-top: 1em;
+}
+
+.freelancerprodetails-label {
+  color: #5d5d5d;
+  margin-left: 0.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.freelancerprodetails-value {
+  margin-top: 0.3em;
+  padding: 0.9em 1em;
+  outline: 1px solid #d2d2d2;
+  border-radius: 7px;
+  font-size: 0.9em;
+  color: #2b67cd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.freelancerprobtn-con {
+  margin-top: 1.5em;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+@media (max-width: 1100px) {
+  .FreelancerProfile-container {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .freelancerprodp {
+    height: 10em;
+    aspect-ratio: 1;
+    align-self: center;
+    margin-bottom: 0;
+  }
+
+  .freelancerprodetails-container {
+    width: 100vw;
+    display: flex;
+    padding: 0.7em;
+  }
+
+  .freelancerprodetails {
+    margin-top: 0.5em;
+    width: calc(100% / 2.1);
+  }
+
+  .freelancerprobtn-con {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5em;
+  }
+
+  .freelancerprobtn {
+    width: calc(100% / 2.2);
+    padding: 0;
+    margin: 0;
+    display: grid;
+    place-items: center;
+  }
+}
+
+.freelancerprobtn {
+  padding: 0.7em 4.5em;
+  margin: 0 0.5em;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition-duration: 0.3s;
+}
+
+.acceptbtn {
+  background-color: #1814f3;
+}
+
+.acceptbtn:hover {
+  background-color: #02006a;
+}
+
+.declinebtn {
+  background-color: #c20000;
+}
+
+.declinebtn:hover {
+  background-color: #620000;
+}
+
+/* ------------------Popup------------ */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.popup-content {
+  background-color: #ffffff;
+  min-width: 35%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 3em;
+  border-radius: 10px;
+}
+.popup-content img {
+  max-height: 10em;
+}

@@ -1,0 +1,359 @@
+.setup {
+  background-image: url("../../assets/blueBG.gif");
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  font-family: "Outfit", serif;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.logo {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.setup-box {
+  width: 80%;
+  height: 75%;
+  background-color: #ffffff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  .set-upl {
+    width: 80%;
+  }
+  .set-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 100%;
+  }
+}
+
+.set-sen {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.set-pro {
+  width: 100%;
+
+  background-color: black;
+  .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+}
+.set-sen label {
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.row input,
+.row textarea {
+  flex: 1;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: 1px solid #d0d0d0;
+  outline: none;
+  padding: 5px 15px;
+  font-size: 16px;
+  font-family: "Outfit", serif;
+  background-color: #f9f9f9;
+  transition: border 0.3s;
+}
+
+.row input:focus {
+  border: 1px solid #001f54;
+}
+
+.row button {
+  background-color: #001f54;
+  color: white;
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.row button:hover {
+  background-color: #00337a;
+}
+
+.submit-btn {
+  width: 100%;
+  max-width: 200px;
+  background-color: #001f54;
+  color: white;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.submit-btn:hover {
+  background-color: #00337a;
+}
+
+.set-img {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.set-img img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 2px solid #d0d0d0;
+}
+
+.set-img label {
+  display: inline-block;
+  background-color: #001f54;
+  color: white;
+  padding: 10px 20px;
+  font-family: "Outfit", serif;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.set-img label:hover {
+  background-color: #00337a;
+}
+
+.upl-box {
+  margin: 30px 0;
+  width: 100%;
+  padding: 30px 0;
+  border: dashed 2px #001f54;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+}
+
+.upl-box button {
+  background-color: #cccccc8a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.plus-icon {
+  font-size: 30px;
+}
+
+.project-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.project-table th,
+.project-table td {
+  border: 1px solid #ddd;
+  text-align: left;
+  width: 20%;
+  padding: 8px;
+  button {
+    background-color: #001f54;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0 20px;
+  }
+}
+
+.project-table th {
+  background-color: #001f54;
+  color: white;
+}
+
+.set-btns {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.set-btns button {
+  background-color: #001f54;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.set-btns button:hover {
+  background-color: #00337a;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    label {
+      width: 100%;
+      text-align: left;
+      font-size: 15px;
+    }
+  }
+
+  input,
+  textarea {
+    font-size: 15px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #001f54;
+    border-radius: 10px;
+  }
+
+  .btn-grp {
+    display: flex;
+    gap: 10px;
+  }
+
+  .popup-content button {
+    width: 100px;
+    margin: 0 auto;
+    background-color: #001f54;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .popup-content button:hover {
+    background-color: #00337a;
+  }
+
+  .preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .preview {
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+
+  .preview img,
+  .preview video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .remove-preview {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 14px;
+    border-radius: 50%;
+    padding: 2px 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+
+.frg-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.frg-popup-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.frg-popup-box p {
+  margin-bottom: 20px;
+}
+
+.frg-popup-box button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.frg-popup-box button:hover {
+  background-color: #0056b3;
+}

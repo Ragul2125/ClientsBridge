@@ -1,0 +1,49 @@
+.registration-container {
+  width: calc(100vw - 260px);
+  height: calc(100vh - 68px);
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+a {
+  color: #9c9c9c;
+}
+
+.tab-titles {
+  padding: 1.5em;
+}
+
+.tab-titles p {
+  display: inline-block;
+  margin: 0 7px;
+  cursor: pointer;
+  font-family: poppins;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .registration-container {
+    width: 100vw;
+  }
+
+  .tab-titles {
+    padding: 1.2em 0.7em;
+  }
+
+  .tab-titles p {
+    margin: 0 4px;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+}
+
+.registrationtab {
+  color: rgb(34, 34, 34);
+}
+
+.active {
+  color: #000;
+}

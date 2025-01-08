@@ -1,0 +1,273 @@
+.registration {
+  font-family: "Outfit", serif;
+  .registration-nav {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #001f54;
+    .logo {
+      height: 80px;
+      margin: 0 20px;
+    }
+  }
+
+  .form-container {
+    background-color: #f9f9f9;
+    max-width: 1140px;
+    margin: 50px auto;
+    padding: 20px 100px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-bottom: 100px;
+  }
+
+  .form-title {
+    text-align: center;
+    font-size: 38px;
+    margin-bottom: 60px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
+  }
+
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  input,
+  textarea,
+  select {
+    border: none;
+    outline: none;
+    min-width: 250px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  textarea {
+    height: 180px;
+    resize: none;
+  }
+
+  button {
+    background-color: #001f54;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #003080;
+  }
+
+  .submit-btn {
+    margin: 0 auto;
+    min-width: 150px;
+    width: 30%;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .verify-btn {
+    align-self: center;
+  }
+
+  @media (max-width: 768px) {
+    .form-container {
+      padding: 20px 50px;
+    }
+    .form-row {
+      gap: 20px;
+      flex-direction: column;
+    }
+
+    .form-group {
+      width: 100%;
+    }
+  }
+  .remove-btn {
+    background-color: none;
+  }
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  }
+
+  .popup-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .popup-content button {
+    background-color: #001f54;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .popup-content button:hover {
+    background-color: #003080;
+  }
+
+  .error-message {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+}
+
+/* TagsInput Component CSS */
+.tags-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* padding: 12px; */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  width: 100%;
+  /* max-width: 600px; */
+  margin: 0 auto;
+  /* border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.tags-input-container label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.tags-input-container p {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.tags-input-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px;
+  background-color: #fff;
+  cursor: text;
+}
+
+.tags-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 0.9rem;
+  padding: 4px;
+}
+
+.tags-input-box input::placeholder {
+  color: #aaa;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.remove-tag {
+  margin: 0 5px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  color: #333;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  padding: 6px 8px;
+}
+
+.tag .close-button {
+  margin-left: 8px;
+  color: #555;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tag .close-button:hover {
+  color: #d00;
+}
+
+.remove-all-btn {
+  display: inline-block;
+  margin-top: 12px;
+  background-color: #6a5acd;
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.remove-all-btn:hover {
+  background-color: #5a4db5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tags-input-container {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .tags-input-box {
+    flex-wrap: wrap;
+    padding: 6px;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    padding: 4px 6px;
+  }
+
+  .remove-all-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,185 @@
+.transaction-container {
+    /* background-color: aqua; */
+    width: calc(100vw - 260px);
+    height: calc(100vh - 68px);
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.transaction-top {
+    width: 90%;
+    padding: 2em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.transtopinner {
+    width: calc(100% / 3.3);
+    min-width: 260px;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    gap: 1.5em;
+    padding: 1.5em 1.5em;
+    border-radius: 15px;
+    color: #686868;
+    /* border: 0.2px solid #d2d2d2; */
+
+}
+
+.transtopimg {
+    width: 20%;
+}
+
+.transtopval {
+    font-size: large;
+    color: #000000;
+}
+
+.trantopic {
+    width: 90%;
+    font-family: poppins;
+    font-weight: bold;
+    padding: 0 0.3em;
+    margin-bottom: 0.5em;
+}
+
+@keyframes scroll-up {
+    0% {
+        transform: translateY(50%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.tran-tablecon {
+    width: 90%;
+    border-radius: 15px 15px 0 0;
+    flex-grow: 1;
+    overflow: scroll;
+    background-color: white;
+    animation: scroll-up 0.2s forwards;
+    border-bottom: none;
+}
+
+.tran-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: start;
+}
+
+.tran-thead th {
+    padding: 0.9em 0;
+    font-weight: 500;
+    font-size: medium;
+    text-align: start;
+    padding-left: 2em;
+    position: sticky;
+    top: 0;
+    z-index: 11;
+    border-bottom: 1px solid #d2d2d2;
+    background-color: white;
+    color: #717171;
+}
+
+.tran-thead th:first-child {
+    padding-left: 2em;
+}
+
+.tran-tbody tr {
+    border-bottom: 1px solid #d2d2d2;
+    font-size: medium;
+    color: #000000;
+}
+
+.tran-tbody td {
+    padding-left: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+
+.tran-tbody td:first-child {
+    padding-left: 1em;
+    display: flex;
+    gap: 0.2em;
+}
+
+.tranicon {
+    font-size: larger;
+    display: grid;
+    place-items: center;
+}
+
+.tranviewbtn {
+    padding: 0.5em 2.5em;
+    border-radius: 9px;
+    outline: 1px solid #bfbfbf;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    color: #000000;
+    text-decoration: none;
+    margin-right: 0.5em;
+}
+
+.tranviewbtn:hover {
+    background-color: #eaeaea;
+}
+
+@media(max-width:1100px) {
+    .transaction-container {
+        width: 100vw;
+        height: 129vh;
+    }
+
+    .transaction-top {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    .transtopinner {
+        width: 95%;
+    }
+
+    .tran-tablecon {
+        width: 95%;
+        margin: 0 0.5em;
+        padding-bottom: 3em;
+        
+    }
+    .tran-thead th {
+        font-size: 0.92rem;
+    }
+
+    .tran-tbody tr {
+        font-size: 0.92rem;
+    }
+
+    .tran-tbody td {
+        padding-left: 2em;
+    }
+
+    .tranfirst {
+        margin-top: 1em;
+    }
+
+    .tran-tbody td:last-child,
+    th:last-child {
+        position: sticky;
+        right: 0;
+        background-color: rgba(253, 253, 253, 0.915);
+        box-shadow: 1px 0px 5px red;
+
+    }
+}

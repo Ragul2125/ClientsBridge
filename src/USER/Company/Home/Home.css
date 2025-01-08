@@ -1,0 +1,302 @@
+.company-home-main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    background-color: var(--white);
+}
+
+/* ==========================================================company-home-search-section========================================== */
+
+.company-home-search-section {
+    padding: 1em 3em;
+}
+
+.company-home-search-section-inner {
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    justify-content: center;
+    background: var(--blugrad);
+    border-radius: 15px;
+    color: white;
+}
+
+.company-home-search-text-head {
+    font-size: x-large;
+    font-family: 'poppins';
+    font-weight: 600;
+    text-wrap: wrap;
+}
+
+.company-home-search-text-des {
+    width: 90%;
+    font-size: large;
+    font-family: 'poppins';
+    text-wrap: wrap;
+}
+
+.company-home-search-section-search-container {
+    width: 100%;
+    display: flex;
+    gap: 1em;
+}
+
+.company-home-search-input {
+    width: 100%;
+    font-size: medium;
+    font-family: 'poppins';
+    padding: 0.5em 1em;
+    outline: 0;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.company-home-search-btn {
+    background-color: white;
+    color: #000000;
+    padding: 0 2.5em;
+    display: grid;
+    place-items: center;
+    font-family: 'outfit', sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.company-home-search-btn:hover {
+    background-color: rgb(58, 58, 58);
+    color: white;
+}
+
+/* ====================================================================company-home-cards-section================================ */
+.company-home-cards-section {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    overflow: scroll;
+}
+
+.company-home-cards-section-container {
+    flex-grow: 1;
+    padding-top: 0;
+    padding: 0 3em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.company-home-card {
+    flex-grow: 1;
+    width: calc(100% /3.3);
+    padding: 1em;
+    border-radius: 10px;
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: auto 2fr auto;
+    grid-template-areas:
+        "dp title btn"
+        "summary summary summary"
+        "box box box";
+    column-gap: 1em;
+    row-gap: 0.7em;
+    overflow: hidden;
+    font-family: 'outfit', sans-serif;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.company-home-card:hover {
+    scale: 1.02;
+}
+
+.company-home-card-img {
+    grid-area: dp;
+    width: 3.5em;
+}
+
+.company-home-card-title {
+    grid-area: title;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+    margin-top: 0.3em;
+    font-weight: 600;
+}
+
+.company-home-card-info {
+    font-weight: 400;
+    color: #5b5b5b;
+    font-size: smaller;
+}
+
+.company-home-card-count {
+    grid-area: btn;
+    padding: 0.5em;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+}
+
+.company-home-card-summary {
+    grid-area: summary;
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    gap: 0.2em;
+}
+
+.company-home-card-summary-des {
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    font-size: smaller;
+
+}
+
+.company-home-card-btn {
+    grid-area: box;
+    padding: 0.5em;
+    border: 1px solid gray;
+    border-radius: 4px;
+    display: grid;
+    place-items: center;
+    transition-duration: 0.2s;
+    color: #000000;
+}
+
+.company-home-card-btn:hover {
+    background-color: var(--blue);
+    color: white;
+    font-weight: 500;
+    border: none;
+}
+
+/* =========================================================BIDDING-VIEW================= */
+.company-home-bidded-view {
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'poppins';
+
+    p,
+    li {
+        font-size: medium;
+        margin-top: 0.5em;
+    }
+
+    .company-home-bidded-view-container {
+        background-color: white;
+        border-radius: 15px;
+        padding: 2em;
+        display: flex;
+        flex-direction: column;
+        height: 85%;
+        margin: 3em;
+        overflow: scroll;
+
+        .company-home-bidded-view-container-header {
+            display: flex;
+            align-items: center;
+            gap: 2em;
+            padding-bottom: 2em;
+
+            h1 {
+                font-size: x-large;
+                font-weight: 600;
+            }
+        }
+
+        .company-home-bidded-view-container-overview {
+            h2 {
+                font-size: larger;
+                font-weight: 600;
+                padding-bottom: 0.5em;
+            }
+
+
+            p {
+                padding-bottom: 0.5em;
+                font-size: medium;
+            }
+
+            p {
+                width: 90%;
+                text-wrap: wrap;
+                font-weight: 400;
+            }
+
+            padding-bottom: 1em;
+        }
+
+        .company-home-bidded-view-container-key-responsibilities {
+            h2 {
+                font-size: large;
+                font-weight: 600;
+            }
+
+            ul {
+                padding-left: 2em;
+
+                li {
+                    padding-bottom: 1em;
+                }
+            }
+
+            padding-bottom: 1em;
+        }
+
+        .company-home-bidded-view-container-details {
+            display: flex;
+            gap: 4em;
+            padding-top: 1em;
+
+            .biding-amount,
+            .time {
+                h3 {
+                    padding-bottom: 1em;
+                }
+
+                div {
+                    padding: 0.5em;
+                    border: 1px solid #00000026;
+                    border-radius: 10px;
+                    width: 210px;
+
+                    input {
+                        outline: none;
+                        border: none;
+                        font-size: 1em;
+                    }
+                }
+            }
+        }
+
+        .company-home-bidded-view-container-btn {
+            display: flex;
+            justify-content: flex-end;
+            padding-top: 2em;
+
+            button {
+                padding: 0.8em 3em;
+                border-radius: 10px;
+                outline: none;
+                border: none;
+                background-color: var(--blue);
+                color: var(--white);
+            }
+        }
+    }
+}

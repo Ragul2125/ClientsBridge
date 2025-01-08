@@ -1,0 +1,341 @@
+.profile-pg {
+    background-color: rgb(190, 186, 186);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    .profile-container {
+        width: 80%;
+        /* background-color: #2764f4; */
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+
+        .profile-container-personal-details {
+            background-color: white;
+            width: 100%;
+            /* height: 75vh; */
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            padding: 2em;
+            margin-top: 1em;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+            .edit {
+                display: flex;
+                justify-content: end;
+                font-size: 1.2em;
+            }
+
+            .profile-container-personal-details-user {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+                /* background-color: aqua; */
+                .profile-container-personal-details-content-dp {
+                    img {
+                        width: 250px;
+                        border-radius: 50%;
+                    }
+                }
+
+                .profile-container-personal-details-content-user-fields {
+
+                    .name,
+                    .user-name,
+                    .role,
+                    .password {
+                        padding-bottom: 1em;
+
+                        h3 {
+                            padding-bottom: 0.5em;
+                        }
+
+                        div {
+                            border: 1px solid black;
+                            width: 400px;
+                            padding: 0.4em;
+                            margin-top: 0.2em;
+                            border: 1px solid rgb(0, 0, 0, 15%);
+                            border-radius: 10px;
+                        }
+                    }
+
+                    .password {
+                        .forgot {
+                            display: flex;
+                            justify-content: end;
+                            color: #2764f4;
+                            padding-top: 0.5em;
+                        }
+                    }
+                }
+            }
+
+            .profile-container-personal-details-content-user-mails-description {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                padding-left: 3em;
+
+                .mail-ratings {
+                    display: flex;
+                    align-items: center;
+                    gap: 3em;
+                    padding-bottom: 1em;
+
+                    .mail {
+                        div {
+                            border: 1px solid black;
+                            width: 450px;
+                            padding: 0.4em;
+                            margin-top: 0.2em;
+                            border: 1px solid rgb(0, 0, 0, 15%);
+                            border-radius: 10px;
+                        }
+                    }
+
+                    .ratings {
+                        .star {
+                            padding-left: 2em;
+                            padding-top: 0.5em;
+                            font-size: 1.5em;
+                        }
+                    }
+                }
+
+                .description {
+                    .des {
+                        border: 1px solid black;
+                        width: 83%;
+                        height: 100px;
+                        padding: 0.4em;
+                        margin-top: 0.2em;
+                        border: 1px solid rgb(0, 0, 0, 15%);
+                        border-radius: 10px;
+                        /* background-color: #2764f4; */
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                        scrollbar-width: none;
+                        -ms-overflow-style: none;
+
+                        .des::-webkit-scrollbar {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            .btn {
+                display: flex;
+                justify-content: end;
+
+                button {
+                    padding: 1em 1.5em;
+                    background-color: #2764f4;
+                    color: white;
+                    border-radius: 10px;
+                    outline: none;
+                    border: none;
+                    /* display: flex; */
+                }
+            }
+        }
+
+        .card:first-child {
+            margin-top: 5em;
+        }
+
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        .des::-webkit-scrollbar {
+            display: none;
+        }
+
+        .card:last-child {
+            margin-bottom: 3em;
+        }
+
+        .profile-container-professional-details {
+            background-color: white;
+            width: 100%;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            padding: 2em;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+            .edit {
+                display: flex;
+                justify-content: end;
+                font-size: 1.2em;
+                padding-bottom: 0.5em;
+            }
+
+            .professional-details-content {
+                display: flex;
+                justify-content: space-around;
+
+                .ownerName,
+                .managerName,
+                .city,
+                .state,
+                .zipCode,
+                .country,
+                .gstNumber,
+                .licenseNumber,
+                .size,
+                .address,
+                .phoneNumber {
+                    display: flex;
+                    align-items: center;
+                    gap: 5em;
+                    padding-bottom: 1.5em;
+
+                    h3 {
+                        width: 150px;
+                    }
+
+                    p {
+                        width: 200px;
+                    }
+                }
+            }
+
+            .btn {
+                display: flex;
+                justify-content: end;
+
+                button {
+                    padding: 1em 1.5em;
+                    background-color: #2764f4;
+                    color: white;
+                    border-radius: 10px;
+                    outline: none;
+                    border: none;
+                    /* display: flex; */
+                }
+            }
+        }
+
+        .profile-container-ratings {
+            background-color: white;
+            width: 100%;
+            height: 40vh;
+            border-radius: 20px;
+            display: flex;
+            /* justify-content: space-around; */
+            padding: 2em;
+            /* margin-bottom: 8em; */
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            flex-direction: column;
+
+            .ratings {
+                display: flex;
+                /* align-items: center; */
+                /* flex-direction: column; */
+                gap: 1em;
+
+                .stars {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .no-stars {
+                        width: 110px;
+                        height: 110px;
+                        border-radius: 50%;
+                        background-color: var(--half-white);
+                        color: var(--primary-blue);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                    }
+
+                    .star {
+                        display: flex;
+                        font-size: 2em;
+                    }
+                }
+            }
+        }
+
+        .profile-container-review {
+            width: 100%;
+            padding: 2em;
+            background-color: white;
+            height: 70vh;
+            margin-bottom: 8em;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+            /* overflow: scroll; */
+            .review-container {
+                /* background-color: var(--half-white); */
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1em;
+                height: 100%;
+
+                .review-cards {
+                    width: 300px;
+                    height: 250px;
+                    padding: 2em;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1em;
+                    background-color: var(--white);
+                    border-radius: 10px;
+
+                    .review-profile {
+                        display: flex;
+                        align-items: center;
+                        justify-content: start;
+                        gap: 1em;
+
+                        p {
+                            font-size: 1.1em;
+                        }
+
+                        .username {
+                            padding-bottom: 0.5em;
+                        }
+                    }
+
+                    .des {
+                        p {
+                            width: 250px;
+                            text-wrap: wrap;
+                        }
+
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                        scrollbar-width: none;
+                        -ms-overflow-style: none;
+
+                        .p::-webkit-scrollbar {
+                            display: none;
+                        }
+                    }
+                }
+
+                overflow-y: auto;
+                overflow-x: hidden;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .review-container::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+}

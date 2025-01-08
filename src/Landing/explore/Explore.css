@@ -1,0 +1,465 @@
+.home-container {
+    height: 100vh;
+    width: 100vw;
+}
+
+.home-nav {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    padding: 0.5em 0;
+    display: flex;
+    align-items: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.3rem;
+    gap: 0.7em;
+    color: var(--blue);
+    background: rgba(255, 255, 255, 0.085);
+    backdrop-filter: blur(14.9px);
+    -webkit-backdrop-filter: blur(14.9px);
+}
+
+
+
+.logo-blu {
+    max-height: 3em;
+    margin-left: 1em;
+}
+
+.home-register-btn {
+    background-color: var(--blue);
+    color: white;
+    padding: 0.7em 1.5em;
+    border: none;
+    cursor: pointer;
+    font-size: medium;
+    border-radius: 50px;
+    margin-left: auto;
+    margin-right: 1em;
+    transition-duration: 0.5s;
+}
+
+.home-register-btn:hover {
+    opacity: 0.5;
+}
+
+@media(max-width:550px) {
+    .home-nav {
+        font-size: medium;
+        gap: 0.5em;
+    }
+
+    .home-register-btn {
+        font-size: small;
+    }
+
+    .logo-blu {
+        max-height: 2.5em;
+    }
+}
+
+/* ----home-carosel-container */
+
+.home-carousel-container {
+    width: 100vw;
+    height: 100vh;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-carousel {
+    width: 90%;
+    height: 68%;
+    border-radius: 16px;
+    margin-top: 2em;
+}
+
+.home-carousel-slide {
+    width: 100%;
+    height: 100%;
+    background-color: #dae0f6;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.home-carousel-slideimg {
+    height: 90%;
+    width: 100%;
+    align-self: end;
+}
+
+.home-carousel-slidetxt {
+    margin: 5em;
+    flex-grow: 1;
+    margin-right: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    font-family: 'outfit', arial, helvetica;
+    text-align: left;
+}
+
+.home-carousel-head {
+    font-size: 2.5vw;
+    text-wrap: wrap;
+    align-self: start;
+}
+
+.home-carousel-detials {
+    font-size: 1.5vw;
+    text-wrap: wrap;
+}
+
+.home-carousel-register-btn {
+    margin-top: 1em;
+    padding: 0.7em 2em;
+    background-color: var(--blue);
+    color: white;
+    font-size: medium;
+    border-radius: 20px;
+    align-self: start;
+    cursor: pointer;
+}
+
+.home-carousel-slide {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    display: none;
+}
+
+.home-carousel-slide.active {
+    opacity: 1;
+    display: flex;
+}
+
+/* Carousel Dots */
+.home-carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5em;
+    gap: 0.5em;
+}
+
+.dot {
+    width: 1.5em;
+    height: 0.3em;
+    border-radius: 10px;
+    background-color: lightgray;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: var(--blue);
+}
+
+/* -----------------------home-whatwedo-container-------------------- */
+.home-whatwecando-container {
+    width: 100vw;
+    /* height: 100vh; */
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 3em;
+}
+
+.home-whatwecando-head {
+    font-size: 2.7em;
+    background: var(--blugrad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-family: 'outfit';
+    letter-spacing: 1px;
+}
+
+.home-whatwecando-do-container {
+    width: 90%;
+    /* padding: 1em ; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.whatwedo {
+    display: flex;
+    flex-direction: column;
+}
+
+.whatwedo-icon {
+    padding: 1em;
+    align-self: start;
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+    font-size: larger;
+    outline: 1.6px solid #312F9C;
+    margin-bottom: 1em;
+    margin-left: 1.7px;
+}
+
+.whatwedo-txt {
+    font-family: 'outfit';
+    font-size: large;
+    text-wrap: wrap;
+}
+
+.home-whatwedo-do2-container {
+    width: 90%;
+    padding: 1em 0;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+}
+
+.whatwedo-do2-img {
+    width: 30%;
+
+}
+
+.whatwedo-do2-txt-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: 2em;
+    margin-left: 0;
+    margin-bottom: 4em;
+}
+
+.whatwedo-do2-headtxt {
+    font-family: 'outfit';
+    font-size: 2em;
+    text-wrap: wrap;
+    margin-right: 2em;
+    font-weight: 600;
+}
+
+.whatwedo-do2-txt {
+    text-wrap: wrap;
+    font-family: 'outfit';
+    font-size: larger;
+    text-align: justify;
+}
+
+.home-howcanwehelp-container {
+    background-image: url('./USER/assets/howcanwehelpbg.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    gap: 3em;
+}
+
+.howcanwehelp-txt-container {
+    height: 100%;
+    padding: 3em;
+    font-family: 'outfit';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    background: var(--blugrad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: 1em;
+    gap: 1em;
+}
+
+.howcanwehelp-head {
+    font-size: 2.5em;
+    text-wrap: wrap;
+}
+
+.howcanwehelp-txt {
+    text-wrap: wrap;
+    text-align: justify;
+    font-size: large;
+}
+
+.howcanwehelp-services-container {
+    width: 70%;
+    white-space: wrap;
+    display: flex;
+    gap: 3em;
+    justify-content: start;
+    align-items: center;
+}
+
+.howcanwehelp-service-row:nth-child(even) {
+    margin-bottom: 6em;
+}
+
+.howcanwehelp-service-row:nth-child(odd) {
+    margin-top: 6em;
+}
+
+.howcanwehelp-service {
+    max-width: 200px;
+    padding: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 20px;
+    outline: 1.6px solid #312f9c43;
+    margin-bottom: 3em;
+    background-color: white;
+}
+
+.howcanwehelp-service-img {
+    width: 3em;
+    margin: 1em 0;
+}
+
+.howcanwehelp-service-headtxt {
+    font-family: 'outfit';
+    font-size: medium;
+    text-wrap: wrap;
+    font-weight: 500;
+    text-align: center;
+}
+
+.howcanwehelp-service-txt-details {
+    font-family: 'outfit';
+    text-align: center;
+    text-wrap: wrap;
+    font-size: small;
+}
+
+/* -----------------------home-profile-container-------------------- */
+.profile-section {
+    padding: 40px;
+    background-color: #f9f9f9;
+    text-align: center;
+    font-family: 'outfit', sans-serif;
+}
+
+.section-title {
+    font-size: 20px;
+    color: #007bff;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.section-subtitle {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px 0 30px;
+    color: #333;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+}
+
+.card-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+}
+
+.card-description {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+    text-wrap: wrap;
+}
+
+.card-link {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card-link:hover {
+    text-decoration: underline;
+}
+
+/* -----------------Footer------------------ */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #ddd;
+    font-family: 'outfit';
+}
+
+.footer-section {
+    flex: 1;
+    margin: 0 10px;
+
+}
+
+.footer-section h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #2c2c2c;
+}
+
+.footer-section p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    text-wrap: wrap;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #2c2c2c;
+    font-size: 14px;
+}
+
+.footer-section ul li a:hover {
+    color: #007bff;
+}
+
+.footer-social {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.footer-social a img {
+    width: 24px;
+    height: 24px;
+}
