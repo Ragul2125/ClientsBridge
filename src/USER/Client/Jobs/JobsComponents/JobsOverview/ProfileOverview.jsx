@@ -1,33 +1,55 @@
-import { useParams } from 'react-router-dom';
 import './Overview.css';
 import dp from '../../../../assets/userdp.svg';
+import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const projectData = [
-    {
-        id: '1',
-        title: 'CreativeTech Solution',
-        time: '3 hours ago',
-        projectName: 'Mobile E-Commerce Application',
-        objective: 'Developed a machine learning model to predict future sales based on historical data. The project involved preprocessing large datasets, feature engineering, and applying regression algorithms to achieve accurate sales predictions.',
-        status: 'This project has been reviewed and selected by the admin at QuantumEdge Technologies, reflecting its alignment with the platform\'s standards and objectives.',
-    },
-    {
-        id: '2',
-        title: 'InnovateX Agency',
-        time: '5 hours ago',
-        projectName: 'AI-Powered Chatbot Development',
-        objective: 'Built an AI-driven chatbot to enhance customer support for an e-commerce platform. Utilized natural language processing (NLP) and machine learning techniques.',
-        status: 'This project is under review for deployment at InnovateX Agency.',
-    },
-];
+const Api_Url = import.meta.env.VITE_BACKEND_URL;
 
 export default function ProfileOverview() {
     const { viewid } = useParams();
+    const [job, setJob] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const project = projectData.find((p) => p.id === viewid);
+    useEffect(() => {
+        const fetchJobDetails = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    alert("User is not authenticated. Please log in.");
+                    return;
+                }
 
-    if (!project) {
-        return <p style={{ margin: '3em' }}>Project not found. Please check the URL.</p>;
+                const response = await axios.get(`${Api_Url}/api/jobs/getDetails/${viewid}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setJob(response.data);
+                console.log(response.data)
+                setLoading(false);
+            } catch (err) {
+                console.error("Error fetching job details:", err);
+                setError(err.response?.data?.message || "Something went wrong!");
+                setLoading(false);
+            }
+        };
+
+        fetchJobDetails();
+    }, [viewid]);
+
+    if (loading) {
+        return <p>Loading job details...</p>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
+
+    if (!job) {
+        return <p style={{ margin: '3em' }}>Job not found. Please check the URL.</p>;
     }
 
     return (
@@ -35,27 +57,33 @@ export default function ProfileOverview() {
             <div className="client-profileoverview-inner">
                 <img className="client-profileoverview-inner-dp" src={dp} alt="User profile" />
                 <p className="client-profileoverview-inner-title">
-                    {project.title}
-                    <span className="client-profileoverview-inner-time">{project.time}</span>
+                    {job.postTitle}
+                    <span className="client-profileoverview-inner-time">
+                        {new Date(job.deadline).toLocaleDateString()}
+                    </span>
                 </p>
                 <p className="client-profileoverview-inner-threedot">...</p>
 
                 <div className="client-profileoverview-inner-des">
-                    <p className="client-profileoverview-inner-des-head">Project Title</p>
+                    <p className="client-profileoverview-inner-des-head">Job Title</p>
                     <p className="client-profileoverview-inner-des-subtxt">
-                        <span className="client-profileoverview-inner-des-subhead">Name of the Project: </span>
-                        {project.projectName}
+                        <span className="client-profileoverview-inner-des-subhead">Title: </span>
+                        {job.postTitle}
                     </p>
 
-                    <p className="client-profileoverview-inner-des-head">Overview</p>
+                    <p className="client-profileoverview-inner-des-head">Job Description</p>
                     <p className="client-profileoverview-inner-des-subtxt">
-                        <span className="client-profileoverview-inner-des-subhead">Objective: </span>
-                        {project.objective}
+                        <span className="client-profileoverview-inner-des-subhead">Description: </span>
+                        {job.description}
                     </p>
 
-                    <p className="client-profileoverview-inner-des-head">Project Status</p>
-                    <p className="client-profileoverview-inner-des-subtxt">{project.status}</p>
+                    <p className="client-profileoverview-inner-des-head">Job Status</p>
+                    <p className="client-profileoverview-inner-des-subtxt">{job.status}</p>
                 </div>
+
+                <Link to="/client/jobs/unassigned" className="client-profileoverview-back-btn">
+                    Back to Unassigned Jobs
+                </Link>
             </div>
         </main>
     );
