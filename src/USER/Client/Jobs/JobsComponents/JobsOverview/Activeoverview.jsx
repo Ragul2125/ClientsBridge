@@ -99,20 +99,63 @@ const View = () => {
 
   return (
     <main className="client-jobs-view-main">
-      <section className="client-profileoverview-inner client-oncooverview-inner">
-        {/* Job details */}
+       <section className="client-profileoverview-inner client-oncooverview-inner">
+        {/* <img className="client-profileoverview-inner-dp" src={dp} alt="User" /> */}
         <p className="client-profileoverview-inner-title">
           <h1>{project.postTitle}</h1>
-          <span className="client-profileoverview-inner-time">3 hours ago</span>
+          <span className="client-profileoverview-inner-time">
+            {new Date(project.deadline).toLocaleDateString()}
+          </span>
         </p>
         <p className="client-profileoverview-inner-threedot">...</p>
+
+        {/* --------------------------------------------------------------------DESC------------------ */}
         <div className="client-profileoverview-inner-des">
-          {/* Job description and details */}
+          {/* <p className="client-profileoverview-inner-des-head">Project Title</p>
+                    <p className="client-profileoverview-inner-des-subtxt">
+                        <span className='client-profileoverview-inner-des-subhead'>Name of the Project: </span> Mobile E-Commerce Application
+                    </p> */}
+
           <p className="client-profileoverview-inner-des-head">Overview</p>
           <p className="client-profileoverview-inner-des-subtxt">
             {project.description}
           </p>
-          {/* Tags and Files */}
+          <div className="client-profileoverview-inner-side-byside">
+            <div>
+              {" "}
+              <p className="client-profileoverview-inner-des-head">Deadline</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+                {new Date(project.deadline).toLocaleDateString()}
+              </p>
+            </div>
+            <div>
+              <p className="client-profileoverview-inner-des-head">Budget</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+                {project.budget}
+              </p>
+            </div>
+            <div>
+              <p className="client-profileoverview-inner-des-head">Category</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+                {project.category}
+              </p>
+            </div>
+          </div>
+
+          <p className="client-profileoverview-inner-des-head">Tags</p>
+          <p className="client-profileoverview-inner-des-tags">
+            {project.tags.map((tag, i) => (
+              <p className="job-tag-seps">{tag}</p>
+            ))}
+          </p>
+          <p className="client-profileoverview-inner-des-head">Files</p>
+          <p className="client-profileoverview-inner-des-file">
+            {project.files.map((file, i) => (
+              <p>
+                <a href={file}>file {i + 1}</a>
+              </p>
+            ))}
+          </p>
         </div>
       </section>
 
