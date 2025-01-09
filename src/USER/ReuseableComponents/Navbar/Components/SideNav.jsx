@@ -40,32 +40,32 @@ export default function SideNav() {
     },
     { name: "Inbox", path: "/client/inbox", icon: <AiOutlineMessage /> },
     { name: "Jobs", path: "/client/jobs/unassigned", icon: <GiWallet /> },
-    {
+    /* {
       name: "Transaction",
       path: "/client/transaction",
       icon: <IoShieldCheckmark />,
-    },
+    }, */
   ];
 
   const array2 = [
     { name: "Home", path: "/company/home", icon: <BiHomeAlt2 /> },
     { name: "Inbox", path: "/company/inbox", icon: <AiOutlineMessage /> },
     { name: "Jobs", path: "/company/jobs/bidded", icon: <GiWallet /> },
-    {
+    /* {
       name: "Transaction",
       path: "/company/transaction",
       icon: <IoShieldCheckmark />,
-    },
+    }, */
   ];
   const array3 = [
     { name: "Home", path: "/freelancer/home", icon: <BiHomeAlt2 /> },
     { name: "Inbox", path: "/freelancer/inbox", icon: <AiOutlineMessage /> },
     { name: "Jobs", path: "/freelancer/jobs/bidded", icon: <GiWallet /> },
-    {
+    /* {
       name: "Transaction",
       path: "/freelancer/transaction",
       icon: <IoShieldCheckmark />,
-    },
+    }, */
   ];
 
   const menuItems = location.pathname.toLowerCase().includes("client")
@@ -111,12 +111,12 @@ export default function SideNav() {
       </div>
       <div className="navbar-bottom">
         <ul>
-          <li>
+          {/* <li>
             <h2>
               <IoSettingsOutline />
             </h2>
             {isExpanded && <p>Setting</p>}
-          </li>
+          </li> */}
           <li onClick={logout}>
             <h2>
               <IoLogOutOutline />

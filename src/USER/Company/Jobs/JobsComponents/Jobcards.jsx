@@ -149,7 +149,11 @@ export default function ActiveJobs() {
                 )
               }
             >
-              <img className="client-jobs-active-card-img" src={dp} alt="dp" />
+              <img
+                className="client-jobs-active-card-img"
+                src={job.clientID.profilePic}
+                alt="dp"
+              />
               <p className="client-jobs-active-card-title">
                 {job.postTitle}
                 <span className="client-jobs-active-card-cost">
