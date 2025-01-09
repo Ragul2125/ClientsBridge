@@ -16,6 +16,8 @@ import OnCooverview from "../Client/Jobs/JobsComponents/JobsOverview/OnCoovervie
 import Activeoverview from "../Client/Jobs/JobsComponents/JobsOverview/Activeoverview";
 // ----------------------------------------------USER PROFILE------------------------->
 import UserProfile from "../ReuseableComponents/Profile/Profile";
+import MessagePage from "../Chat/components/MessagePage";
+import Home from "../Chat/Home";
 
 export default function ClientLayout() {
   return (
@@ -38,9 +40,11 @@ export default function ClientLayout() {
           <Route path="jobs/active/:viewid" element={<Activeoverview />} />
           <Route path="jobs/ongoing/:viewid" element={<OnCooverview />} />
           <Route path="jobs/completed/:viewid" element={<OnCooverview />} />
-          <Route path="profile" element={<UserProfile />}>
-            {/* <Route path="addprojects" element={<Addprojects />} /> */}
+          <Route path="profile" element={<UserProfile />} />
+          <Route path="chat" element={<Home />}>
+            <Route path=":id" element={<MessagePage />} />
           </Route>
+          {/* <Route path="addprojects" element={<Addprojects />} /> */}
         </Routes>
       </div>
     </div>

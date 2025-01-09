@@ -12,6 +12,8 @@ import Jobcards from "./Jobs/JobsComponents/Jobcards.jsx";
 import Jobview from "./Jobs/JobsComponents/JobsOverview/Jobsview.jsx";
 import Onco from "./Jobs/JobsComponents/JobsOverview/OnCooverview.jsx";
 import Profile from "../ReuseableComponents/Profile/Profile.jsx";
+import Homepg from "../Chat/Home.jsx";
+import MessagePage from "../Chat/components/MessagePage.jsx";
 
 export default function ClientLayout() {
   return (
@@ -34,6 +36,9 @@ export default function ClientLayout() {
           <Route path="jobs/ongoing/:jbid" element={<Onco />} />
           <Route path="jobs/completed/:jbid" element={<Onco />} />
           <Route path="myProfile" element={<Profile />} />
+          <Route path="chat" element={<Homepg />}>
+            <Route path=":id" element={<MessagePage />} />
+          </Route>
         </Routes>
       </div>
     </div>

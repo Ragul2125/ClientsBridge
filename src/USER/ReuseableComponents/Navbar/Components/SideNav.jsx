@@ -38,7 +38,7 @@ export default function SideNav() {
       path: "/client/dashboard",
       icon: <LuLayoutDashboard />,
     },
-    { name: "Inbox", path: "/client/inbox", icon: <AiOutlineMessage /> },
+    { name: "Inbox", path: "/client/chat", icon: <AiOutlineMessage /> },
     { name: "Jobs", path: "/client/jobs/unassigned", icon: <GiWallet /> },
     /* {
       name: "Transaction",
@@ -49,7 +49,7 @@ export default function SideNav() {
 
   const array2 = [
     { name: "Home", path: "/company/home", icon: <BiHomeAlt2 /> },
-    { name: "Inbox", path: "/company/inbox", icon: <AiOutlineMessage /> },
+    { name: "Inbox", path: "/company/chat", icon: <AiOutlineMessage /> },
     { name: "Jobs", path: "/company/jobs/bidded", icon: <GiWallet /> },
     /* {
       name: "Transaction",
@@ -59,7 +59,7 @@ export default function SideNav() {
   ];
   const array3 = [
     { name: "Home", path: "/freelancer/home", icon: <BiHomeAlt2 /> },
-    { name: "Inbox", path: "/freelancer/inbox", icon: <AiOutlineMessage /> },
+    { name: "Inbox", path: "/freelancer/chat", icon: <AiOutlineMessage /> },
     { name: "Jobs", path: "/freelancer/jobs/bidded", icon: <GiWallet /> },
     /* {
       name: "Transaction",

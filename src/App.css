@@ -70,6 +70,10 @@ select {
 .mobiletop {
   display: none;
 }
+.home-container-chat {
+  background-color: #0b0b45;
+  height: 100%;
+}
 
 @media (max-width: 1100px) {
   .mobiletop {
