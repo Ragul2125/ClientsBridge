@@ -3,6 +3,7 @@ import Addimg from '../../../assets/addnew.svg';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import TagsInput from '../../../../Landing/Registerations/TagsInput';
 
 export default function Addnew() {
     const [step, setStep] = useState(1);
@@ -244,6 +245,10 @@ export default function Addnew() {
                                                     setFormData({ ...formData, projectBudget: e.target.value })
                                                 }
                                             />
+                                            
+                                        </div>
+                                        <div>
+                                            <TagsInput />
                                         </div>
                                         <div className="addnew-two-inputs">
                                             <label htmlFor="uploadFiles" className="addnew-projectname-label">

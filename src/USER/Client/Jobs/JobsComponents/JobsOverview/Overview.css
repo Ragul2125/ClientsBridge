@@ -343,3 +343,9 @@
         -ms-overflow-style: none;
     }
 }
+
+.client-profileoverview-inner-des-file{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+  }

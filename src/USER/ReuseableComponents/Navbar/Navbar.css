@@ -184,7 +184,9 @@ a {
     cursor: pointer;
 
     .profileImg {
-      width: 2em;
+      border-radius: 50%;
+      width: 2.5em;
+      height: 2.5em;
     }
 
     .profile-about {

@@ -51,40 +51,69 @@ export default function ProfileOverview() {
     if (!job) {
         return <p style={{ margin: '3em' }}>Job not found. Please check the URL.</p>;
     }
+    console.log(job)
 
     return (
         <main className="client-profileoverview-main">
-            <div className="client-profileoverview-inner">
-                <img className="client-profileoverview-inner-dp" src={dp} alt="User profile" />
-                <p className="client-profileoverview-inner-title">
-                    {job.postTitle}
-                    <span className="client-profileoverview-inner-time">
-                        {new Date(job.deadline).toLocaleDateString()}
-                    </span>
-                </p>
-                <p className="client-profileoverview-inner-threedot">...</p>
+            <section className="client-profileoverview-inner client-oncooverview-inner">
+        {/* <img className="client-profileoverview-inner-dp" src={dp} alt="User" /> */}
+        <p className="client-profileoverview-inner-title">
+          <h1>{job.postTitle}</h1>
+          <span className="client-profileoverview-inner-time">
+          {new Date(job.deadline).toLocaleDateString()}
+          </span>
+        </p>
+        <p className="client-profileoverview-inner-threedot">...</p>
 
-                <div className="client-profileoverview-inner-des">
-                    <p className="client-profileoverview-inner-des-head">Job Title</p>
+        {/* --------------------------------------------------------------------DESC------------------ */}
+        <div className="client-profileoverview-inner-des">
+          {/* <p className="client-profileoverview-inner-des-head">Project Title</p>
                     <p className="client-profileoverview-inner-des-subtxt">
-                        <span className="client-profileoverview-inner-des-subhead">Title: </span>
-                        {job.postTitle}
-                    </p>
+                        <span className='client-profileoverview-inner-des-subhead'>Name of the Project: </span> Mobile E-Commerce Application
+                    </p> */}
 
-                    <p className="client-profileoverview-inner-des-head">Job Description</p>
-                    <p className="client-profileoverview-inner-des-subtxt">
-                        <span className="client-profileoverview-inner-des-subhead">Description: </span>
-                        {job.description}
-                    </p>
-
-                    <p className="client-profileoverview-inner-des-head">Job Status</p>
-                    <p className="client-profileoverview-inner-des-subtxt">{job.status}</p>
-                </div>
-
-                <Link to="/client/jobs/unassigned" className="client-profileoverview-back-btn">
-                    Back to Unassigned Jobs
-                </Link>
+          <p className="client-profileoverview-inner-des-head">Overview</p>
+          <p className="client-profileoverview-inner-des-subtxt">
+            {job.description}
+          </p>
+          <div className="client-profileoverview-inner-side-byside">
+            <div>
+              {" "}
+              <p className="client-profileoverview-inner-des-head">Deadline</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+              {new Date(job.deadline).toLocaleDateString()}
+              </p>
             </div>
+            <div>
+              <p className="client-profileoverview-inner-des-head">Budget</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+                {job.budget}
+              </p>
+            </div>
+            <div>
+              <p className="client-profileoverview-inner-des-head">Category</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+                {job.category}
+              </p>
+            </div>
+          </div>
+
+          <p className="client-profileoverview-inner-des-head">Tags</p>
+          <p className="client-profileoverview-inner-des-tags">
+            {job.tags.map((tag, i) => (
+              <p className="job-tag-seps">{tag}</p>
+            ))}
+          </p>
+          <p className="client-profileoverview-inner-des-head">Files</p>
+          <p className="client-profileoverview-inner-des-file">
+            {job.files.map((file, i) => (
+              <p>
+                <a href={file}>file {i + 1}</a>
+              </p>
+            ))}
+          </p>
+        </div>
+      </section>
         </main>
     );
 }

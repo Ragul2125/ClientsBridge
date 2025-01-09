@@ -57,8 +57,22 @@ export default function SideNav() {
       icon: <IoShieldCheckmark />,
     },
   ];
+  const array3 = [
+    { name: "Home", path: "/freelancer/home", icon: <BiHomeAlt2 /> },
+    { name: "Inbox", path: "/freelancer/inbox", icon: <AiOutlineMessage /> },
+    { name: "Jobs", path: "/freelancer/jobs/bidded", icon: <GiWallet /> },
+    {
+      name: "Transaction",
+      path: "/freelancer/transaction",
+      icon: <IoShieldCheckmark />,
+    },
+  ];
 
-  const menuItems = location.pathname.toLowerCase().includes("lient") ? array1 : array2;
+  const menuItems = location.pathname.toLowerCase().includes("client")
+    ? array1
+    : location.pathname.toLowerCase().includes("company")
+    ? array2
+    : array3;
 
   return (
     <div className={`Sidenav ${isExpanded ? "expanded" : ""}`}>

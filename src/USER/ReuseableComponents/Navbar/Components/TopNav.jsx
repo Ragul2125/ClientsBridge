@@ -37,7 +37,6 @@ const TopNav = () => {
         if (res.data) {
           setUserData(res.data);
         }
-        console.log("logger runs");
       } catch (error) {
         if (error.status == 401) {
           localStorage.clear("token");
@@ -68,7 +67,12 @@ const TopNav = () => {
             onChange={(e) => setgsearch(e.target.value)}
           />
         </div>
-        <div onClick={() => navigate("/client/profile")} className="profile">
+        <div
+          onClick={() =>
+            navigate(`/${localStorage.getItem("role").toLowerCase()}/myProfile`)
+          }
+          className="profile"
+        >
           <img
             src={userData?.profilePic}
             className="profileImg"
@@ -76,7 +80,7 @@ const TopNav = () => {
           />
           <div className="profile-about">
             <h4>{userData.name || "Jayasree"}</h4>
-            <p>{userData.role || "Client"}</p>
+            <p>{userData.userName || "Client"}</p>
           </div>
         </div>
 
