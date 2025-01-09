@@ -1,35 +1,47 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../Jobs.css';
 import dp from '../../../assets/userdp.svg';
 import { GoSearch } from "react-icons/go";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const jobData = [
-    {
-        id: 1,
-        title: 'CreativeTech Solution',
-        time: '3 hours ago',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, eius.',
-    },
-    {
-        id: 2,
-        title: 'InnovateX Agency',
-        time: '5 hours ago',
-        description: 'Dolorum harum neque rem maiores repellat quam quo officia.',
-    },
-    {
-        id: 3,
-        title: 'TechStar Company',
-        time: '1 day ago',
-        description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum animi.',
-    },
-];
+const API_Url = import.meta.env.VITE_BACKEND_URL;
 
 export default function Unassigned() {
     const [searchTerm, setSearchTerm] = useState('');
+    const [jobs, setJobs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const filteredJobs = jobData.filter(job =>
-        job.title.toLowerCase().includes(searchTerm.toLowerCase())
+    useEffect(() => {
+        const fetchJobs = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    alert("User is not authenticated. Please log in.");
+                    return;
+                }
+
+                const response = await axios.get(`${API_Url}/api/jobs/pendingJobs`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setJobs(response.data);
+                setLoading(false);
+            } catch (err) {
+                console.error("Error fetching pending jobs:", err);
+                setError(err.response?.data?.message || "Something went wrong!");
+                setLoading(false);
+            }
+        };
+
+        fetchJobs();
+    }, []);
+
+    const filteredJobs = jobs.filter(job =>
+        job.postTitle.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
@@ -46,21 +58,25 @@ export default function Unassigned() {
             </section>
             <section className="client-jobs-unassigned-project-section">
                 <div className="client-jobs-unassigned-project-inner">
-                    {filteredJobs.length > 0 ? (
+                    {loading ? (
+                        <p>Loading jobs...</p>
+                    ) : error ? (
+                        <p>{error}</p>
+                    ) : filteredJobs.length > 0 ? (
                         filteredJobs.map(job => (
-                            <div key={job.id} className="client-jobs-unassigned-project-card">
+                            <div key={job._id} className="client-jobs-unassigned-project-card">
                                 <img
                                     className="client-jobs-unassigned-project-card-dp"
                                     src={dp}
                                     alt="DP"
                                 />
                                 <p className="client-jobs-unassigned-project-card-title">
-                                    {job.title}
+                                    {job.postTitle}
                                     <span className="client-jobs-unassigned-project-card-time">
-                                        {job.time}
+                                        {new Date(job.deadline).toLocaleDateString()}
                                     </span>
                                 </p>
-                                <Link to={`${job.id}`} className="client-jobs-unassigned-project-card-btn">View more</Link>
+                                <Link to={`${job._id}`} className="client-jobs-unassigned-project-card-btn">View more</Link>
                                 <p className="client-jobs-unassigned-project-card-description">
                                     {job.description}
                                 </p>
