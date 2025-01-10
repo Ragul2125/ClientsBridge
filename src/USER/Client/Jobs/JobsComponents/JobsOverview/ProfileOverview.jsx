@@ -1,8 +1,8 @@
-import './Overview.css';
-import dp from '../../../../assets/userdp.svg';
-import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import "./Overview.css";
+import dp from "../../../../assets/userdp.svg";
+import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Api_Url = import.meta.env.VITE_BACKEND_URL;
 
@@ -22,14 +22,17 @@ export default function ProfileOverview() {
           return;
         }
 
-        const response = await axios.get(`${Api_Url}/api/jobs/getDetails/${viewid}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `${Api_Url}/api/jobs/getDetails/${viewid}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         setJob(response.data);
-        console.log(response.data)
+        console.log(response.data);
         setLoading(false);
       } catch (err) {
         console.error("Error fetching job details:", err);
@@ -53,16 +56,21 @@ export default function ProfileOverview() {
         return;
       }
 
-      const response = await axios.delete(`${Api_Url}/api/jobs/deleteJob/${viewid}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.delete(
+        `${Api_Url}/api/jobs/deleteJob/${viewid}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       alert("Job deleted successfully!");
       // Redirect or update the UI accordingly
     } catch (err) {
-      alert("Failed to delete job: " + (err.response?.data?.message || err.message));
+      alert(
+        "Failed to delete job: " + (err.response?.data?.message || err.message)
+      );
     }
   };
 
@@ -75,7 +83,9 @@ export default function ProfileOverview() {
   }
 
   if (!job) {
-    return <p style={{ margin: '3em' }}>Job not found. Please check the URL.</p>;
+    return (
+      <p style={{ margin: "3em" }}>Job not found. Please check the URL.</p>
+    );
   }
 
   return (
@@ -87,9 +97,11 @@ export default function ProfileOverview() {
             {new Date(job.deadline).toLocaleDateString()}
           </span>
         </p>
-
         <div className="client-profileoverview-inner-actions">
-          <p className="client-profileoverview-inner-threedot" onClick={handleDropdownToggle}>
+          <p
+            className="client-profileoverview-inner-threedot"
+            onClick={handleDropdownToggle}
+          >
             ...
           </p>
           {showDropdown && (
@@ -128,14 +140,18 @@ export default function ProfileOverview() {
           <p className="client-profileoverview-inner-des-head">Tags</p>
           <p className="client-profileoverview-inner-des-tags">
             {job.tags.map((tag, i) => (
-              <p className="job-tag-seps" key={i}>{tag}</p>
+              <p className="job-tag-seps" key={i}>
+                {tag}
+              </p>
             ))}
           </p>
           <p className="client-profileoverview-inner-des-head">Files</p>
           <p className="client-profileoverview-inner-des-file">
             {job.files.map((file, i) => (
               <p key={i}>
-                <a href={file} target="_blank" rel="noopener noreferrer">file {i + 1}</a>
+                <a href={file} target="_blank" rel="noopener noreferrer">
+                  file {i + 1}
+                </a>
               </p>
             ))}
           </p>

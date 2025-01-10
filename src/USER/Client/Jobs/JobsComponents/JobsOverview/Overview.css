@@ -1,406 +1,398 @@
 .client-profileoverview-main {
-    width: 100%;
-    height: 100%;
-    background-color: var(--white);
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
 }
 
 .client-profileoverview-inner {
-    background-color: #ffffff;
-    padding: 2.5em;
-    flex-grow: 1;
-    margin: 0 4em;
-    margin-top: 3.5em;
-    border-radius: 30px 30px 0 0;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto 1fr;
-    display: grid;
-    grid-template-areas:
-        "dp title btn"
-        "des des des";
-    row-gap: 0.5em;
-    column-gap: 1em;
-    font-family: 'poppins';
-    overflow: hidden;
-    overflow: scroll;
+  background-color: #ffffff;
+  padding: 2.5em;
+  flex-grow: 1;
+  margin: 0 4em;
+  margin-top: 3.5em;
+  border-radius: 30px 30px 0 0;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr;
+  display: grid;
+  grid-template-areas:
+    "dp title btn"
+    "des des des";
+  row-gap: 0.5em;
+  column-gap: 1em;
+  font-family: "poppins";
+  overflow: hidden;
+  overflow: scroll;
 }
 
 .client-profileoverview-inner-dp {
-    grid-area: dp;
-    width: 5em;
+  grid-area: dp;
+  width: 5em;
 }
 
 .client-profileoverview-inner-title {
-    grid-area: title;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: large;
-    font-weight: 500;
+  grid-area: title;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: large;
+  font-weight: 500;
 }
 
 .client-profileoverview-inner-time {
-    font-size: small;
-    font-weight: 400;
-    color: gray;
+  font-size: small;
+  font-weight: 400;
+  color: gray;
 }
 
 .client-profileoverview-inner-threedot {
-    grid-area: btn;
-    font-weight: bolder;
-    cursor: pointer;
-    font-size: large;
+  grid-area: btn;
+  font-weight: bolder;
+  cursor: pointer;
+  font-size: large;
 }
 
 .client-profileoverview-inner-des {
-    grid-area: des;
-    margin-left: 1.5em;
-    font-family: 'poppins';
+  grid-area: des;
+  margin-left: 1.5em;
+  font-family: "poppins";
 }
 
 .client-profileoverview-inner-des-head {
-    font-size: medium;
-    font-weight: 500;
-    margin-top: 1.5em;
+  font-size: medium;
+  font-weight: 500;
+  margin-top: 1.5em;
 }
 
 .client-profileoverview-inner-des-subtxt {
-    font-size: smaller;
-    margin-top: 0.2em;
-    text-wrap: wrap;
+  font-size: smaller;
+  margin-top: 0.2em;
+  text-wrap: wrap;
 }
 
 .client-profileoverview-inner-des-subhead {
-    font-style: italic;
-    font-family: 'outfit';
-    color: rgb(103, 103, 103);
-    margin-right: 0.5em;
+  font-style: italic;
+  font-family: "outfit";
+  color: rgb(103, 103, 103);
+  margin-right: 0.5em;
 }
 
 .client-profileoverview-inner-actions {
-    position: relative;
-    display: flex;
-    justify-content: flex-end; /* Align the three dots to the right */
-    margin-top: -30px; /* Adjust this margin to fine-tune the position */
-  }
-  .dropdown-menu {
-    position: absolute;
-    top: 0; /* Align the dropdown to the top */
-    right: 0; /* Align the dropdown to the right */
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    padding: 5px 10px;
-  }
-  
-  /* Button inside the dropdown */
-  .dropdown-menu button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px 12px;
-    width: 100%;
-    text-align: left;
-    font-size: 16px;
-  }
-  
-  /* Hover effect for the dropdown button */
-  .dropdown-menu button:hover {
-    background-color: #f0f0f0;
-  }
+  position: relative;
+  display: flex;
+  justify-content: flex-end; /* Align the three dots to the right */
+  margin-top: -30px; /* Adjust this margin to fine-tune the position */
+}
+.dropdown-menu {
+  position: absolute;
+  top: 0; /* Align the dropdown to the top */
+  right: 0; /* Align the dropdown to the right */
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  padding: 5px 10px;
+}
+
+/* Button inside the dropdown */
+.dropdown-menu button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+}
+
+/* Hover effect for the dropdown button */
+.dropdown-menu button:hover {
+  background-color: #f0f0f0;
+}
 /* ====================================================================Onco OVERVIEW=================================== */
 .client-oncooverview-main {
-    width: 100%;
-    height: 100%;
-    background-color: var(--white);
-    display: grid;
-    grid-template-rows: auto 50%;
-    grid-template-columns: auto 30%;
-    grid-template-areas:
-        "long box1"
-        "long box2";
-    padding: 1em;
-
+  width: 100%;
+  height: 100%;
+  background-color: var(--white);
+  display: grid;
+  grid-template-rows: auto 50%;
+  grid-template-columns: auto 30%;
+  grid-template-areas:
+    "long box1"
+    "long box2";
+  padding: 1em;
 }
 
 .client-oncooverview-inner {
-    grid-area: long;
-    margin: 1em;
-    border-radius: 20px;
-    transition-duration: 0.2s;
+  grid-area: long;
+  margin: 1em;
+  border-radius: 20px;
+  transition-duration: 0.2s;
 }
 
 .client-oncooverview-inner:hover {
-    scale: 1.015;
+  scale: 1.015;
 }
 
 .client-oncooverview-side {
-    background-color: #ffffff;
-    padding: 1em;
-    margin: 1em;
-    margin-left: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    gap: 0.3em;
-    font-family: 'poppins', serif;
-    transition-duration: 0.2s;
+  background-color: #ffffff;
+  padding: 1em;
+  margin: 1em;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  gap: 0.3em;
+  font-family: "poppins", serif;
+  transition-duration: 0.2s;
 }
 
 .client-oncooverview-side:hover {
-    scale: 1.015;
+  scale: 1.015;
 }
 
 .client-profileoverview-side-dp {
-    width: 5em;
-    margin-bottom: 1em;
+  width: 5em;
+  margin-bottom: 1em;
 }
 
 .client-oncooverview-side-head {
-    font-size: large;
-    font-weight: 600;
+  font-size: large;
+  font-weight: 600;
 }
 
 .client-oncooverview-side-type {
-    font-size: medium;
-    font-weight: 500;
-    color: #606060;
+  font-size: medium;
+  font-weight: 500;
+  color: #606060;
 }
 
 .side1 {
-    grid-area: box1;
-    margin-bottom: 0.5em;
+  grid-area: box1;
+  margin-bottom: 0.5em;
 }
 
 .side2 {
-    grid-area: box2;
-    gap: 0;
-    margin-top: 0.5em;
+  grid-area: box2;
+  gap: 0;
+  margin-top: 0.5em;
 }
 
 .client-oncooverview-side-emoji {
-    font-size: 3rem;
-    transition-duration: 0.1s;
+  font-size: 3rem;
+  transition-duration: 0.1s;
 }
 
 .client-oncooverview-side:hover .client-oncooverview-side-emoji {
-    scale: 1.5;
+  scale: 1.5;
 }
 
 .client-oncooverview-side-subtxt {
-    width: 80%;
-    font-size: small;
-    color: #606060;
-    text-wrap: wrap;
-    text-align: center;
+  width: 80%;
+  font-size: small;
+  color: #606060;
+  text-wrap: wrap;
+  text-align: center;
 }
 
 .client-oncooverview-side-deadline {
-    font-size: medium;
-    color: #606060;
-    font-weight: 500;
-    text-align: center;
+  font-size: medium;
+  color: #606060;
+  font-weight: 500;
+  text-align: center;
 }
 
 .client-oncooverview-side-enddate {
-    font-size: large;
-    color: #000000;
-    font-weight: 600;
-    letter-spacing: 1px;
+  font-size: large;
+  color: #000000;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .client-oncooverview-side-chatbtn {
-    margin-top: 0.5em;
-    display: flex;
-    align-items: center;
-    padding: 0.3em 1em;
-    border-radius: 30px;
-    outline: 1px dashed #000000;
-    gap: 0.5em;
-    font-size: small;
-    cursor: pointer;
-    transition-duration: 0.2s;
+  margin-top: 0.5em;
+  display: flex;
+  align-items: center;
+  padding: 0.3em 1em;
+  border-radius: 30px;
+  outline: 1px dashed #000000;
+  gap: 0.5em;
+  font-size: small;
+  cursor: pointer;
+  transition-duration: 0.2s;
 }
 
 .client-oncooverview-side-chatbtn:hover {
-    background-color: #000000;
-    color: #ffffff;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 /* ==============================================ACTIVE VIEW==================================== */
 .client-jobs-view-main {
-    height: 100%;
-    width: 100%;
-    background-color: var(--white);
+  height: 100%;
+  width: 100%;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-family: "Outfit", system-ui;
+
+  p,
+  li {
+    font-size: medium;
+  }
+
+  .client-jobs-view-main-detials {
+    width: 65%;
+    height: 90%;
+    background-color: white;
+    border-radius: 15px;
+    padding: 3em;
+    overflow: scroll;
+
+    .client-jobs-view-main-detials-header {
+      display: flex;
+      align-items: center;
+      gap: 2em;
+      margin-bottom: 2em;
+
+      .client-jobs-view-main-detials-header-dp {
+        width: 4em;
+      }
+    }
+
+    .client-jobs-view-main-detials-content {
+      .client-jobs-view-main-detials-content-project-title,
+      .client-jobs-view-main-detials-content-overview,
+      .client-jobs-view-main-detials-content-contact-information,
+      .client-jobs-view-main-detials-content-deliverables {
+        h3 {
+          padding-bottom: 1em;
+          font-size: larger;
+        }
+
+        p {
+          padding-left: 1em;
+          padding-bottom: 1em;
+        }
+
+        ul {
+          padding-left: 2em;
+
+          li {
+            padding-bottom: 1em;
+          }
+        }
+      }
+
+      .client-jobs-view-main-detials-content-overview {
+        p {
+          width: 80%;
+          text-wrap: wrap;
+        }
+      }
+    }
+  }
+
+  .client-jobs-view-main-bidded {
+    width: 30%;
+    height: 90%;
+    background-color: white;
+    border-radius: 15px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    font-family: "Outfit", system-ui;
+    padding-bottom: 1em;
 
-    p,
-    li {
-        font-size: medium;
-    }
+    .client-jobs-view-main-bidded-cards {
+      width: 90%;
+      height: 100px;
+      background-color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5em;
+      margin-top: 1em;
+      border-radius: 10px;
 
-    .client-jobs-view-main-detials {
-        width: 65%;
-        height: 90%;
-        background-color: white;
-        border-radius: 15px;
-        padding: 3em;
-        overflow: scroll;
-
-        .client-jobs-view-main-detials-header {
-            display: flex;
-            align-items: center;
-            gap: 2em;
-            margin-bottom: 2em;
-
-            .client-jobs-view-main-detials-header-dp {
-                width: 4em;
-            }
-        }
-
-        .client-jobs-view-main-detials-content {
-
-            .client-jobs-view-main-detials-content-project-title,
-            .client-jobs-view-main-detials-content-overview,
-            .client-jobs-view-main-detials-content-contact-information,
-            .client-jobs-view-main-detials-content-deliverables {
-                h3 {
-                    padding-bottom: 1em;
-                    font-size: larger;
-                }
-
-                p {
-                    padding-left: 1em;
-                    padding-bottom: 1em;
-                }
-
-                ul {
-                    padding-left: 2em;
-
-                    li {
-                        padding-bottom: 1em;
-                    }
-                }
-            }
-
-            .client-jobs-view-main-detials-content-overview {
-                p {
-                    width: 80%;
-                    text-wrap: wrap;
-                }
-            }
-        }
-    }
-
-    .client-jobs-view-main-bidded {
-        width: 30%;
-        height: 90%;
-        background-color: white;
-        border-radius: 15px;
+      .client-jobs-view-main-bidded-cards-content {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        padding-bottom: 1em;
+        gap: 1em;
 
-        .client-jobs-view-main-bidded-cards {
-            width: 90%;
-            height: 100px;
-            background-color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5em;
-            margin-top: 1em;
-            border-radius: 10px;
-
-            .client-jobs-view-main-bidded-cards-content {
-                display: flex;
-                align-items: center;
-                gap: 1em;
-
-                .client-jobs-view-main-bidded-cards-content-dp {
-                    img {
-                        width: 3em;
-                    }
-                }
-
-                .client-jobs-view-main-bidded-cards-content-name {
-                    h3 {
-                        font-size: medium;
-                        font-weight: 500;
-                    }
-
-                    p {
-                        font-size: smaller;
-                        font-weight: 500;
-                        color: #606060;
-                    }
-                }
-
-            }
-
-            .client-jobs-view-main-bidded-cards-accept {
-                button {
-                    padding: 0.4em 2em;
-                    /* background-color: var(--blue); */
-                    color: #000000;
-                    border: none;
-                    border-radius: 50px;
-                    margin-right: 0.7em;
-                    cursor: pointer;
-                    font-size: small;
-                    font-family: 'poppins';
-                    outline: 1px dashed var(--blue);
-                    transition-duration: 0.3s;
-
-                }
-
-                button:hover {
-                    background-color: var(--blue);
-                    color: white;
-
-                }
-            }
+        .client-jobs-view-main-bidded-cards-content-dp {
+          img {
+            width: 3em;
+          }
         }
 
-        overflow-y: scroll;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+        .client-jobs-view-main-bidded-cards-content-name {
+          h3 {
+            font-size: medium;
+            font-weight: 500;
+          }
+
+          p {
+            font-size: smaller;
+            font-weight: 500;
+            color: #606060;
+          }
+        }
+      }
+
+      .client-jobs-view-main-bidded-cards-accept {
+        button {
+          padding: 0.4em 2em;
+          /* background-color: var(--blue); */
+          color: #000000;
+          border: none;
+          border-radius: 50px;
+          margin-right: 0.7em;
+          cursor: pointer;
+          font-size: small;
+          font-family: "poppins";
+          outline: 1px dashed var(--blue);
+          transition-duration: 0.3s;
+        }
+
+        button:hover {
+          background-color: var(--blue);
+          color: white;
+        }
+      }
     }
+
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 }
 
 .client-profileoverview-inner-des-file {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
 }
 
 .complete-btn {
-    margin-top: 0.5em;
-    display: flex;
-    align-items: center;
-    padding: 0.3em 1em;
-    border-radius: 30px;
-    outline: 1px dashed #000000;
-    gap: 0.5em;
-    font-size: small;
-    cursor: pointer;
-    transition-duration: 0.2s;
-    border: #ffffff;
-
-
+  margin-top: 0.5em;
+  display: flex;
+  align-items: center;
+  padding: 0.3em 1em;
+  border-radius: 30px;
+  outline: 1px dashed #000000;
+  gap: 0.5em;
+  font-size: small;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  border: #ffffff;
 }
 
 .complete-btn:hover {
-    background-color: black;
-    color: #ffffff;
-
+  background-color: black;
+  color: #ffffff;
 }
