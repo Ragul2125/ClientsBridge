@@ -78,6 +78,39 @@
     margin-right: 0.5em;
 }
 
+.client-profileoverview-inner-actions {
+    position: relative;
+    display: flex;
+    justify-content: flex-end; /* Align the three dots to the right */
+    margin-top: -30px; /* Adjust this margin to fine-tune the position */
+  }
+  .dropdown-menu {
+    position: absolute;
+    top: 0; /* Align the dropdown to the top */
+    right: 0; /* Align the dropdown to the right */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 5px 10px;
+  }
+  
+  /* Button inside the dropdown */
+  .dropdown-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+  }
+  
+  /* Hover effect for the dropdown button */
+  .dropdown-menu button:hover {
+    background-color: #f0f0f0;
+  }
 /* ====================================================================Onco OVERVIEW=================================== */
 .client-oncooverview-main {
     width: 100%;
@@ -344,8 +377,30 @@
     }
 }
 
-.client-profileoverview-inner-des-file{
+.client-profileoverview-inner-des-file {
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
-  }
+}
+
+.complete-btn {
+    margin-top: 0.5em;
+    display: flex;
+    align-items: center;
+    padding: 0.3em 1em;
+    border-radius: 30px;
+    outline: 1px dashed #000000;
+    gap: 0.5em;
+    font-size: small;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    border: #ffffff;
+
+
+}
+
+.complete-btn:hover {
+    background-color: black;
+    color: #ffffff;
+
+}

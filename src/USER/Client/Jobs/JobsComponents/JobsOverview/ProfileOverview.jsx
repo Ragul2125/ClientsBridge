@@ -7,81 +7,108 @@ import axios from 'axios';
 const Api_Url = import.meta.env.VITE_BACKEND_URL;
 
 export default function ProfileOverview() {
-    const { viewid } = useParams();
-    const [job, setJob] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const { viewid } = useParams();
+  const [job, setJob] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
 
-    useEffect(() => {
-        const fetchJobDetails = async () => {
-            try {
-                const token = localStorage.getItem("token");
-                if (!token) {
-                    alert("User is not authenticated. Please log in.");
-                    return;
-                }
+  useEffect(() => {
+    const fetchJobDetails = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          alert("User is not authenticated. Please log in.");
+          return;
+        }
 
-                const response = await axios.get(`${Api_Url}/api/jobs/getDetails/${viewid}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+        const response = await axios.get(`${Api_Url}/api/jobs/getDetails/${viewid}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-                setJob(response.data);
-                console.log(response.data)
-                setLoading(false);
-            } catch (err) {
-                console.error("Error fetching job details:", err);
-                setError(err.response?.data?.message || "Something went wrong!");
-                setLoading(false);
-            }
-        };
+        setJob(response.data);
+        console.log(response.data)
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching job details:", err);
+        setError(err.response?.data?.message || "Something went wrong!");
+        setLoading(false);
+      }
+    };
 
-        fetchJobDetails();
-    }, [viewid]);
+    fetchJobDetails();
+  }, [viewid]);
 
-    if (loading) {
-        return <p>Loading job details...</p>;
+  const handleDropdownToggle = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleDeleteJob = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("User is not authenticated. Please log in.");
+        return;
+      }
+
+      const response = await axios.delete(`${Api_Url}/api/jobs/deleteJob/${viewid}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      alert("Job deleted successfully!");
+      // Redirect or update the UI accordingly
+    } catch (err) {
+      alert("Failed to delete job: " + (err.response?.data?.message || err.message));
     }
+  };
 
-    if (error) {
-        return <p>{error}</p>;
-    }
+  if (loading) {
+    return <p>Loading job details...</p>;
+  }
 
-    if (!job) {
-        return <p style={{ margin: '3em' }}>Job not found. Please check the URL.</p>;
-    }
-    console.log(job)
+  if (error) {
+    return <p>{error}</p>;
+  }
 
-    return (
-        <main className="client-profileoverview-main">
-            <section className="client-profileoverview-inner client-oncooverview-inner">
-        {/* <img className="client-profileoverview-inner-dp" src={dp} alt="User" /> */}
+  if (!job) {
+    return <p style={{ margin: '3em' }}>Job not found. Please check the URL.</p>;
+  }
+
+  return (
+    <main className="client-profileoverview-main">
+      <section className="client-profileoverview-inner client-oncooverview-inner">
         <p className="client-profileoverview-inner-title">
           <h1>{job.postTitle}</h1>
           <span className="client-profileoverview-inner-time">
-          {new Date(job.deadline).toLocaleDateString()}
+            {new Date(job.deadline).toLocaleDateString()}
           </span>
         </p>
-        <p className="client-profileoverview-inner-threedot">...</p>
 
-        {/* --------------------------------------------------------------------DESC------------------ */}
+        <div className="client-profileoverview-inner-actions">
+          <p className="client-profileoverview-inner-threedot" onClick={handleDropdownToggle}>
+            ...
+          </p>
+          {showDropdown && (
+            <div className="dropdown-menu">
+              <button onClick={handleDeleteJob}>Delete Job</button>
+            </div>
+          )}
+        </div>
+
         <div className="client-profileoverview-inner-des">
-          {/* <p className="client-profileoverview-inner-des-head">Project Title</p>
-                    <p className="client-profileoverview-inner-des-subtxt">
-                        <span className='client-profileoverview-inner-des-subhead'>Name of the Project: </span> Mobile E-Commerce Application
-                    </p> */}
-
           <p className="client-profileoverview-inner-des-head">Overview</p>
           <p className="client-profileoverview-inner-des-subtxt">
             {job.description}
           </p>
           <div className="client-profileoverview-inner-side-byside">
             <div>
-              {" "}
               <p className="client-profileoverview-inner-des-head">Deadline</p>
               <p className="client-profileoverview-inner-des-subtxt">
-              {new Date(job.deadline).toLocaleDateString()}
+                {new Date(job.deadline).toLocaleDateString()}
               </p>
             </div>
             <div>
@@ -101,19 +128,19 @@ export default function ProfileOverview() {
           <p className="client-profileoverview-inner-des-head">Tags</p>
           <p className="client-profileoverview-inner-des-tags">
             {job.tags.map((tag, i) => (
-              <p className="job-tag-seps">{tag}</p>
+              <p className="job-tag-seps" key={i}>{tag}</p>
             ))}
           </p>
           <p className="client-profileoverview-inner-des-head">Files</p>
           <p className="client-profileoverview-inner-des-file">
             {job.files.map((file, i) => (
-              <p>
-                <a href={file}>file {i + 1}</a>
+              <p key={i}>
+                <a href={file} target="_blank" rel="noopener noreferrer">file {i + 1}</a>
               </p>
             ))}
           </p>
         </div>
       </section>
-        </main>
-    );
+    </main>
+  );
 }

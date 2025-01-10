@@ -7,21 +7,28 @@ import TagsInput from '../../../../Landing/Registerations/TagsInput';
 
 export default function Addnew() {
     const [step, setStep] = useState(1);
-    const [isSubmitting, setIsSubmitting] = useState(false); 
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
         projectName: '',
         projectDesc: '',
         projectDeadline: '',
         projectCategory: '',
         projectBudget: '',
-        uploadFiles: [] 
+        uploadFiles: [],
+        tags: []
     });
     const API_URL = import.meta.env.VITE_BACKEND_URL;
     const navigate = useNavigate();
+    const handleTagsChange = (newTags) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            tags: newTags, 
+        }));
+    };
 
     const handlePublish = async () => {
         if (isSubmitting) return;
-            setIsSubmitting(true);
+        setIsSubmitting(true);
         try {
             const token = localStorage.getItem("token");
             if (!token) {
@@ -35,7 +42,9 @@ export default function Addnew() {
                 !formData.projectDesc ||
                 !formData.projectBudget ||
                 !formData.projectDeadline ||
-                !formData.projectCategory
+                !formData.projectCategory ||
+                formData.tags.length === 0
+
             ) {
                 alert("Please fill all the required fields.");
                 return;
@@ -53,7 +62,7 @@ export default function Addnew() {
                     budget: formData.projectBudget,
                     deadline: formData.projectDeadline,
                     category: formData.projectCategory,
-                    tags: ["tag1", "tag2"],
+                    tags: formData.tags,
                 },
             ];
 
@@ -72,7 +81,7 @@ export default function Addnew() {
             );
 
             alert("Jobs created successfully!");
-            navigate('/client/jobs/unassigned',{ replace: true });
+            navigate('/client/jobs/unassigned', { replace: true });
             console.log(response.data);
         } catch (error) {
             console.error("Error publishing job:", error);
@@ -124,32 +133,32 @@ export default function Addnew() {
 
     const handleFileChange = (e) => {
         const allowedTypes = [
-            'application/pdf', 
-            'image/jpeg', 
-            'image/png', 
-            'application/msword', 
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
-            'video/mp4', 
-            'video/x-matroska', 
+            'application/pdf',
+            'image/jpeg',
+            'image/png',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'video/mp4',
+            'video/x-matroska',
         ];
         const files = Array.from(e.target.files);
-    
+
         const validFiles = files.filter(file => allowedTypes.includes(file.type));
         if (validFiles.length !== files.length) {
             alert("Some files were not allowed. Only PDFs and Word documents are accepted.");
         }
-    
+
         if (validFiles.length + formData.uploadFiles.length > 5) {
             alert("You can upload a maximum of 5 files.");
             return;
         }
-    
+
         setFormData((prevData) => ({
             ...prevData,
             uploadFiles: [...prevData.uploadFiles, ...validFiles],
         }));
     };
-    
+
 
     return (
         <>
@@ -245,11 +254,9 @@ export default function Addnew() {
                                                     setFormData({ ...formData, projectBudget: e.target.value })
                                                 }
                                             />
-                                            
+
                                         </div>
-                                        <div>
-                                            <TagsInput />
-                                        </div>
+                                        
                                         <div className="addnew-two-inputs">
                                             <label htmlFor="uploadFiles" className="addnew-projectname-label">
                                                 Upload Files (Max 5) *
@@ -261,6 +268,10 @@ export default function Addnew() {
                                                 onChange={handleFileChange}
                                                 multiple
                                             />
+                                        </div>
+                                        <br/>
+                                        <div>
+                                            <TagsInput onTagsChange={handleTagsChange} />
                                         </div>
                                     </div>
                                 </>
@@ -307,7 +318,7 @@ export default function Addnew() {
                                 >
                                     Prev
                                 </p>
-                                {step === 3 ? <p onClick={handlePublish} className='addnew-nxt-btn addnew-btn'disabled={isSubmitting}>Publish</p> : <p onClick={nextstep} className='addnew-nxt-btn addnew-btn'>Next</p>}
+                                {step === 3 ? <p onClick={handlePublish} className='addnew-nxt-btn addnew-btn' disabled={isSubmitting}>Publish</p> : <p onClick={nextstep} className='addnew-nxt-btn addnew-btn'>Next</p>}
                             </div>
                         </div>
                     </div>
