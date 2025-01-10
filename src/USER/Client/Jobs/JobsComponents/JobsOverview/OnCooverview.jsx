@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function ProfileOverview() {
-    const { viewid } = useParams(); // Assuming jobId is passed in the URL
+    const { viewid } = useParams(); 
     const navigate = useNavigate();
     const [jobs, setJobs] = useState('');
     const [jobData, setJobData] = useState(null);
@@ -42,17 +42,17 @@ export default function ProfileOverview() {
         try {
             const token = localStorage.getItem('token');
             const response = await axios.post(
-                `${API_URL}/api/jobs/complete/${viewid}`, // Adjust the route based on your backend
+                `${API_URL}/api/jobs/complete/${viewid}`, 
                 {},
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }
             );
-            alert(response.data.message); // Show success message
-            // Update local jobData state to reflect completed status
+            alert(response.data.message); 
+            
             setJobData((prevData) => ({
                 ...prevData,
-                status: "completed",
+                status: "satisfied",
             }));
             setJobs('completed'); 
             navigate("/client/jobs/completed")

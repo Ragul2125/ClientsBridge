@@ -22,7 +22,7 @@ export default function Addnew() {
     const handleTagsChange = (newTags) => {
         setFormData((prevData) => ({
             ...prevData,
-            tags: newTags, // Update the tags in formData
+            tags: newTags, 
         }));
     };
 
