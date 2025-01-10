@@ -79,7 +79,6 @@ const View = () => {
       console.error("Error accepting job:", error);
     }
   };
-
   
   const openPopup = (bid) => {
     console.log("Opening popup for bid:", bid); 
@@ -92,7 +91,23 @@ const View = () => {
     setShowPopup(false);
     setSelectedBid(null);
   };
-
+  const handleChat = async (bid) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `${API_URL}/api/message/createconvo`,
+        { receiverId: bid._id }, 
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      navigate("/client/inbox");
+      console.log("Conversation created:", response.data);
+    } catch (error) {
+      console.error("Error creating conversation:", error);
+    }
+  };
+  
   
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -173,6 +188,9 @@ const View = () => {
                     {bid.description}
                   </p>
                 </div>
+              </div>
+              <div className="client-jobs-view-main-bidded-cards-chat">
+                <button onClick={() => handleChat(bid)}>chat</button>
               </div>
               <div className="client-jobs-view-main-bidded-cards-accept">
                 <button onClick={() => openPopup(bid)}>Accept</button>

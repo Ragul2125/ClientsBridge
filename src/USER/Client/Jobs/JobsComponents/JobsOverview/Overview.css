@@ -81,23 +81,28 @@
 .client-profileoverview-inner-actions {
     position: relative;
     display: flex;
-    justify-content: flex-end; /* Align the three dots to the right */
-    margin-top: -30px; /* Adjust this margin to fine-tune the position */
-  }
-  .dropdown-menu {
+    justify-content: flex-end;
+    /* Align the three dots to the right */
+    margin-top: -30px;
+    /* Adjust this margin to fine-tune the position */
+}
+
+.dropdown-menu {
     position: absolute;
-    top: 0; /* Align the dropdown to the top */
-    right: 0; /* Align the dropdown to the right */
+    top: 0;
+    /* Align the dropdown to the top */
+    right: 0;
+    /* Align the dropdown to the right */
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 10;
     padding: 5px 10px;
-  }
-  
-  /* Button inside the dropdown */
-  .dropdown-menu button {
+}
+
+/* Button inside the dropdown */
+.dropdown-menu button {
     background: none;
     border: none;
     cursor: pointer;
@@ -105,12 +110,13 @@
     width: 100%;
     text-align: left;
     font-size: 16px;
-  }
-  
-  /* Hover effect for the dropdown button */
-  .dropdown-menu button:hover {
+}
+
+/* Hover effect for the dropdown button */
+.dropdown-menu button:hover {
     background-color: #f0f0f0;
-  }
+}
+
 /* ====================================================================Onco OVERVIEW=================================== */
 .client-oncooverview-main {
     width: 100%;
@@ -369,6 +375,30 @@
 
                 }
             }
+
+            .client-jobs-view-main-bidded-cards-chat {
+                button {
+                    padding: 0.4em 2em;
+                    /* background-color: var(--blue); */
+                    color: #000000;
+                    border: none;
+                    border-radius: 50px;
+                    margin-right: 0.7em;
+                    cursor: pointer;
+                    font-size: small;
+                    font-family: 'poppins';
+                    outline: 1px dashed var(--blue);
+                    transition-duration: 0.3s;
+
+                }
+
+                button:hover {
+                    background-color: var(--blue);
+                    color: white;
+
+                }
+            }
+
         }
 
         overflow-y: scroll;

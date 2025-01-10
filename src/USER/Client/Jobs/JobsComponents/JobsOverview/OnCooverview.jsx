@@ -61,6 +61,22 @@ export default function ProfileOverview() {
             alert("Failed to mark the job as completed.");
         }
     };
+    const handleChat = async (bid) => {
+        try {
+          const token = localStorage.getItem("token");
+          const response = await axios.post(
+            `${API_URL}/api/message/createconvo`,
+            { receiverId: jobData.assignedTo?._id }, 
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          navigate("/client/inbox");
+          console.log("Conversation created:", response.data);
+        } catch (error) {
+          console.error("Error creating conversation:", error);
+        }
+      };
     if (!jobData) return <div>Loading job details...</div>;
 
     return (
@@ -141,7 +157,7 @@ export default function ProfileOverview() {
                     <p className="client-oncooverview-side-subtxt">
                         Message {jobData.assignedTo?.name}
                     </p>
-                    <p className="client-oncooverview-side-chatbtn"><IoChatboxEllipsesOutline /> Chat</p>
+                    <p className="client-oncooverview-side-chatbtn" onClick={handleChat}><IoChatboxEllipsesOutline /> Chat</p>
                     <button className='complete-btn' onClick={handleCompleteJob}> Mark as completed</button>
         
                 </section>
