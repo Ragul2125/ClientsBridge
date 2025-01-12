@@ -42,28 +42,26 @@ export default function ProfileOverview() {
         console.error("Error fetching job details:", error);
       }
     };
-<<<<<<< HEAD
+
     if (viewid) fetchJobDetails();
   }, [viewid]);
-=======
-    const handleChat = async (bid) => {
-        try {
-          const token = localStorage.getItem("token");
-          const response = await axios.post(
-            `${API_URL}/api/message/createconvo`,
-            { receiverId: jobData.assignedTo?._id }, 
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-          navigate("/client/inbox");
-          console.log("Conversation created:", response.data);
-        } catch (error) {
-          console.error("Error creating conversation:", error);
+  const handleChat = async (bid) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `${API_URL}/api/message/createconvo`,
+        { receiverId: jobData.assignedTo?._id },
+        {
+          headers: { Authorization: `Bearer ${token}` },
         }
-      };
-    if (!jobData) return <div>Loading job details...</div>;
->>>>>>> kathir
+      );
+      navigate("/client/inbox");
+      console.log("Conversation created:", response.data);
+    } catch (error) {
+      console.error("Error creating conversation:", error);
+    }
+  };
+  if (!jobData) return <div>Loading job details...</div>;
 
   const handleReviewSubmit = async () => {
     try {
@@ -194,7 +192,6 @@ export default function ProfileOverview() {
         <p className="client-oncooverview-side-type">Freelancer</p>
       </section>
 
-<<<<<<< HEAD
       {/* Project Deadline and Chat Option */}
       {jobs === "ongoing" && (
         <section className="client-oncooverview-side side2">
@@ -205,7 +202,7 @@ export default function ProfileOverview() {
           <p className="client-oncooverview-side-subtxt">
             Message {jobData.assignedTo?.name}
           </p>
-          <p className="client-oncooverview-side-chatbtn">
+          <p className="client-oncooverview-side-chatbtn" onClick={handleChat}>
             <IoChatboxEllipsesOutline /> Chat
           </p>
           <button className="complete-btn" onClick={handleCompleteJob}>
@@ -214,21 +211,6 @@ export default function ProfileOverview() {
           </button>
         </section>
       )}
-=======
-            {/* Project Deadline and Chat Option */}
-            {jobs === 'ongoing' && (
-                <section className="client-oncooverview-side side2">
-                    <p className="client-oncooverview-side-deadline">Project deadline</p>
-                    <p className="client-oncooverview-side-enddate">{new Date(jobData.deadline).toLocaleDateString()}</p>
-                    <p className="client-oncooverview-side-subtxt">
-                        Message {jobData.assignedTo?.name}
-                    </p>
-                    <p className="client-oncooverview-side-chatbtn" onClick={handleChat}><IoChatboxEllipsesOutline /> Chat</p>
-                    <button className='complete-btn' onClick={handleCompleteJob}> Mark as completed</button>
-        
-                </section>
-            )}
->>>>>>> kathir
 
       {/* Completed Project Details */}
       {jobs === "completed" && (

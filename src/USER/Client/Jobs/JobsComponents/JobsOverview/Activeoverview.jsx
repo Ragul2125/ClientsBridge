@@ -12,11 +12,10 @@ const View = () => {
   const [bids, setBids] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showPopup, setShowPopup] = useState(false); 
-  const [selectedBid, setSelectedBid] = useState(null); 
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedBid, setSelectedBid] = useState(null);
   const API_URL = import.meta.env.VITE_BACKEND_URL;
 
-  
   useEffect(() => {
     const fetchJobDetails = async () => {
       try {
@@ -28,7 +27,7 @@ const View = () => {
           }
         );
         const jobData = response.data;
-        console.log("Fetched Bids:", jobData.interested); 
+        console.log("Fetched Bids:", jobData.interested);
 
         setProject({
           postTitle: jobData.postTitle,
@@ -50,14 +49,13 @@ const View = () => {
     fetchJobDetails();
   }, [viewid]);
 
-
   const handleAccept = async () => {
     if (!selectedBid) {
       console.error("No bid selected.");
       return;
     }
 
-    const userId = selectedBid.userId || selectedBid._id || selectedBid.id; 
+    const userId = selectedBid.userId || selectedBid._id || selectedBid.id;
     if (!userId) {
       console.error("Bid does not contain a valid userId:", selectedBid);
       return;
@@ -79,14 +77,13 @@ const View = () => {
       console.error("Error accepting job:", error);
     }
   };
-  
+
   const openPopup = (bid) => {
-    console.log("Opening popup for bid:", bid); 
+    console.log("Opening popup for bid:", bid);
     setSelectedBid(bid);
     setShowPopup(true);
   };
 
-  
   const closePopup = () => {
     setShowPopup(false);
     setSelectedBid(null);
@@ -96,7 +93,7 @@ const View = () => {
       const token = localStorage.getItem("token");
       const response = await axios.post(
         `${API_URL}/api/message/createconvo`,
-        { receiverId: bid._id }, 
+        { receiverId: bid._id },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -107,14 +104,13 @@ const View = () => {
       console.error("Error creating conversation:", error);
     }
   };
-  
-  
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
     <main className="client-jobs-view-main">
-       <section className="client-profileoverview-inner client-oncooverview-inner">
+      <section className="client-profileoverview-inner client-oncooverview-inner">
         {/* <img className="client-profileoverview-inner-dp" src={dp} alt="User" /> */}
         <p className="client-profileoverview-inner-title">
           <h1>{project.postTitle}</h1>
@@ -185,7 +181,7 @@ const View = () => {
                 <div className="client-jobs-view-main-bidded-cards-content-name">
                   <h3>{bid.name}</h3>
                   <p className="client-profileoverview-inner-des-subtxt">
-                    {bid.description}
+                    {bid?.userName}
                   </p>
                 </div>
               </div>
