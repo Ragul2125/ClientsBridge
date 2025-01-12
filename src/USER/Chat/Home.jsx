@@ -51,7 +51,6 @@ const Home = () => {
       });
 
       const userData = response.data.data;
-      console.log(userData);
       dispatch(setUser(userData));
       console.log("Fetched user details:", userData);
 
@@ -105,10 +104,13 @@ const Home = () => {
     };
   }, []);
 
-  const basePath = location.pathname === "/";
-
+  const basePath =
+    location.pathname === `/${localStorage.getItem("role").toLowerCase()}/chat`;
+  console.log(basePath);
+  console.log(location.pathname);
+  console.log(`/${localStorage.getItem("role").toLowerCase()}/chat`);
   return (
-    <div className="home-container-chat">
+    <div className="home-container">
       {/* <div className="sidebar-container">
         <Sidebar />
       </div> */}

@@ -7,7 +7,7 @@ import { FiArrowUpLeft } from "react-icons/fi";
 import { IoClose, IoArrowBack } from "react-icons/io5";
 import { IoMdSend } from "react-icons/io";
 import moment from "moment";
-import uploadFile from "../../ReuseableComponents/helpers/uploadFile.js";
+import uploadFile from "../../ReuseableComponents/helpers/uploadFile";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { debounce } from "lodash";
@@ -15,8 +15,13 @@ import ScrollToBottomButton from "./ScrollToBottomButton";
 import "./MessagePage.css";
 import MessageBubble from "./MessageBubble";
 import TypingIndicator from "./TypingIndicator";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
+import FileUploadButton from "./FileUploadButton ";
 
 const MessagePage = () => {
+  const { userId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [selectedUser, setSelectedUser] = useState(null);
   const [activeTab, setActiveTab] = useState("chats");
   const [openFileUpload, setOpenFileUpload] = useState(false);
@@ -28,6 +33,7 @@ const MessagePage = () => {
   );
   const [previewImage, setPreviewImage] = useState(null);
   const [seenMessages, setSeenMessages] = useState(new Set());
+  const [isOpen, setIsOpen] = useState(false);
 
   // const [imagePreview, setImagePreview] = useState(null);
   // const [videoPreview, setVideoPreview] = useState(null);
@@ -65,6 +71,15 @@ const MessagePage = () => {
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
   const [onlineUserSet, setOnlineUserSet] = useState(new Set());
+  // Add loading state for conversations
+  const [isLoadingConversations, setIsLoadingConversations] = useState(true);
+  const [activeTabConversations, setActiveTabConversations] = useState([]);
+
+  // Cache conversations by tab
+  const conversationsCache = useRef({
+    chats: [],
+    jobs: [],
+  });
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -288,16 +303,15 @@ const MessagePage = () => {
   //sidebbar data
   useEffect(() => {
     if (socketConnection && user?._id) {
+      setIsLoadingConversations(true);
+      // First check if we have cached data for this tab
+      if (conversationsCache.current[activeTab].length > 0) {
+        setConversations(conversationsCache.current[activeTab]);
+        setIsLoadingConversations(false);
+      }
       socketConnection.emit("sidebar", user._id);
 
       socketConnection.on("conversation", (data) => {
-        console.log("Received conversation data:", data);
-
-        if (!data || !Array.isArray(data)) {
-          console.error("Invalid conversation data:", data);
-          return;
-        }
-
         const conversationUserData = data.map((conversation) => {
           const isCurrentUserSender = conversation?.sender?._id === user?._id;
           return {
@@ -308,9 +322,26 @@ const MessagePage = () => {
           };
         });
 
-        console.log("Mapped conversation data:", conversationUserData);
+        // Filter and cache conversations based on activeTab
+        const chatConversations = conversationUserData.filter(
+          (conv) => conv.temp === true
+        );
+        const jobConversations = conversationUserData.filter(
+          (conv) => conv.temp === false
+        );
 
-        // Filter conversations
+        conversationsCache.current = {
+          chats: chatConversations,
+          jobs: jobConversations,
+        };
+
+        // Set current tab's conversations
+        setConversations(
+          activeTab === "jobs" ? jobConversations : chatConversations
+        );
+        setIsLoadingConversations(false);
+
+        // Filter conversations based on activeTab and temp field
         const filteredConversations = conversationUserData.filter((conv) => {
           if (activeTab === "jobs") {
             return conv.temp === false;
@@ -319,7 +350,6 @@ const MessagePage = () => {
           }
         });
 
-        console.log("Filtered conversations:", filteredConversations);
         setConversations(filteredConversations);
       });
 
@@ -381,15 +411,11 @@ const MessagePage = () => {
         online: onlineUserSet.has(userDetails._id),
         profilePic: userDetails.profilePic,
       });
-
       setSelectedChatId(userDetails._id);
+      navigate(`/${localStorage.getItem("role")}/chat/${userDetails._id}`);
 
       if (socketConnection) {
         socketConnection.emit("message-page", userDetails._id);
-        socketConnection.emit("fetch-messages", {
-          userId: user._id,
-          receiverId: userDetails._id,
-        });
         socketConnection.emit("seen", userDetails._id);
 
         setConversations((prev) =>
@@ -399,8 +425,54 @@ const MessagePage = () => {
         );
       }
     },
-    [socketConnection, user._id, onlineUserSet]
+    [socketConnection, onlineUserSet, navigate]
   );
+
+  // Modified handleBackToList
+  const handleBackToList = useCallback(() => {
+    setSelectedUser(null);
+    setSelectedChatId(null);
+    navigate(`/${localStorage.getItem("role") / chat}`);
+  }, [navigate]);
+
+  // Effect to handle URL-based user selection
+  useEffect(() => {
+    if (userId && conversations.length > 0) {
+      const conversation = conversations.find(
+        (conv) => conv.userDetails._id === userId
+      );
+      if (conversation) {
+        const userDetails = conversation.userDetails;
+        setSelectedUser({
+          ...userDetails,
+          online: onlineUserSet.has(userDetails._id),
+          profilePic: userDetails.profilePic,
+        });
+        setSelectedChatId(userDetails._id);
+
+        if (socketConnection) {
+          socketConnection.emit("message-page", userDetails._id);
+          socketConnection.emit("seen", userDetails._id);
+        }
+      }
+    }
+  }, [userId, conversations, socketConnection, onlineUserSet]);
+
+  // Effect to clear selection when navigating to /messages
+  useEffect(() => {
+    if (location.pathname === "/messages" && selectedUser) {
+      setSelectedUser(null);
+      setSelectedChatId(null);
+    }
+  }, [location.pathname]);
+
+  // Effect to handle route changes
+  useEffect(() => {
+    if (!userId) {
+      setSelectedUser(null);
+      setSelectedChatId(null);
+    }
+  }, [userId]);
 
   // Update seen status when messages are viewed (seen update)
   useEffect(() => {
@@ -657,6 +729,18 @@ const MessagePage = () => {
     }
   }, [socketConnection, selectedUser]);
 
+  const isFirstInGroup = (message, index) => {
+    if (index === 0) return true;
+    const prevMessage = message[index - 1];
+    return prevMessage.msgByUserId !== message.msgByUserId;
+  };
+
+  const isLastInGroup = (message, index) => {
+    if (index === message.length - 1) return true;
+    const nextMessage = message[index + 1];
+    return nextMessage.msgByUserId !== message.msgByUserId;
+  };
+
   return (
     <div className="message-page">
       <nav className="nav-bar">
@@ -691,7 +775,7 @@ const MessagePage = () => {
           className={`conversation-list ${selectedUser ? "hidden-mobile" : ""}`}
         >
           <div className="conversation-list-inner">
-            {conversations?.length == 0 ? (
+            {conversations.length === 0 ? (
               <div className="empty-state">
                 <div className="empty-state-icon">
                   <FiArrowUpLeft size={50} />
@@ -701,7 +785,6 @@ const MessagePage = () => {
                 </p>
               </div>
             ) : (
-              conversations.length > 0 &&
               conversations.map((conv) => {
                 const isUserTyping = typingUsers.has(conv.userDetails._id);
                 const hasUnreadMessages =
@@ -797,10 +880,7 @@ const MessagePage = () => {
             <>
               <div className="chat-header">
                 <div className="chat-header-user">
-                  <button
-                    className="back-button"
-                    onClick={() => setSelectedUser(null)}
-                  >
+                  <button className="back-button" onClick={handleBackToList}>
                     <IoArrowBack />
                   </button>
                   <Avatar
@@ -816,14 +896,17 @@ const MessagePage = () => {
                       {selectedUser.name}
                     </span>
                     <p className="chat-header-status">
-                      {selectedUser.online ? "Online" : "Offline"}
+                      {typingUsers.has(selectedUser?._id) ? (
+                        <span className="typing-status">typing...</span>
+                      ) : selectedUser.online ? (
+                        "Online"
+                      ) : (
+                        "Offline"
+                      )}
                     </p>
                   </div>
                 </div>
-                <button
-                  className="close-button"
-                  onClick={() => setSelectedUser(null)}
-                >
+                <button className="close-button" onClick={handleBackToList}>
                   <IoClose />
                 </button>
               </div>
@@ -846,6 +929,8 @@ const MessagePage = () => {
                               user={user}
                               onMessageSeen={handleMessageSeen}
                               onPreviewImage={setPreviewImage}
+                              isFirstInGroup={isFirstInGroup(messages, index)}
+                              isLastInGroup={isLastInGroup(messages, index)}
                             />
                           ))}
                         </div>
@@ -870,48 +955,11 @@ const MessagePage = () => {
 
               <div className="message-input-area">
                 <div className="message-input-container">
-                  <div className="file-upload-container">
-                    <button
-                      onClick={() => setOpenFileUpload(!openFileUpload)}
-                      className="file-upload-button"
-                    >
-                      <FaPlus />
-                    </button>
-                    {openFileUpload && (
-                      <div className="file-upload-options">
-                        <label className="file-upload-option">
-                          <FaImage className="file-upload-icon image" />
-                          <span>Image</span>
-                          <input
-                            type="file"
-                            className="hidden-input"
-                            onChange={handleUploadImage}
-                            accept="image/*"
-                          />
-                        </label>
-                        <label className="file-upload-option">
-                          <FaVideo className="file-upload-icon video" />
-                          <span>Video</span>
-                          <input
-                            type="file"
-                            className="hidden-input"
-                            onChange={handleUploadVideo}
-                            accept="video/*"
-                          />
-                        </label>
-                        <label className="file-upload-option">
-                          <IoDocumentAttach className="file-upload-icon document" />
-                          <span>PDF</span>
-                          <input
-                            type="file"
-                            className="hidden-input"
-                            onChange={handleUploadPdf}
-                            accept=".pdf,.doc,.docx,.txt,.odt"
-                          />
-                        </label>
-                      </div>
-                    )}
-                  </div>
+                  <FileUploadButton
+                    onImageUpload={handleUploadImage}
+                    onVideoUpload={handleUploadVideo}
+                    onPdfUpload={handleUploadPdf}
+                  />
                   <form className="message-form" onSubmit={handleSendMessage}>
                     <input
                       type="text"

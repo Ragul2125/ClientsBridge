@@ -87,10 +87,18 @@ const MessageBubble = ({
   isOwnMessage,
   user,
   onMessageSeen,
+  isFirstInGroup,
+  isLastInGroup,
 }) => {
   const messageRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Add a small delay to trigger the animation
+    const timeoutId = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+
     if (messageRef.current && !isOwnMessage && !message.seen) {
       const observer = new IntersectionObserver(
         (entries) => {
@@ -102,26 +110,44 @@ const MessageBubble = ({
       );
 
       observer.observe(messageRef.current);
-      return () => observer.unobserve(messageRef.current);
+      return () => {
+        observer.unobserve(messageRef.current);
+        clearTimeout(timeoutId);
+      };
     }
+
+    return () => clearTimeout(timeoutId);
   }, [message._id, isOwnMessage, message.seen, onMessageSeen]);
+
+  const messageClass = `message-bubble ${
+    isOwnMessage ? "own-message" : "other-message"
+  } ${isFirstInGroup ? "first-in-group" : "consecutive-message"}`;
 
   return (
     <div
       ref={messageRef}
       data-message-id={message._id}
-      className={`message-bubble ${isOwnMessage ? "own-message" : ""}`}
+      className={messageClass}
+      style={{
+        "--slide-x": isOwnMessage ? "10px" : "-10px",
+      }}
     >
-      <div className="avatar-container">
-        <Avatar
-          width={28}
-          height={28}
-          imageUrl={isOwnMessage ? user?.profilePic : selectedUser?.profilePic}
-          name={isOwnMessage ? user?.name : message.senderName}
-          userId={message.msgByUserId}
-          className={`avatar ${isOwnMessage ? "margin-left" : "margin-right"}`}
-        />
-      </div>
+      {isFirstInGroup && (
+        <div className="avatar-container">
+          <Avatar
+            width={28}
+            height={28}
+            imageUrl={
+              isOwnMessage ? user?.profilePic : selectedUser?.profilePic
+            }
+            name={isOwnMessage ? user?.name : message.senderName}
+            userId={message.msgByUserId}
+            className={`avatar ${
+              isOwnMessage ? "margin-left" : "margin-right"
+            }`}
+          />
+        </div>
+      )}
 
       <div
         className={`message-content ${
