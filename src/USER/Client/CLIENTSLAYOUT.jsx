@@ -42,7 +42,7 @@ export default function ClientLayout() {
           <Route path="jobs/completed/:viewid" element={<OnCooverview />} />
           <Route path="myProfile" element={<UserProfile />} />
           <Route path="chat" element={<Home />}>
-            <Route path=":id" element={<MessagePage />} />
+            <Route path=":userId" element={<MessagePage />} />
           </Route>
           {/* <Route path="addprojects" element={<Addprojects />} /> */}
         </Routes>

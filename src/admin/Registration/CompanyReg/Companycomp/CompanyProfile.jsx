@@ -61,10 +61,10 @@ const CompanyProfile = () => {
     const ress = await choice(selection, id, "company");
     if (ress == true) {
       alert("Company " + selection + "ed");
-      navigate("/registration/company");
+      navigate("admin/registration/company");
     } else if (ress == false) {
       alert("Company" + selection + "ed");
-      navigate("/registration/company");
+      navigate("admin/registration/company");
     } else {
       alert(ress);
     }

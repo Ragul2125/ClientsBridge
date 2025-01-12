@@ -20,6 +20,7 @@ const SetupProfile = () => {
       );
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("role", response.data.role);
         setIsPasswordVerified(true);
         alert("Password verified successfully!");
       } else {
@@ -78,7 +79,7 @@ const SetupProfile = () => {
       );
       if (response.data.user) {
         alert("Profile setup successfully!");
-        window.location.href = "/setup/addProjects"; // Redirect to the next page
+        window.location.href = "/setup/addProjects/" + response.data.user.role; // Redirect to the next page
       } else {
         alert("Failed to set up profile. Please try again.");
       }

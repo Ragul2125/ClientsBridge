@@ -1,7 +1,6 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   logout,
   setOnlineUser,
@@ -11,25 +10,16 @@ import {
 import io from "socket.io-client";
 import { useSocket } from "../../SocketContext";
 import MessagePage from "./components/MessagePage";
+import axios from "axios";
 
 const Home = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const { userId } = useParams();
   const socket = useSocket();
-
-  console.log("user", user);
-  const token = localStorage.getItem("token");
-  console.log(token);
-
-  const [dataUser, setDataUser] = useState({
-    name: "",
-    email: "",
-    profilePic: "",
-    online: false,
-    _id: "",
-  });
+  const [activeTab, setActiveTaab] = useState("chats");
 
   const fetchUserDetails = async () => {
     try {
@@ -52,7 +42,6 @@ const Home = () => {
 
       const userData = response.data.data;
       dispatch(setUser(userData));
-      console.log("Fetched user details:", userData);
 
       if (userData.logout) {
         dispatch(logout());
@@ -80,7 +69,7 @@ const Home = () => {
         dispatch(setOnlineUser(data));
       });
     }
-  }, [socket]);
+  }, [socket, dispatch]);
 
   useEffect(() => {
     const socketConnection = io(import.meta.env.VITE_BACKEND_URL, {
@@ -88,39 +77,36 @@ const Home = () => {
         token: localStorage.getItem("token"),
       },
     });
-    console.log(socketConnection);
-
-    console.log("Token:", localStorage.getItem("token"));
 
     socketConnection.on("onlineUser", (data) => {
-      console.log(data);
       dispatch(setOnlineUser(data));
     });
     dispatch(setSocketConnection(socketConnection));
 
-    console.log(user, socket, token);
     return () => {
       socketConnection.disconnect();
     };
-  }, []);
+  }, [dispatch]);
 
-  const basePath =
-    location.pathname === `/${localStorage.getItem("role").toLowerCase()}/chat`;
-  console.log(basePath);
-  console.log(location.pathname);
-  console.log(`/${localStorage.getItem("role").toLowerCase()}/chat`);
+  useEffect(() => {
+    // Set activeTab based on the current URL
+    const path = location.pathname;
+    if (path.includes("/chat")) {
+      setActiveTab(path.includes("/jobs") ? "jobs" : "chats");
+    }
+  }, [location]);
+
+  const setActiveTab = (tab) => {
+    console.log(tab);
+    setActiveTaab(tab);
+  };
+
   return (
     <div className="home-container">
-      {/* <div className="sidebar-container">
-        <Sidebar />
-      </div> */}
-
-      {basePath ? (
-        <div className="empty-message-container">
-          Select user to send message
-        </div>
+      {location.pathname.includes("/chat") ? (
+        <MessagePage activeTab={activeTab} setActiveTab={setActiveTab} />
       ) : (
-        <MessagePage />
+        <Outlet />
       )}
     </div>
   );

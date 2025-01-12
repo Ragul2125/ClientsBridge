@@ -28,7 +28,7 @@ const Landing = () => {
         element={<FreelancerRegistrationPage />}
       />
       <Route path="/setup/:id" element={<SetupProfile />} />
-      <Route path="/setup/addProjects" element={<SetupProjects />} />
+      <Route path="/setup/addProjects/:role" element={<SetupProjects />} />
     </Routes>
   );
 };

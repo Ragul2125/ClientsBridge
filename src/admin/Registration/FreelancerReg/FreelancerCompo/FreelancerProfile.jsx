@@ -22,10 +22,10 @@ const FreelancerProfile = () => {
     const ress = await choice(selection, id, "freelancer");
     if (ress == true) {
       alert("Freelancer " + selection + "ed");
-      navigate("/registration/freelancer");
+      navigate("/admin/registration/freelancer");
     } else if (ress == false) {
       alert("Freelancer" + selection + "ed");
-      navigate("/registration/freelancer");
+      navigate("/admin/registration/freelancer");
     } else {
       alert(ress);
     }

@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import logo from "../../assets/logo.png";
 import axios from "axios";
 import TagsInput from "../Registerations/TagsInput";
+import { useNavigate, useParams } from "react-router-dom";
 
 const SetupProjects = () => {
+  const { role } = useParams();
+  const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
@@ -103,7 +106,7 @@ const SetupProjects = () => {
         JSON.stringify({
           name: project.name,
           description: project.description,
-          skillsUsed: project.skills.split(",").map((skill) => skill.trim()),
+          skillsUsed: project.skills,
         })
       );
 
@@ -117,9 +120,11 @@ const SetupProjects = () => {
         formData.append("videos", video);
       });
 
-      /* try {
+      try {
         const response = await axios.post(
-          "http://localhost:8000/api/freelancer/6761255b7fa484c00446a07f/createProject",
+          `${
+            import.meta.env.VITE_BACKEND_URL
+          }/api/freelancer/6761255b7fa484c00446a07f/createProject`,
           formData,
           {
             headers: {
@@ -131,13 +136,16 @@ const SetupProjects = () => {
 
         if (response.status === 200 || response.status === 201) {
           console.log(`Project "${project.name}" submitted successfully!`);
+          window.location.href = `/${localStorage
+            .getItem("role")
+            .toLowerCase()}`;
         } else {
           throw new Error(`Failed to add project: ${project.name}`);
         }
       } catch (error) {
         alert(`Error submitting project "${project.name}": ${error.message}`);
         return;
-      } */
+      }
       console.log(formData.get("project"));
       console.log(formData.getAll("images"));
       console.log(formData.getAll("videos"));
@@ -201,7 +209,15 @@ const SetupProjects = () => {
                 </button>
               </>
             )}
-            {projects.length === 0 && <button>Skip</button>}
+            {projects.length === 0 && (
+              <button
+                onClick={() => {
+                  navigate(`/${role}`);
+                }}
+              >
+                Skip
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -63,10 +63,10 @@ const ClientProfile = () => {
     const ress = await choice(selection, id, "client");
     if (ress == true) {
       alert("client " + selection + "ed");
-      navigate("/registration/client");
+      navigate("admin/registration/client");
     } else if (ress == false) {
       alert("client" + selection + "ed");
-      navigate("/registration/client");
+      navigate("admin/registration/client");
     } else {
       alert(ress);
     }

@@ -15,12 +15,13 @@ const FreelancerRegistrationPage = () => {
   };
 
   const handleTagsChange = (field, tags) => {
-    setFormData({ ...formData, [field]: tags });
+    setFormData({ ...formData, skills: field });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(formData);
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/auth/register/freelancer`,
         formData

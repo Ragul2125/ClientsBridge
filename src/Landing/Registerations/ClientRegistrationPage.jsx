@@ -12,12 +12,6 @@ const ClientRegistrationPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  function textToList(text) {
-    return text
-      .split(",") // Split the text by commas
-      .map((item) => item.trim()) // Trim whitespace from each item
-      .filter((item) => item !== ""); // Remove any empty strings
-  }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -29,16 +23,19 @@ const ClientRegistrationPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      formData.socialUrls = textToList(formData.socialUrls);
+      console.log(formData);
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/auth/register/client`,
         formData
       );
       if (response.status === 200) {
-        setPopupMessage("Client registration successful.");
+        setPopupMessage(
+          "Client registration successful. we'll reach you through email."
+        );
         setSubmitted(true);
       }
     } catch (error) {
+      console.log(error);
       if (error.response && error.response.data.message) {
         setErrorMessage(error.response.data.message);
       } else {
