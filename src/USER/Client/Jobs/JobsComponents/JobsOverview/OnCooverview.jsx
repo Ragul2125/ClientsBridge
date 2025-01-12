@@ -1,6 +1,9 @@
 import "./Overview.css";
 import dp from "../../../../assets/userdp.svg";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
+import { FaPenFancy } from "react-icons/fa";
+import { MdOutlineStar, MdOutlineStarBorder } from "react-icons/md";
+
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -10,6 +13,9 @@ export default function ProfileOverview() {
   const navigate = useNavigate();
   const [jobs, setJobs] = useState("");
   const [jobData, setJobData] = useState(null);
+  const [ReviewPanel, setReviewPanel] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [review, setReview] = useState("");
   const location = useLocation();
   const API_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -38,6 +44,33 @@ export default function ProfileOverview() {
     };
     if (viewid) fetchJobDetails();
   }, [viewid]);
+
+  const handleReviewSubmit = async () => {
+    try {
+      console.log(review, rating);
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/review/${
+          jobData.assignedTo._id
+        }/addReviews`,
+        {
+          stars: rating,
+          description: review,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log("done");
+      setReviewPanel(false);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+  const handleStarClick = (index) => {
+    setRating(index + 1);
+  };
   const handleCompleteJob = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -166,11 +199,54 @@ export default function ProfileOverview() {
         <section className="client-oncooverview-side side2">
           <p className="client-oncooverview-side-emoji">🥳</p>
           <p className="client-oncooverview-side-head">Completed</p>
-          <p className="client-oncooverview-side-subtxt">
-            Project started on {jobData.startDate} and completed on{" "}
-            {jobData.endDate}
+          <p
+            onClick={() => setReviewPanel(true)}
+            className="client-oncooverview-side-chatbtn"
+          >
+            Add Review <FaPenFancy />
           </p>
         </section>
+      )}
+
+      {ReviewPanel && (
+        <div className="add-review-container">
+          <div className="add-review-inner">
+            <p className="add-review-txt">
+              Rate your <span>Experience</span> with @
+              {jobData?.assignedTo?.userName}?
+            </p>
+            <div className="review-star-container">
+              {Array.from({ length: 5 }, (_, index) => (
+                <p
+                  key={index}
+                  className="review-star"
+                  onClick={() => handleStarClick(index)}
+                >
+                  {index < rating ? <MdOutlineStar /> : <MdOutlineStarBorder />}
+                </p>
+              ))}
+            </div>
+            <textarea
+              className="review-input"
+              placeholder="Write your review"
+              value={review}
+              onChange={(e) => {
+                setReview(e.target.value);
+              }}
+            ></textarea>
+            <div className="review-btn-container">
+              <p
+                onClick={() => setReviewPanel(false)}
+                className="review-cancel"
+              >
+                Cancel
+              </p>
+              <p onClick={handleReviewSubmit} className="review-submit">
+                Submit
+              </p>
+            </div>
+          </div>
+        </div>
       )}
     </main>
   );

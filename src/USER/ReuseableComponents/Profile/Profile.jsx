@@ -381,18 +381,20 @@ const Profile = () => {
                   </div>
                 )}
 
-                <div className="address">
-                  <h3>Date of Birth</h3>
-                  <p
-                    contentEditable={isEditableProfessional}
-                    suppressContentEditableWarning={true}
-                    onBlur={(e) =>
-                      ProfessionalContentChange(e, "address", index)
-                    }
-                  >
-                    {profileData.dob.substring(0, 10)}
-                  </p>
-                </div>
+                {profileData?.dob && (
+                  <div className="address">
+                    <h3>Date of Birth</h3>
+                    <p
+                      contentEditable={isEditableProfessional}
+                      suppressContentEditableWarning={true}
+                      onBlur={(e) =>
+                        ProfessionalContentChange(e, "address", index)
+                      }
+                    >
+                      {profileData?.dob?.substring(0, 10)}
+                    </p>
+                  </div>
+                )}
                 <div className="phoneNumber">
                   <h3>Phone Number</h3>
                   <p
@@ -418,87 +420,98 @@ const Profile = () => {
           </div>
 
           {/* -------------Review-details--------------- */}
-          <div className="profile-container-review">
-            <h2>Reviews</h2>
-            <div className="review-container">
-              {profileData?.reviews?.map((r, index) => (
-                <div className="review-cards" key={index}>
-                  <div className="review-profile">
-                    <img src={r.reviewByUserId.profilePic} alt="" />
-                    <div className="username-stars">
-                      <div className="username">
-                        <p>{r.reviewByUserId.name}</p>
-                      </div>
-                      <div className="stars">
-                        <p>
-                          {[...Array(maxRating)].map((_, index) => (
-                            <span key={index}>
-                              {index < r.stars ? "★" : "☆"}
-                            </span>
-                          ))}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="des">
-                    <p>{r.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* ---------------------Project------------------ */}
-          <div className="profile-container-own-projects">
-            <div className="project-container-heading">
-              <h2>Projects</h2>
-              <Link to="addprojects">
-                <button>Add</button>
-              </Link>
-            </div>
-
-            <div className="projects-container">
-              {profileData?.projects?.map((details, index) => (
-                <div className="projects-cards" key={index}>
-                  <div className="projects-images">
-                    <div className="viewing-image">
-                      {/* Display the clicked image here */}
-                      <img
-                        src={
-                          details._id == idA ? projectImage : details.images[0]
-                        }
-                        alt="Project Main View"
-                      />
-                    </div>
-
-                    <div className="carousel-image-list">
-                      {details.images.map((img, imgIndex) => (
-                        <div className="carousel-image" key={imgIndex}>
-                          <img
-                            onClick={() => changeProjectImage(img, details._id)}
-                            src={img}
-                          />
+          {profileData?.reviews.length > 0 && (
+            <div className="profile-container-review">
+              <h2>Reviews</h2>
+              <div className="review-container">
+                {profileData?.reviews?.map((r, index) => (
+                  <div className="review-cards" key={index}>
+                    <div className="review-profile">
+                      <img src={r.reviewByUserId.profilePic} alt="" />
+                      <div className="username-stars">
+                        <div className="username">
+                          <p>{r.reviewByUserId.name}</p>
+                          <p className="rev-user-name">
+                            @{r.reviewByUserId.userName}
+                          </p>
                         </div>
-                      ))}
+                        <div className="stars">
+                          <p>
+                            {[...Array(r.stars)].map((_, index) => (
+                              <span key={index}>
+                                {index < r.stars ? "★" : "☆"}
+                              </span>
+                            ))}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="des">
+                      <p>{r.description}</p>
                     </div>
                   </div>
-
-                  <div className="about-projects">
-                    <div className="project-cards-name">
-                      <h1>{details.name}</h1>
-                    </div>
-                    <div className="project-cards-description">
-                      <p>{details.description}</p>
-                    </div>
-                    <div className="skills-used">
-                      {details.skillsUsed.map((skill, skillIndex) => (
-                        <p key={skillIndex}>{skill}</p>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
+          {/* ---------------------Project------------------ */}
+          {profileData?.projects?.length > 0 && (
+            <div className="profile-container-own-projects">
+              <div className="project-container-heading">
+                <h2>Projects</h2>
+                <Link to="addprojects">
+                  <button>Add</button>
+                </Link>
+              </div>
+
+              <div className="projects-container">
+                {profileData?.projects?.map((details, index) => (
+                  <div className="projects-cards" key={index}>
+                    <div className="projects-images">
+                      <div className="viewing-image">
+                        {/* Display the clicked image here */}
+                        <img
+                          src={
+                            details._id == idA
+                              ? projectImage
+                              : details.images[0]
+                          }
+                          alt="Project Main View"
+                        />
+                      </div>
+
+                      <div className="carousel-image-list">
+                        {details.images.map((img, imgIndex) => (
+                          <div className="carousel-image" key={imgIndex}>
+                            <img
+                              onClick={() =>
+                                changeProjectImage(img, details._id)
+                              }
+                              src={img}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="about-projects">
+                      <div className="project-cards-name">
+                        <h1>{details.name}</h1>
+                      </div>
+                      <div className="project-cards-description">
+                        <p>{details.description}</p>
+                      </div>
+                      <div className="skills-used">
+                        {details.skillsUsed.map((skill, skillIndex) => (
+                          <p key={skillIndex}>{skill}</p>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </main>
       <Outlet />

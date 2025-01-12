@@ -118,7 +118,7 @@ const Home = () => {
           Select user to send message
         </div>
       ) : (
-        <Outlet />
+        <MessagePage />
       )}
     </div>
   );

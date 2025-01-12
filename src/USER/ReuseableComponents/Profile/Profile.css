@@ -274,6 +274,11 @@
             align-items: center;
             justify-content: start;
             gap: 1em;
+            img {
+              height: 40px;
+              width: 40px;
+              border-radius: 50%;
+            }
             p {
               font-size: 1.1em;
             }
@@ -533,4 +538,7 @@
       }
     }
   }
+}
+.rev-user-name {
+  opacity: 0.5;
 }

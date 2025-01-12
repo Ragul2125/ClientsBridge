@@ -11,6 +11,7 @@ export default function ProfileOverview() {
   const [jobDetails, setJobDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [review, setReview] = useState("");
   const [jobs, setJobs] = useState("");
   const [ReviewPanel, setReviewPanel] = useState(false);
   const [rating, setRating] = useState(0);
@@ -49,6 +50,30 @@ export default function ProfileOverview() {
 
     fetchJobDetails();
   }, [id, location.pathname]);
+
+  const handleReviewSubmit = async () => {
+    try {
+      console.log(review, rating);
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/review/${
+          jobDetails.clientID._id
+        }/addReviews`,
+        {
+          stars: rating,
+          description: review,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log("done");
+      setReviewPanel(false);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   const handleStarClick = (index) => {
     setRating(index + 1);
@@ -170,7 +195,8 @@ export default function ProfileOverview() {
         <div className="add-review-container">
           <div className="add-review-inner">
             <p className="add-review-txt">
-              <span>Satisfied</span> with my work?
+              Rate your <span>Experience</span> with @
+              {jobDetails?.clientID?.userName}?
             </p>
             <div className="review-star-container">
               {Array.from({ length: 5 }, (_, index) => (
@@ -186,6 +212,10 @@ export default function ProfileOverview() {
             <textarea
               className="review-input"
               placeholder="Write your review"
+              value={review}
+              onChange={(e) => {
+                setReview(e.target.value);
+              }}
             ></textarea>
             <div className="review-btn-container">
               <p
@@ -194,10 +224,7 @@ export default function ProfileOverview() {
               >
                 Cancel
               </p>
-              <p
-                onClick={() => setReviewPanel(false)}
-                className="review-submit"
-              >
+              <p onClick={handleReviewSubmit} className="review-submit">
                 Submit
               </p>
             </div>
