@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { formatDistanceToNow } from "date-fns";
 
+import Load from "../../../ReuseableComponents/Loaders/Load";
+
 const API_Url = import.meta.env.VITE_BACKEND_URL;
 
 export default function Unassigned() {
@@ -33,7 +35,7 @@ export default function Unassigned() {
         setLoading(false);
       } catch (err) {
         console.error("Error fetching pending jobs:", err);
-        setError(err.response?.data?.message || "Something went wrong!");
+        setError(err.response?.data?.message || <Load type="err" />);
         setLoading(false);
       }
     };
@@ -62,7 +64,7 @@ export default function Unassigned() {
       <section className="client-jobs-unassigned-project-section">
         <div className="client-jobs-unassigned-project-inner">
           {loading ? (
-            <p>Loading jobs...</p>
+            <Load type="load" />
           ) : error ? (
             <p>{error}</p>
           ) : filteredJobs.length > 0 ? (
@@ -96,7 +98,8 @@ export default function Unassigned() {
               </div>
             ))
           ) : (
-            <p>No jobs found.</p>
+            // <p className="client-jobs-active-no-results">No jobs found.</p>
+            <Load type="nojobs" />
           )}
         </div>
       </section>

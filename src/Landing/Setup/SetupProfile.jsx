@@ -22,7 +22,6 @@ const SetupProfile = () => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", response.data.role);
         setIsPasswordVerified(true);
-        alert("Password verified successfully!");
       } else {
         alert("Invalid password. Please try again.");
       }

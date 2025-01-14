@@ -26,7 +26,7 @@ const TopNav = () => {
 
   return (
     <>
-      <div className="topNav">
+      <div className="top-Nav">
         <img
           className="backbtn"
           src={back}

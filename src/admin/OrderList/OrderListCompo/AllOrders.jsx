@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../OrderList.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Load from "../../../USER/ReuseableComponents/Loaders/Load";
 
 export default function AllOrders() {
   const [orderList, setOrderList] = useState([]);
@@ -36,8 +37,7 @@ export default function AllOrders() {
         setError("");
       }
     } catch (err) {
-      console.log(err);
-      console.log("error");
+      console.error(err);
       setError("Failed to fetch orders. Please try again later.");
       setLoading(false);
     }
@@ -52,9 +52,11 @@ export default function AllOrders() {
       <p className="ordertxtmin">Active Members</p>
       <div className="order-tablecon">
         {loading ? (
-          <p>Loading...</p>
+          <Load type="load" />
         ) : error ? (
-          <p className="error">{error}</p>
+          <Load type="err" />
+        ) : orderList.length === 0 ? (
+          <Load type="nojobs" />
         ) : (
           <table className="order-table">
             <thead className="order-thead">

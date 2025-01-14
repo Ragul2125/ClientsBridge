@@ -4,6 +4,7 @@ import { MdOutlinePeopleAlt } from "react-icons/md";
 import dp from "../../assets/userdp.svg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Load from "../../ReuseableComponents/Loaders/Load";
 import { formatDistanceToNow } from "date-fns";
 
 export default function Home() {
@@ -53,11 +54,11 @@ export default function Home() {
   );
 
   if (loading) {
-    return <p>Loading projects...</p>;
+    return <Load type="load" />;
   }
 
   if (error) {
-    return <p className="error-message">{error}</p>;
+    return <Load type="err" />;
   }
 
   return (

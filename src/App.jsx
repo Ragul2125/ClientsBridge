@@ -8,6 +8,7 @@ import ClientLayout from "./USER/Client/CLIENTSLAYOUT";
 import CompanyLayout from "./USER/Company/COMPANYLAYOUT";
 import Sec from "../src/USER/ReuseableComponents/Success/Success";
 import Profile from "./USER/ReuseableComponents/Profile/Profile";
+import Load from "./USER/ReuseableComponents/Loaders/Load";
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ function App() {
         <Route path="/company/*" element={<CompanyLayout />} />
         <Route path="/freelancer/*" element={<CompanyLayout />} />
         <Route path="/success" element={<Sec />} />
+        <Route path="/load" element={<Load />} />
       </Routes>
     </BrowserRouter>
   );
