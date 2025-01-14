@@ -49,7 +49,7 @@ const JobAssignPopup = ({ togglePopup, jobId }) => {
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/admin/assignJob/${jobId}`,
         {
-          freelancerIds: selectedFreelancers,
+          ids: selectedFreelancers,
         },
         {
           headers: {

@@ -16,6 +16,10 @@
   display: none;
 }
 
+Link,
+a {
+  text-decoration: none;
+}
 input,
 textarea,
 button,

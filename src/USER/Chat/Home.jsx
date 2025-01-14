@@ -102,7 +102,7 @@ const Home = () => {
   };
 
   return (
-    <div className="home-container">
+    <div className="home-container-chat">
       {location.pathname.includes("/chat") ? (
         <MessagePage activeTab={activeTab} setActiveTab={setActiveTab} />
       ) : (

@@ -4,7 +4,7 @@ import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { FaPenFancy } from "react-icons/fa";
 import { MdOutlineStar, MdOutlineStarBorder } from "react-icons/md";
 import { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function ProfileOverview() {
@@ -158,9 +158,6 @@ export default function ProfileOverview() {
         <p className="client-oncooverview-side-type">
           @{jobDetails?.clientID?.userName}
         </p>
-        <p className="client-oncooverview-side-cost">
-          {jobDetails?.clientID?.description}
-        </p>
       </section>
 
       {jobs === "ongoing" && (
@@ -172,9 +169,12 @@ export default function ProfileOverview() {
           <p className="client-oncooverview-side-subtxt">
             Message {jobDetails?.clientId?.name || "Client"}
           </p>
-          <p className="client-oncooverview-side-chatbtn">
+          <Link
+            to={"/" + localStorage.getItem("role") + "/chat"}
+            className="client-oncooverview-side-chatbtn"
+          >
             <IoChatboxEllipsesOutline /> Chat
-          </p>
+          </Link>
         </section>
       )}
 

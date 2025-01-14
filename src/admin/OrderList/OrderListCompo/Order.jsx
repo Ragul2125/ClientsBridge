@@ -93,7 +93,11 @@ export default function Orders({ type }) {
             </div>
             <div className="orderdetails">
               <p className="orderlabel">Project tags</p>
-              <p className="ordervalue">{JSON.stringify(jobDetail.tags)}</p>
+              <p className="ordervalue">
+                {jobDetail.tags.map((tag) => {
+                  return <span>{tag + " "}</span>;
+                })}
+              </p>
             </div>
             <div className="orderdetails orderdetailstwo">
               <div className="orderdetailstwoinner">
@@ -201,7 +205,9 @@ export default function Orders({ type }) {
               <></>
             )}
           </div>
-          {isPopupOpen && <JobAssignPopup togglePopup={togglePopup} />}
+          {isPopupOpen && (
+            <JobAssignPopup togglePopup={togglePopup} jobId={jobDetail._id} />
+          )}
         </main>
       </>
     );

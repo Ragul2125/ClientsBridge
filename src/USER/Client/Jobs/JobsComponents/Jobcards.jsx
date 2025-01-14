@@ -83,23 +83,22 @@ export default function ActiveJobs() {
             />
             <p className="client-jobs-active-card-title">
               {job.postTitle}
-              <span className="client-jobs-active-card-cost">{job.budget}</span>
+              <span className="client-jobs-active-card-cost">
+                {"₹ " + job.budget}
+              </span>
             </p>
             <p className="client-jobs-active-card-summary">
               Summary
               <p className="client-jobs-active-card-summary-des">
-                {job.description}
+                {job.description.substring(0, 300) + "..."}
               </p>
             </p>
             {jobStatus === "active" && (
               <div className="company-job-card-box">
                 <p className="company-jobs-card-box-sdate">
-                  Status{" "}
+                  Interested{" "}
                   <span className="company-jobs-card-box-live">
-                    <GoDotFill
-                      style={{ color: "#14ef14", marginTop: "0.1em" }}
-                    />{" "}
-                    live
+                    {job.interested.length + " +"}
                   </span>
                 </p>
               </div>

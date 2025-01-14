@@ -37,7 +37,7 @@ export default function ClientLayout() {
           <Route path="jobs/completed/:jbid" element={<Onco />} />
           <Route path="myProfile" element={<Profile />} />
           <Route path="chat" element={<Homepg />}>
-            <Route path=":id" element={<MessagePage />} />
+            <Route path=":userId" element={<MessagePage />} />
           </Route>
         </Routes>
       </div>

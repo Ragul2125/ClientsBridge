@@ -72,7 +72,7 @@ export default function AllOrders() {
                 <tr key={order._id}>
                   <td>{order.postTitle}</td>
                   <td>{order.clientID.name || "N/A"}</td>
-                  <td>${order.budget}</td>
+                  <td>₹ {order.budget}</td>
                   <td>{new Date(order.deadline).toLocaleDateString()}</td>
                   <td>{order.category}</td>
                   <td>

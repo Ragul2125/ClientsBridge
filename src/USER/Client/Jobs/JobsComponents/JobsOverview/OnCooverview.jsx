@@ -148,7 +148,7 @@ export default function ProfileOverview() {
             <div>
               <p className="client-profileoverview-inner-des-head">Budget</p>
               <p className="client-profileoverview-inner-des-subtxt">
-                {jobData.budget}
+                ₹ {jobData.budget}
               </p>
             </div>
             <div>
@@ -169,7 +169,9 @@ export default function ProfileOverview() {
           <p className="client-profileoverview-inner-des-file">
             {jobData.files.map((file, i) => (
               <p>
-                <a href={file}>file {i + 1}</a>
+                <a target="_blank" href={file}>
+                  file {i + 1}
+                </a>
               </p>
             ))}
           </p>
@@ -184,12 +186,14 @@ export default function ProfileOverview() {
           alt="User"
         />
         <p className="client-oncooverview-side-head">
-          {jobData.assignedTo?.userName}
-        </p>
-        <p className="client-oncooverview-side-head">
           {jobData.assignedTo?.name}
         </p>
-        <p className="client-oncooverview-side-type">Freelancer</p>
+        <p className="client-oncooverview-side-head">
+          {jobData.assignedTo?.userName}
+        </p>
+        <p className="client-oncooverview-side-type">
+          {jobData.assignedTo?.role}
+        </p>
       </section>
 
       {/* Project Deadline and Chat Option */}

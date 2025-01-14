@@ -1,547 +1,540 @@
 .client-jobs-main {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
-    background-color: var(--white);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  background-color: var(--white);
 }
 
 .client-jobs-tabs-container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .client-jobs-tabs-titles {
-    padding: 1em;
-    font-family: "Outfit", system-ui;
+  padding: 1em;
+  font-family: "Outfit", system-ui;
 }
 
 .client-jobs-tabs-titles p {
-    display: inline-block;
-    margin: 0 7px;
-    cursor: pointer;
-    font-family: poppins;
-    font-size: 1.5rem;
-    font-weight: 600;
-    font-family: "Outfit", system-ui;
+  display: inline-block;
+  margin: 0 7px;
+  cursor: pointer;
+  font-family: poppins;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Outfit", system-ui;
 }
 
-@media(max-width:1100px) {
-    .client-jobs-tabs-titles {
-        padding: 1.2em 0.7em;
-    }
+@media (max-width: 1100px) {
+  .client-jobs-tabs-titles {
+    padding: 1.2em 0.7em;
+  }
 
-    .client-jobs-tabs-titles p {
-        margin: 0 4px;
-        font-size: 1.4rem;
-        font-weight: 600;
-    }
+  .client-jobs-tabs-titles p {
+    margin: 0 4px;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
 }
 
 .client-jobs-tabs-titles a {
-    color: #868686;
+  color: #868686;
 }
 
 .client-jobs-tabs-titles .active {
-    color: #000;
+  color: #000;
 }
 
 .client-jobs-newjob-btn {
-    margin-right: 1.5em;
-    margin-left: auto;
-    padding: 0.5em 1em;
-    outline: 1px dashed gray;
-    font-family: 'outfit';
-    border-radius: 30px;
-    cursor: pointer;
-    color: black;
-    transition-duration: 0.2s;
+  margin-right: 1.5em;
+  margin-left: auto;
+  padding: 0.5em 1em;
+  outline: 1px dashed gray;
+  font-family: "outfit";
+  border-radius: 30px;
+  cursor: pointer;
+  color: black;
+  transition-duration: 0.2s;
 }
 
 .client-jobs-newjob-btn:hover {
-    background-color: gray;
-    color: white;
+  background-color: gray;
+  color: white;
 }
 
 /*=========================================================================client-jobs-add-jobs-main===================================== */
 .addnew-container {
-    width: calc(100% - 70px);
-    height: calc(100% - 50px);
-    background-color: var(--white);
-    background: linear-gradient(to left, #e5ebff, #adbdff);
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    font-family: "Outfit", system-ui;
-    display: flex;
-    flex-direction: column;
+  width: calc(100% - 70px);
+  height: calc(100% - 50px);
+  background-color: var(--white);
+  background: linear-gradient(to left, #e5ebff, #adbdff);
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  font-family: "Outfit", system-ui;
+  display: flex;
+  flex-direction: column;
 }
 
 .addnew-progressbar-container {
-    width: 100%;
-    padding: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  padding: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
 .addnew-progress-step-container {
-    width: 40%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
 }
 
 .addnew-progressbar {
-    position: absolute;
-    width: 100%;
-    height: 1em;
-    background-color: #ffffff;
-    border-radius: 20px;
+  position: absolute;
+  width: 100%;
+  height: 1em;
+  background-color: #ffffff;
+  border-radius: 20px;
 }
 
 .addnew-progressbar-inner {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(to left, #5174fe, #c9d3f8);
-    border-radius: 20px;
-    transition: width 0.5s ease;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(to left, #5174fe, #c9d3f8);
+  border-radius: 20px;
+  transition: width 0.5s ease;
 }
 
 .addnew-progress-step {
-    width: 55px;
-    aspect-ratio: 1;
-    background-color: #6fafe0;
-    z-index: 11;
-    display: grid;
-    place-items: center;
-    border-radius: 60px;
-    color: aliceblue;
+  width: 55px;
+  aspect-ratio: 1;
+  background-color: #6fafe0;
+  z-index: 11;
+  display: grid;
+  place-items: center;
+  border-radius: 60px;
+  color: aliceblue;
 }
 
 .addnew-step1-container {
-    flex-grow: 1;
-    /* background-color: #5174fe; */
-
+  flex-grow: 1;
+  /* background-color: #5174fe; */
 }
 
 .addnew-step1-img {
-    width: 32%;
-    position: fixed;
-    bottom: 0;
-    z-index: -1;
+  width: 32%;
+  position: fixed;
+  bottom: 0;
+  z-index: -1;
 }
 
 .addnew-step1-inner-container {
-    width: 68%;
-    height: 100%;
-    margin-left: auto;
+  width: 68%;
+  height: 100%;
+  margin-left: auto;
 }
 
 .addnew-step1-inner {
-    width: 95%;
-    height: 90%;
-    padding: 4em;
-    padding-bottom: 2em;
-    border-radius: 20px;
-    background-color: #ffffff;
-    box-shadow: 5px 5px 15px rgba(186, 186, 186, 0.108);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
+  width: 95%;
+  height: 90%;
+  padding: 4em;
+  padding-bottom: 2em;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 5px 5px 15px rgba(186, 186, 186, 0.108);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  overflow-y: scroll;
 }
 
 .addnew-projectname-label {
-    font-family: 'outfit', sans-serif;
-    text-wrap: nowrap;
-    text-overflow: ellipsis;
+  font-family: "outfit", sans-serif;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
 }
 
 .addnew-input {
-    padding: 1em;
-    outline: 1px solid rgb(193, 191, 191);
-    border: none;
-    border-radius: 7px;
-    overflow: hidden;
+  padding: 1em;
+  outline: 1px solid rgb(193, 191, 191);
+  border: none;
+  border-radius: 7px;
+  overflow: hidden;
 }
 
 .projectdesc-input {
-    flex-grow: 1;
-    text-align: start;
-    resize: none;
+  flex-grow: 1;
+  text-align: start;
+  resize: none;
 }
 
 .addnew-twoinputs-container {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .addnew-two-inputs {
-    width: calc(100% / 2.05);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
+  width: calc(100% / 2.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 .addnew-preview-container {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    /* grid-template-rows: auto auto auto auto; */
-    grid-template-areas:
-        "pname pname pbudget"
-        "pdes pdes pdeadline"
-        "pdes pdes pcat"
-        "pdes pdes pfile";
-    gap: 1em;
-    margin-bottom: 1.5em;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-template-rows: auto auto auto auto; */
+  grid-template-areas:
+    "pname pname pbudget"
+    "pdes pdes pdeadline"
+    "pdes pdes pcat"
+    "pdes pdes pfile";
+  gap: 1em;
+  margin-bottom: 1.5em;
+  overflow-y: scroll;
 }
 
 .preview-label {
-    font-style: italic;
-    color: #5b5b5b;
+  font-style: italic;
+  color: #5b5b5b;
 }
 
 .preview-projectname {
-    grid-area: pname;
+  grid-area: pname;
 }
 
 .preview-budget {
-    grid-area: pbudget;
+  grid-area: pbudget;
 }
 
 .preview-deadline {
-    grid-area: pdeadline;
+  grid-area: pdeadline;
 }
 
 .preview-Category {
-    grid-area: pcat;
+  grid-area: pcat;
 }
 
 .preview-desc {
-    grid-area: pdes;
+  grid-area: pdes;
 }
 
 .preview-file {
-    grid-area: pfile;
+  grid-area: pfile;
 }
 
 .addnew-preview {
-    padding: 1em;
-    background-color: #c7c7c76e;
-    border-radius: 10px;
-    text-wrap: wrap;
+  padding: 1em;
+  background-color: #c7c7c76e;
+  border-radius: 10px;
+  text-wrap: wrap;
 }
 
 .addnew-button-container {
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    gap: 1em;
-    margin-top: 0.7em;
-    margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 1em;
+  margin-top: 0.7em;
+  margin-top: auto;
 }
 
 .addnew-btn {
-    padding: 0.5em 2em;
-    color: rgb(81, 81, 81);
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-family: monospace;
-    font-size: large;
-    outline: 1px solid rgb(193, 191, 191);
+  padding: 0.5em 2em;
+  color: rgb(81, 81, 81);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: large;
+  outline: 1px solid rgb(193, 191, 191);
 }
 
 .addnew-nxt-btn {
-    background-color: #1947ff;
-    color: white;
+  background-color: #1947ff;
+  color: white;
 }
-
-
-
-
 
 /*===================================================================client-jobs-unassigned-jobs-main===================================== */
 .client-jobs-unassigned-main {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--white);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
 }
 
 /* -----------------------------------client-jobs-unassigned-search-section------------------------ */
 .client-jobs-unassigned-search-section {
-    padding: 2em 1em;
-    display: flex;
-    gap: 0.7em;
-    justify-content: center;
-    background-color: var(--white);
+  padding: 2em 1em;
+  display: flex;
+  gap: 0.7em;
+  justify-content: center;
+  background-color: var(--white);
 }
 
 .client-jobs-unassigned-search-input {
-    width: 50%;
-    padding: 0.7em 1em;
-    outline: 0;
-    border: none;
-    border-radius: 5px;
-    outline: 1px solid gray;
-    background-color: transparent;
-    font-family: 'poppins';
+  width: 50%;
+  padding: 0.7em 1em;
+  outline: 0;
+  border: none;
+  border-radius: 5px;
+  outline: 1px solid gray;
+  background-color: transparent;
+  font-family: "poppins";
 }
 
 .client-jobs-unassigned-search-btn {
-    background-color: gray;
-    color: white;
-    padding: 0 1em;
-    display: grid;
-    place-items: center;
-    font-family: 'outfit', sans-serif;
-    border-radius: 5px;
-    cursor: pointer;
-    transition-duration: 0.2s;
+  background-color: gray;
+  color: white;
+  padding: 0 1em;
+  display: grid;
+  place-items: center;
+  font-family: "outfit", sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-duration: 0.2s;
 }
 
 .client-jobs-unassigned-search-btn:hover {
-    background-color: rgb(58, 58, 58);
-    color: white;
+  background-color: rgb(58, 58, 58);
+  color: white;
 }
 
 /* -------------------------------------client-jobs-unassigned-project-section------------------------ */
 .client-jobs-unassigned-project-section {
-    flex-grow: 1;
-    padding: 0 4em;
-    overflow: hidden;
-
+  flex-grow: 1;
+  padding: 0 4em;
+  overflow: hidden;
 }
 
 .client-jobs-unassigned-project-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: 30px 30px 0 0;
-    background-color: #ffffff;
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2em;
-    overflow: scroll;
-
+  width: 100%;
+  height: 100%;
+  border-radius: 30px 30px 0 0;
+  background-color: #ffffff;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  overflow: scroll;
 }
 
 .client-jobs-unassigned-project-card {
-    padding: 1.5em 2.5em;
-    border-radius: 12px;
-    display: grid;
-    grid-template-columns: auto 2fr auto;
-    grid-template-areas:
-        "dp title btn"
-        "dp none none"
-        "dp des des";
-    column-gap: 2em;
-    row-gap: 0.5em;
-    font-family: 'outfit', sans-serif;
-    outline: 1px solid #d5d5d5;
-    background-color: var(--white);
-    transition-duration: 0.3s;
+  padding: 1.5em 2.5em;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: auto 2fr auto;
+  grid-template-areas:
+    "dp title btn"
+    "dp none none"
+    "dp des des";
+  column-gap: 2em;
+  row-gap: 0.5em;
+  font-family: "outfit", sans-serif;
+  outline: 1px solid #d5d5d5;
+  background-color: var(--white);
+  transition-duration: 0.3s;
 }
 
 .client-jobs-unassigned-project-card:hover {
-    scale: 1.013;
+  scale: 1.013;
 }
 
 .client-jobs-unassigned-project-card-dp {
-    grid-area: dp;
-    width: 4em;
+  grid-area: dp;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
 }
 
 .client-jobs-unassigned-project-card-title {
-    margin-top: 0.5em;
-    grid-area: title;
-    display: flex;
-    flex-direction: column;
-    font-weight: 500;
+  margin-top: 0.5em;
+  grid-area: title;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
 }
 
 .client-jobs-unassigned-project-card-time {
-    font-weight: 400;
-    font-size: smaller;
+  font-weight: 400;
+  font-size: smaller;
 }
 
 .client-jobs-unassigned-project-card-btn {
-    grid-area: btn;
-    border-radius: 20px;
-    padding: 0 1.7em;
-    display: grid;
-    place-items: center;
-    color: black;
-    outline: 1px dashed gray;
-    margin-bottom: 0.7em;
-    cursor: pointer;
-    transition-duration: 0.2s;
+  grid-area: btn;
+  border-radius: 20px;
+  padding: 0 1.7em;
+  display: grid;
+  place-items: center;
+  color: black;
+  outline: 1px dashed gray;
+  margin-bottom: 0.7em;
+  cursor: pointer;
+  transition-duration: 0.2s;
 }
 
 .client-jobs-unassigned-project-card-btn:hover {
-    background-color: gray;
-    color: white;
+  background-color: gray;
+  color: white;
 }
 
 .client-jobs-unassigned-project-card-description {
-    grid-area: des;
-    text-wrap: wrap;
+  grid-area: des;
+  text-wrap: wrap;
 }
 
 /*===================================================================client-jobs-unassigned-jobs-main===================================== */
 .client-jobs-active-main {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .client-jobs-active-search-section {
-    padding: 2em 1em;
-    display: flex;
-    gap: 0.7em;
-    justify-content: center;
-    background-color: var(--white);
+  padding: 2em 1em;
+  display: flex;
+  gap: 0.7em;
+  justify-content: center;
+  background-color: var(--white);
 }
 
 .client-jobs-active-search-input {
-    width: 50%;
-    padding: 0.7em 1em;
-    outline: 0;
-    border: none;
-    border-radius: 5px;
-    outline: 1px solid gray;
-    background-color: transparent;
-    font-family: 'poppins';
+  width: 50%;
+  padding: 0.7em 1em;
+  outline: 0;
+  border: none;
+  border-radius: 5px;
+  outline: 1px solid gray;
+  background-color: transparent;
+  font-family: "poppins";
 }
 
 .client-jobs-active-search-btn {
-    background-color: gray;
-    color: white;
-    padding: 0 1em;
-    display: grid;
-    place-items: center;
-    font-family: 'outfit', sans-serif;
-    border-radius: 5px;
-    cursor: pointer;
-    transition-duration: 0.2s;
+  background-color: gray;
+  color: white;
+  padding: 0 1em;
+  display: grid;
+  place-items: center;
+  font-family: "outfit", sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-duration: 0.2s;
 }
 
 .client-jobs-active-search-btn:hover {
-    background-color: rgb(58, 58, 58);
-    color: white;
+  background-color: rgb(58, 58, 58);
+  color: white;
 }
 
 .client-jobs-active-cards-container {
-    flex-grow: 1;
-    padding: 2em;
-    padding-top: 0;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: start;
-    flex-wrap: wrap;
-    gap: 1em;
-    overflow: scroll;
+  flex-grow: 1;
+  padding: 2em;
+  padding-top: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 1em;
+  overflow: scroll;
 }
 
-
 .client-jobs-active-card {
-    flex-grow: 1;
-    width: calc(100% /3.1);
-    padding: 1em;
-    border-radius: 10px;
-    background-color: #ffffff;
-    display: grid;
-    grid-template-columns: auto 2fr auto;
-    grid-template-areas:
-        "dp title btn"
-        "summary summary summary"
-        "box box box";
-    column-gap: 1em;
-    row-gap: 0.7em;
-    overflow: hidden;
-    font-family: 'outfit', sans-serif;
-    transition-duration: 0.3s;
-    cursor: pointer;
+  flex-grow: 1;
+  width: calc(100% / 3.1);
+  padding: 1em;
+  border-radius: 10px;
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: auto 2fr auto;
+  grid-template-areas:
+    "dp title btn"
+    "summary summary summary"
+    "box box box";
+  column-gap: 1em;
+  row-gap: 0.7em;
+  overflow: hidden;
+  font-family: "outfit", sans-serif;
+  transition-duration: 0.3s;
+  cursor: pointer;
 }
 
 .client-jobs-active-card:hover {
-    scale: 1.02;
+  scale: 1.02;
 }
 
 .client-jobs-active-card-img {
-    grid-area: dp;
-    width: 3.5em;
+  grid-area: dp;
+  width: 3.5em;
 }
 
 .client-jobs-active-card-title {
-    grid-area: title;
-    display: flex;
-    flex-direction: column;
-    gap: 0.1em;
-    margin-top: 0.3em;
-    font-weight: 600;
+  grid-area: title;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  margin-top: 0.3em;
+  font-weight: 600;
 }
 
 .client-jobs-active-card-info {
-    font-weight: 400;
-    color: #5b5b5b;
-    font-size: smaller;
+  font-weight: 400;
+  color: #5b5b5b;
+  font-size: smaller;
 }
 
 .client-jobs-active-card-threedot {
-    grid-area: btn;
-    padding: 0.5em;
-    cursor: pointer;
-    font-weight: bolder;
+  grid-area: btn;
+  padding: 0.5em;
+  cursor: pointer;
+  font-weight: bolder;
 }
 
 .client-jobs-active-card-summary {
-    grid-area: summary;
-    display: flex;
-    flex-direction: column;
-    font-weight: 600;
-    gap: 0.2em;
+  grid-area: summary;
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  gap: 0.2em;
 }
 
 .client-jobs-active-card-summary-des {
-    width: 90%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: 400;
-    font-size: smaller;
-
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  font-size: smaller;
 }
 
 .client-jobs-active-card-box {
-    grid-area: box;
-    padding: 0.5em;
-    border: 1px solid #e7e7e7;
-    border-radius: 4px;
+  grid-area: box;
+  padding: 0.5em;
+  border: 1px solid #e7e7e7;
+  border-radius: 4px;
 }
 
 .client-jobs-active-card-box-sdate {
-    padding-bottom: 0.5em;
-    display: flex;
-    justify-content: space-between;
-    font-size: smaller;
+  padding-bottom: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  font-size: smaller;
 }
 
 .client-jobs-active-card-box-edate {
-    padding-top: 0.5em;
-    border-top: 1px solid #e7e7e7;
-    display: flex;
-    justify-content: space-between;
-    font-size: smaller;
+  padding-top: 0.5em;
+  border-top: 1px solid #e7e7e7;
+  display: flex;
+  justify-content: space-between;
+  font-size: smaller;
 }
-
 
 /* --- */

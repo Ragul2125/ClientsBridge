@@ -156,6 +156,7 @@
 }
 
 .client-oncooverview-inner {
+  width: 70%;
   grid-area: long;
   margin: 1em;
   border-radius: 20px;
@@ -186,7 +187,8 @@
 }
 
 .client-profileoverview-side-dp {
-  width: 5em;
+  width: 7em;
+  height: 7em;
   border-radius: 50%;
   margin-bottom: 1em;
 }

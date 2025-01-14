@@ -98,7 +98,7 @@ const View = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      navigate("/client/inbox");
+      navigate("/client/chat");
       console.log("Conversation created:", response.data);
     } catch (error) {
       console.error("Error creating conversation:", error);
@@ -142,7 +142,7 @@ const View = () => {
             <div>
               <p className="client-profileoverview-inner-des-head">Budget</p>
               <p className="client-profileoverview-inner-des-subtxt">
-                {project.budget}
+                ₹ {project.budget}
               </p>
             </div>
             <div>

@@ -4,6 +4,7 @@ import { MdOutlinePeopleAlt } from "react-icons/md";
 import dp from "../../assets/userdp.svg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { formatDistanceToNow } from "date-fns";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -91,13 +92,22 @@ export default function Home() {
             {filteredProjects.length > 0 ? (
               filteredProjects.map((project) => (
                 <div className="company-home-card" key={project._id}>
-                  <img className="company-home-card-img" src={dp} alt="dp" />
+                  <img
+                    className="company-home-card-img"
+                    src={project.clientID.profilePic}
+                    alt="dp"
+                  />
                   <p className="company-home-card-title">
                     {project.postTitle}
-                    <span className="company-home-card-info">2w ago</span>{" "}
+                    <span className="company-home-card-info">
+                      {" "}
+                      {formatDistanceToNow(new Date(project.createdAt), {
+                        addSuffix: true,
+                      })}
+                    </span>{" "}
                     {/* Update with actual data */}
                     <span className="company-home-card-cost">
-                      ${project.budget}
+                      ₹ {project.budget}
                     </span>
                   </p>
                   <p className="company-home-card-count">
@@ -107,7 +117,7 @@ export default function Home() {
                   <p className="company-home-card-summary">
                     Summary
                     <p className="company-home-card-summary-des">
-                      {project.description}
+                      {project.description.substring(0, 300) + "...."}
                     </p>
                   </p>
                   <Link

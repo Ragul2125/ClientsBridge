@@ -5,6 +5,7 @@ import "../Jobs.css";
 import dp from "../../../assets/userdp.svg";
 import { GoSearch } from "react-icons/go";
 import { GoDotFill } from "react-icons/go";
+import { formatDistanceToNow } from "date-fns";
 
 export default function ActiveJobs() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -89,14 +90,16 @@ export default function ActiveJobs() {
       return (
         <div className="company-job-card-box">
           <p className="company-jobs-card-box-sdate">
-            Job holder{" "}
+            Time left
             <span className="company-jobs-card-box-live">
-              <img className="company-jobs-card-box-dp" src={dp} alt="dp" />
+              {formatDistanceToNow(new Date(job.deadline), { addSuffix: true })}
             </span>
           </p>
           <p className="company-jobs-card-box-edate">
-            Recent Report{" "}
-            <span className="company-jobs-card-box-appli">2 days ago</span>
+            Deadline{" "}
+            <span className="company-jobs-card-box-appli">
+              {new Date(job.deadline).toLocaleDateString()}
+            </span>
           </p>
         </div>
       );
@@ -157,13 +160,13 @@ export default function ActiveJobs() {
               <p className="client-jobs-active-card-title">
                 {job.postTitle}
                 <span className="client-jobs-active-card-cost">
-                  {job.budget}
+                  ₹ {job.budget}
                 </span>
               </p>
               <p className="client-jobs-active-card-summary">
                 Summary
                 <p className="client-jobs-active-card-summary-des">
-                  {job.description}
+                  {job.description.substring(0, 300) + "..."}
                 </p>
               </p>
               {renderJobStatus(job)}

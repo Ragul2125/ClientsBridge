@@ -132,6 +132,7 @@
 }
 
 .client-oncooverview-inner {
+  /* width: 70%; */
   grid-area: long;
   margin: 1em;
   border-radius: 20px;
@@ -162,7 +163,8 @@
 }
 
 .client-profileoverview-side-dp {
-  width: 5em;
+  width: 7em;
+  height: 7em;
   margin-bottom: 1em;
 }
 
@@ -315,15 +317,13 @@
     padding-bottom: 1em;
     .client-jobs-view-main-bidded-cards {
       width: 90%;
-      height: 100px;
       background-color: var(--white);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.5em;
+      padding: 0.7em;
       margin-top: 1em;
       border-radius: 10px;
-
       .client-jobs-view-main-bidded-cards-content {
         display: flex;
         align-items: center;
