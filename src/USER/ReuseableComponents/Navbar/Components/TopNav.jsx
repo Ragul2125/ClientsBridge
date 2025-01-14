@@ -2,7 +2,8 @@ import "../Navbar.css";
 import React, { useEffect, useState } from "react";
 import search from "../../../../assets/search.svg";
 import back from "../../../../assets/back.svg";
-import profileImg from "../../../../assets/profileImg.svg";
+// import profileImg from "../../../../assets/profileImg.svg";
+import dp from '../../../assets/userdp.svg'
 import { GoArrowUpRight } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -73,11 +74,20 @@ const TopNav = () => {
           }
           className="profile"
         >
-          <img
+          {/* <img
             src={userData?.profilePic}
             className="profileImg"
             alt="Profile"
+          /> */}
+          {/* -------------------------------------------------DP----------- */}
+          <img
+            src={userData?.profilePic || dp}
+            className="profileImg"
+            alt="Profile"
+            onError={(e) => { e.target.src = dp; }}
           />
+          {/* -------------------------------------------------DP----------- */}
+
           <div className="profile-about">
             <h4>{userData.name || "Jayasree"}</h4>
             <p>{userData.userName || "Client"}</p>

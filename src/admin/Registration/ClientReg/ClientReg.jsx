@@ -3,14 +3,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import Load from '../../../USER/ReuseableComponents/Loaders/Load';
+
 const ClientReg = () => {
   const [clients, setClients] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
   useEffect(() => {
     async function getAllClients() {
       try {
+        setLoading(true);
         const { data } = await axios.get(
-          `${
-            import.meta.env.VITE_BACKEND_URL
+          `${import.meta.env.VITE_BACKEND_URL
           }/api/admin/getAllClientRegisterations`,
           {
             headers: {
@@ -19,9 +24,12 @@ const ClientReg = () => {
           }
         );
         setClients(data);
-        console.log(data);
+        setError("");
       } catch (error) {
-        console.log(error);
+        console.error(error);
+        setError("Failed to fetch client data. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     }
     getAllClients();
@@ -29,7 +37,11 @@ const ClientReg = () => {
 
   return (
     <>
-      {clients.length > 0 && (
+      {loading ? (
+        <Load type='load' />
+      ) : error ? (
+          <Load type='err' />
+      ) : clients.length > 0 ? (
         <section className="clientreg-container">
           <div className="clientreg-tablecon">
             <table className="clientreg-table">
@@ -44,31 +56,31 @@ const ClientReg = () => {
                 </tr>
               </thead>
               <tbody className="clientreg-tbody">
-                {clients.map((client) => {
-                  return (
-                    <tr key={client._id}>
-                      <td className="clientreg-avatar">
-                        {client.name.charAt(0).toUpperCase()}
-                      </td>
-                      <td>{client.name}</td>
-                      <td>{client.country}</td>
-                      <td>{client.phoneNumber}</td>
-                      <td>{client.mailId}</td>
-                      <td>
-                        <Link
-                          to={`${client?._id || ""}`}
-                          className="clientregviewbtn"
-                        >
-                          View
-                        </Link>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {clients.map((client) => (
+                  <tr key={client._id}>
+                    <td className="clientreg-avatar">
+                      {client.name.charAt(0).toUpperCase()}
+                    </td>
+                    <td>{client.name}</td>
+                    <td>{client.country}</td>
+                    <td>{client.phoneNumber}</td>
+                    <td>{client.mailId}</td>
+                    <td>
+                      <Link
+                        to={`${client?._id || ""}`}
+                        className="clientregviewbtn"
+                      >
+                        View
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </section>
+      ) : (
+        <Load type='nojobs' />
       )}
     </>
   );

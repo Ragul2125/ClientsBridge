@@ -396,7 +396,7 @@
     text-wrap: wrap;
 }
 
-/*===================================================================client-jobs-unassigned-jobs-main===================================== */
+/*===================================================================client-jobs-card-jobs-main===================================== */
 .client-jobs-active-main {
     height: 100%;
     width: 100%;
@@ -445,16 +445,17 @@
     padding: 2em;
     padding-top: 0;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: start;
     flex-wrap: wrap;
-    gap: 1em;
+    gap: 0.5em;
+    row-gap: 1em;
     overflow: scroll;
 }
 
 
 .client-jobs-active-card {
-    flex-grow: 1;
+    /* flex-grow: 1; */
     width: calc(100% /3.1);
     padding: 1em;
     border-radius: 10px;

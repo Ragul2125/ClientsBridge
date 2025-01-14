@@ -77,7 +77,7 @@ export default function SideNav() {
   return (
     <div className={`Sidenav ${isExpanded ? "expanded" : ""}`}>
       <div className="navbar-top">
-        <header>
+        <header className="topheader">
           <img src={logo} alt="profileImg" />
           <h2 className="logotxt">{isExpanded && <p>CLIENTSBRIDGE</p>}</h2>
         </header>

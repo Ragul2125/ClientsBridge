@@ -6,7 +6,7 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import { TbRestore } from "react-icons/tb";
 import { Link, useLocation } from "react-router-dom";
 import "../Inbox.css";
-
+import Load from '../../../USER/ReuseableComponents/Loaders/Load.jsx'
 export default function InboxAllChat() {
   const [favoriteChats, setFavoriteChats] = useState([]);
   const [selectedChats, setSelectedChats] = useState([]);
@@ -90,11 +90,11 @@ export default function InboxAllChat() {
   };
 
   if (isLoading) {
-    return <div>Loading conversations...</div>;
+    return <Load type='load'/>
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <Load type='err' />
   }
 
   return (

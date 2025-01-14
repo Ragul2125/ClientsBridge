@@ -53,15 +53,24 @@ a {
     width: 45px;
 }
  */
+.topheader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
 .logotxt {
   font-size: larger;
+  display: inline-block;
+  color: white;
+  padding-left: 0.5em;
 }
 
 .sidebar-content {
   ul {
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 1.5em;
 
     li {
       display: flex;
@@ -205,6 +214,7 @@ a {
     }
 
     .profile {
+
       .profile-about,
       .langimg {
         display: none;

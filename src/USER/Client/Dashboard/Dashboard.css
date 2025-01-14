@@ -109,14 +109,13 @@
 }
 
 .client-dashboard-project-history-table {
-
     flex-grow: 1;
     border-collapse: collapse;
 }
 
 .client-dashboard-project-history-table th,
 td {
-    padding: 1.4em;
+    padding: 1.3em;
     text-align: left;
     color: #000000;
     padding-left: 2em;

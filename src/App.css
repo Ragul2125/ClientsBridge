@@ -10,7 +10,9 @@
   user-select: none;
   box-sizing: border-box;
 }
-
+a, Link{
+  text-decoration: none;
+}
 ::-webkit-scrollbar {
   color: transparent;
   display: none;

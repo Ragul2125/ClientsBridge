@@ -5,7 +5,7 @@ import "../Jobs.css";
 import dp from "../../../assets/userdp.svg";
 import { GoSearch } from "react-icons/go";
 import { GoDotFill } from "react-icons/go";
-
+import Load from '../../../ReuseableComponents/Loaders/Load'
 export default function ActiveJobs() {
   const [searchTerm, setSearchTerm] = useState("");
   const [jobs, setJobs] = useState([]);
@@ -133,8 +133,8 @@ export default function ActiveJobs() {
         </p>
       </section>
       <section className="client-jobs-active-cards-container">
-        {loading && <p>Loading jobs...</p>}
-        {error && <p className="client-jobs-active-error">{error}</p>}
+        {loading && <Load type='load'/>}
+        {error && <Load type='err' />}
         {!loading &&
           !error &&
           filteredJobs.map((job) => (
@@ -170,7 +170,8 @@ export default function ActiveJobs() {
             </div>
           ))}
         {!loading && !error && filteredJobs.length === 0 && (
-          <p className="client-jobs-active-no-results">No jobs found.</p>
+          // <p className="client-jobs-active-no-results">No jobs found.</p>
+          <Load type='nojobs'/>
         )}
       </section>
     </div>

@@ -16,10 +16,7 @@ const ActiveProject = ({ stats }) => {
       <div className="active-box">
         <header>
           <h2>Active Project</h2>
-          <div className="month">
-            <p>october</p>
-            <img src={more} alt="" />
-          </div>
+
         </header>
         <div className="table">
           <table>

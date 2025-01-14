@@ -4,7 +4,7 @@ import { MdOutlinePeopleAlt } from "react-icons/md";
 import dp from "../../assets/userdp.svg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import Load from '../../ReuseableComponents/Loaders/Load'
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [projects, setProjects] = useState([]);
@@ -52,11 +52,11 @@ export default function Home() {
   );
 
   if (loading) {
-    return <p>Loading projects...</p>;
+    return <Load type='load' />;
   }
 
   if (error) {
-    return <p className="error-message">{error}</p>;
+    return <Load type='err' />;
   }
 
   return (
@@ -119,7 +119,7 @@ export default function Home() {
                 </div>
               ))
             ) : (
-              <p className="company-home-no-results">
+                <p className="company-home-no-results">
                 No projects found matching your search.
               </p>
             )}
