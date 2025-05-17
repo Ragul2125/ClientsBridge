@@ -1,8 +1,43 @@
-# React + Vite
+# 💼 Clientsbridge - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Clientsbridge** is a full-featured freelancing platform designed for managing jobs, applications, and real-time collaboration between clients, companies, and freelancers. This repository contains the **React-based frontend** of the application.
 
-Currently, two official plugins are available:
+> 🚧 This project is part of an internship for the company *Clientsbridge* and is currently not launched.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+
+## 🔍 Features
+
+- 🌐 Responsive & clean user interface
+- 📝 Clients can post jobs
+- 🧑‍💻 Freelancers and companies can bid on jobs
+- ✅ Admin-controlled user onboarding (application-based approval)
+- 📈 Admin panel with analytics and dashboards
+- 💬 Real-time chat using **Socket.IO**
+- 🔐 Secure user authentication
+- 🎯 Role-based access: Clients, Freelancers, Companies, Admin
+
+---
+
+## 🖥️ Tech Stack
+
+- **Frontend Framework**: React.js
+- **Routing**: React Router
+- **State Management**: Redux
+- **UI Components**: CSS
+- **Real-time Communication**: Socket.IO-client
+
+---
+
+## 🚀 Getting Started
+
+```bash
+# Clone the frontend repo
+git clone https://github.com/Vickeysvibe/ClientsBridge.git
+cd ClientsBridge
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
