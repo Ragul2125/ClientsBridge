@@ -4,32 +4,20 @@ import "../../CompanyReg/CompanyReg.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { choice } from "../../../api/registerations";
+import useAxiosFetch from "../../../../hooks/useAxiosFetch";
+import toast from "react-hot-toast";
 
 const ClientProfile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [client, setClient] = useState({});
   const [clientDetails, setClientDetails] = useState([]);
-  useEffect(() => {
-    async function getClient() {
-      try {
-        const { data } = await axios.get(
-          `${
-            import.meta.env.VITE_BACKEND_URL
-          }/api/admin/getRegisteration/${id}?role=client`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        setClient(data);
-      } catch (error) {
-        console.error("Error fetching client data:", error);
-      }
-    }
-    getClient();
-  }, [id]);
+
+  const {
+    data: client,
+    error,
+    loading,
+    refetch,
+  } = useAxiosFetch(`/admin/getRegisteration/${id}?role=client`);
 
   useEffect(() => {
     if (client) {
@@ -60,19 +48,23 @@ const ClientProfile = () => {
   }, [client]);
 
   const send = async (selection) => {
-    const ress = await choice(selection, id, "client");
-    if (ress == true) {
-      alert("client " + selection + "ed");
-      navigate("admin/registration/client");
-    } else if (ress == false) {
-      alert("client" + selection + "ed");
-      navigate("admin/registration/client");
-    } else {
-      alert(ress);
+    try {
+      const ress = await choice(selection, id, "client");
+      if (ress === true) {
+        toast.success(`Client ${selection}ed successfully`);
+        navigate("/admin/registration/client");
+      } else if (ress === false) {
+        toast.success(`Client ${selection}ed successfully`);
+        navigate("/admin/registration/client");
+      } else {
+        toast.error(ress || "Unexpected error");
+      }
+    } catch (err) {
+      toast.error("Something went wrong!");
     }
   };
 
-  if (client.name) {
+  if (client?.name) {
     return (
       <div className="FreelancerProfile-container">
         <div className="freelancerprodetails-container">

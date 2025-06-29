@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import logo from "../../assets/logo.png";
 import "./login.css";
+import { Eye, EyeOff } from "lucide-react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -15,6 +18,7 @@ const LoginPage = () => {
   }, []);
 
   const handleLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     // Validation
@@ -34,13 +38,13 @@ const LoginPage = () => {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,
         {
-          mailId: email,
+          mailId: email.toLowerCase(),
           password,
         }
       );
 
       // Handle successful login
-      if (response.data.token) {
+      if (response.data.success) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", response.data.role);
         window.location.href = `/${response.data.role}`;
@@ -48,6 +52,8 @@ const LoginPage = () => {
       // Redirect or update UI
     } catch (err) {
       setError(err.response?.data?.message || "Invalid login credentials.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,15 +86,23 @@ const LoginPage = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input
-            type="password"
-            placeholder="Enter your password"
-            className="auth-input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit" className="auth-btn-primary">
-            Login
+          <div className="password-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              className="auth-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <span
+              className="eye-icon"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </span>
+          </div>
+          <button type="submit" className="auth-btn-primary" disabled={loading}>
+            {loading ? <div className="spinner-res" /> : "Login"}
           </button>
         </form>
         <div className="social-container">

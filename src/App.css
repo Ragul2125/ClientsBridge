@@ -10,7 +10,8 @@
   user-select: none;
   box-sizing: border-box;
 }
-a, Link{
+a,
+Link {
   text-decoration: none;
 }
 ::-webkit-scrollbar {
@@ -151,4 +152,63 @@ select {
   .userdp {
     width: 2em;
   }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ddd;
+  border-top: 5px solid #4caf50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-res {
+  width: 20px;
+  height: 20px;
+  border: 4px solid #ddd;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 16px 0;
+  gap: 6px;
+}
+
+.pagination-btn {
+  padding: 6px 14px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+.pagination-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-btn.active {
+  background-color: #1976d2;
+  color: white;
 }

@@ -9,9 +9,11 @@ import CompanyLayout from "./USER/Company/COMPANYLAYOUT";
 import Sec from "../src/USER/ReuseableComponents/Success/Success";
 import Profile from "./USER/ReuseableComponents/Profile/Profile";
 import Load from "./USER/ReuseableComponents/Loaders/Load";
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <BrowserRouter>
+      <Toaster />
       <Routes>
         <Route path="/*" element={<Landing />} />
         <Route path="/test" element={<Chat />} />

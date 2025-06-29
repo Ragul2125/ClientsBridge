@@ -10,8 +10,10 @@ import TagsInput from "./TagsInput";
 const ClientRegistrationPage = () => {
   const [formData, setFormData] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -22,6 +24,7 @@ const ClientRegistrationPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       console.log(formData);
       const response = await axios.post(
@@ -41,12 +44,14 @@ const ClientRegistrationPage = () => {
       } else {
         setErrorMessage("An unexpected error occurred.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   const closePopup = () => {
     setSubmitted(false);
-    window.location.href = "/"; // Redirect to homepage
+    window.location.href = "/explore"; // Redirect to homepage
   };
 
   return (
@@ -159,8 +164,8 @@ const ClientRegistrationPage = () => {
               required
             />
           </div>
-          <button type="submit" className="submit-btn">
-            Submit Registration
+          <button type="submit" className="submit-btn" disabled={loading}>
+            {loading ? <div className="spinner-res" /> : "Submit Registration"}
           </button>
         </form>
       </div>

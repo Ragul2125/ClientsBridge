@@ -1,82 +1,79 @@
 import "../FreelancerReg.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { choice, getFreelancerById } from "../../../api/registerations";
+import toast from "react-hot-toast";
+import useAxiosFetch from "../../../../hooks/useAxiosFetch";
+import { choice } from "../../../api/registerations";
 
 const FreelancerProfile = () => {
   const { id } = useParams();
-  const [freelancer, setFreelancer] = useState({});
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function getFreelancer() {
-      const res = await getFreelancerById(id);
-      if (res) {
-        setFreelancer(res);
-      }
-    }
-    getFreelancer();
-  }, []);
+  const {
+    data: freelancer,
+    error,
+    loading,
+  } = useAxiosFetch(`/admin/getRegisteration/${id}?role=freelancer`);
 
   const send = async (selection) => {
-    const ress = await choice(selection, id, "freelancer");
-    if (ress == true) {
-      alert("Freelancer " + selection + "ed");
-      navigate("/admin/registration/freelancer");
-    } else if (ress == false) {
-      alert("Freelancer" + selection + "ed");
-      navigate("/admin/registration/freelancer");
-    } else {
-      alert(ress);
+    try {
+      const ress = await choice(selection, id, "freelancer");
+      if (ress === true || ress === false) {
+        toast.success(`Freelancer ${selection}ed successfully`);
+        navigate("/admin/registration/freelancer");
+      } else {
+        toast.error(ress || "Unexpected error");
+      }
+    } catch (err) {
+      toast.error("Something went wrong!");
     }
   };
-  if (!freelancer) {
-    return (
-      <p style={{ margin: "2em", fontSize: "xx-large" }}>
-        Freelancer not found.
-      </p>
-    );
-  }
+
+  if (loading) return <h2>Loading...</h2>;
+  if (error) return <h2 style={{ color: "red" }}>{error}</h2>;
+  if (!freelancer) return <h2>No freelancer data found.</h2>;
 
   const freelancerDetails = [
-    { label: "Name", value: freelancer?.name || "Unknown User" },
-    { label: "Description", value: freelancer?.description || "N/A" },
-    { label: "Email", value: freelancer?.mailId || "N/A" },
+    { label: "Name", value: freelancer.name || "Unknown User" },
+    { label: "Description", value: freelancer.description || "N/A" },
+    { label: "Email", value: freelancer.mailId || "N/A" },
     { label: "Password", value: "*********" },
     {
       label: "Date of Birth",
-      value: freelancer?.dob?.substring(0, 10) || "NaN",
+      value: freelancer.dob?.substring(0, 10) || "NaN",
     },
-    { label: "city", value: freelancer?.city || "N/A" },
-    { label: "state", value: freelancer?.state || "N/A" },
-    { label: "City", value: freelancer?.city || "N/A" },
-    { label: "Postal Code", value: freelancer?.zipCode || "N/A" },
-    { label: "Country", value: freelancer?.country || "N/A" },
+    { label: "City", value: freelancer.city || "N/A" },
+    { label: "State", value: freelancer.state || "N/A" },
+    { label: "Postal Code", value: freelancer.zipCode || "N/A" },
+    { label: "Country", value: freelancer.country || "N/A" },
     {
       label: "Skills",
-      value:
-        (
-          <div className="tagClose">
-            {" "}
-            {freelancer?.skills?.map((skill) => (
-              <div className="tagBox">{skill}</div>
-            ))}
-          </div>
-        ) || "N/A",
+      value: (
+        <div className="tagClose">
+          {freelancer.skills?.map((skill, i) => (
+            <div className="tagBox" key={i}>
+              {skill}
+            </div>
+          ))}
+        </div>
+      ),
     },
     {
-      label: "Social URL's",
-      value:
-        (
-          <div className="tagClose">
-            {" "}
-            {freelancer?.socialUrls?.map((skill) => (
-              <a href={skill} className="tagBox taglink" target="_blank">
-                {skill}
-              </a>
-            ))}
-          </div>
-        ) || "N/A",
+      label: "Social URLs",
+      value: (
+        <div className="tagClose">
+          {freelancer.socialUrls?.map((url, i) => (
+            <a
+              key={i}
+              href={url}
+              className="tagBox taglink"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {url}
+            </a>
+          ))}
+        </div>
+      ),
     },
   ];
 
