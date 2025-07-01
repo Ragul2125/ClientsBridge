@@ -47,7 +47,6 @@
   width: 100%;
   border-collapse: collapse;
   text-align: start;
- 
 }
 
 .order-thead th {
@@ -182,10 +181,16 @@
 .ordervalue {
   padding: 1em;
   outline: 1px solid #cccbcb;
-  text-wrap: wrap;
   font-size: medium;
-  font-family: poppins;
+  font-family: Poppins, sans-serif;
   border-radius: 10px;
+  white-space: normal;
+  overflow-y: auto;
+  max-height: 200px;
+}
+
+.orderdesc {
+  text-wrap: nowrap;
 }
 
 .orderdetailstwo {

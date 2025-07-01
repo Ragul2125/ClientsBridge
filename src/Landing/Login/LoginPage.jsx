@@ -3,6 +3,7 @@ import axios from "axios";
 import logo from "../../assets/logo.png";
 import "./login.css";
 import { Eye, EyeOff } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -115,7 +116,9 @@ const LoginPage = () => {
             <span>Login with LinkedIn</span>
           </button>
         </div>
-        <div className="auth-forgot">Forgot Password?</div>
+        <Link to={"/forgot"} className="auth-forgot">
+          Forgot Password?
+        </Link>
       </div>
     </div>
   );

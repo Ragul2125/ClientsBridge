@@ -4,6 +4,7 @@ import axios from "axios";
 import dp from "../../../../assets/profileImg.svg";
 import "../Home.css";
 import GlobalPopup from "../../../ReuseableComponents/Popup/GlobalPopup";
+import JobDetailsLayout from "../../../ReuseableComponents/job/JobDetailsLayout";
 
 const BidView = () => {
   const { jobid } = useParams();
@@ -78,64 +79,8 @@ const BidView = () => {
   if (!project) return <p>Loading...</p>;
 
   return (
-    <main className="company-home-bidded-view">
-      <div className="company-home-bidded-view-container">
-        <div className="company-home-bidded-view-container-header">
-          <img src={project.clientID.profilePic || dp} alt="Icon" />
-          <div>
-            <h1>{project.postTitle}</h1>
-            <p>@{project.clientID.userName}</p>
-          </div>
-        </div>
-        <div className="company-home-bidded-view-container-overview">
-          <h2>Role Overview</h2>
-          <p>{project.description}</p>
-        </div>
-        <div className="client-profileoverview-inner-side-byside">
-          <div>
-            {" "}
-            <p className="client-profileoverview-inner-des-head">Deadline</p>
-            <p className="client-profileoverview-inner-des-subtxt">
-              {new Date(project.deadline).toLocaleDateString()}
-            </p>
-          </div>
-          <div>
-            <p className="client-profileoverview-inner-des-head">Budget</p>
-            <p className="client-profileoverview-inner-des-subtxt">
-              {project.budget}
-            </p>
-          </div>
-          <div>
-            <p className="client-profileoverview-inner-des-head">Category</p>
-            <p className="client-profileoverview-inner-des-subtxt">
-              {project.category}
-            </p>
-          </div>
-        </div>
-        {project.tags.length > 0 && (
-          <>
-            <p className="client-profileoverview-inner-des-head">Tags</p>
-            <p className="client-profileoverview-inner-des-tags">
-              {project.tags.map((tag, i) => (
-                <p className="job-tag-seps">{tag}</p>
-              ))}
-            </p>
-          </>
-        )}
-        {project.files.length > 0 && (
-          <>
-            <p className="client-profileoverview-inner-des-head">Files</p>
-            <p className="client-profileoverview-inner-des-file">
-              {project.files.map((file, i) => (
-                <p>
-                  <a target="_blank" href={file}>
-                    file {i + 1}
-                  </a>
-                </p>
-              ))}
-            </p>
-          </>
-        )}
+    <JobDetailsLayout project={project}>
+      <section className="client-oncooverview-side side2">
         <div className="company-home-bidded-view-container-details">
           <div className="biding-amount">
             <h3>Bidding Amount</h3>
@@ -150,31 +95,12 @@ const BidView = () => {
           </div>
         </div>
         {error && <p className="error">{error}</p>}
-
-        {isPopupVisible && (
-          <GlobalPopup
-            text={`Confirm your bid of ₹${bidAmount}?`}
-            className="confirm-bid-popup"
-            buttons={[
-              {
-                label: "Confirm",
-                className: "confirm",
-                onClick: handleBidSubmit,
-              },
-              {
-                label: "Cancel",
-                className: "cancel",
-                onClick: closePopup,
-              },
-            ]}
-          />
-        )}
-
         <div className="company-home-bidded-view-container-btn">
           <button onClick={openPopup}>Bid</button>
         </div>
-      </div>
-    </main>
+      </section>
+      ;
+    </JobDetailsLayout>
   );
 };
 

@@ -156,7 +156,6 @@
 }
 
 .client-oncooverview-inner {
-  width: 70%;
   grid-area: long;
   margin: 1em;
   border-radius: 20px;
@@ -247,14 +246,14 @@
 }
 
 .client-oncooverview-side-chatbtn {
-  margin-top: 1em;
+  margin: 1em 0;
   display: flex;
   align-items: center;
   padding: 0.5em 1.3em;
   border-radius: 30px;
   outline: 1px dashed #000000;
   gap: 0.5em;
-  font-size: small;
+  font-size: large;
   cursor: pointer;
   transition-duration: 0.2s;
 }
