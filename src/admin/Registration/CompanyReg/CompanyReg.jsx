@@ -36,10 +36,10 @@ const CompanyReg = () => {
         <Load type="load" />
       ) : error ? (
         <Load type="err" />
-      ) : companies?.data?.length > 0 ? (
+      ) : companies?.length > 0 ? (
         <>
           <section className="freelancerreg-container">
-            {companies.data.map((company) => (
+            {companies.map((company) => (
               <CompanyCard
                 key={company.id}
                 company={company}

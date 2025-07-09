@@ -176,7 +176,7 @@ export default function Orders({ type }) {
             ) : type === "ongoing" ||
               type === "satisfied" ||
               type === "completed" ? (
-              <div className="profile-container">
+              <div className="profile-container bottom-profile">
                 <div className="profile-picture">
                   <img
                     src={jobDetail.assignedTo.profilePic}

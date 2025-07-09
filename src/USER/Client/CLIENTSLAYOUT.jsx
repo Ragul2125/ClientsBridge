@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import "./CLIENTSLAYOUT.css";
+import "../../ReuseableComponents/CommonCss/LAYOUT.css";
 // ----------------------------------------------NAVBAR-------------------------------->
-import Nav from "../ReuseableComponents/Navbar/Navbar";
+import Nav from "../../ReuseableComponents/Nav/SideMenu";
 // ----------------------------------------------DASHBOARD----------------------------->
 import Dashboard from "./Dashboard/Dashboard";
 // ----------------------------------------------JOBS---------------------------------->
@@ -18,12 +18,13 @@ import Activeoverview from "../Client/Jobs/JobsComponents/JobsOverview/Activeove
 import UserProfile from "../ReuseableComponents/Profile/Profile";
 import MessagePage from "../Chat/components/MessagePage";
 import Home from "../Chat/Home";
+import JobLayout from "./Jobs/JobsComponents/JobsOverview/JobLayout";
 
 export default function ClientLayout() {
   return (
-    <div className="client-layout">
+    <div className="layout">
       <Nav />
-      <div className="client-content">
+      <div className="content">
         <Routes>
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
@@ -38,8 +39,8 @@ export default function ClientLayout() {
           {/* --------------------Profile Overview--------------------- */}
           <Route path="jobs/unassigned/:viewid" element={<ProfileOverview />} />
           <Route path="jobs/active/:viewid" element={<Activeoverview />} />
-          <Route path="jobs/ongoing/:viewid" element={<OnCooverview />} />
-          <Route path="jobs/completed/:viewid" element={<OnCooverview />} />
+          <Route path="jobs/ongoing/:viewid" element={<JobLayout />} />
+          <Route path="jobs/completed/:viewid" element={<JobLayout />} />
           <Route path="myProfile" element={<UserProfile />} />
           <Route path="chat" element={<Home />}>
             <Route path=":userId" element={<MessagePage />} />

@@ -23,6 +23,20 @@
   margin-bottom: 0.7em;
 }
 
+@keyframes cup {
+  from {
+    opacity: 0.5;
+    filter: blur(10px);
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
 @keyframes scroll-up {
   0% {
     transform: translateY(50%);
@@ -34,19 +48,22 @@
 }
 
 .order-tablecon {
+  height: 0vh;
   width: 95%;
   border-radius: 15px 15px 0 0;
   flex-grow: 1;
   overflow: scroll;
   background-color: rgb(255, 255, 255);
   border-bottom: none;
-  animation: scroll-up 0.2s forwards;
+  /* animation: scroll-up 0.2s forwards; */
+  animation: cup 0.4s ease-in;
 }
 
 .order-table {
   width: 100%;
   border-collapse: collapse;
   text-align: start;
+  animation: cup 0.4s ease-in;
 }
 
 .order-thead th {
@@ -77,6 +94,7 @@
   padding-left: 3em;
   padding-top: 2em;
   padding-bottom: 2em;
+  white-space: nowrap;
 }
 
 .orderviewbtn {
@@ -131,7 +149,7 @@
 /* =================================orderdetails============================== */
 .orderdetails-container {
   width: calc(100vw - 260px);
-  height: calc(100vh - 68px);
+  height: calc(100vh - 68px) !important;
   margin-top: auto;
   padding: 2em;
   padding-bottom: 0;
@@ -139,6 +157,7 @@
   display: flex;
   gap: 2em;
   animation: cup 0.4s ease-in;
+  overflow: auto;
 }
 
 @keyframes cup {
@@ -157,10 +176,11 @@
 
 .orderdetails-inner {
   width: calc(100% / 1.3);
+  height: 80vh;
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
   overflow: auto;
+  gap: 0.5em;
   padding: 0.2em;
   padding-bottom: 1.5em;
 }
@@ -222,7 +242,7 @@
 
 .orderimagesother {
   padding: 0.5em;
-  background-color: #e7e7e7;
+  background-color: #ffffff;
   border-radius: 7px;
   display: flex;
   justify-content: start;
@@ -287,17 +307,14 @@
 }
 
 .profile-picture {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
   overflow: hidden;
   margin-bottom: 20px;
-}
-
-.profile-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  img {
+    width: 150px;
+    height: 150px;
+    object-fit: fill;
+    border-radius: 50%;
+  }
 }
 
 .profile-details {
@@ -337,15 +354,17 @@
 
 .list-container {
   width: 400px;
-  height: 400px;
+  height: 360px;
   background-color: #e7e7e7;
   display: flex;
+  gap: 1em;
   flex-direction: column;
   align-items: left;
+  overflow: auto;
   justify-content: center;
   padding: 10px;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 15px;
   /* overflow-y: auto; */
 }
 
@@ -460,4 +479,52 @@
 .assign-close-btn {
   background-color: #f44336;
   color: white;
+}
+@media (max-width: 1100px) {
+  .orderdetails-innerimages {
+    flex-direction: row;
+  }
+}
+@media (max-width: 1100px) {
+  .orderdetails-container {
+    width: 100%;
+    flex-direction: column;
+    overflow-y: scroll;
+    .orderdetails-inner {
+      width: 100%;
+      overflow: visible;
+    }
+    .orderdetails-innerimages {
+      .profile-container {
+        justify-content: start;
+        flex-direction: row;
+        width: 100%;
+        height: 200px;
+        gap: 3em;
+
+        .profile-picture {
+          width: 150px;
+          height: 150px;
+        }
+      }
+     
+      .list-container {
+        width: 100% !important;
+        margin-bottom: 4em;
+      }
+      .bottom-profile {
+        margin-bottom: 4em;
+      }
+
+      .orderbtncon {
+        margin-bottom: 4em;
+      }
+    }
+  }
+}
+
+@media (max-width:900px) {
+   .orderdetails-innerimages {
+        flex-direction: column;
+      }
 }

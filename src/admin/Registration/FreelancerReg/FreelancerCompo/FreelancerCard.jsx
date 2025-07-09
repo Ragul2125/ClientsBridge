@@ -2,7 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 
 const FreelancerCard = ({ freelancer, onAssign }) => {
   const location = useLocation();
-
+  console.log(freelancer);
+  
   return (
     <div className="freelancer-card">
       <div className="freelancerdp">

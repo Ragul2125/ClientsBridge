@@ -2,7 +2,7 @@ import profileImg from "../assets/image/profileImg.svg";
 import { Outlet, Routes, Route, useNavigate } from "react-router-dom";
 
 // Components
-import SideMenu from "./Nav/SideMenu.jsx";
+import SideMenu from "../ReuseableComponents/Nav/SideMenu.jsx";
 import Dashboard from "./Dashboard/Dashboard.jsx";
 import Registration from "./Registration/Reg.jsx";
 import ClientReg from "./Registration/ClientReg/ClientReg.jsx";

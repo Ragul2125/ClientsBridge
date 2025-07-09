@@ -1,6 +1,6 @@
 import "./ClientReg.css";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 import Load from "../../../USER/ReuseableComponents/Loaders/Load";
 import useAxiosFetch from "../../../hooks/useAxiosFetch";
 import ClientTable from "./Clientcomp/ClientTable";
@@ -17,19 +17,18 @@ const ClientReg = () => {
   } = useAxiosFetch(
     `/admin/getAllClientRegisterations?page=${page}&limit=${limit}`
   );
-
   console.log(clients);
-
+  
   return (
     <>
       {loading ? (
         <Load type="load" />
       ) : error ? (
         <Load type="err" />
-      ) : clients?.data?.length > 0 ? (
+      ) : clients?.length > 0 ? (
         <div className="clientreg-tablecon">
           <ClientTable
-            data={clients.data}
+            data={clients}
             page={page}
             total={clients.total}
             limit={limit}

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 const ClientTable = ({ data, page, total, limit, onPageChange }) => {
+  console.log(total)
   const totalPages = Math.ceil(total / limit);
-
   const handlePageClick = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       onPageChange(newPage);

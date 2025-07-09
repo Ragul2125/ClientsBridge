@@ -185,11 +185,13 @@ const View = () => {
                   </p>
                 </div>
               </div>
-              <div className="client-jobs-view-main-bidded-cards-chat">
-                <button onClick={() => handleChat(bid)}>chat</button>
-              </div>
-              <div className="client-jobs-view-main-bidded-cards-accept">
-                <button onClick={() => openPopup(bid)}>Accept</button>
+              <div className="btn">
+                <div className="client-jobs-view-main-bidded-cards-chat">
+                  <button onClick={() => handleChat(bid)}>chat</button>
+                </div>
+                <div className="client-jobs-view-main-bidded-cards-accept">
+                  <button onClick={() => openPopup(bid)}>Accept</button>
+                </div>
               </div>
             </div>
           ))

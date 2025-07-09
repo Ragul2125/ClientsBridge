@@ -49,58 +49,64 @@ export default function Unassigned() {
 
   return (
     <main className="client-jobs-unassigned-main">
-      <section className="client-jobs-unassigned-search-section">
-        <input
-          placeholder="Search Jobs"
-          type="search"
-          className="client-jobs-unassigned-search-input"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <p className="client-jobs-unassigned-search-btn">
-          <GoSearch />
-        </p>
-      </section>
       <section className="client-jobs-unassigned-project-section">
         <div className="client-jobs-unassigned-project-inner">
-          {loading ? (
-            <Load type="load" />
-          ) : error ? (
-            <p>{error}</p>
-          ) : filteredJobs.length > 0 ? (
-            filteredJobs.map((job) => (
-              <div
-                key={job._id}
-                className="client-jobs-unassigned-project-card"
-              >
-                <img
-                  className="client-jobs-unassigned-project-card-dp"
-                  src={job.clientID.profilePic}
-                  alt="DP"
-                />
-                <p className="client-jobs-unassigned-project-card-title">
-                  {job.postTitle}
-                  <span className="client-jobs-unassigned-project-card-time">
-                    {formatDistanceToNow(new Date(job.createdAt), {
-                      addSuffix: true,
-                    })}
-                  </span>
-                </p>
-                <Link
-                  to={`${job._id}`}
-                  className="client-jobs-unassigned-project-card-btn"
+          <section className="client-jobs-unassigned-search-section">
+            <input
+              placeholder="Search Jobs"
+              type="search"
+              className="client-jobs-unassigned-search-input"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <p className="client-jobs-unassigned-search-btn">
+              <GoSearch />
+            </p>
+          </section>
+          <div className="cards-container">
+            {loading ? (
+              <Load type="load" />
+            ) : error ? (
+              <p>{error}</p>
+            ) : filteredJobs.length > 0 ? (
+              filteredJobs.map((job) => (
+                <div
+                  key={job._id}
+                  className="client-jobs-unassigned-project-card"
                 >
-                  View more
-                </Link>
-                <p className="client-jobs-unassigned-project-card-description">
-                  {job.description.substring(0, 300) + "..."}
-                </p>
-              </div>
-            ))
-          ) : (
-            // <p className="client-jobs-active-no-results">No jobs found.</p>
-            <Load type="nojobs" />
-          )}
+                  <div className="info-content">
+                    <div className="card-info">
+                    <img
+                      className="client-jobs-unassigned-project-card-dp"
+                      src={job.clientID.profilePic}
+                      alt="DP"
+                    />
+                    <p className="client-jobs-unassigned-project-card-title">
+                      {job.postTitle}
+                      <span className="client-jobs-unassigned-project-card-time">
+                        {formatDistanceToNow(new Date(job.createdAt), {
+                          addSuffix: true,
+                        })}
+                      </span>
+                    </p>
+                  </div>
+                  <p className="client-jobs-unassigned-project-card-description">
+                    {job.description.substring(0, 150) + "..."}
+                  </p>
+                  </div>
+                  <Link
+                    to={`${job._id}`}
+                    className="client-jobs-unassigned-project-card-btn"
+                  >
+                    View more
+                  </Link>
+                </div>
+              ))
+            ) : (
+              // <p className="client-jobs-active-no-results">No jobs found.</p>
+              <Load type="nojobs" />
+            )}
+          </div>
         </div>
       </section>
     </main>

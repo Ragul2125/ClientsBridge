@@ -43,15 +43,16 @@ const LoginPage = () => {
           password,
         }
       );
-
+      console.log(response);
       // Handle successful login
-      if (response.data.success) {
+      if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", response.data.role);
         window.location.href = `/${response.data.role}`;
       }
       // Redirect or update UI
     } catch (err) {
+      console.log(err)
       setError(err.response?.data?.message || "Invalid login credentials.");
     } finally {
       setLoading(false);
