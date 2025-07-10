@@ -259,46 +259,84 @@
 
       padding-bottom: 1em;
     }
-
-    .company-home-bidded-view-container-details {
-      display: flex;
-      gap: 4em;
-      padding-top: 1em;
-
-      .biding-amount,
-      .time {
-        h3 {
-          padding-bottom: 1em;
-        }
-
-        div {
-          padding: 0.5em;
-          border: 1px solid #00000026;
-          border-radius: 10px;
-          width: 210px;
-
-          input {
-            outline: none;
-            border: none;
-            font-size: 1em;
-          }
-        }
-      }
-    }
-
-    .company-home-bidded-view-container-btn {
-      display: flex;
-      justify-content: flex-end;
-      padding-top: 2em;
-
-      button {
-        padding: 0.8em 3em;
-        border-radius: 10px;
-        outline: none;
-        border: none;
-        background-color: var(--blue);
-        color: var(--white);
-      }
-    }
   }
+}
+
+.company-home-bidded-view-container-details {
+  padding: 2em;
+  margin: 1em 0;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.biding-amount h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5em;
+}
+
+.biding-amount .amount {
+  padding: 0.5em;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 280px;
+  background-color: #fafafa;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.biding-amount .amount:focus-within {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+}
+
+.biding-amount input {
+  width: 100%;
+  padding: 0.8em 1em;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  background: transparent;
+  outline: none;
+}
+
+.company-home-bidded-view-container-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.company-home-bidded-view-container-btn button {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  padding: 0.8em 2.5em;
+  border: none;
+  border-radius: 40px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+}
+
+.company-home-bidded-view-container-btn button:hover {
+  background: linear-gradient(135deg, #6d28d9, #9333ea);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.5);
+}
+
+.company-home-bidded-view-container-btn button:active {
+  transform: translateY(0);
+}
+
+.error {
+  color: #e63946;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 0.5em;
 }

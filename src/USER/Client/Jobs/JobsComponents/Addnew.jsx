@@ -88,6 +88,8 @@ export default function Addnew() {
           error.message ||
           "An unexpected error occurred. Please try again."
       );
+    } finally {
+      setIsSubmitting(false);
     }
   };
   const LoadingScreen = () => (

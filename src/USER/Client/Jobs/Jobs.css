@@ -191,6 +191,7 @@
   flex-grow: 1;
   text-align: start;
   resize: none;
+  overflow-y: scroll;
 }
 
 .addnew-twoinputs-container {
