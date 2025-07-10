@@ -7,6 +7,7 @@
     flex-direction: column;
     align-items: center;
     overflow: hidden;
+    animation: cup 0.4s ease-in;
 }
 
 .transaction-top {
@@ -16,6 +17,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 0.5em;
+    
 }
 
 .transtopinner {
@@ -59,13 +61,27 @@
     }
 }
 
+@keyframes cup {
+  from {
+    opacity: 0.5;
+    filter: blur(10px);
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
 .tran-tablecon {
     width: 90%;
     border-radius: 15px 15px 0 0;
     flex-grow: 1;
     overflow: scroll;
     background-color: white;
-    animation: scroll-up 0.2s forwards;
+      animation: cup 0.4s ease-in;
     border-bottom: none;
 }
 
@@ -103,6 +119,7 @@
     padding-left: 2em;
     padding-top: 2em;
     padding-bottom: 2em;
+    white-space: nowrap;
 }
 
 

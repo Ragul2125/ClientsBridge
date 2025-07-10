@@ -4,6 +4,7 @@
   background-color: var(--white);
   display: flex;
   flex-direction: column;
+  padding: 1em;
 }
 
 .client-profileoverview-inner {
@@ -221,13 +222,13 @@
   letter-spacing: 1px;
 }
 
-.client-oncooverview-side-chatbtn {
+/* .client-oncooverview-side-chatbtn {
   margin-top: 0.5em;
   display: flex;
   align-items: center;
   padding: 0.3em 1em;
   border-radius: 30px;
-  outline: 1px dashed #000000;
+  outline: 1px dashed #0b0b45;
   gap: 0.5em;
   font-size: small;
   cursor: pointer;
@@ -235,9 +236,9 @@
 }
 
 .client-oncooverview-side-chatbtn:hover {
-  background-color: #000000;
+  background-color: #0b0b45;
   color: #ffffff;
-}
+} */
 
 /* ==============================================ACTIVE VIEW==================================== */
 .client-jobs-view-main {
@@ -248,7 +249,7 @@
   align-items: center;
   justify-content: space-around;
   font-family: "Outfit", system-ui;
-
+  padding: 1em;
   p,
   li {
     font-size: medium;
@@ -308,8 +309,8 @@
 
   .client-jobs-view-main-bidded {
     width: 30%;
-    height: 90%;
-    background-color: white;
+    height: 95%;
+    background-color: #fff;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -317,13 +318,14 @@
     padding-bottom: 1em;
     .client-jobs-view-main-bidded-cards {
       width: 90%;
-      background-color: var(--white);
+      background-color: #f4f5f9;
       display: flex;
-      align-items: center;
+      align-items: start;
+      flex-direction: column;
       justify-content: space-between;
       padding: 0.7em;
       margin-top: 1em;
-      border-radius: 10px;
+      border-radius: 15px;
       .client-jobs-view-main-bidded-cards-content {
         display: flex;
         align-items: center;
@@ -349,7 +351,13 @@
           }
         }
       }
-
+      .btn{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 1em;
+      }
       .client-jobs-view-main-bidded-cards-accept {
         button {
           padding: 0.4em 2em;
@@ -399,13 +407,23 @@
   }
 }
 
+@media (max-width:1100px) {
+  .client-jobs-view-main{
+    overflow-y: scroll;
+    flex-direction: column;
+    .client-jobs-view-main-bidded{
+      width: 100%;
+    }
+  }
+}
+
 .client-profileoverview-inner-des-file {
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
 }
 
-.complete-btn {
+/* .complete-btn {
   margin-top: 0.5em;
   display: flex;
   align-items: center;
@@ -422,4 +440,4 @@
 .complete-btn:hover {
   background-color: black;
   color: #ffffff;
-}
+} */

@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import "./COMPANYLAYOUT.css";
+import "../../ReuseableComponents/CommonCss/LAYOUT.css";
 // ----------------------------------------------NAVBAR-------------------------------->
-import Nav from "../ReuseableComponents/Navbar/Navbar";
+import Nav from "../../ReuseableComponents/Nav/SideMenu.jsx";
 // ----------------------------------------------HOME----------------------------->
 import Home from "./Home/Home";
 import Bid from "./Home/HomeComponents/Biddingpage.jsx";
@@ -17,9 +17,9 @@ import MessagePage from "../Chat/components/MessagePage.jsx";
 
 export default function ClientLayout() {
   return (
-    <div className="company-layout">
+    <div className="layout">
       <Nav />
-      <div className="company-content">
+      <div className="content">
         <Routes>
           <Route index element={<Home />} />
           <Route path="home" element={<Home />} />

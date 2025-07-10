@@ -9,11 +9,10 @@
 
 /* Navigation styles */
 .nav-bar {
-  background-color: #ffffff;
-  border-bottom-width: 1px;
-  border-bottom-color: #e5e7eb;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  margin-top: 1em;
+  border-top: 1px solid #e5e7e8;
+  background-color: #fff;
+  padding: 0 1em;
 }
 
 @media (min-width: 768px) {
@@ -34,6 +33,7 @@
   color: #6b7280;
   border: none;
   background-color: white;
+  font-size: medium;
 }
 
 .nav-tab.active {
@@ -48,6 +48,7 @@
   flex: 1;
   overflow: hidden;
   width: 100vw;
+  background-color: #f4f5f9;
 }
 
 @media (min-width: 640px) {
@@ -61,11 +62,12 @@
   width: 100%;
   border-right-width: 1px;
   border-right-color: #e5e7eb;
-  background-color: #f3f4f6;
+  background-color: #fff;
   overflow-y: auto;
   margin: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  padding: 1em;
 }
 
 @media (min-width: 640px) {
@@ -125,6 +127,9 @@
 .conversation-list-inner {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 /* Empty state styles */
@@ -176,6 +181,7 @@
   align-items: center;
   border: none;
   padding: 0.75rem 1rem;
+  border-radius: 10px;
 }
 
 @media (min-width: 640px) {
@@ -369,6 +375,7 @@
 .messages-container {
   flex: 1;
   overflow-y: auto;
+  background-color: #fff;
 }
 
 .messages-container::-webkit-scrollbar {
@@ -630,6 +637,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
 }
 
 .no-chat-content {

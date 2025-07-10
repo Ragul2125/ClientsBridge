@@ -17,6 +17,8 @@ const FreelancerReg = () => {
     `/admin/getAllFreelancerRegisterations?page=${page}&limit=${limit}`
   );
 
+  console.log(freelancers)
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedFreelancer, setSelectedFreelancer] = useState(null);
 
@@ -37,10 +39,10 @@ const FreelancerReg = () => {
         <Load type="load" />
       ) : error ? (
         <Load type="err" />
-      ) : freelancers?.data?.length > 0 ? (
+      ) : freelancers?.length > 0 ? (
         <>
           <section className="freelancerreg-container">
-            {freelancers.data.map((freelancer) => (
+            {freelancers.map((freelancer) => (
               <FreelancerCard
                 key={freelancer.id}
                 freelancer={freelancer}
