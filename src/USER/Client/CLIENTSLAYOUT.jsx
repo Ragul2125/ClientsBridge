@@ -12,7 +12,7 @@ import Jobcards from "./Jobs/JobsComponents/Jobcards";
 import Add from "./Jobs/JobsComponents/Addnew";
 // ----------------------------------------------JOBS OVERVIEW------------------------->
 import ProfileOverview from "../Client/Jobs/JobsComponents/JobsOverview/ProfileOverview";
-import OnCooverview from "../Client/Jobs/JobsComponents/JobsOverview/OnCooverview";
+// import OnCooverview from "../Client/Jobs/JobsComponents/JobsOverview/OnCooverview";
 import Activeoverview from "../Client/Jobs/JobsComponents/JobsOverview/Activeoverview";
 // ----------------------------------------------USER PROFILE------------------------->
 import UserProfile from "../ReuseableComponents/Profile/Profile";

@@ -122,20 +122,20 @@ export default function ActiveJobs() {
   };
 
   return (
-    <div className="client-jobs-active-main">
-      <section className="client-jobs-active-search-section">
+    <div className="company-jobs-active-main">
+      <section className="company-jobs-active-search-section">
         <input
           placeholder="Search Jobs"
           type="search"
-          className="client-jobs-active-search-input"
+          className="company-jobs-active-search-input"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <p className="client-jobs-unassigned-search-btn">
+        <p className="company-jobs-unassigned-search-btn">
           <GoSearch />
         </p>
       </section>
-      <section className="client-jobs-active-cards-container">
+      <section className="company-jobs-active-cards-container">
         {loading && <Load type="load" />}
         {error && <Load type="err" />}
         {!loading &&
@@ -143,7 +143,7 @@ export default function ActiveJobs() {
           filteredJobs.map((job) => (
             <div
               key={job._id}
-              className="client-jobs-active-card"
+              className="company-jobs-active-card"
               onClick={() =>
                 navigate(
                   `/${localStorage
@@ -152,21 +152,23 @@ export default function ActiveJobs() {
                 )
               }
             >
-              <img
-                className="client-jobs-active-card-img"
-                src={job.clientID.profilePic}
-                alt="dp"
-              />
-              <p className="client-jobs-active-card-title">
-                {job.postTitle}
-                <span className="client-jobs-active-card-cost">
-                  ₹ {job.budget}
-                </span>
-              </p>
-              <p className="client-jobs-active-card-summary">
+              <div className="card-info">
+                <img
+                  className="company-jobs-active-card-img"
+                  src={job.clientID.profilePic}
+                  alt="dp"
+                />
+                <p className="company-jobs-active-card-title">
+                  {job.postTitle}
+                  <span className="company-jobs-active-card-cost">
+                    ₹ {job.budget}
+                  </span>
+                </p>
+              </div>
+              <p className="company-jobs-active-card-summary">
                 Summary
-                <p className="client-jobs-active-card-summary-des">
-                  {job.description.substring(0, 300) + "..."}
+                <p className="company-jobs-active-card-summary-des">
+                  {job.description.substring(0, 120) + "..."}
                 </p>
               </p>
               {renderJobStatus(job)}

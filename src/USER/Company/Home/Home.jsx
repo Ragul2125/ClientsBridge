@@ -93,34 +93,40 @@ export default function Home() {
             {filteredProjects.length > 0 ? (
               filteredProjects.map((project) => (
                 <div className="company-home-card" key={project._id}>
-                  <img
-                    className="company-home-card-img"
-                    src={project.clientID.profilePic}
-                    alt="dp"
-                  />
-                  <p className="company-home-card-title">
-                    {project.postTitle}
-                    <span className="company-home-card-info">
-                      {" "}
-                      {formatDistanceToNow(new Date(project.createdAt), {
-                        addSuffix: true,
-                      })}
-                    </span>{" "}
-                    {/* Update with actual data */}
-                    <span className="company-home-card-cost">
-                      ₹ {project.budget}
-                    </span>
-                  </p>
-                  <p className="company-home-card-count">
-                    <MdOutlinePeopleAlt />
-                    {project.interested.length}+ Interested
-                  </p>
-                  <p className="company-home-card-summary">
-                    Summary
-                    <p className="company-home-card-summary-des">
-                      {project.description.substring(0, 300) + "...."}
+                  <div className="top">
+                    <div className="card-info">
+                      <div className="card-info-left">
+                        <img
+                          className="company-home-card-img"
+                          src={project.clientID.profilePic}
+                          alt="dp"
+                        />
+                        <p className="company-home-card-title">
+                          {project.postTitle}
+                          <span className="company-home-card-info">
+                            {" "}
+                            {formatDistanceToNow(new Date(project.createdAt), {
+                              addSuffix: true,
+                            })}
+                          </span>{" "}
+                          {/* Update with actual data */}
+                          <span className="company-home-card-cost">
+                            ₹ {project.budget}
+                          </span>
+                        </p>
+                      </div>
+                      <p className="company-home-card-count">
+                        <MdOutlinePeopleAlt />
+                        <p>{project.interested.length} + Interested</p>
+                      </p>
+                    </div>
+                    <p className="company-home-card-summary">
+                      Summary
+                      <p className="company-home-card-summary-des">
+                        {project.description.substring(0, 120) + "...."}
+                      </p>
                     </p>
-                  </p>
+                  </div>
                   <Link
                     to={`/company/home/${project._id}`}
                     className="company-home-card-btn"

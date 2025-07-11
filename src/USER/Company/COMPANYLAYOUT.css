@@ -1,0 +1,14 @@
+.company-layout {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.company-content {
+    width: calc(100vw - 260px);
+    height: calc(100vh - 55px);
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
