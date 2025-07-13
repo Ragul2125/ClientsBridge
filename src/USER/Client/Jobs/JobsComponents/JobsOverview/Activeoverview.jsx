@@ -112,13 +112,15 @@ const View = () => {
     <main className="client-jobs-view-main">
       <section className="client-profileoverview-inner client-oncooverview-inner">
         {/* <img className="client-profileoverview-inner-dp" src={dp} alt="User" /> */}
-        <p className="client-profileoverview-inner-title">
-          <h1>{project.postTitle}</h1>
-          <span className="client-profileoverview-inner-time">
-            {new Date(project.deadline).toLocaleDateString()}
-          </span>
-        </p>
-        <p className="client-profileoverview-inner-threedot">...</p>
+        <div className="flex-bw">
+          <p className="client-profileoverview-inner-title">
+            <h1>{project.postTitle}</h1>
+            <span className="client-profileoverview-inner-time">
+              {new Date(project.deadline).toLocaleDateString()}
+            </span>
+          </p>
+          <p className="client-profileoverview-inner-threedot">...</p>
+        </div>
 
         {/* --------------------------------------------------------------------DESC------------------ */}
         <div className="client-profileoverview-inner-des">

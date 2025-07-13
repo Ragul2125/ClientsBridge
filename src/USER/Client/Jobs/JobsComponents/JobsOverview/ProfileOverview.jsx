@@ -91,24 +91,26 @@ export default function ProfileOverview() {
   return (
     <main className="client-profileoverview-main">
       <section className="client-profileoverview-inner client-oncooverview-inner">
-        <p className="client-profileoverview-inner-title">
-          <h1>{job.postTitle}</h1>
-          <span className="client-profileoverview-inner-time">
-            {new Date(job.deadline).toLocaleDateString()}
-          </span>
-        </p>
-        <div className="client-profileoverview-inner-actions">
-          <p
-            className="client-profileoverview-inner-threedot"
-            onClick={handleDropdownToggle}
-          >
-            ...
+        <div className="flex-bw">
+          <p className="client-profileoverview-inner-title">
+            <h1>{job.postTitle}</h1>
+            <span className="client-profileoverview-inner-time">
+              {new Date(job.deadline).toLocaleDateString()}
+            </span>
           </p>
-          {showDropdown && (
-            <div className="dropdown-menu">
-              <button onClick={handleDeleteJob}>Delete Job</button>
-            </div>
-          )}
+          <div className="client-profileoverview-inner-actions">
+            <p
+              className="client-profileoverview-inner-threedot"
+              onClick={handleDropdownToggle}
+            >
+              ...
+            </p>
+            {showDropdown && (
+              <div className="dropdown-menu">
+                <button onClick={handleDeleteJob}>Delete Job</button>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="client-profileoverview-inner-des">

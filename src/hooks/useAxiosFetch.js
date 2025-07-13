@@ -19,6 +19,9 @@ export default function useAxiosFetch(url, options = {}, immediate = true) {
           ...stableOptions,
           ...overrideOptions,
         });
+        if (response.status == 401) {
+          window.location.href = "/login";
+        }
         setData(response.data);
         return response.data;
       } catch (err) {

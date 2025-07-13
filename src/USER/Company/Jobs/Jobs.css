@@ -19,6 +19,7 @@
 
 .company-jobs-tabs-titles {
   padding: 1em;
+  padding-top: 2em;
   font-family: "Outfit", system-ui;
 }
 
@@ -104,7 +105,7 @@
   justify-content: space-between;
   align-items: start;
   flex-wrap: wrap;
-  gap:0.5em;
+  gap: 0.5em;
   row-gap: 1em;
   overflow: scroll;
 }
@@ -203,6 +204,9 @@
   align-items: center;
 }
 .company-jobs-card-box-dp {
+  border-radius: 50%;
   width: 1.5em;
+  height: 1.5em;
+  object-fit: cover;
   margin-right: 0.5em;
 }

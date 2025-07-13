@@ -84,7 +84,9 @@ export default function Orders({ type }) {
           </div>
           <div className="orderdetail">
             <p className="orderlabel">Description</p>
-            <p className="ordervalue">{jobDetail.description}</p>
+            <div className="ordervalue ordvalue-scroll">
+              {jobDetail.description}
+            </div>
           </div>
           <div className="orderdetails">
             <p className="orderlabel">Project tags</p>
@@ -155,18 +157,23 @@ export default function Orders({ type }) {
             </>
           ) : type === "active" ? (
             <div className="list-container">
-              {jobDetail.interested.map((freelancer, index) => (
-                <div className="orderimagesother" key={index}>
-                  <img src={freelancer.profilePic} alt="" />
-                  <div className="details">
-                    <p>{freelancer.name}</p>
-                    <p className="userid">{freelancer.userName}</p>
+              <h1 className="list-head">Interested</h1>
+              {jobDetail.length > 0 ? (
+                jobDetail.interested.map((freelancer, index) => (
+                  <div className="orderimagesother" key={index}>
+                    <img src={freelancer.profilePic} alt="" />
+                    <div className="details">
+                      <p>{freelancer.name}</p>
+                      <p className="userid">{freelancer.userName}</p>
+                    </div>
+                    <div className="icon">
+                      <FaEye />
+                    </div>
                   </div>
-                  <div className="icon">
-                    <FaEye />
-                  </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <div className="list-no">No one showed inetest yet</div>
+              )}
             </div>
           ) : type === "ongoing" ||
             type === "satisfied" ||
@@ -191,7 +198,7 @@ export default function Orders({ type }) {
                 <button className="profile-btn">View Profile</button>
               </div>
               {type === "satisfied" && (
-                <button onClick={handleMarkAsCompleted}>
+                <button className="profile-btn" onClick={handleMarkAsCompleted}>
                   Mark as Completed
                 </button>
               )}

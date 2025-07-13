@@ -209,6 +209,13 @@
   max-height: 200px;
 }
 
+.ordervalue.ordvalue-scroll {
+  white-space: pre-wrap; /* ensures line breaks respected */
+  word-break: break-word;
+  overflow-y: auto;
+  max-height: 200px;
+}
+
 .orderdesc {
   text-wrap: nowrap;
 }
@@ -251,6 +258,7 @@
 }
 
 .orderimagesother img {
+  object-fit: cover;
   width: 3em;
   aspect-ratio: 1;
   border-radius: 7px;
@@ -312,9 +320,25 @@
   img {
     width: 150px;
     height: 150px;
-    object-fit: fill;
+    object-fit: cover;
     border-radius: 50%;
   }
+}
+
+.search-input {
+  width: 95%;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #0b0b45;
+  box-shadow: 0 0 5px rgba(11, 11, 69, 0.3);
 }
 
 .profile-details {
@@ -361,11 +385,24 @@
   flex-direction: column;
   align-items: left;
   overflow: auto;
-  justify-content: center;
+  justify-content: start;
   padding: 10px;
   box-sizing: border-box;
   border-radius: 15px;
   /* overflow-y: auto; */
+}
+
+.list-head {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.list-no {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .userid {
@@ -421,6 +458,7 @@
 .assign-freelancer {
   display: flex;
   align-items: center;
+  gap: 2em;
   margin-bottom: 10px;
   padding: 10px;
   border-bottom: 1px solid #ddd;
@@ -480,6 +518,7 @@
   background-color: #f44336;
   color: white;
 }
+
 @media (max-width: 1100px) {
   .orderdetails-innerimages {
     flex-direction: row;
@@ -507,7 +546,7 @@
           height: 150px;
         }
       }
-     
+
       .list-container {
         width: 100% !important;
         margin-bottom: 4em;
@@ -523,8 +562,8 @@
   }
 }
 
-@media (max-width:900px) {
-   .orderdetails-innerimages {
-        flex-direction: column;
-      }
+@media (max-width: 900px) {
+  .orderdetails-innerimages {
+    flex-direction: column;
+  }
 }

@@ -1,96 +1,151 @@
 import React, { useEffect, useState } from "react";
 import "../OrderList.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Load from "../../../USER/ReuseableComponents/Loaders/Load";
+import useAxiosFetch from "../../../hooks/useAxiosFetch";
 
 export default function AllOrders() {
-  const [orderList, setOrderList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [page, setPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const getStatusFromPath = (pathname) => {
     if (pathname.includes("pending")) return "pending";
     if (pathname.includes("active")) return "active";
     if (pathname.includes("ongoing")) return "ongoing";
-    if (pathname.includes("satisfied")) return "satisfied"; // Adjust based on actual backend mapping
+    if (pathname.includes("satisfied")) return "satisfied";
     if (pathname.includes("completed")) return "completed";
-    return "all"; // Default case
+    return "all";
   };
 
-  const fetchOrders = async () => {
-    const status = getStatusFromPath(window.location.pathname);
-    let endpoint = "/api/admin/getJobs?status=" + status;
-    try {
-      setLoading(true);
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}${endpoint}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      if (data) {
-        setOrderList(data);
-        setLoading(false);
-        setError("");
-      }
-    } catch (err) {
-      console.error(err);
-      setError("Failed to fetch orders. Please try again later.");
-      setLoading(false);
-    }
+  const getDescFromPath = (pathname = window.location.pathname) => {
+    if (pathname.includes("pending")) return "Needs your approval";
+    if (pathname.includes("active"))
+      return "Open for bidding or has been suggested a list of freelancers / comapnies";
+    if (pathname.includes("ongoing"))
+      return "A Freelancers / Company has been assigned and doing the job";
+    if (pathname.includes("satisfied"))
+      return "The client is satisfied with the Freelancer/Company's work";
+    if (pathname.includes("completed"))
+      return "Jobs that are completed and payments are done";
+    return "all";
   };
+
+  const status = getStatusFromPath(window.location.pathname);
+
+  const { data, error, loading, refetch } = useAxiosFetch(
+    `/admin/getJobs?status=${status}&page=${page}&limit=20&search=${debouncedSearch}`
+  );
 
   useEffect(() => {
-    fetchOrders();
+    if (data) {
+      setCurrentPage(data.currentPage);
+      setTotalPages(data.totalPages);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    setPage(1);
   }, [window.location.pathname]);
+
+  // Debounce search input by 500ms
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [searchTerm]);
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
+
+  const orderList = data?.data;
 
   return (
     <main className="orderlist-container">
-      <p className="ordertxtmin">Active Members</p>
+      <p className="ordertxtmin">{getDescFromPath()}</p>
+      <input
+        type="text"
+        className="search-input"
+        placeholder="Search by job title..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
       <div className="order-tablecon">
         {loading ? (
           <Load type="load" />
         ) : error ? (
           <Load type="err" />
-        ) : orderList.length === 0 ? (
+        ) : orderList?.length === 0 ? (
           <Load type="nojobs" />
         ) : (
-          <table className="order-table">
-            <thead className="order-thead">
-              <tr>
-                <th>Projects Name</th>
-                <th>Clients</th>
-                <th>Budget</th>
-                <th>Deadline</th>
-                <th>Category</th>
-                <th>View</th>
-              </tr>
-            </thead>
-            <tbody className="order-tbody">
-              {orderList.map((order) => (
-                <tr key={order._id}>
-                  <td>{order.postTitle}</td>
-                  <td>{order.clientID.name || "N/A"}</td>
-                  <td>₹ {order.budget}</td>
-                  <td>{new Date(order.deadline).toLocaleDateString()}</td>
-                  <td>{order.category}</td>
-                  <td>
-                    <Link
-                      to={`/admin/jobs/${getStatusFromPath(
-                        window.location.pathname
-                      )}/${order._id}`}
-                      className="orderviewbtn"
-                    >
-                      View
-                    </Link>
-                  </td>
+          <>
+            <table className="order-table">
+              <thead className="order-thead">
+                <tr>
+                  <th>Projects Name</th>
+                  <th>Clients</th>
+                  <th>Budget</th>
+                  <th>Deadline</th>
+                  <th>Category</th>
+                  <th>View</th>
                 </tr>
+              </thead>
+              <tbody className="order-tbody">
+                {orderList?.map((order) => (
+                  <tr key={order._id}>
+                    <td>{order.postTitle}</td>
+                    <td>{order.clientID?.name || "N/A"}</td>
+                    <td>₹ {order.budget}</td>
+                    <td>{new Date(order.deadline).toLocaleDateString()}</td>
+                    <td>{order.category}</td>
+                    <td>
+                      <Link
+                        to={`/admin/jobs/${status}/${order._id}`}
+                        className="orderviewbtn"
+                      >
+                        View
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="pagination-container">
+              <button
+                className="pagination-btn"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Prev
+              </button>
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pg) => (
+                <button
+                  key={pg}
+                  className={`pagination-btn ${
+                    pg === currentPage ? "active" : ""
+                  }`}
+                  onClick={() => handlePageChange(pg)}
+                >
+                  {pg}
+                </button>
               ))}
-            </tbody>
-          </table>
+
+              <button
+                className="pagination-btn"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+          </>
         )}
       </div>
     </main>

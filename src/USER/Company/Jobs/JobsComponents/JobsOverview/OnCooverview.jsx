@@ -6,6 +6,7 @@ import { MdOutlineStar, MdOutlineStarBorder } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
+import Load from "../../../../ReuseableComponents/Loaders/Load";
 
 export default function ProfileOverview() {
   const [jobDetails, setJobDetails] = useState(null);
@@ -79,7 +80,7 @@ export default function ProfileOverview() {
     setRating(index + 1);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Load />;
   if (error) return <p style={{ color: "red", margin: "2em" }}>{error}</p>;
 
   return (

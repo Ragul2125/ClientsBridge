@@ -7,7 +7,6 @@ import Nav from "../../ReuseableComponents/Nav/SideMenu";
 import Dashboard from "./Dashboard/Dashboard";
 // ----------------------------------------------JOBS---------------------------------->
 import Jobs from "./Jobs/Jobs";
-import Unassigned from "./Jobs/JobsComponents/Unassigned";
 import Jobcards from "./Jobs/JobsComponents/Jobcards";
 import Add from "./Jobs/JobsComponents/Addnew";
 // ----------------------------------------------JOBS OVERVIEW------------------------->
@@ -28,8 +27,8 @@ export default function ClientLayout() {
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="jobs" element={<Jobs />}>
-            <Route index element={<Unassigned />} />
-            <Route path="unassigned" element={<Unassigned />} />
+            <Route index element={<Jobcards />} />
+            <Route path="unassigned" element={<Jobcards />} />
             <Route path="active" element={<Jobcards />} />
             <Route path="ongoing" element={<Jobcards />} />
             <Route path="completed" element={<Jobcards />} />

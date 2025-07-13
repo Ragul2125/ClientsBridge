@@ -25,6 +25,8 @@ export default function ActiveJobs() {
     jobStatus = "ongoing";
   } else if (location.pathname.includes("/client/jobs/completed")) {
     jobStatus = "completed";
+  } else if (location.pathname.includes("/client/jobs/unassigned")) {
+    jobStatus = "unassigned";
   }
 
   useEffect(() => {
@@ -39,6 +41,8 @@ export default function ActiveJobs() {
           endpoint = `${BACKEND_URL}/api/jobs/onGoingJobs`;
         else if (jobStatus === "completed")
           endpoint = `${BACKEND_URL}/api/jobs/completedJobs`;
+        else if (jobStatus === "unassigned")
+          endpoint = `${BACKEND_URL}/api/jobs/pendingJobs`;
 
         const response = await axios.get(endpoint, {
           headers: {
@@ -46,6 +50,7 @@ export default function ActiveJobs() {
           },
         });
         setJobs(response.data);
+        console.log(response.data);
       } catch (err) {
         console.error("Error fetching jobs:", err);
         setError("Failed to fetch jobs. Please try again.");
@@ -57,7 +62,7 @@ export default function ActiveJobs() {
     fetchJobs();
   }, [jobStatus, BACKEND_URL]);
 
-  const filteredJobs = jobs.filter(
+  const filteredJobs = jobs?.filter(
     (job) =>
       job.postTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -98,10 +103,10 @@ export default function ActiveJobs() {
                   />
                   <p className="client-jobs-active-card-title">
                     {job.postTitle}
-                    <span className="client-jobs-active-card-cost">
-                      {"₹ " + job.budget}
-                    </span>
                   </p>
+                </div>
+                <div className="client-jobs-active-card-cost">
+                  {"₹ " + job.budget}
                 </div>
                 <p className="client-jobs-active-card-summary">
                   Summary
@@ -126,9 +131,6 @@ export default function ActiveJobs() {
                     End Date{" "}
                     <span>{new Date(job.deadline).toLocaleDateString()}</span>
                   </p>
-                  {/* <p className="company-jobs-card-box-edate">
-                    Category <span>{job.category}</span>
-                  </p> */}
                 </div>
               )}
               {jobStatus === "completed" && (

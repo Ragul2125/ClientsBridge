@@ -5,6 +5,7 @@ import "./Overview.css";
 import dp from "../../../../assets/userdp.svg";
 import { FaPenFancy } from "react-icons/fa";
 import JobDetailsLayout from "../../../../ReuseableComponents/job/JobDetailsLayout";
+import Load from "../../../../ReuseableComponents/Loaders/Load";
 
 export default function ProfileOverview() {
   const { jbid } = useParams();
@@ -46,7 +47,7 @@ export default function ProfileOverview() {
     fetchProject();
   }, [jbid]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Load />;
   if (error) return <p style={{ margin: "3em", color: "red" }}>{error}</p>;
 
   return (

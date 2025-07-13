@@ -13,7 +13,7 @@ import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <BrowserRouter>
-      <Toaster />
+      <Toaster containerStyle={{ zIndex: 99999 }} />
       <Routes>
         <Route path="/*" element={<Landing />} />
         <Route path="/test" element={<Chat />} />

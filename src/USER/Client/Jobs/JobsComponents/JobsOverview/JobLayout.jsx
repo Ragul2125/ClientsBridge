@@ -7,7 +7,7 @@ import { MdOutlineStar, MdOutlineStarBorder } from "react-icons/md";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import useAxiosFetch from "../../../../../hooks/useAxiosFetch"
+import useAxiosFetch from "../../../../../hooks/useAxiosFetch";
 
 export default function JobLayout() {
   const { viewid } = useParams();
@@ -113,13 +113,15 @@ export default function JobLayout() {
     <main className="client-oncooverview-main">
       <section className="client-profileoverview-inner client-oncooverview-inner">
         {/* <img className="client-profileoverview-inner-dp" src={dp} alt="User" /> */}
-        <p className="client-profileoverview-inner-title">
-          <h1>{jobData.postTitle}</h1>
-          <span className="client-profileoverview-inner-time">
-            {new Date(jobData.deadline).toLocaleDateString()}
-          </span>
-        </p>
-        <p className="client-profileoverview-inner-threedot">...</p>
+        <div className="flex-bw">
+          <p className="client-profileoverview-inner-title">
+            <h1>{jobData.postTitle}</h1>
+            <span className="client-profileoverview-inner-time">
+              {new Date(jobData.deadline).toLocaleDateString()}
+            </span>
+          </p>
+          <p className="client-profileoverview-inner-threedot">...</p>
+        </div>
 
         {/* --------------------------------------------------------------------DESC------------------ */}
         <div className="client-profileoverview-inner-des">

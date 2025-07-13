@@ -17,7 +17,8 @@ const FreelancerProfile = () => {
   const send = async (selection) => {
     try {
       const ress = await choice(selection, id, "freelancer");
-      if (ress === true || ress === false) {
+      console.log(ress);
+      if (ress == true || ress == false) {
         toast.success(`Freelancer ${selection}ed successfully`);
         navigate("/admin/registration/freelancer");
       } else {

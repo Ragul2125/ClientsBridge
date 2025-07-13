@@ -1,39 +1,20 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import dp from "../../../assets/dp.png";
 import { FaEye } from "react-icons/fa";
+import axios from "axios";
+import useAxiosFetch from "../../../hooks/useAxiosFetch";
 
 const JobAssignPopup = ({ togglePopup, jobId }) => {
-  const [freelancers, setFreelancers] = useState([]);
   const [selectedFreelancers, setSelectedFreelancers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchFreelancers = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(
-          `${
-            import.meta.env.VITE_BACKEND_URL
-          }/api/admin/getFreelancersAnsCompanies`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        setFreelancers(response.data || []);
-        console.log(response.data);
-      } catch (err) {
-        setError("Failed to fetch freelancers. Please try again.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchFreelancers();
-  }, [jobId]);
+  const {
+    data: freelancers = [],
+    loading,
+    error: fetchError,
+    refetch,
+  } = useAxiosFetch("/admin/getFreelancersAnsCompanies");
 
   const handleCheckboxChange = (freelancerId) => {
     setSelectedFreelancers((prev) =>
@@ -44,7 +25,8 @@ const JobAssignPopup = ({ togglePopup, jobId }) => {
   };
 
   const handleSubmit = async () => {
-    setIsLoading(true);
+    setIsSubmitting(true);
+    setError(null);
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/admin/assignJob/${jobId}`,
@@ -66,7 +48,7 @@ const JobAssignPopup = ({ togglePopup, jobId }) => {
     } catch (err) {
       setError("Failed to assign freelancers. Please try again.");
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -74,13 +56,13 @@ const JobAssignPopup = ({ togglePopup, jobId }) => {
     <div className="assign-popup-overlay">
       <div className="assign-popup-content">
         <h2 className="assign-popup-title">Assign Freelancers</h2>
-        {isLoading ? (
+        {loading ? (
           <p className="loading-message">Loading...</p>
-        ) : error ? (
-          <p className="error-message">{error}</p>
+        ) : fetchError ? (
+          <p className="error-message">{fetchError}</p>
         ) : (
           <div className="assign-freelancer-list">
-            {freelancers.map((freelancer) => (
+            {freelancers?.map((freelancer) => (
               <div className="assign-freelancer" key={freelancer._id}>
                 <input
                   type="checkbox"
@@ -103,13 +85,14 @@ const JobAssignPopup = ({ togglePopup, jobId }) => {
             ))}
           </div>
         )}
+        {error && <p className="error-message">{error}</p>}
         <div className="assign-buttons-container">
           <button
             className="assign-confirm-btn"
             onClick={handleSubmit}
-            disabled={selectedFreelancers.length === 0 || isLoading}
+            disabled={selectedFreelancers.length === 0 || isSubmitting}
           >
-            Confirm
+            {isSubmitting ? "Submitting..." : "Confirm"}
           </button>
           <button className="assign-close-btn" onClick={togglePopup}>
             Close

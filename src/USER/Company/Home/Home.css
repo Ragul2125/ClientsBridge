@@ -82,102 +82,107 @@
 }
 
 .company-home-cards-section-container {
-  flex-grow: 1;
-  padding-top: 0;
-  padding: 0 3em;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: start;
-  flex-wrap: wrap;
-  gap: 1em;
-}
-
-.company-home-card {
-  flex-grow: 1;
-  width: calc(100% / 3.3);
-  padding: 1em;
-  border-radius: 10px;
-  background-color: #ffffff;
   display: grid;
-  grid-template-columns: auto 2fr auto;
-  grid-template-areas:
-    "dp title btn"
-    "summary summary summary"
-    "box box box";
-  column-gap: 1em;
-  row-gap: 0.7em;
-  overflow: hidden;
-  font-family: "outfit", sans-serif;
-  transition-duration: 0.3s;
-  cursor: pointer;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem 3em;
+}
+.company-home-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s, transform 0.2s;
+  text-decoration: none;
+  color: inherit;
 }
 
 .company-home-card:hover {
-  scale: 1.02;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
 }
 
+/* ======================== IMAGE & TITLE ======================== */
 .company-home-card-img {
-  grid-area: dp;
-  width: 3.5em;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.8rem;
 }
 
 .company-home-card-title {
-  grid-area: title;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
   display: flex;
   flex-direction: column;
-  gap: 0.1em;
-  margin-top: 0.3em;
-  font-weight: 600;
+  gap: 0.3rem;
 }
 
 .company-home-card-info {
+  font-size: 0.85rem;
+  color: #6b7280;
   font-weight: 400;
-  color: #5b5b5b;
-  font-size: smaller;
+  text-align: right;
 }
 
-.company-home-card-count {
-  grid-area: btn;
-  padding: 0.5em;
-  cursor: pointer;
+.company-home-card-cost {
+  font-size: 1.6rem;
   font-weight: 500;
+  color: var(--blue);
+}
+
+/* ======================== INTERESTED COUNT ======================== */
+.company-home-card-count {
   display: flex;
   align-items: center;
-  gap: 0.2em;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4b5563;
+  margin: 0.5rem 0;
 }
 
+/* ======================== SUMMARY ======================== */
 .company-home-card-summary {
-  grid-area: summary;
-  display: flex;
-  flex-direction: column;
   font-weight: 600;
-  gap: 0.2em;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
 }
 
 .company-home-card-summary-des {
-  width: 90%;
+  margin-top: 0.3rem;
+  font-weight: 400;
+  font-size: 0.88rem;
+  color: #555;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-weight: 400;
-  font-size: smaller;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Show 3 lines only */
+  -webkit-box-orient: vertical;
 }
 
+/* ======================== BUTTON ======================== */
 .company-home-card-btn {
-  grid-area: box;
-  padding: 0.5em;
-  border: 1px solid gray;
-  border-radius: 4px;
-  display: grid;
-  place-items: center;
-  transition-duration: 0.2s;
-  color: #000000;
+  margin-top: auto;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--blue);
+  transition: background-color 0.2s, color 0.2s, border 0.2s;
 }
 
 .company-home-card-btn:hover {
   background-color: var(--blue);
   color: white;
-  font-weight: 500;
-  border: none;
+  border-color: var(--blue);
+  font-weight: 600;
 }
 
 /* =========================================================BIDDING-VIEW================= */
