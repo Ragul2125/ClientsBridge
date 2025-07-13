@@ -1,0 +1,54 @@
+/* Styling for media preview */
+.media-preview {
+  border-radius: 0.5rem; /* rounded-lg */
+  cursor: pointer;
+  object-fit: cover; /* object-cover */
+  max-height: 300px; /* max-h-[300px] */
+  width: 100%; /* w-full */
+}
+
+/* Styling for full-screen media */
+.fullscreen-media {
+  max-height: 90vh; /* max-h-[90vh] */
+  max-width: 90vw; /* max-w-[90vw] */
+  object-fit: contain; /* object-contain */
+}
+
+/* Overlay for full-screen preview */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.75); /* bg-black bg-opacity-75 */
+  z-index: 50; /* z-50 */
+}
+
+/* Content within the overlay */
+.overlay-content {
+  position: relative;
+}
+
+/* Close button styling */
+.close-button {
+  position: absolute;
+  top: -2.5rem; /* -top-10 */
+  right: 0;
+  padding: 0.5rem; /* p-2 */
+  color: white;
+  transition: color 0.2s ease-in-out;
+}
+
+.close-button:hover {
+  color: #d1d5db; /* hover:text-gray-300 */
+}
+
+/* Close icon styling */
+.close-icon {
+  width: 1.5rem; /* w-6 */
+  height: 1.5rem; /* h-6 */
+}

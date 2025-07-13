@@ -1,204 +1,212 @@
 .company-jobs-main {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
-    background-color: var(--white);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  background-color: var(--white);
 }
 
 .company-jobs-tabs-container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+}
+.client-jobs-active-card-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
 }
 
 .company-jobs-tabs-titles {
-    padding: 1em;
-    font-family: "Outfit", system-ui;
+  padding: 1em;
+  padding-top: 2em;
+  font-family: "Outfit", system-ui;
 }
 
 .company-jobs-tabs-titles p {
-    display: inline-block;
-    margin: 0 7px;
-    cursor: pointer;
-    font-family: poppins;
-    font-size: 1.5rem;
-    font-weight: 600;
-    font-family: "Outfit", system-ui;
+  display: inline-block;
+  margin: 0 7px;
+  cursor: pointer;
+  font-family: poppins;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Outfit", system-ui;
 }
 
-@media(max-width:1100px) {
-    .company-jobs-tabs-titles {
-        padding: 1.2em 0.7em;
-    }
+@media (max-width: 1100px) {
+  .company-jobs-tabs-titles {
+    padding: 1.2em 0.7em;
+  }
 
-    .company-jobs-tabs-titles p {
-        margin: 0 4px;
-        font-size: 1.4rem;
-        font-weight: 600;
-    }
+  .company-jobs-tabs-titles p {
+    margin: 0 4px;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
 }
 
 .company-jobs-tabs-titles a {
-    color: #868686;
+  color: #868686;
 }
 
 .company-jobs-tabs-titles .active {
-    color: #000;
+  color: #000;
 }
 
 /* ==================================================================company-jobs-active-main================================ */
 .company-jobs-card-main {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .company-jobs-search-section {
-    padding: 2em 1em;
-    display: flex;
-    gap: 0.7em;
-    justify-content: center;
-    background-color: var(--white);
+  padding: 2em 1em;
+  display: flex;
+  gap: 0.7em;
+  justify-content: center;
+  background-color: var(--white);
 }
 
 .company-jobs-search-input {
-    width: 50%;
-    padding: 0.7em 1em;
-    font-family: 'poppins';
-    outline: 0;
-    border: none;
-    border-radius: 5px;
-    outline: 1px solid gray;
-    background-color: transparent;
+  width: 50%;
+  padding: 0.7em 1em;
+  font-family: "poppins";
+  outline: 0;
+  border: none;
+  border-radius: 5px;
+  outline: 1px solid gray;
+  background-color: transparent;
 }
 
 .company-jobs-search-btn {
-    background-color: gray;
-    color: white;
-    padding: 0 1em;
-    display: grid;
-    place-items: center;
-    font-family: 'outfit', sans-serif;
-    border-radius: 5px;
-    cursor: pointer;
-    transition-duration: 0.2s;
+  background-color: gray;
+  color: white;
+  padding: 0 1em;
+  display: grid;
+  place-items: center;
+  font-family: "outfit", sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-duration: 0.2s;
 }
 
 .company-jobs-search-btn:hover {
-    background-color: rgb(58, 58, 58);
-    color: white;
+  background-color: rgb(58, 58, 58);
+  color: white;
 }
 
 .company-jobs-cards-container {
-    flex-grow: 1;
-    padding: 2em;
-    padding-top: 0;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: start;
-    flex-wrap: wrap;
-    gap: 1em;
-    overflow: scroll;
+  flex-grow: 1;
+  padding: 2em;
+  padding-top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  row-gap: 1em;
+  overflow: scroll;
 }
 
-
 .company-jobs-card {
-    flex-grow: 1;
-    width: calc(100% /3.1);
-    padding: 1em;
-    border-radius: 10px;
-    background-color: #ffffff;
-    display: grid;
-    grid-template-columns: auto 2fr auto;
-    grid-template-areas:
-        "dp title btn"
-        "summary summary summary"
-        "box box box";
-    column-gap: 1em;
-    row-gap: 0.7em;
-    overflow: hidden;
-    font-family: 'outfit', sans-serif;
-    transition-duration: 0.3s;
-    cursor: pointer;
+  /* flex-grow: 1; */
+  width: calc(100% / 3.1);
+  padding: 1em;
+  border-radius: 10px;
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: auto 2fr auto;
+  grid-template-areas:
+    "dp title btn"
+    "summary summary summary"
+    "box box box";
+  column-gap: 1em;
+  row-gap: 0.7em;
+  overflow: hidden;
+  font-family: "outfit", sans-serif;
+  transition-duration: 0.3s;
+  cursor: pointer;
 }
 
 .company-jobs-card:hover {
-    scale: 1.02;
+  scale: 1.02;
 }
 
 .company-jobs-card-img {
-    grid-area: dp;
-    width: 3.5em;
+  grid-area: dp;
+  width: 3.5em;
 }
 
 .company-jobs-card-title {
-    grid-area: title;
-    display: flex;
-    flex-direction: column;
-    gap: 0.1em;
-    margin-top: 0.3em;
-    font-weight: 600;
+  grid-area: title;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  margin-top: 0.3em;
+  font-weight: 600;
 }
 
 .company-jobs-card-info {
-    font-weight: 400;
-    color: #5b5b5b;
-    font-size: smaller;
+  font-weight: 400;
+  color: #5b5b5b;
+  font-size: smaller;
 }
 
 .company-jobs-card-threedot {
-    grid-area: btn;
-    padding: 0.5em;
-    cursor: pointer;
-    font-weight: bolder;
+  grid-area: btn;
+  padding: 0.5em;
+  cursor: pointer;
+  font-weight: bolder;
 }
 
 .company-jobs-card-summary {
-    grid-area: summary;
-    display: flex;
-    flex-direction: column;
-    font-weight: 600;
-    gap: 0.2em;
+  grid-area: summary;
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  gap: 0.2em;
 }
 
 .company-jobs-card-summary-des {
-    width: 90%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: 400;
-    font-size: smaller;
-
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  font-size: smaller;
 }
 
 .company-job-card-box {
-    grid-area: box;
-    padding: 0.5em;
-    border: 1px solid #c3c3c3;
-    border-radius: 4px;
+  grid-area: box;
+  padding: 0.5em;
+  border: 1px solid #c3c3c3;
+  border-radius: 4px;
 }
 
 .company-jobs-card-box-sdate {
-    padding-bottom: 0.5em;
-    display: flex;
-    justify-content: space-between;
-    font-size: smaller;
+  padding-bottom: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  font-size: smaller;
 }
 
 .company-jobs-card-box-edate {
-    padding-top: 0.5em;
-    border-top: 1px solid #c3c3c3;
-    display: flex;
-    justify-content: space-between;
-    font-size: smaller;
+  padding-top: 0.5em;
+  border-top: 1px solid #c3c3c3;
+  display: flex;
+  justify-content: space-between;
+  font-size: smaller;
 }
 
 .company-jobs-card-box-live {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-.company-jobs-card-box-dp{
-    width: 1.5em;
-    margin-right: 0.5em;
+.company-jobs-card-box-dp {
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  object-fit: cover;
+  margin-right: 0.5em;
 }

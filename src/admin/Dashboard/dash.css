@@ -27,12 +27,11 @@
 /* ===================cards=============================== */
 .pgs {
   padding: 2em;
-
   .carts {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5em;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     padding-top: 1em;
 
@@ -68,6 +67,7 @@
           h1 {
             font-weight: 700;
             color: #202224;
+            text-align: left;
           }
         }
       }
@@ -105,14 +105,7 @@
       justify-content: space-between;
       align-items: center;
 
-      .month {
-        display: flex;
-        gap: 1em;
-        align-items: center;
-        border: 1px solid #404145;
-        padding: 0.5em 1em;
-        border-radius: 50px;
-      }
+    
     }
 
     .table {
@@ -124,9 +117,8 @@
         width: 100%;
         border-collapse: collapse;
         background-color: white;
-        border-radius: 15px;
+        border-radius: 5px;
         overflow: hidden;
-        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
       }
 
       thead {
@@ -145,8 +137,8 @@
         padding: 1em;
         text-align: left;
         font-weight: 400;
-        border-bottom: 1px solid #979797;
-
+        white-space: nowrap;
+        /* border-bottom: 1px solid #979797; */
       }
 
       .first-col {
@@ -185,6 +177,9 @@
 @media(max-width:1100px) {
   .dashboard-page {
     width: 100vw;
+  }
+  .activeProject{
+    margin-bottom: 2em;
   }
 }
 @media(max-width:850px) {

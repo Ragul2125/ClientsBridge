@@ -8,7 +8,19 @@
   justify-content: center;
   font-family: "Poppins", sans-serif;
 }
+@keyframes cup {
+  from {
+    opacity: 0.5;
+    filter: blur(10px);
+    transform: translateY(5px);
+  }
 
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
 .clientreg-tablecon {
   flex-grow: 1;
   background-color: white;
@@ -16,8 +28,8 @@
   border-radius: 15px 15px 0 0;
   overflow: auto;
   position: relative;
-  animation: scroll-up 0.2s forwards;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: cup 0.4s ease-in;
 }
 .clientreg-table {
   width: 100%;
@@ -32,6 +44,7 @@
   color: #777777;
   position: sticky;
   top: 0;
+  left: 0;
   z-index: 11;
   border-bottom: 1px solid #d2d2d2;
   text-align: center;
@@ -40,7 +53,7 @@
 
 .clientreg-tbody tr {
   border-bottom: 1px solid #d2d2d2;
-  font-size: medium;
+  font-size: smaller;
   color: #000000;
   transition: background-color 0.3s;
 }
@@ -74,7 +87,7 @@
 }
 
 .clientregviewbtn {
-  padding: 0.5em 1.5em;
+  padding: 0.5em 2em;
   border-radius: 5px;
   border: 1px solid #bfbfbf;
   cursor: pointer;
@@ -95,6 +108,7 @@
 
   .clientreg-tablecon {
     margin: 0 0.5em;
+    margin-bottom: 3em;
   }
 
   .clientreg-thead th {
@@ -113,4 +127,9 @@
     background-color: rgba(253, 253, 253, 0.95);
     box-shadow: -1px 0px 5px rgba(0, 0, 0, 0.1);
   }
+}
+
+.client-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
 }

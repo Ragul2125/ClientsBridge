@@ -3,10 +3,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Overview.css";
 import dp from "../../../../assets/userdp.svg";
+import { FaPenFancy } from "react-icons/fa";
+import JobDetailsLayout from "../../../../ReuseableComponents/job/JobDetailsLayout";
+import Load from "../../../../ReuseableComponents/Loaders/Load";
 
 export default function ProfileOverview() {
   const { jbid } = useParams();
   const [project, setProject] = useState(null);
+  const [amount, setAmount] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -30,6 +34,7 @@ export default function ProfileOverview() {
           }
         );
         setProject(response.data.job);
+        setAmount(response.data.amount);
       } catch (err) {
         setError(
           err.response?.data?.message || "Failed to fetch project details."
@@ -42,50 +47,26 @@ export default function ProfileOverview() {
     fetchProject();
   }, [jbid]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Load />;
   if (error) return <p style={{ margin: "3em", color: "red" }}>{error}</p>;
 
   return (
-    <main className="client-profileoverview-main">
-      <div className="client-profileoverview-inner">
-        <img
-          className="client-profileoverview-inner-dp"
-          src={project.clientID.profilePic}
-          alt="User profile"
-        />
-        <p className="client-profileoverview-inner-title">
-          {project.clientID.name}
-          <span className="client-profileoverview-inner-time">
-            {project.clientID.userName}
-          </span>
-        </p>
-        <p className="client-profileoverview-inner-threedot">...</p>
-
-        <div className="client-profileoverview-inner-des">
-          <p className="client-profileoverview-inner-des-head">Project Title</p>
-          <p className="client-profileoverview-inner-des-subtxt">
-            <span className="client-profileoverview-inner-des-subhead">
-              Name of the Project:{" "}
-            </span>
-            {project.postTitle}
-          </p>
-
-          <p className="client-profileoverview-inner-des-head">Overview</p>
-          <p className="client-profileoverview-inner-des-subtxt">
-            <span className="client-profileoverview-inner-des-subhead">
-              Objective:{" "}
-            </span>
-            {project.description}
-          </p>
-
-          <p className="client-profileoverview-inner-des-head">
-            Project Status
-          </p>
-          <p className="client-profileoverview-inner-des-subtxt">
-            {project.status}
-          </p>
-        </div>
-      </div>
-    </main>
+    <>
+      {!loading && project?.postTitle && (
+        <JobDetailsLayout project={project}>
+          <section className="client-oncooverview-side side2">
+            <p className="client-oncooverview-side-texxt">
+              The client still did not accept your bid
+            </p>
+            <p className="client-oncooverview-side-chatbtn">
+              Your bid : {amount}
+            </p>
+            <p className="client-oncooverview-side-head">
+              total bids : {project.interested.length}+
+            </p>
+          </section>
+        </JobDetailsLayout>
+      )}
+    </>
   );
 }

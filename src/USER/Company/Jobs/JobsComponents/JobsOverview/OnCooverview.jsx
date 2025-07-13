@@ -4,13 +4,15 @@ import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { FaPenFancy } from "react-icons/fa";
 import { MdOutlineStar, MdOutlineStarBorder } from "react-icons/md";
 import { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
+import Load from "../../../../ReuseableComponents/Loaders/Load";
 
 export default function ProfileOverview() {
   const [jobDetails, setJobDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [review, setReview] = useState("");
   const [jobs, setJobs] = useState("");
   const [ReviewPanel, setReviewPanel] = useState(false);
   const [rating, setRating] = useState(0);
@@ -20,9 +22,9 @@ export default function ProfileOverview() {
 
   useEffect(() => {
     // Determine job type based on path
-    if (location.pathname.includes("/company/jobs/ongoing")) {
+    if (location.pathname.includes("/jobs/ongoing")) {
       setJobs("ongoing");
-    } else if (location.pathname.includes("/company/jobs/completed")) {
+    } else if (location.pathname.includes("/jobs/completed")) {
       setJobs("completed");
     }
 
@@ -50,52 +52,99 @@ export default function ProfileOverview() {
     fetchJobDetails();
   }, [id, location.pathname]);
 
+  const handleReviewSubmit = async () => {
+    try {
+      console.log(review, rating);
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/review/${
+          jobDetails.clientID._id
+        }/addReviews`,
+        {
+          stars: rating,
+          description: review,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log("done");
+      setReviewPanel(false);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   const handleStarClick = (index) => {
     setRating(index + 1);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Load />;
   if (error) return <p style={{ color: "red", margin: "2em" }}>{error}</p>;
 
   return (
     <main className="client-oncooverview-main">
       <section className="client-profileoverview-inner client-oncooverview-inner">
-        <img
-          className="client-profileoverview-inner-dp"
-          src={jobDetails?.clientID?.profilePic}
-          alt="User"
-        />
+        {/* <img className="client-profileoverview-inner-dp" src={dp} alt="User" /> */}
         <p className="client-profileoverview-inner-title">
-          {jobDetails?.clientID?.name || "Unknown Client"}
+          <h1>{jobDetails.postTitle}</h1>
           <span className="client-profileoverview-inner-time">
-            {jobDetails?.clientID?.userName}
+            3 hours ago{" "}
           </span>
         </p>
-        <p className="client-profileoverview-inner-threedot">...</p>
 
+        {/* --------------------------------------------------------------------DESC------------------ */}
         <div className="client-profileoverview-inner-des">
-          <p className="client-profileoverview-inner-des-head">Project Title</p>
-          <p className="client-profileoverview-inner-des-subtxt">
-            <span className="client-profileoverview-inner-des-subhead">
-              Name of the Project:{" "}
-            </span>
-            {jobDetails?.postTitle || "N/A"}
-          </p>
+          {/* <p className="client-profileoverview-inner-des-head">jobDetails Title</p>
+                    <p className="client-profileoverview-inner-des-subtxt">
+                        <span className='client-profileoverview-inner-des-subhead'>Name of the jobDetails: </span> Mobile E-Commerce Application
+                    </p> */}
 
           <p className="client-profileoverview-inner-des-head">Overview</p>
           <p className="client-profileoverview-inner-des-subtxt">
-            <span className="client-profileoverview-inner-des-subhead">
-              Objective:{" "}
-            </span>
-            {jobDetails?.description || "N/A"}
+            {jobDetails.description}
           </p>
+          <div className="client-profileoverview-inner-side-byside">
+            <div>
+              {" "}
+              <p className="client-profileoverview-inner-des-head">Deadline</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+                {jobDetails.deadline.substring(0, 10)}
+              </p>
+            </div>
+            <div>
+              <p className="client-profileoverview-inner-des-head">Budget</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+                {jobDetails.budget}
+              </p>
+            </div>
+            <div>
+              <p className="client-profileoverview-inner-des-head">Category</p>
+              <p className="client-profileoverview-inner-des-subtxt">
+                {jobDetails.category}
+              </p>
+            </div>
+          </div>
 
-          <p className="client-profileoverview-inner-des-head">
-            Project Status
+          <p className="client-profileoverview-inner-des-head">Tags</p>
+          <p className="client-profileoverview-inner-des-tags">
+            {jobDetails.tags.map((tag, i) => (
+              <p className="job-tag-seps">{tag}</p>
+            ))}
           </p>
-          <p className="client-profileoverview-inner-des-subtxt">
-            {jobDetails?.status || "N/A"}
-          </p>
+          {jobDetails.files.length > 0 && (
+            <>
+              <p className="client-profileoverview-inner-des-head">Files</p>
+              <p className="client-profileoverview-inner-des-file">
+                {jobDetails.files.map((file, i) => (
+                  <p>
+                    <a href={file}>file {i + 1}</a>
+                  </p>
+                ))}
+              </p>
+            </>
+          )}
         </div>
       </section>
       <section className="client-oncooverview-side side1">
@@ -108,10 +157,7 @@ export default function ProfileOverview() {
           {jobDetails?.clientID?.name}
         </p>
         <p className="client-oncooverview-side-type">
-          {jobDetails?.clientID?.userName}
-        </p>
-        <p className="client-oncooverview-side-cost">
-          {jobDetails?.clientID?.description}
+          @{jobDetails?.clientID?.userName}
         </p>
       </section>
 
@@ -119,14 +165,17 @@ export default function ProfileOverview() {
         <section className="client-oncooverview-side side2">
           <p className="client-oncooverview-side-deadline">Project Deadline</p>
           <p className="client-oncooverview-side-enddate">
-            {jobDetails?.deadline || "N/A"}
+            {jobDetails?.deadline.substring(0, 10) || "N/A"}
           </p>
           <p className="client-oncooverview-side-subtxt">
             Message {jobDetails?.clientId?.name || "Client"}
           </p>
-          <p className="client-oncooverview-side-chatbtn">
+          <Link
+            to={"/" + localStorage.getItem("role") + "/chat"}
+            className="client-oncooverview-side-chatbtn"
+          >
             <IoChatboxEllipsesOutline /> Chat
-          </p>
+          </Link>
         </section>
       )}
 
@@ -147,7 +196,8 @@ export default function ProfileOverview() {
         <div className="add-review-container">
           <div className="add-review-inner">
             <p className="add-review-txt">
-              <span>Satisfied</span> with my work?
+              Rate your <span>Experience</span> with @
+              {jobDetails?.clientID?.userName}?
             </p>
             <div className="review-star-container">
               {Array.from({ length: 5 }, (_, index) => (
@@ -163,6 +213,10 @@ export default function ProfileOverview() {
             <textarea
               className="review-input"
               placeholder="Write your review"
+              value={review}
+              onChange={(e) => {
+                setReview(e.target.value);
+              }}
             ></textarea>
             <div className="review-btn-container">
               <p
@@ -171,10 +225,7 @@ export default function ProfileOverview() {
               >
                 Cancel
               </p>
-              <p
-                onClick={() => setReviewPanel(false)}
-                className="review-submit"
-              >
+              <p onClick={handleReviewSubmit} className="review-submit">
                 Submit
               </p>
             </div>

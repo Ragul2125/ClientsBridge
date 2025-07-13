@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Nav/Nav.css";
+import "./Nav.css";
 import search from "../../assets/image/search.svg";
 import back from "../../assets/image/back.svg";
 import profileImg from "../../assets/image/profileImg.svg";
@@ -26,7 +26,7 @@ const TopNav = () => {
 
   return (
     <>
-      <div className="topNav">
+      <div className="top-Nav">
         <img
           className="backbtn"
           src={back}

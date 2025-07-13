@@ -8,6 +8,7 @@ const FreelancerRegistrationPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,12 +16,14 @@ const FreelancerRegistrationPage = () => {
   };
 
   const handleTagsChange = (field, tags) => {
-    setFormData({ ...formData, [field]: tags });
+    setFormData({ ...formData, skills: field });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
+      console.log(formData);
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/auth/register/freelancer`,
         formData
@@ -35,6 +38,8 @@ const FreelancerRegistrationPage = () => {
       } else {
         setErrorMessage("An unexpected error occurred.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -161,8 +166,8 @@ const FreelancerRegistrationPage = () => {
               required
             />
           </div>
-          <button type="submit" className="submit-btn">
-            Submit Registration
+          <button type="submit" className="submit-btn" disabled={loading}>
+            {loading ? <div className="spinner-res" /> : "Submit Registration"}
           </button>
         </form>
       </div>

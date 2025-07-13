@@ -1,46 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import dp from "../../../../assets/profileImg.svg";
+import { toast } from "react-hot-toast";
 import "../Home.css";
+import GlobalPopup from "../../../ReuseableComponents/Popup/GlobalPopup";
+import JobDetailsLayout from "../../../ReuseableComponents/job/JobDetailsLayout";
+import useAxiosFetch from "../../../../hooks/useAxiosFetch";
+import Load from "../../../ReuseableComponents/Loaders/Load";
 
 const BidView = () => {
   const { jobid } = useParams();
-  const [project, setProject] = useState(null);
   const [bidAmount, setBidAmount] = useState("");
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
-  useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/jobs/getDetails/${jobid}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        setProject(response.data);
-      } catch (error) {
-        console.error("Error fetching project:", error);
-        setError("Failed to fetch job details.");
-      }
-    };
-
-    fetchProject();
-  }, [jobid]);
+  const {
+    data: project,
+    error: fetchError,
+    loading,
+    refetch,
+  } = useAxiosFetch(`/jobs/getDetails/${jobid}`);
 
   const handleBidSubmit = async () => {
-    if (!bidAmount) {
-      setError("Please enter a valid bid amount.");
-      return;
-    }
-
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/bid`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/biddings/bid`,
         { jobId: jobid, amount: bidAmount },
         {
           headers: {
@@ -49,49 +33,91 @@ const BidView = () => {
           },
         }
       );
-      setSuccessMessage(response.data.message);
+
       setError("");
+      setIsPopupVisible(false);
+      toast.success("Bid submitted successfully! 🎉");
+      refetch(); // Just refetch the data, no redirect
       setBidAmount("");
     } catch (error) {
       console.error("Error submitting bid:", error);
       setError("Failed to submit the bid.");
+      toast.error("Failed to submit the bid.");
     }
   };
 
-  if (!project) return <p>Loading...</p>;
+  const openPopup = () => {
+    if (!bidAmount) {
+      setError("Please enter a valid bid amount.");
+      return;
+    }
+    setError("");
+    setIsPopupVisible(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupVisible(false);
+  };
 
   return (
-    <main className="company-home-bidded-view">
-      <div className="company-home-bidded-view-container">
-        <div className="company-home-bidded-view-container-header">
-          <img src={project.clientID.profilePic || dp} alt="Icon" />
-          <h1>{project.postTitle}</h1>
-          <p>{project.clientID.userName}</p>
-        </div>
-        <div className="company-home-bidded-view-container-overview">
-          <h2>Role Overview</h2>
-          <p>{project.description}</p>
-        </div>
-        <div className="company-home-bidded-view-container-details">
-          <div className="biding-amount">
-            <h3>Bidding Amount</h3>
-            <div className="amount">
-              <input
-                type="number"
-                placeholder="Enter the bid amount"
-                value={bidAmount}
-                onChange={(e) => setBidAmount(e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-        {error && <p className="error">{error}</p>}
-        {successMessage && <p className="success">{successMessage}</p>}
-        <div className="company-home-bidded-view-container-btn">
-          <button onClick={handleBidSubmit}>Bid</button>
-        </div>
-      </div>
-    </main>
+    <>
+      {loading && <Load type={"load"} />}
+      {project && (
+        <JobDetailsLayout project={project}>
+          {project.userBidAmount ? (
+            <section className="client-oncooverview-side side2">
+              <p className="client-oncooverview-side-texxt">
+                The client still did not accept your bid
+              </p>
+              <p className="client-oncooverview-side-chatbtn">
+                Your bid : {project.userBidAmount}
+              </p>
+              <p className="client-oncooverview-side-head">
+                total bids : {project.interested.length}+
+              </p>
+            </section>
+          ) : (
+            <section className="client-oncooverview-side side2">
+              <div className="company-home-bidded-view-container-details">
+                <div className="biding-amount">
+                  <h3>Bidding Amount</h3>
+                  <div className="amount">
+                    <input
+                      type="number"
+                      placeholder="Enter the bid amount (₹)"
+                      value={bidAmount}
+                      onChange={(e) => setBidAmount(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+              {error && <p className="error">{error}</p>}
+              <div className="company-home-bidded-view-container-btn">
+                <button onClick={openPopup}>Bid</button>
+              </div>
+            </section>
+          )}
+        </JobDetailsLayout>
+      )}
+      {isPopupVisible && (
+        <GlobalPopup
+          text={`Confirm your bid of ₹${bidAmount}?`}
+          className="confirm-bid-popup"
+          buttons={[
+            {
+              label: "Confirm",
+              className: "confirm",
+              onClick: handleBidSubmit,
+            },
+            {
+              label: "Cancel",
+              className: "cancel",
+              onClick: closePopup,
+            },
+          ]}
+        />
+      )}
+    </>
   );
 };
 

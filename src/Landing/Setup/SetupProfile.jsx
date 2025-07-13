@@ -20,13 +20,13 @@ const SetupProfile = () => {
       );
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("role", response.data.role);
         setIsPasswordVerified(true);
-        alert("Password verified successfully!");
       } else {
         alert("Invalid password. Please try again.");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Password verification error:", error);
       alert("An error occurred while verifying the password.");
     }
   };
@@ -43,7 +43,7 @@ const SetupProfile = () => {
         );
         setIsUsernameAvailable(response.data);
       } catch (error) {
-        console.error(error);
+        console.error("Error checking username availability:", error);
       }
     } else {
       setIsUsernameAvailable(false);
@@ -52,22 +52,38 @@ const SetupProfile = () => {
 
   const handleSubmit = async () => {
     if (!username.trim() || !isUsernameAvailable) {
-      alert("Please provide a valid username.");
+      alert("Please provide a valid and available username.");
       return;
     }
+
+    if (!profilePic) {
+      alert("Please upload a profile picture.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("userName", username);
+    formData.append("file", profilePic);
+
     try {
-      const response = await axios.post("/api/setUserName", {
-        Headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        userName: username,
-      });
-      if (response.data.success) {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/setup/setUserName`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (response.data.user) {
         alert("Profile setup successfully!");
-        window.location.href = "/next-page"; // Navigate to the next page
+        window.location.href = "/setup/addProjects/" + response.data.user.role; // Redirect to the next page
       } else {
         alert("Failed to set up profile. Please try again.");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Profile setup error:", error);
       alert("An error occurred while setting up the profile.");
     }
   };

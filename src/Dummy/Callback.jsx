@@ -6,27 +6,16 @@ const Callback = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(token, role);
-    console.log(token == "false");
     if (token !== "false" && role) {
-      console.log("not");
-      // Store the token in localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("role", role.toLowerCase());
-      // Redirect to the role-based page
-      navigate(`/${role.toLowerCase()}`);
-    } else if (token == "false") {
-      console.log("works");
-      navigate("/explore");
+      navigate(`/${role.toLowerCase()}`, { replace: true });
+    } else if (token === "false") {
+      navigate("/explore", { replace: true });
     }
   }, [token, role, navigate]);
 
-  return (
-    <div>
-      <p>{token}</p>
-      <p>{role}</p>
-    </div>
-  );
+  return null;
 };
 
 export default Callback;

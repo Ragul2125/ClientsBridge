@@ -1,30 +1,42 @@
-import React, { useEffect, useState } from "react";
 import "./dash.css";
 import Dashpg from "./dashComp/dashpg";
 import Freelancerpg from "../Dashboard/dashComp/Freelancherpg";
-import Company from "../Dashboard/dashComp/company";
-import Client from "../Dashboard/dashComp/Client";
 import ActiveProject from "./dashComp/ActiveProject";
-import axios from "axios";
+import Load from "../../USER/ReuseableComponents/Loaders/Load";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 const Dashboard = () => {
-  console.log("runnning");
-  const [stats, setStats] = useState();
-  useEffect(() => {
-    async function runn() {
-      const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/admin/statistics`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      if (res.status == 200) {
-        setStats(res.data);
-      }
-    }
-    runn();
-  }, []);
+  const { data: stats, error, loading } = useAxiosFetch("/admin/statistics");
+
+  if (loading) {
+    return (
+      <p
+        style={{
+          height: "100vh",
+          width: "100%",
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
+        <Load type="load" />
+      </p>
+    );
+  }
+
+  if (error) {
+    return (
+      <p
+        style={{
+          height: "100vh",
+          width: "100%",
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
+        <Load type="err" />;
+      </p>
+    );
+  }
+
   if (stats) {
     return (
       <div className="dashboard-page">
@@ -34,6 +46,8 @@ const Dashboard = () => {
       </div>
     );
   }
+
+  return null;
 };
 
 export default Dashboard;

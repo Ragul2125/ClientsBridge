@@ -10,14 +10,10 @@ import TagsInput from "./TagsInput";
 const ClientRegistrationPage = () => {
   const [formData, setFormData] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  function textToList(text) {
-    return text
-      .split(",") // Split the text by commas
-      .map((item) => item.trim()) // Trim whitespace from each item
-      .filter((item) => item !== ""); // Remove any empty strings
-  }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -28,28 +24,34 @@ const ClientRegistrationPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      formData.socialUrls = textToList(formData.socialUrls);
+      console.log(formData);
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/auth/register/client`,
         formData
       );
       if (response.status === 200) {
-        setPopupMessage("Client registration successful.");
+        setPopupMessage(
+          "Client registration successful. we'll reach you through email."
+        );
         setSubmitted(true);
       }
     } catch (error) {
+      console.log(error);
       if (error.response && error.response.data.message) {
         setErrorMessage(error.response.data.message);
       } else {
         setErrorMessage("An unexpected error occurred.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   const closePopup = () => {
     setSubmitted(false);
-    window.location.href = "/"; // Redirect to homepage
+    window.location.href = "/explore"; // Redirect to homepage
   };
 
   return (
@@ -162,8 +164,8 @@ const ClientRegistrationPage = () => {
               required
             />
           </div>
-          <button type="submit" className="submit-btn">
-            Submit Registration
+          <button type="submit" className="submit-btn" disabled={loading}>
+            {loading ? <div className="spinner-res" /> : "Submit Registration"}
           </button>
         </form>
       </div>

@@ -7,6 +7,7 @@ const CompanyRegistrationPage = () => {
   const [formData, setFormData] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
@@ -16,6 +17,7 @@ const CompanyRegistrationPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/auth/register/company`,
@@ -30,6 +32,8 @@ const CompanyRegistrationPage = () => {
       } else {
         setErrorMessage("An unexpected error occurred.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -230,8 +234,8 @@ const CompanyRegistrationPage = () => {
               required
             />
           </div>
-          <button type="submit" className="submit-btn">
-            Submit Application
+          <button type="submit" className="submit-btn" disabled={loading}>
+            {loading ? <div className="spinner-res" /> : "Submit Registration"}
           </button>
         </form>
       </div>
