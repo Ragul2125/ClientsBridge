@@ -1,67 +1,134 @@
 import { useState, useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../Jobs.css";
 import { GoSearch } from "react-icons/go";
 import Load from "../../../ReuseableComponents/Loaders/Load";
 import useAxiosFetch from "../../../../hooks/useAxiosFetch";
-import JobCard from "./JobsOverview/JobCard";
+import JobCard from "./JobsOverview/JobCard";              // keep if you’re using it
+import fallbackAvatar from "../../../../assets/image/dp.png"; // any placeholder image
 
 export default function ActiveJobs() {
+  /* ----------------------------------------------------------------
+   * State + routing helpers
+   * ---------------------------------------------------------------- */
   const [searchTerm, setSearchTerm] = useState("");
-  const location = useLocation();
+  const location  = useLocation();
+  const navigate  = useNavigate();
 
-  let jobstatus = "";
-  if (location.pathname.includes("jobs/bidded")) {
-    jobstatus = "bidded";
-  } else if (location.pathname.includes("jobs/ongoing")) {
-    jobstatus = "ongoing";
-  } else if (location.pathname.includes("jobs/completed")) {
-    jobstatus = "completed";
-  }
+  /* ----------------------------------------------------------------
+   * 1. Derive the job status from URL
+   * ---------------------------------------------------------------- */
+  const jobstatus = location.pathname.includes("jobs/bidded")
+    ? "bidded"
+    : location.pathname.includes("jobs/ongoing")
+    ? "ongoing"
+    : location.pathname.includes("jobs/completed")
+    ? "completed"
+    : "";
 
-  // Build endpoint URL
+  /* ----------------------------------------------------------------
+   * 2. Build the correct API endpoint
+   * ---------------------------------------------------------------- */
   const endpoint = useMemo(() => {
     const base = import.meta.env.VITE_BACKEND_URL;
-    if (jobstatus === "bidded") return `${base}/api/jobs/biddedJobs`;
-    if (jobstatus === "ongoing") return `${base}/api/jobs/onGoingJobs`;
-    if (jobstatus === "completed") return `${base}/api/jobs/completedJobs`;
-    return "";
+    switch (jobstatus) {
+      case "bidded":
+        return `${base}/api/jobs/biddedJobs`;
+      case "ongoing":
+        return `${base}/api/jobs/onGoingJobs`;
+      case "completed":
+        return `${base}/api/jobs/completedJobs`;
+      default:
+        return "";
+    }
   }, [jobstatus]);
 
-  const { data: jobs = [], error, loading } = useAxiosFetch(endpoint);
+  /* ----------------------------------------------------------------
+   * 3. Fetch the jobs
+   * ---------------------------------------------------------------- */
+  const { data, error, loading } = useAxiosFetch(endpoint);
 
-  // Filter jobs based on search
-  const filteredJobs = jobs?.filter(
-    (job) =>
-      job.postTitle?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.description?.toLowerCase().includes(searchTerm.toLowerCase())
+  // Always work with an array so .filter and .map never crash
+  const jobs = Array.isArray(data) ? data : [];
+
+  /* ----------------------------------------------------------------
+   * 4. Search filter (case‑insensitive)
+   * ---------------------------------------------------------------- */
+  const filteredJobs = jobs.filter((job) =>
+    [job.postTitle, job.description].some((field) =>
+      field?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
   );
 
+  /* ----------------------------------------------------------------
+   * 5. Early‑return UI for common states
+   * ---------------------------------------------------------------- */
+  if (loading)           return <Load type="load"  />;
+  if (error)             return <Load type="err"   />;
+  if (filteredJobs.length === 0) return <Load type="nojobs" />;
+
+  /* ----------------------------------------------------------------
+   * 6. Main render
+   * ---------------------------------------------------------------- */
   return (
-    <div className="client-jobs-active-main">
-      <section className="client-jobs-active-search-section">
+    <div className="company-jobs-active-main">
+      {/* ---------- Search bar ---------- */}
+      <section className="company-jobs-active-search-section">
         <input
-          placeholder="Search Jobs"
           type="search"
-          className="client-jobs-active-search-input"
+          placeholder="Search Jobs"
+          className="company-jobs-active-search-input"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <p className="client-jobs-unassigned-search-btn">
+        <button
+          type="button"
+          aria-label="Search"
+          className="company-jobs-unassigned-search-btn"
+        >
           <GoSearch />
-        </p>
+        </button>
       </section>
-      <section className="client-jobs-active-cards-container">
-        {loading && <Load type="load" />}
-        {error && <Load type="err" />}
-        {!loading &&
-          !error &&
-          filteredJobs?.map((job) => (
-            <JobCard job={job} jobstatus={jobstatus} />
-          ))}
-        {!loading && !error && filteredJobs?.length === 0 && (
-          <Load type="nojobs" />
-        )}
+
+      {/* ---------- Job cards ---------- */}
+      <section className="company-jobs-active-cards-container">
+        {filteredJobs.map((job) => (
+          <div
+            key={job._id}
+            className="company-jobs-active-card"
+            onClick={() =>
+              navigate(
+                `/${localStorage
+                  .getItem("role")
+                  .toLowerCase()}/jobs/${jobstatus}/${job._id}`
+              )
+            }
+          >
+            <div className="card-info">
+              <img
+                className="company-jobs-active-card-img"
+                src={job.clientID?.profilePic || fallbackAvatar}
+                alt="client profile"
+              />
+              <p className="company-jobs-active-card-title">
+                {job.postTitle}
+                <span className="company-jobs-active-card-cost">
+                  ₹ {job.budget}
+                </span>
+              </p>
+            </div>
+
+            <div className="company-jobs-active-card-summary">
+              <span>Summary</span>
+              <p className="company-jobs-active-card-summary-des">
+                {`${job.description?.substring(0, 260) || ""}…`}
+              </p>
+            </div>
+
+            {/* Optional helper – include only if you already have this util */}
+            {typeof renderJobStatus === "function" && renderJobStatus(job)}
+          </div>
+        ))}
       </section>
     </div>
   );

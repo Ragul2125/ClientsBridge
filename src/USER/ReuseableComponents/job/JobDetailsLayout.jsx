@@ -20,6 +20,7 @@ const Layout = ({ project, children }) => {
               {" "}
               <p className="client-profileoverview-inner-des-head">Deadline</p>
               <p className="client-profileoverview-inner-des-subtxt">
+                {project.deadline ? project.deadline.substring(0, 120) : "N/A"}
                 {project.deadline.substring(0, 10)}
               </p>
             </div>
@@ -44,6 +45,19 @@ const Layout = ({ project, children }) => {
             ))}
           </p>
           <p className="client-profileoverview-inner-des-head">Files</p>
+          {/* <ul className="client-profileoverview-inner-des-file">
+            {project.files?.length ? (
+              project.files.map((file, i) => (
+                <p key={i}>
+                  <a href={file} target="_blank" rel="noopener noreferrer">
+                    File {i + 1}
+                  </a>
+                </p>
+              ))
+            ) : (
+              <li>No files uploaded.</li>
+            )}
+          </ul> */}
           <p className="client-profileoverview-inner-des-file">
             {project.files.map((file, i) => (
               <p>

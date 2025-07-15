@@ -70,6 +70,7 @@
   font-size: smaller;
   margin-top: 0.2em;
   text-wrap: wrap;
+  text-align: justify;
 }
 
 .client-profileoverview-inner-des-subhead {

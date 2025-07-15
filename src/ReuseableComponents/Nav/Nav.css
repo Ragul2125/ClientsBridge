@@ -203,7 +203,7 @@
   align-items: center;
   padding: 0.7em;
   gap: 1em;
-  z-index: 999;
+  z-index: 99;
 
   .backbtn {
     width: 2em;
