@@ -111,7 +111,7 @@ export default function ActiveJobs() {
                 <p className="client-jobs-active-card-summary">
                   Summary
                   <p className="client-jobs-active-card-summary-des">
-                    {job.description.substring(0, 150) + "..."}
+                    {job.description.substring(0, 100) + "..."}
                   </p>
                 </p>
               </div>

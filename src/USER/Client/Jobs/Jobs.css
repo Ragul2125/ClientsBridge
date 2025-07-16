@@ -7,10 +7,6 @@
   background-color: var(--white);
   padding: 1em;
 }
-.client-jobs-active-card-cost {
-  padding: 10px 0;
-  font-weight: 600;
-}
 .loading-screen {
   position: fixed;
   top: 0;
@@ -196,7 +192,6 @@
   flex-grow: 1;
   text-align: start;
   resize: none;
-  overflow-y: scroll;
 }
 
 .addnew-twoinputs-container {
@@ -385,14 +380,14 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+    .card-info {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+    }
   }
 }
 
-.card-info {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-}
 .client-jobs-unassigned-project-card:hover {
   scale: 1.013;
 }
@@ -491,48 +486,64 @@
   background-color: rgb(58, 58, 58);
   color: white;
 }
+
 .client-jobs-active-cards-container {
   max-height: 85%;
   padding: 2em;
   padding-top: 0;
   display: flex;
-  justify-content: start; /* Center cards on small screens or if fewer cards */
-  align-items: flex-start;
+  justify-content:safe;
+  align-items: start;
   flex-wrap: wrap;
   gap: 1.5em;
-  overflow-y: auto;
+  overflow: scroll;
 }
 
-/* Cards — responsive widths */
 .client-jobs-active-card {
-  flex: 1 1 300px; /* Minimum 300px, can grow to fill space naturally */
-  max-width: 32%; /* Avoids awkward stretching */
+  width: 400px;
   height: 250px;
-  padding: 1.5em;
+  padding: 1.5em; 
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  flex-direction: column;
   border-radius: 10px;
   background-color: #f4f5f9;
-  font-family: "Outfit", sans-serif;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  color: #000;
+  font-family: "outfit", sans-serif;
+  transition-duration: 0.3s;
   cursor: pointer;
+  .info-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .card-info{
+      display: flex;
+      align-items: center;
+      gap: 1em;
+    }
+    .client-jobs-active-card-summary-des{
+      width: 100%;
+      font-size: 15px;
+    }
+  }
+  .company-job-card-box{
+    background-color: #0b0b45;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    color: #fff;
+  }
 }
 
 .client-jobs-active-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  scale: 1.02;
 }
 
 .client-jobs-active-card-img {
+  grid-area: dp;
   width: 3.5em;
-  height: 3.5em;
-  border-radius: 50%;
-  object-fit: cover;
 }
 
 .client-jobs-active-card-title {
+  grid-area: title;
   display: flex;
   flex-direction: column;
   gap: 0.1em;
@@ -540,47 +551,55 @@
   font-weight: 600;
 }
 
+.client-jobs-active-card-info {
+  font-weight: 400;
+  color: #5b5b5b;
+  font-size: smaller;
+}
+
+.client-jobs-active-card-threedot {
+  grid-area: btn;
+  padding: 0.5em;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
 .client-jobs-active-card-summary {
+  grid-area: summary;
+  display: flex;
+  flex-direction: column;
   font-weight: 600;
+  gap: 0.2em;
 }
 
 .client-jobs-active-card-summary-des {
-  width: 100%;
+  width: 90%;
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 400;
-  font-size: 0.9rem;
+  font-size: smaller;
 }
 
-.company-job-card-box {
-  background-color: #0b0b45;
-  padding: 0.5em 1em;
-  border-radius: 10px;
-  color: #fff;
+.client-jobs-active-card-box {
+  grid-area: box;
+  padding: 0.5em;
+  border: 1px solid #e7e7e7;
+  border-radius: 4px;
 }
 
-.client-jobs-active-card-box-sdate,
-.client-jobs-active-card-box-edate {
+.client-jobs-active-card-box-sdate {
+  padding-bottom: 0.5em;
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
+  font-size: smaller;
 }
 
-.company-jobs-card-box-live {
+.client-jobs-active-card-box-edate {
+  padding-top: 0.5em;
+  border-top: 1px solid #e7e7e7;
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  font-size: smaller;
 }
 
-/* ==================== Responsive Breakpoints ==================== */
-@media (max-width: 1200px) {
-  .client-jobs-active-card {
-    max-width: 48%;
-  }
-}
-
-@media (max-width: 768px) {
-  .client-jobs-active-card {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-}
+/* --- */
