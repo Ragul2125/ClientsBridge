@@ -36,7 +36,6 @@
 
 .company-jobs-tabs-titles {
   padding: 1em;
-  padding-top: 2em;
   font-family: "Outfit", system-ui;
 }
 
@@ -223,10 +222,7 @@
   align-items: center;
 }
 .company-jobs-card-box-dp {
-  border-radius: 50%;
   width: 1.5em;
-  height: 1.5em;
-  object-fit: cover;
   margin-right: 0.5em;
 }
 
@@ -291,9 +287,8 @@
       height: 270px;
       padding: 1.5em;
       display: flex;
-      /* justify-content: space-between; */
+      justify-content: space-between;
       flex-direction: column;
-      gap: 1em;
       border-radius: 20px;
       background-color: #f4f5f9;
       font-family: "outfit", sans-serif;
@@ -313,7 +308,7 @@
         font-weight: bold;
         .company-jobs-active-card-summary-des {
           width: 100%;
-          font-size: 16px;
+          font-size: 15px;
         }
       }
       .info-content {
@@ -338,7 +333,6 @@
     }
 
     .company-jobs-active-card:hover {
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
       scale: 1.02;
     }
     .company-jobs-active-card-img {
@@ -355,7 +349,7 @@
       font-weight: 600;
     }
     .company-jobs-active-card-summary-des {
-      width: 90%;
+      width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
       font-weight: 400;
