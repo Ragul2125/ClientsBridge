@@ -24,11 +24,14 @@ export default function AdminPanel() {
   useEffect(() => {
     async function summa() {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/log`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/log`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         console.log("logger runs");
       } catch (error) {
         if (error.status == 401) {

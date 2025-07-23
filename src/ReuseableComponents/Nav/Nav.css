@@ -241,6 +241,9 @@
     display: flex;
     align-items: center;
     gap: 1em;
+    .navproimg {
+      height: 40px;
+    }
   }
 }
 

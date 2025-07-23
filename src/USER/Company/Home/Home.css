@@ -19,7 +19,7 @@
   flex-direction: column;
   overflow: scroll;
   background-color: var(--white);
-    animation: cup 0.4s ease-in;
+  animation: cup 0.4s ease-in;
 }
 
 /* ==========================================================company-home-search-section========================================== */
@@ -101,13 +101,13 @@
 }
 
 .company-home-cards-section-container {
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%; /* Ensure container takes full width */
+  display: grid; /* Changed from flex to grid */
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 2rem;
   padding: 2rem 3em;
 }
 .company-home-card {
-  width: 425px;
   height: 260px;
   padding: 1em;
   border-radius: 20px;
@@ -339,26 +339,25 @@
   outline: none;
 }
 
-    .company-home-bidded-view-container-btn {
-      display: flex;
-      justify-content: flex-end;
-      padding-top: 2em;
+.company-home-bidded-view-container-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 2em;
 
-      button {
-        padding: 0.8em 3em;
-        border-radius: 10px;
-        outline: none;
-        border: none;
-        background-color: var(--blue);
-        color: var(--white);
-      }
-    }
-  
+  button {
+    padding: 0.8em 3em;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    background-color: var(--blue);
+    color: var(--white);
+  }
+}
 
 @media (max-width: 1100px) {
   .company-home-search-section {
     padding: 1em 1em;
-    .company-home-search-text-des{
+    .company-home-search-text-des {
       width: 100%;
       font-size: medium;
       text-align: justify;
@@ -368,16 +367,16 @@
       padding-bottom: 0.5em;
     }
   }
-  .company-home-cards-section{
+  .company-home-cards-section {
     overflow: visible;
   }
-  .company-home-cards-section-container{
+  .company-home-cards-section-container {
     padding: 0 1em;
-    
-    .company-home-card{
+
+    .company-home-card {
       flex-grow: 1;
     }
-    .company-home-card:last-child{
+    .company-home-card:last-child {
       margin-bottom: 2em;
     }
   }

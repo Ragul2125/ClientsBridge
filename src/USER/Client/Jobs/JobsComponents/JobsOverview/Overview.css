@@ -6,6 +6,20 @@
   flex-direction: column;
   padding: 1em;
 }
+.client-jobs-view-main > .client-profileoverview-inner {
+  flex: 1; /* Allows this panel to grow and take available space */
+  height: 100%; /* Fix: Make it take full container height */
+  max-height: calc(100vh - 2em); /* Adjust based on padding */
+  background-color: white;
+  border-radius: 15px;
+  padding: 2.5em;
+  overflow-y: auto; /* Enable vertical scrolling within the panel */
+
+  /* Fix: Change from grid to flex for better vertical stacking */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em; /* Adds space between the header and the description */
+}
 
 .client-profileoverview-inner {
   background-color: #ffffff;
@@ -248,10 +262,9 @@
   width: 100%;
   background-color: var(--white);
   display: flex;
-  align-items: center;
-  justify-content: space-around;
   font-family: "Outfit", system-ui;
   padding: 1em;
+  gap: 1em;
   p,
   li {
     font-size: medium;
@@ -311,13 +324,18 @@
 
   .client-jobs-view-main-bidded {
     width: 30%;
-    height: 95%;
+    min-width: 350px; /* Fix: Added a minimum width to ensure visibility */
+    height: 100%; /* Fix: Make it take full container height */
+    max-height: calc(100vh - 2em);
     background-color: #fff;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 1em;
+    padding: 1.5em 1em;
+    overflow-y: auto; /* Use 'auto' for scrolling only when needed */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     .client-jobs-view-main-bidded-cards {
       width: 90%;
       background-color: #f4f5f9;
