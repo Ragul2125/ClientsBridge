@@ -18,9 +18,8 @@
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  background-color: var(--white);   
+  background-color: var(--white);
   animation: cup 0.4s ease-in;
- 
 }
 
 .company-jobs-tabs-container {
@@ -29,7 +28,7 @@
   flex-direction: column;
   align-items: start;
   padding-top: 1em;
-  .title-des{
+  .title-des {
     padding-left: 2em;
     color: #0b0b45;
     font-weight: bold;
@@ -82,7 +81,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-
 }
 
 .company-jobs-search-section {
@@ -91,7 +89,6 @@
   gap: 0.7em;
   justify-content: center;
   background-color: var(--white);
-  
 }
 
 .company-jobs-search-input {
@@ -279,18 +276,22 @@
       color: white;
     }
   }
+  .company-jobs-active-cards-container:has(
+      .company-jobs-active-card + .company-jobs-active-card
+    ) {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  }
   .company-jobs-active-cards-container {
     max-height: 85%;
     padding: 2em;
     padding-top: 0;
-    display: flex;
-    justify-content: safe;
+    display: grid;
+    justify-content: start;
     align-items: start;
     flex-wrap: wrap;
     gap: 2em;
     overflow: scroll;
     .company-jobs-active-card {
-      width: 400px;
       height: 270px;
       padding: 1.5em;
       display: flex;

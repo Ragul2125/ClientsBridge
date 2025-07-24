@@ -6,6 +6,7 @@ import profileImg from "../../assets/image/profileImg.svg";
 import more from "../../assets/image/more.svg";
 import { GoArrowUpRight } from "react-icons/go";
 import { Link } from "react-router-dom";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 const TopNav = () => {
   const [gsearch, setgsearch] = useState("");
@@ -23,6 +24,10 @@ const TopNav = () => {
   const filteredSuggestions = suggestions.filter((suggestion) =>
     suggestion.name.toLowerCase().includes(gsearch.toLowerCase())
   );
+
+  const { data, error, loading, refetch } = useAxiosFetch("/log");
+
+  console.log(data);
 
   return (
     <>
@@ -44,10 +49,14 @@ const TopNav = () => {
           />
         </div>
         <div className="profile">
-          <img src={profileImg} alt="profileImg" />
+          <img
+            src={data?.profilePic || profileImg}
+            className="navproimg"
+            alt="profileImg"
+          />
           <div className="profile-about">
-            <h4>Jayasree</h4>
-            <p>Admin</p>
+            <h4>{data?.name || "Jayasree"}</h4>
+            <p>{data?.role || "Admin"}</p>
           </div>
           <img src={more} alt="more" />
         </div>
