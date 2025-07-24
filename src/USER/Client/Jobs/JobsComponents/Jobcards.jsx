@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../Jobs.css";
 import dp from "../../../assets/userdp.svg";
 import { GoSearch } from "react-icons/go";
@@ -95,26 +95,37 @@ export default function ActiveJobs() {
               onClick={() => navigate(`/client/jobs/${jobStatus}/${job._id}`)}
             >
               <div className="info-content">
-                <div className="card-info">
-                  <img
-                    className="client-jobs-active-card-img"
-                    src={job.clientID.profilePic || dp}
-                    alt="dp"
-                  />
-                  <p className="client-jobs-active-card-title">
-                    {job.postTitle}
-                  </p>
-                </div>
-                <div className="client-jobs-active-card-cost">
-                  {"₹ " + job.budget}
+                <div className="info-top">
+                  <div className="card-info">
+                    <img
+                      className="client-jobs-active-card-img"
+                      src={job.clientID.profilePic || dp}
+                      alt="dp"
+                    />
+                    <p className="client-jobs-active-card-title">
+                      {job.postTitle}
+                    </p>
+                  </div>
+                  <div className="client-jobs-active-card-cost">
+                    {"₹ " + job.budget}
+                  </div>
                 </div>
                 <p className="client-jobs-active-card-summary">
                   Summary
                   <p className="client-jobs-active-card-summary-des">
                     {job.description.substring(0, 100) + "..."}
                   </p>
+
                 </p>
               </div>
+              {jobStatus === "unassigned" && (
+                <Link
+                  to={`${job._id}`}
+                  className="client-jobs-unassigned-project-card-btn"
+                >
+                  View more
+                </Link>
+              )}
               {jobStatus === "active" && (
                 <div className="company-job-card-box">
                   <p className="company-jobs-card-box-sdate">

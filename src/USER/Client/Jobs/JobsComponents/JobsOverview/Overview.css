@@ -55,6 +55,7 @@
 }
 
 .client-profileoverview-inner-des {
+  height: 620px;
   grid-area: des;
   margin-left: 1.5em;
   font-family: "poppins";
@@ -135,10 +136,12 @@
 
 .client-oncooverview-inner {
   /* width: 70%; */
+  height: 800px;
   grid-area: long;
   margin: 1em;
   border-radius: 20px;
   transition-duration: 0.2s;
+  /* overflow: scroll; */
 }
 
 .client-oncooverview-inner:hover {
@@ -146,7 +149,7 @@
 }
 
 .client-oncooverview-side {
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   padding: 1em;
   margin: 1em;
   margin-left: 0;
@@ -310,7 +313,9 @@
   }
 
   .client-jobs-view-main-bidded {
-    width: 30%;
+    min-width: 400px;
+    min-height: 200px;
+    padding: 1em;
     height: 95%;
     background-color: #fff;
     border-radius: 15px;
@@ -318,6 +323,7 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 1em;
+    margin: 1em;
     .client-jobs-view-main-bidded-cards {
       width: 90%;
       background-color: #f4f5f9;
