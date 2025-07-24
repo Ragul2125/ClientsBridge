@@ -29,7 +29,7 @@ const JobCard = ({ project }) => {
       <p className="company-home-card-summary">
         Summary
         <p className="company-home-card-summary-des">
-          {project.description.substring(0, 300) + "...."}
+          {project.description.substring(0, 100) + "...."}
         </p>
       </p>
       <Link

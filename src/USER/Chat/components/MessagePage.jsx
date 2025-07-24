@@ -754,7 +754,7 @@ const MessagePage = () => {
               setSelectedUser(null);
             }}
           >
-            Chats{" "}
+            Client Inquiries{" "}
             {conversations.filter((conv) => conv.temp === true).length > 0 &&
               `(${conversations.filter((conv) => conv.temp === true).length})`}
           </button>
@@ -765,7 +765,7 @@ const MessagePage = () => {
               setSelectedUser(null);
             }}
           >
-            Jobs{" "}
+            Project Communication{" "}
             {conversations.filter((conv) => conv.temp === false).length > 0 &&
               `(${conversations.filter((conv) => conv.temp === false).length})`}
           </button>

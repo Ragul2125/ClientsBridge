@@ -67,13 +67,26 @@ select {
     display: none;
   }
 }
+@keyframes cup {
+  from {
+    opacity: 0.5;
+    filter: blur(10px);
+    transform: translateY(5px);
+  }
 
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
 .mobiletop {
   display: none;
 }
 .home-container-chat {
   background-color: #0b0b45;
   height: 100%;
+    animation: cup 0.4s ease-in;
 }
 
 @media (max-width: 1100px) {

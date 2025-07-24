@@ -7,15 +7,8 @@
 
 .content {
     width: calc(100vw - 260px);
-    height: calc(100vh - 65px);
+    height: calc(100vh - 65px) !important;
     position: fixed;
     right: 0;
     bottom: 0;
-}
-
-@media (max-width:1100px) {
-    .content{
-        width: 100vw;
-        position: relative;
-    }
 }

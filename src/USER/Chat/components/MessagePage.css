@@ -96,11 +96,12 @@
   /* width: calc(100% - 1rem); */
   max-width: 100%;
   overflow: hidden;
-  padding: 0em;
+  padding: 1em;
   /* background-color: #0a0a74; */
+
 }
 
-@media (min-width: 640px) {
+@media (min-width: 800px) {
   .chat-area {
     margin: 1rem;
     width: calc(100% - 2rem);
@@ -443,12 +444,13 @@
   left: 0;
   right: 0;
   z-index: 10;
+  
 }
 
 @media (max-width: 639px) {
   .message-input-area {
     position: fixed;
-    bottom: 0;
+    bottom: 3em;
     left: 0;
     right: 0;
   }

@@ -1,3 +1,17 @@
+@keyframes cup {
+  from {
+    opacity: 0.5;
+    filter: blur(10px);
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
 .company-jobs-main {
   width: 100%;
   height: 100%;
@@ -5,11 +19,20 @@
   flex-direction: column;
   overflow: scroll;
   background-color: var(--white);
+  animation: cup 0.4s ease-in;
 }
 
 .company-jobs-tabs-container {
   display: flex;
-  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  align-items: start;
+  padding-top: 1em;
+  .title-des {
+    padding-left: 2em;
+    color: #0b0b45;
+    font-weight: bold;
+  }
 }
 .client-jobs-active-card-img {
   height: 50px;
@@ -19,7 +42,6 @@
 
 .company-jobs-tabs-titles {
   padding: 1em;
-  padding-top: 2em;
   font-family: "Outfit", system-ui;
 }
 
@@ -204,9 +226,148 @@
   align-items: center;
 }
 .company-jobs-card-box-dp {
-  border-radius: 50%;
   width: 1.5em;
-  height: 1.5em;
-  object-fit: cover;
   margin-right: 0.5em;
+}
+
+.company-jobs-active-main {
+  height: 90%;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 20px;
+  margin: 0 2em;
+  margin-top: 1em;
+  animation: cup 0.4s ease-in;
+  .company-jobs-active-search-section {
+    padding: 2em 1em;
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 20px;
+
+    .company-jobs-active-search-input {
+      width: 50%;
+      padding: 0.7em 1em;
+      outline: 0;
+      border: none;
+      border-radius: 5px;
+      outline: 1px solid gray;
+      background-color: transparent;
+      font-family: "poppins";
+    }
+    .company-jobs-unassigned-search-btn {
+      background-color: gray;
+      color: white;
+      padding: 0.7em;
+      display: grid;
+      place-items: center;
+      font-family: "outfit", sans-serif;
+      border-radius: 5px;
+      cursor: pointer;
+      transition-duration: 0.2s;
+    }
+
+    .company-jobs-active-search-btn:hover {
+      background-color: rgb(58, 58, 58);
+      color: white;
+    }
+  }
+  .company-jobs-active-cards-container:has(
+      .company-jobs-active-card + .company-jobs-active-card
+    ) {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  }
+  .company-jobs-active-cards-container {
+    max-height: 85%;
+    padding: 2em;
+    padding-top: 0;
+    display: grid;
+    justify-content: start;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 2em;
+    overflow: scroll;
+    .company-jobs-active-card {
+      height: 270px;
+      padding: 1.5em;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      border-radius: 20px;
+      background-color: #f4f5f9;
+      font-family: "outfit", sans-serif;
+      transition-duration: 0.3s;
+      cursor: pointer;
+      .card-info {
+        display: flex;
+        gap: 1em;
+        img {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+        }
+      }
+      .company-jobs-active-card-summary {
+        padding-bottom: 1em;
+        font-weight: bold;
+        .company-jobs-active-card-summary-des {
+          width: 100%;
+          font-size: 15px;
+        }
+      }
+      .info-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .card-info {
+          display: flex;
+          align-items: center;
+          gap: 1em;
+        }
+        .company-jobs-active-card-summary-des {
+          font-size: 15px;
+        }
+      }
+      .company-job-card-box {
+        background-color: #0b0b45;
+        padding: 0.5em 1em;
+        border-radius: 10px;
+        color: #fff;
+      }
+    }
+
+    .company-jobs-active-card:hover {
+      scale: 1.02;
+    }
+    .company-jobs-active-card-img {
+      grid-area: dp;
+      width: 3.5em;
+    }
+
+    .company-jobs-active-card-title {
+      grid-area: title;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1em;
+      margin-top: 0.3em;
+      font-weight: 600;
+    }
+    .company-jobs-active-card-summary-des {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 400;
+      font-size: smaller;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .company-jobs-active-main {
+    width: 85%;
+  }
 }

@@ -115,7 +115,7 @@ const freelancerNav = [
     label: "Jobs",
     path: "/freelancer/jobs/bidded",
     icon: <GiWallet />,
-    match: (path) => path.includes("/freelancer/jobs"),
+    match: (path) => path === "/freelancer/jobs/bidded"|| path === "/freelancer/jobs/bidded/:id" || path === "/freelancer/jobs/ongoing" || path === "/freelancer/jobs/completed"
   },
   /* {
         name: "Transaction",
