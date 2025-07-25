@@ -1,4 +1,4 @@
-import './jobs.css'
+import './Jobs.css'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 export default function Jobs() {
     const location = useLocation();
