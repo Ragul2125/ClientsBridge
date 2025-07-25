@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./profile.css";
+import "./Profile.css";
 import Rating from "@mui/material/Rating";
 
 import { FaRegEdit } from "react-icons/fa";
