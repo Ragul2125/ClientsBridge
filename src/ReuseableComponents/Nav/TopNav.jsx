@@ -3,7 +3,7 @@ import "./Nav.css";
 import search from "../../assets/image/search.svg";
 import back from "../../assets/image/back.svg";
 import profileImg from "../../assets/image/profileImg.svg";
-import more from "../../assets/image/more.svg";
+import more from "../../assets/image/More.svg";
 import { GoArrowUpRight } from "react-icons/go";
 import { Link } from "react-router-dom";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
