@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import more from "../../../assets/image/more.svg";
+import more from "../../../assets/image/More.svg";
 import orders from "../../../assets/svg/order.svg";
 
 const ActiveProject = ({ stats }) => {
