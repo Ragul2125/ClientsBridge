@@ -15,20 +15,20 @@ const Landing = () => {
   return (
     <Routes>
       <Route index element={<LandingPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/explore" element={<Explore />} />
-      <Route path="/forgot" element={<ForgotPassword />} />
-      <Route path="/changePassword/:secret" element={<ChangePassword />} />
-      <Route path="/signup" element={<SignupPage />} />
-      <Route path="/choice" element={<RegChoice />} />
-      <Route path="/register/client" element={<ClientRegistrationPage />} />
-      <Route path="/register/company" element={<CompanyRegistrationPage />} />
+      <Route path="login" element={<LoginPage />} />
+      <Route path="explore" element={<Explore />} />
+      <Route path="forgot" element={<ForgotPassword />} />
+      <Route path="changePassword/:secret" element={<ChangePassword />} />
+      <Route path="signup" element={<SignupPage />} />
+      <Route path="choice" element={<RegChoice />} />
+      <Route path="register/client" element={<ClientRegistrationPage />} />
+      <Route path="register/company" element={<CompanyRegistrationPage />} />
       <Route
-        path="/register/freelancer"
+        path="register/freelancer"
         element={<FreelancerRegistrationPage />}
       />
-      <Route path="/setup/:id" element={<SetupProfile />} />
-      <Route path="/setup/addProjects/:role" element={<SetupProjects />} />
+      <Route path="setup/:id" element={<SetupProfile />} />
+      <Route path="setup/addProjects/:role" element={<SetupProjects />} />
     </Routes>
   );
 };
