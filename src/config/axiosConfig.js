@@ -5,6 +5,8 @@ const axiosInstance = axios.create({
   timeout: 10000,
 });
 
+console.log(`${import.meta.env.VITE_BACKEND_URL}/api`);
+
 // Add interceptor to attach JWT token
 axiosInstance.interceptors.request.use(
   (config) => {

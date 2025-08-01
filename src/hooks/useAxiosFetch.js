@@ -7,7 +7,8 @@ export default function useAxiosFetch(url, options = {}, immediate = true) {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  console.log(url);
+  
   const fetchData = useCallback(
     async (overrideOptions = {}) => {
       setLoading(true);

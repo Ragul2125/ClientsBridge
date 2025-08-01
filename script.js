@@ -24,6 +24,8 @@ class ChatDashboard {
           import.meta.env.VITE_BACKEND_URL
         }/api/admin/conversations/getconversations`
       );
+      console.log(import.meta.env.VITE_BACKEND_URL);
+      
       const data = await response.json();
       return data.conversations;
     } catch (error) {
