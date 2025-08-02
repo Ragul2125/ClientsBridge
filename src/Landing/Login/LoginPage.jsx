@@ -3,7 +3,8 @@ import axios from "axios";
 import logo from "../../assets/logo.png";
 import "./login.css";
 import { Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router-dom";
+// 1. Import useNavigate along with Link
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -12,28 +13,37 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  // 2. Initialize the navigate function
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      window.location.href = `/${localStorage.getItem("role")}`;
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    // 3. If a user is already logged in, navigate them using React Router
+    if (token && role) {
+      navigate(`/${role}`);
     }
-  }, []);
+    // 4. Add navigate to the dependency array
+  }, [navigate]);
 
   const handleLogin = async (e) => {
     setLoading(true);
     e.preventDefault();
 
-    // Validation
     if (!email || !password) {
       setError("Please fill in all fields.");
+      setLoading(false); // Make sure to stop loading on validation error
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
       setError("Please enter a valid email address.");
+      setLoading(false); // Make sure to stop loading on validation error
       return;
     }
 
-    setError(""); // Clear error if validation passes
+    setError("");
 
     try {
       const response = await axios.post(
@@ -43,22 +53,21 @@ const LoginPage = () => {
           password,
         }
       );
-      console.log(response);
-      // Handle successful login
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", response.data.role);
-        window.location.href = `/${response.data.role}`;
+        // 5. Use navigate here as well after a successful login
+        navigate(`/${response.data.role}`);
       }
-      // Redirect or update UI
     } catch (err) {
-      console.log(err)
       setError(err.response?.data?.message || "Invalid login credentials.");
     } finally {
       setLoading(false);
     }
   };
 
+  // Note: These social logins still use window.location.href, which is correct
+  // because they redirect to an external URL for OAuth. This is fine.
   const googleLogin = () => {
     window.location.href = `${
       import.meta.env.VITE_BACKEND_URL
@@ -73,9 +82,7 @@ const LoginPage = () => {
 
   return (
     <div className="authpg">
-      <div className="auth-title">
-        <img src={logo} alt="ClientsBridge" />
-      </div>
+      {/* ... Rest of your JSX is fine ... */}
       <div className="auth-box login-box">
         <div className="auth-heading">Log In</div>
         <div className="auth-subtext">Please enter your login credentials</div>
