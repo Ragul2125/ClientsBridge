@@ -21,28 +21,28 @@ import axios from "axios";
 
 export default function AdminPanel() {
   const navigate = useNavigate();
-  useEffect(() => {
-    async function summa() {
-      try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/log`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        console.log("logger runs");
-      } catch (error) {
-        if (error.status == 401) {
-          localStorage.clear("token");
-          localStorage.clear("role");
-          navigate("/login");
-        }
-      }
-    }
-    summa();
-  }, []);
+  // useEffect(() => {
+  //   async function summa() {
+  //     try {
+  //       const res = await axios.get(
+  //         `${import.meta.env.VITE_BACKEND_URL}/api/log`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //           },
+  //         }
+  //       );
+  //       console.log("logger runs");
+  //     } catch (error) {
+  //       if (error.status == 401) {
+  //         localStorage.clear("token");
+  //         localStorage.clear("role");
+  //         navigate("/login");
+  //       }
+  //     }
+  //   }
+  //   summa();
+  // }, []);
   return (
     <>
       {/* Top bar for mobile view */}
