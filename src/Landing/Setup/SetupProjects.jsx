@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import Modal from "./Modal"; // A new, reusable Modal component
 import TagsInput from "../Registerations/TagsInput";
 import logo from "../../assets/logo.png";
-import "./Setup.css"; // We'll use a dedicated CSS file
+import "./setup.css"; // We'll use a dedicated CSS file
 
 const initialProjectState = {
   name: "",
