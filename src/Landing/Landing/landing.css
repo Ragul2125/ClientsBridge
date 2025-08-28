@@ -48,7 +48,7 @@
     z-index: 111;
   }
   nav {
-    height: 100px;
+    height: 70px;
     width: 70%;
     margin: 0 15%;
     display: flex;
@@ -56,6 +56,9 @@
     align-items: center;
     z-index: 10;
     position: fixed;
+    /* background: rgba(255, 255, 255, 0.085);
+    backdrop-filter: blur(14.9px);
+    -webkit-backdrop-filter: blur(14.9px); */
     img {
       height: 70px;
     }
@@ -130,10 +133,28 @@
   .services {
     height: 100vh;
     width: 100%;
+    /* padding-top: 0; */
     display: flex;
-    justify-content: center;
+    /* justify-content: space-between; */
+    gap: 12em;
+    flex-direction: column;
     align-items: center;
-
+    .semi-circle {
+      width: 600px;
+      height: 100px; /* half of width */
+      background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.267),
+        rgba(255, 255, 255, 0.228),
+        #a9a9a941
+      );
+      border-bottom-left-radius: 300px;
+      border-bottom-right-radius: 300px;
+      filter: blur(95px);
+      box-shadow: 0 -20px 80px rgba(192, 192, 192, 0.6);
+      position: relative;
+      z-index: 2;
+    }
     .s-in {
       width: 80%;
       max-width: 1200px;
@@ -194,7 +215,8 @@
 
   .features {
     height: auto;
-    padding: 100px 0;
+    padding: 150px 0;
+    padding-bottom: 170px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -221,14 +243,18 @@
         h2 {
           text-align: left;
           font-size: 4rem;
-          margin-bottom: 0;
+          line-height: 1em;
+          /* margin-bottom: 0; */
           color: var(--accent-color);
+          padding-bottom:0.25em ;
         }
 
         p {
           font-size: 1.7rem;
           color: var(--secondary-text-color);
           text-align: left;
+          padding-bottom:0.25em ;
+
         }
       }
 
@@ -242,7 +268,11 @@
           background-color: var(--section-bg-light);
           border-radius: 10px;
           padding: 20px;
-
+          span {
+            display: flex;
+            gap: 0.5em;
+            padding-bottom: 0.5em;
+          }
           h3 {
             margin: 0;
             padding: 0;
@@ -268,6 +298,64 @@
           }
         }
       }
+    }
+  }
+  .products {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+    width: 100%;
+    gap: 1em;
+    .our-services {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      P {
+        font-size: large;
+      }
+    }
+    .non-IT-cards {
+      /* background-color: #fffefe; */
+      width: 100%;
+      padding: 1em 10em;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      cursor: pointer;
+      .card {
+        width: 325px;
+        height: 280px;
+        border-radius: 20px;
+        background-color: #232357;
+        border: 2px solid #2c357b;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+
+        .icons {
+          background-color: #3c3c6a;
+          border-radius: 30px;
+          padding: 1em;
+          height: 105px;
+        }
+        .card-content {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          p {
+            padding-top: 5px;
+            text-align: center;
+            font-size: medium;
+          }
+        }
+      }
+    }
+    p{
+      font-size: large;
     }
   }
 }
@@ -303,23 +391,65 @@
       }
     }
     .services {
-      height: 80vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* height: 80vh; */
       .s-in {
         .serv-content {
+          display: flex;
+          align-items: center;
+          h1{
+            font-size: 3rem;
+            text-align: center;
+          }
           padding: 30px 0;
           p {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
+            text-align: center;
           }
         }
       }
     }
   }
   .features .f-content {
+    padding: 100px;
+    display:flex ;
+    align-items:center ;
     h2 {
-      font-size: 4rem;
+      font-size: 3rem !important;
+      text-align: center !important;
     }
     p {
-      font-size: 1.4rem;
+      font-size: 1.2rem !important;
+      padding-bottom: 1em;
+      text-align: center !important;
+
+    }
+  }
+  .products {
+    display: flex;
+    padding: 10px 20px !important;
+    gap: 0em !important;
+    .our-services {
+      p {
+        text-align: center;
+      }
+    }
+    .non-IT-cards {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1em 0em !important;
+      gap: 1.5em;
+    }
+    p{
+      text-align:center ;
+      padding-bottom: 1em ;
+    }
+    button{
+      margin-bottom: 3em;
     }
   }
 }
