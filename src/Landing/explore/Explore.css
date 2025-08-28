@@ -14,9 +14,7 @@
     font-size: 1.3rem;
     gap: 0.7em;
     color: var(--blue);
-    background: rgba(255, 255, 255, 0.085);
-    backdrop-filter: blur(14.9px);
-    -webkit-backdrop-filter: blur(14.9px);
+    
 }
 
 

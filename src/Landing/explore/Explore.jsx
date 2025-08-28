@@ -141,7 +141,7 @@ export default function Explore() {
           </div>
         </div>
       </section>
-      <section className="home-howcanwehelp-container">
+      {/* <section className="home-howcanwehelp-container">
         <div className="howcanwehelp-txt-container">
           <h2 className="howcanwehelp-head">How can we help your business?</h2>
           <p className="howcanwehelp-txt">
@@ -201,6 +201,9 @@ export default function Explore() {
             </div>
           </div>
         </div>
+      </section> */}
+      <section className="ourproduct">
+
       </section>
       <section className="profile-section">
         <h2 className="section-title">Unleash Your Potential Today!</h2>
