@@ -74,7 +74,7 @@ const LandingPage = () => {
         </nav>
         <div className="land-home">
           <h2>Welcome To</h2>
-          <h1>Clientsbridge</h1>
+          <h1>ClientsBridge</h1>
           <button onClick={handleSignup}>Explore </button>
         </div>{" "}
       </div>
@@ -90,7 +90,7 @@ const LandingPage = () => {
               full potential in the freelancing world.
             </p>
             <button onClick={handleSignup} className="content-button">
-              Try it now
+              Join Now
             </button>
           </div>
         </div>
@@ -146,7 +146,7 @@ const LandingPage = () => {
         <div className="our-services">
           <h1>Our Services </h1>
           <p>
-            Comprehensive IT and Non-IT solutions designed to accelerate your
+            Comprehensive solutions designed to accelerate your
             buisness growth and digital transformation
           </p>
         </div>

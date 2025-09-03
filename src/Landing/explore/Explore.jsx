@@ -3,8 +3,14 @@ import "./Explore.css";
 import { RiPulseLine } from "react-icons/ri";
 import { FiLock } from "react-icons/fi";
 import { FiTrendingUp } from "react-icons/fi";
-import { FaBolt, FaLock, FaHeart, FaChartLine } from "react-icons/fa";
-
+import {
+  FaBolt,
+  FaLock,
+  FaHeart,
+  FaChartLine,
+  FaArrowRight,
+} from "react-icons/fa";
+import { MdOutlineAutoGraph } from "react-icons/md";
 import logoblu from "../../assets/logoblu.svg";
 import slide1 from "../../assets/slide1.svg";
 import slide2 from "../../assets/slide2.svg";
@@ -47,7 +53,138 @@ export default function Explore() {
   const handleDotClick = (index) => {
     setCurrentSlide(index);
   };
+  const services = [
+    {
+      title: "Business & Compliance",
+      items: [
+        "Contract drafting",
+        "Legal research",
+        "Trademark/Patent filing",
+        "Regulatory Documentation",
+        "Tax and GST filing",
+        "Virtual assistance",
+        "Data entry",
+        "Customer support",
+      ],
+    },
+    {
+      title: "Content & Publishing",
+      items: [
+        "Content development",
+        "Translation",
+        "Transcription",
+        "Copyediting",
+        "Proof reading",
+        "Artwork",
+        "Alt text writing",
+        "Document formatting",
+      ],
+    },
+    {
+      title: "Creative & Design",
+      items: [
+        "Graphic designing",
+        "Logo designing",
+        "Brand identity creation",
+        "Packaging design",
+        "Motion graphics",
+      ],
+    },
 
+    {
+      title: "Web & App Development",
+      items: [
+        "Custom web application development",
+        "Mobile app development",
+        "Desktop software development",
+        "API development & integration",
+        "E-commerce website development",
+        "CMS development (WordPress, Drupal, etc.)",
+      ],
+    },
+    {
+      title: "Front-end, Back-end & Full-stack",
+      items: [
+        "Front-end development (React, Angular, Vue)",
+        "Back-end development (Node.js, Django, Laravel, etc.)",
+        "Full-stack development",
+        "Progressive Web Apps (PWAs)",
+        "Single Page Applications (SPAs)",
+      ],
+    },
+    {
+      title: "Cloud & DevOps",
+      items: [
+        "Cloud architecture & migration (AWS, Azure, GCP)",
+        "Infrastructure setup & automation",
+        "CI/CD pipeline implementation",
+        "Server administration & monitoring",
+        "Containerization (Docker, Kubernetes)",
+        "Cloud security & optimization",
+      ],
+    },
+    {
+      title: "AI, Data & Automation",
+      items: [
+        "Data analytics & BI reporting",
+        "Data warehousing & ETL services",
+        "Machine learning model development",
+        "Chatbot & virtual assistant development",
+        "Computer vision & NLP solutions",
+        "Database design & administration",
+      ],
+    },
+    {
+      title: "Cybersecurity & Compliance",
+      items: [
+        "Penetration testing & vulnerability assessment",
+        "Network security services",
+        "Endpoint protection solutions",
+        "Security audits & compliance",
+        "Disaster recovery planning",
+      ],
+    },
+    {
+      title: "Emerging Technologies",
+      items: [
+        "Blockchain development",
+        "IoT solutions",
+        "AR/VR application development",
+        "Web3 & DApp development",
+      ],
+    },
+    {
+      title: "Maintenance & Support",
+      items: [
+        "Website and software maintenance",
+        "Bug fixing & performance optimization",
+        "IT helpdesk services",
+        "Remote tech support",
+      ],
+    },
+    {
+      title: "Quality Assurance & Testing",
+      items: [
+        "Manual & automated testing",
+        "Mobile & web app testing",
+        "Security & performance testing",
+        "Usability testing",
+      ],
+    },
+    {
+      title: "IT Consulting & Architecture",
+      items: [
+        "Technology strategy consulting",
+        "Software architecture design",
+        "IT infrastructure consulting",
+        "System integration planning",
+      ],
+    },
+    {
+      title: "Industry Solutions",
+      items: ["FMCG - Coming soon", "Pharma - Coming soon"],
+    },
+  ];
   return (
     <div className="home-container">
       <nav className="home-nav">
@@ -202,16 +339,40 @@ export default function Explore() {
           </div>
         </div>
       </section> */}
-      <section className="ourproduct">
-
+      <section className="explore-our-services-section">
+        <h2 className="section-tit">
+          Explore our <span>Services</span>
+        </h2>
+        <p className="section-description">
+          Comprehensive service tailored to meet your business models
+        </p>
+        <div className="explore-service-div">
+          {services.map((service, index) => (
+            <div key={index} className="service-card">
+              <h3 className="service-card-title">
+                <MdOutlineAutoGraph /> {service.title}
+              </h3>
+              <ul className="list-card">
+                {service.items.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+              <p className="learn-more">
+                Learn more <FaArrowRight />
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
       <section className="profile-section">
         <h2 className="section-title">Unleash Your Potential Today!</h2>
         <h3 className="section-subtitle">Elevate Your Profile</h3>
         <div className="card-container">
           <div className="card">
-            <FaBolt className="card-icon" />
-            <h4 className="card-title">Customize Skills</h4>
+            <span>
+              <FaBolt className="card-icon" />
+              <h4 className="card-title">Customize Skills</h4>
+            </span>
             <p className="card-description">
               Tailor your profile with a range of skills and expertise.
             </p>
@@ -220,8 +381,10 @@ export default function Explore() {
             </a>
           </div>
           <div className="card">
-            <FaHeart className="card-icon" />
-            <h4 className="card-title">Showcase Portfolio</h4>
+            <span>
+              <FaHeart className="card-icon" />
+              <h4 className="card-title">Showcase Portfolio</h4>
+            </span>
             <p className="card-description">
               Highlight your best work with ease for potential clients to see.
             </p>
@@ -230,8 +393,10 @@ export default function Explore() {
             </a>
           </div>
           <div className="card">
-            <FaLock className="card-icon" />
-            <h4 className="card-title">Professional Networking</h4>
+            <span>
+              <FaLock className="card-icon" />
+              <h4 className="card-title">Professional Networking</h4>
+            </span>
             <p className="card-description">
               Connect with industry professionals to expand your opportunities.
             </p>
@@ -240,8 +405,11 @@ export default function Explore() {
             </a>
           </div>
           <div className="card">
-            <FaChartLine className="card-icon" />
-            <h4 className="card-title">Boost Visibility</h4>
+            <span>
+              {" "}
+              <FaChartLine className="card-icon" />
+              <h4 className="card-title">Boost Visibility</h4>
+            </span>
             <p className="card-description">
               Increase your visibility and attract more clients with a standout
               profile.
@@ -260,7 +428,7 @@ export default function Explore() {
             We build readymade websites, mobile applications, and elaborate
             online business services.
           </p>
-          <div className="footer-social">
+          {/* <div className="footer-social">
             <a href="#" aria-label="Facebook">
               <img src="/facebook-icon.png" alt="Facebook" />
             </a>
@@ -270,7 +438,7 @@ export default function Explore() {
             <a href="#" aria-label="LinkedIn">
               <img src="/linkedin-icon.png" alt="LinkedIn" />
             </a>
-          </div>
+          </div> */}
         </div>
         <div className="footer-section">
           <h4>What We Do</h4>
