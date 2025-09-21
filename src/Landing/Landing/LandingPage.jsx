@@ -131,6 +131,18 @@ const LandingPage = () => {
                 communication.
               </p>
             </li>
+            <li>
+              <span>
+                <img src={vector} alt="vector" />
+                <h3>For Companies</h3>
+              </span>
+              <p>
+                Find and hire skilled freelancers with ease. Manage projects,
+                ensure secure payments, and build long-term partnerships to
+                scale your business efficiently.
+              </p>
+            </li>
+
             {/* <li>
               <h3>For Client</h3>
               <p>
