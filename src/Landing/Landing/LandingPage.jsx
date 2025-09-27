@@ -55,7 +55,7 @@ const LandingPage = () => {
   ];
   const Navigate = useNavigate();
   const handleExplore = () => {
-    Navigate("/explore");
+    Navigate("/signup");
   };
 
   return (
