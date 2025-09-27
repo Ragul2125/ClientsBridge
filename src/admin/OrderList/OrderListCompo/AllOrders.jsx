@@ -23,7 +23,7 @@ export default function AllOrders() {
   const getDescFromPath = (pathname = window.location.pathname) => {
     if (pathname.includes("pending")) return "Needs your approval";
     if (pathname.includes("active"))
-      return "Open for bidding or has been suggested a list of freelancers / comapnies";
+      return "Open for bidding or suggested freelancers/companies";
     if (pathname.includes("ongoing"))
       return "A Freelancers / Company has been assigned and doing the job";
     if (pathname.includes("satisfied"))

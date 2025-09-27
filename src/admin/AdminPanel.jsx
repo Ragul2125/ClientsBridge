@@ -1,5 +1,6 @@
 import profileImg from "../assets/image/profileImg.svg";
 import { Outlet, Routes, Route, useNavigate } from "react-router-dom";
+import { IoLogOutOutline } from "react-icons/io5";
 
 // Components
 import SideMenu from "../ReuseableComponents/Nav/SideMenu.jsx";
@@ -43,6 +44,11 @@ export default function AdminPanel() {
   //   }
   //   summa();
   // }, []);
+   const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <>
       {/* Top bar for mobile view */}
@@ -50,7 +56,12 @@ export default function AdminPanel() {
         <div className="logocon">
           <h3>CLIENTSBRIDGE</h3>
         </div>
-        <img className="userdp" src={profileImg} alt="profile" />
+        <span>
+          <img className="userdp" src={profileImg} alt="profile" />
+          <div className="logout-icon">
+            <p onClick={logout} ><IoLogOutOutline /></p>
+          </div>
+        </span>
       </div>
 
       {/* Main Admin Container */}

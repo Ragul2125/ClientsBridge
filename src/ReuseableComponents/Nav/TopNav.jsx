@@ -58,7 +58,6 @@ const TopNav = () => {
             <h4>{data?.name || "Jayasree"}</h4>
             <p>{data?.role || "Admin"}</p>
           </div>
-          <img src={more} alt="more" />
         </div>
 
         {gsearch && (

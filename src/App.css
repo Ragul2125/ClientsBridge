@@ -96,6 +96,18 @@ select {
     width: 100vw;
     padding: 0.7em 1em;
     background-color: var(--blue);
+    span{
+      display:flex ;
+      align-items: center;
+      gap: 1em;
+      color: white;
+      .logout-icon{
+        p{
+          font-size: x-large;
+          cursor: pointer;
+        }
+      }
+    }
   }
 
   .logocon {
