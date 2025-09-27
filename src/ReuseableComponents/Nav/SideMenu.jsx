@@ -197,7 +197,7 @@ const SideMenu = () => {
             {item.icon}
           </Link>
         ))}
-        {["Client", "Company", "Freelancer"].some((role) =>
+        {["Client", "Company", "Freelancer","client", "company", "freelancer"].some((role) =>
           location.pathname.includes(role)
         ) ? (
           <div className="Logout" style={{ color: "white", cursor: "pointer" }}>
