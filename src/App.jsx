@@ -18,7 +18,7 @@ function App() {
         <Route path="/*" element={<Landing />} />
         <Route path="/test" element={<Chat />} />
         <Route path="/admin/*" element={<AdminPanel />} />
-        <Route path="/callback/:token/:role" element={<Callback />} />
+        <Route path="/callback/:token" element={<Callback />} />
         <Route path="/client/*" element={<ClientLayout />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/company/*" element={<CompanyLayout />} />

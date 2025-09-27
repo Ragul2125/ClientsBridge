@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 
 const Callback = () => {
-  const { token, role } = useParams();
+  const { token } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const role = searchParams.get("role");
   const navigate = useNavigate();
 
   useEffect(() => {
