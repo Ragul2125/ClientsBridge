@@ -164,6 +164,7 @@ export default function Explore() {
         "Brand identity creation",
         "Packaging design",
         "Motion graphics",
+        "UI/UX design",
       ],
     },
 
@@ -186,6 +187,7 @@ export default function Explore() {
         "Full-stack development",
         "Progressive Web Apps (PWAs)",
         "Single Page Applications (SPAs)",
+        "Mobile app development (React Native, Flutter)",
       ],
     },
     {
@@ -217,7 +219,7 @@ export default function Explore() {
         "Network security services",
         "Endpoint protection solutions",
         "Security audits & compliance",
-        "Disaster recovery planning",
+        // "Disaster recovery planning",
       ],
     },
     {

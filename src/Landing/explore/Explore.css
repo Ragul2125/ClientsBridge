@@ -413,7 +413,7 @@
   text-decoration: underline;
 }
 
-/* -----------------Footer------------------ */
+/* -----------------Footer------------------
 .footer {
   display: flex;
   justify-content: space-between;
@@ -469,7 +469,7 @@
 .footer-social a img {
   width: 24px;
   height: 24px;
-}
+} */
 
 .explore-our-services-section {
   width: 100%;
@@ -594,8 +594,9 @@
   width: 100%;
   list-style: none;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 0.2em;
+  gap: 1em;
   padding-left: 1em;
   li {
     width: 45%;
@@ -614,7 +615,11 @@
 }
 
 
-
+@media (max-width : 1100px) {
+  .service-card{
+    width: 85%;
+  }
+}
 @media (max-width:800px) {
     .home-carousel-container{
         height: 80%;
@@ -652,4 +657,56 @@
     .whatwedo-do2-img{
         width: 100%;
     }
+}
+
+
+
+.footer {
+  background:var(--blue);
+  color: #fff;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.footer h4 {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: #f1f1f1;
+}
+
+.footer p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #ccc;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer ul li {
+  margin-bottom: 10px;
+}
+
+.footer ul li a {
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer ul li a:hover {
+  color: #fff;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .footer {
+    text-align: center;
+  }
+  .footer-section {
+    margin-bottom: 20px;
+  }
 }
