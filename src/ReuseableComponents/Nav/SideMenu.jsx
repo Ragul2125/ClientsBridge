@@ -11,6 +11,7 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { GiWallet } from "react-icons/gi";
 import { IoShieldCheckmark, IoLogOutOutline } from "react-icons/io5";
 import { BiHomeAlt2 } from "react-icons/bi";
+import { color } from "framer-motion";
 
 const adminNav = [
   {
@@ -115,7 +116,11 @@ const freelancerNav = [
     label: "Jobs",
     path: "/freelancer/jobs/bidded",
     icon: <GiWallet />,
-    match: (path) => path === "/freelancer/jobs/bidded"|| path === "/freelancer/jobs/bidded/:id" || path === "/freelancer/jobs/ongoing" || path === "/freelancer/jobs/completed"
+    match: (path) =>
+      path === "/freelancer/jobs/bidded" ||
+      path === "/freelancer/jobs/bidded/:id" ||
+      path === "/freelancer/jobs/ongoing" ||
+      path === "/freelancer/jobs/completed",
   },
   /* {
         name: "Transaction",
@@ -192,6 +197,17 @@ const SideMenu = () => {
             {item.icon}
           </Link>
         ))}
+        {["Client", "Company", "Freelancer"].some((role) =>
+          location.pathname.includes(role)
+        ) ? (
+          <div className="Logout" style={{ color: "white", cursor: "pointer" }}>
+            <h2 onClick={logout}>
+              <IoLogOutOutline />
+            </h2>
+          </div>
+        ) : (
+          ""
+        )}
       </nav>
     </>
   );

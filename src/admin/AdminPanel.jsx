@@ -1,5 +1,6 @@
 import profileImg from "../assets/image/profileImg.svg";
 import { Outlet, Routes, Route, useNavigate } from "react-router-dom";
+import { IoLogOutOutline } from "react-icons/io5";
 
 // Components
 import SideMenu from "../ReuseableComponents/Nav/SideMenu.jsx";
@@ -21,28 +22,33 @@ import axios from "axios";
 
 export default function AdminPanel() {
   const navigate = useNavigate();
-  useEffect(() => {
-    async function summa() {
-      try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/log`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        console.log("logger runs");
-      } catch (error) {
-        if (error.status == 401) {
-          localStorage.clear("token");
-          localStorage.clear("role");
-          navigate("/login");
-        }
-      }
-    }
-    summa();
-  }, []);
+  // useEffect(() => {
+  //   async function summa() {
+  //     try {
+  //       const res = await axios.get(
+  //         `${import.meta.env.VITE_BACKEND_URL}/api/log`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //           },
+  //         }
+  //       );
+  //       console.log("logger runs");
+  //     } catch (error) {
+  //       if (error.status == 401) {
+  //         localStorage.clear("token");
+  //         localStorage.clear("role");
+  //         navigate("/login");
+  //       }
+  //     }
+  //   }
+  //   summa();
+  // }, []);
+   const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <>
       {/* Top bar for mobile view */}
@@ -50,7 +56,12 @@ export default function AdminPanel() {
         <div className="logocon">
           <h3>CLIENTSBRIDGE</h3>
         </div>
-        <img className="userdp" src={profileImg} alt="profile" />
+        <span>
+          <img className="userdp" src={profileImg} alt="profile" />
+          <div className="logout-icon">
+            <p onClick={logout} ><IoLogOutOutline /></p>
+          </div>
+        </span>
       </div>
 
       {/* Main Admin Container */}

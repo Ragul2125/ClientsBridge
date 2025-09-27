@@ -10,3 +10,17 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+:root {
+  --primary-color: #001f54;
+  --secondary-color: #00337a;
+  --light-gray: #f4f7f9;
+  --medium-gray: #d0d0d0;
+  --dark-gray: #333;
+  --text-color: #333;
+  --white-color: #ffffff;
+  --danger-color: #d9534f;
+  --success-color: #5cb85c;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}

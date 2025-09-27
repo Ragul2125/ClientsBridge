@@ -1,44 +1,62 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../config/axiosConfig";
 
 export default function useAxiosFetch(url, options = {}, immediate = true) {
-  const stableOptions = useMemo(() => options, []); // memoize once
+  const stableOptions = useMemo(() => JSON.stringify(options), [options]);
 
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  console.log(url);
-  
+  const [loading, setLoading] = useState(immediate);
+  const navigate = useNavigate();
+
   const fetchData = useCallback(
-    async (overrideOptions = {}) => {
+    async (overrideOptions = {}, signal) => {
       setLoading(true);
       setError("");
       try {
+        const parsedOptions = JSON.parse(stableOptions);
         const response = await axiosInstance({
           url,
-          method: stableOptions.method || "GET",
-          ...stableOptions,
+          method: parsedOptions.method || "GET",
+          ...parsedOptions,
           ...overrideOptions,
+          signal,
         });
-        if (response.status == 401) {
-          window.location.href = "/login";
-        }
         setData(response.data);
         return response.data;
       } catch (err) {
-        setError(err.response?.data?.message || err.message || "Unknown error");
+        if (err.name === "CanceledError") {
+          return null;
+        }
+        if (err.response?.status === 401) {
+          navigate("/login");
+        }
+        setError(
+          err.response?.data?.message ||
+            err.message ||
+            "An unknown error occurred"
+        );
         return null;
       } finally {
-        setLoading(false);
+        if (signal?.aborted !== true) {
+          setLoading(false);
+        }
       }
     },
-    [url, stableOptions]
+    [url, stableOptions, navigate]
   );
 
   useEffect(() => {
+    const controller = new AbortController();
+
     if (immediate) {
-      fetchData();
+      fetchData({}, controller.signal);
     }
+
+    return () => {
+      controller.abort();
+    };
   }, [fetchData, immediate]);
 
   return { data, error, loading, refetch: fetchData };

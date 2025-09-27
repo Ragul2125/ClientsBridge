@@ -39,6 +39,26 @@ const slides = [
   },
 ];
 
+const whatWeDo = [
+  {
+    icon: RiPulseLine,
+    title: "Bridge for Collaboration",
+    description:
+      "Seamlessly connect clients, freelancers, and companies to work together.",
+  },
+  {
+    icon: FiLock,
+    title: "Secure Project Execution",
+    description:
+      "Ensure trust, transparency, and smooth implementation from idea to delivery.",
+  },
+  {
+    icon: FiTrendingUp,
+    title: "Turn Ideas into Projects",
+    description:
+      "Transform innovative ideas into real, successful projects with expert teams.",
+  },
+];
 export default function Explore() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -53,6 +73,62 @@ export default function Explore() {
   const handleDotClick = (index) => {
     setCurrentSlide(index);
   };
+
+  // ✅ Array data for profile section
+  const profileCards = [
+    {
+      cardClass: "card",
+      icon: FaBolt,
+      iconClass: "card-icon",
+      titleClass: "card-title",
+      title: "Connect with Talent",
+      descriptionClass: "card-description",
+      description:
+        "Seamlessly connect with freelancers and companies to bring your ideas to life.",
+      linkClass: "card-link",
+      linkText: "Discover More",
+      linkHref: "#",
+    },
+    {
+      cardClass: "card",
+      icon: FaHeart,
+      iconClass: "card-icon",
+      titleClass: "card-title",
+      title: "Build Strong Partnerships",
+      descriptionClass: "card-description",
+      description:
+        "Foster long-lasting relationships between clients, freelancers, and businesses.",
+      linkClass: "card-link",
+      linkText: "Explore Further",
+      linkHref: "#",
+    },
+    {
+      cardClass: "card",
+      icon: FaLock,
+      iconClass: "card-icon",
+      titleClass: "card-title",
+      title: "Secure Collaboration",
+      descriptionClass: "card-description",
+      description:
+        "Ensure trust and transparency while collaborating on projects from start to finish.",
+      linkClass: "card-link",
+      linkText: "Learn More",
+      linkHref: "#",
+    },
+    {
+      cardClass: "card",
+      icon: FaChartLine,
+      iconClass: "card-icon",
+      titleClass: "card-title",
+      title: "Transform Ideas",
+      descriptionClass: "card-description",
+      description:
+        "Turn innovative ideas into successful working projects with expert support.",
+      linkClass: "card-link",
+      linkText: "Get Started Now",
+      linkHref: "#",
+    },
+  ];
   const services = [
     {
       title: "Business & Compliance",
@@ -228,123 +304,49 @@ export default function Explore() {
       <section className="home-whatwecando-container">
         <h2 className="home-whatwecando-head">What we can do ?</h2>
         <div className="home-whatwecando-do-container">
-          <div className="whatwedo">
-            <p className="whatwedo-icon">
-              <RiPulseLine />
-            </p>
-            <p className="whatwedo-txt">
-              <b>Diverse Talent Pool</b>
-            </p>
-            <p className="whatwedo-txt">
-              Access clients, freelancers, and companies.
-            </p>
-          </div>
-          <div className="whatwedo">
-            <p className="whatwedo-icon">
-              <FiLock />
-            </p>
-            <p className="whatwedo-txt">
-              <b>Diverse Talent Pool</b>
-            </p>
-            <p className="whatwedo-txt">
-              Access clients, freelancers, and companies.
-            </p>
-          </div>
-          <div className="whatwedo">
-            <p className="whatwedo-icon">
-              <FiTrendingUp />
-            </p>
-            <p className="whatwedo-txt">
-              <b>Diverse Talent Pool</b>
-            </p>
-            <p className="whatwedo-txt">
-              Access clients, freelancers, and companies.
-            </p>
-          </div>
+          {whatWeDo.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <div key={i} className="whatwedo">
+                <p className="whatwedo-icon">
+                  <Icon />
+                </p>
+                <p className="whatwedo-txt">
+                  <b>{item.title}</b>
+                  <p className="whatwedo-txt">{item.description}</p>
+                </p>
+              </div>
+            );
+          })}
         </div>
         <div className="home-whatwedo-do2-container">
-          <img className="whatwedo-do2-img" src={whatwedoimg} alt="" />
+          <img
+            className="whatwedo-do2-img"
+            src={whatwedoimg}
+            alt="ClientsBridge Team"
+          />
           <div className="whatwedo-do2-txt-container">
             <p className="whatwedo-do2-headtxt">
-              Growing company with a team of{" "}
-              <span style={{ color: "#312F9C" }}>dedicated professionals</span>
+              Building bridges between{" "}
+              <span style={{ color: "#312F9C" }}>
+                businesses and top talent
+              </span>
             </p>
             <p className="whatwedo-do2-txt">
-              Our mission is to empower businesses to enable freelancers to find
-              meaningful work opportunities. Our professionals who are
-              passionate about providing innovative solutions to help businesses
-              and freelancers succeed together.
+              At ClientsBridge, we are committed to helping companies connect
+              with skilled freelancers and professionals. Our mission is to
+              simplify collaboration, foster growth, and create lasting
+              opportunities where businesses and talent succeed together.
             </p>
           </div>
         </div>
       </section>
-      {/* <section className="home-howcanwehelp-container">
-        <div className="howcanwehelp-txt-container">
-          <h2 className="howcanwehelp-head">How can we help your business?</h2>
-          <p className="howcanwehelp-txt">
-            We're here to help you grow your business and build a strong team.
-            We offer a variety of services and tools to help you make the most
-            of your freelance and client opportunities.
-          </p>
-        </div>
-        <div className="howcanwehelp-services-container">
-          <div className="howcanwehelp-service-row">
-            <div className="howcanwehelp-service">
-              <img className="howcanwehelp-service-img" src={hcwh1} alt="" />
-              <p className="howcanwehelp-service-headtxt">
-                {" "}
-                Access Top Freelance Talent
-              </p>
-              <p className="howcanwehelp-service-txt-details">
-                We use industry-standard payment processing to ensure your
-                freelance and client payments are secure and transparent.
-              </p>
-            </div>
-            <div className="howcanwehelp-service">
-              <img className="howcanwehelp-service-img" src={hcwh1} alt="" />
-              <p className="howcanwehelp-service-headtxt">
-                {" "}
-                Access Top Freelance Talent
-              </p>
-              <p className="howcanwehelp-service-txt-details">
-                We use industry-standard payment processing to ensure your
-                freelance and client payments are secure and transparent.
-              </p>
-            </div>
-          </div>
-
-          <div className="howcanwehelp-service-row">
-            <div className="howcanwehelp-service">
-              <img className="howcanwehelp-service-img" src={hcwh1} alt="" />
-              <p className="howcanwehelp-service-headtxt">
-                {" "}
-                Access Top Freelance Talent
-              </p>
-              <p className="howcanwehelp-service-txt-details">
-                We use industry-standard payment processing to ensure your
-                freelance and client payments are secure and transparent.
-              </p>
-            </div>
-            <div className="howcanwehelp-service">
-              <img className="howcanwehelp-service-img" src={hcwh1} alt="" />
-              <p className="howcanwehelp-service-headtxt">
-                {" "}
-                Access Top Freelance Talent
-              </p>
-              <p className="howcanwehelp-service-txt-details">
-                We use industry-standard payment processing to ensure your
-                freelance and client payments are secure and transparent.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section> */}
       <section className="explore-our-services-section">
         <h2 className="section-tit">
-          Explore our <span>Services</span>
+          Explore our <span>Services</span>{" "}
         </h2>
         <p className="section-description">
-          Comprehensive service tailored to meet your business models
+          Comprehensive service tailored to meet your buisness models
         </p>
         <div className="explore-service-div">
           {services.map((service, index) => (
@@ -357,9 +359,9 @@ export default function Explore() {
                   <li key={i}>{item}</li>
                 ))}
               </ul>
-              <p className="learn-more">
+              {/* <p className="learn-more">
                 Learn more <FaArrowRight />
-              </p>
+              </p> */}
             </div>
           ))}
         </div>
@@ -367,96 +369,53 @@ export default function Explore() {
       <section className="profile-section">
         <h2 className="section-title">Unleash Your Potential Today!</h2>
         <h3 className="section-subtitle">Elevate Your Profile</h3>
+
         <div className="card-container">
-          <div className="card">
-            <span>
-              <FaBolt className="card-icon" />
-              <h4 className="card-title">Customize Skills</h4>
-            </span>
-            <p className="card-description">
-              Tailor your profile with a range of skills and expertise.
-            </p>
-            <a href="#" className="card-link">
-              Discover More
-            </a>
-          </div>
-          <div className="card">
-            <span>
-              <FaHeart className="card-icon" />
-              <h4 className="card-title">Showcase Portfolio</h4>
-            </span>
-            <p className="card-description">
-              Highlight your best work with ease for potential clients to see.
-            </p>
-            <a href="#" className="card-link">
-              Explore Further
-            </a>
-          </div>
-          <div className="card">
-            <span>
-              <FaLock className="card-icon" />
-              <h4 className="card-title">Professional Networking</h4>
-            </span>
-            <p className="card-description">
-              Connect with industry professionals to expand your opportunities.
-            </p>
-            <a href="#" className="card-link">
-              Learn More
-            </a>
-          </div>
-          <div className="card">
-            <span>
-              {" "}
-              <FaChartLine className="card-icon" />
-              <h4 className="card-title">Boost Visibility</h4>
-            </span>
-            <p className="card-description">
-              Increase your visibility and attract more clients with a standout
-              profile.
-            </p>
-            <a href="#" className="card-link">
-              Get Started Now
-            </a>
-          </div>
+          {profileCards.map((card, i) => {
+            const Icon = card.icon;
+            return (
+              <div key={i} className={card.cardClass}>
+                <span>
+                  <Icon className={card.iconClass} />
+                  <h4 className={card.titleClass}>{card.title}</h4>
+                </span>
+                <p className={card.descriptionClass}>{card.description}</p>
+                {/* <a href={card.linkHref} className={card.linkClass}>
+                  {card.linkText}
+                </a> */}
+              </div>
+            );
+          })}
         </div>
       </section>
       <footer className="footer">
         <div className="footer-section">
-          <h4>A+ Studio</h4>
+          <h4>ClientsBridge</h4>
           <p>
-            Leading digital agency with solid design and development expertise.
-            We build readymade websites, mobile applications, and elaborate
-            online business services.
+            The bridge between clients, freelancers, and companies. We help you
+            transform innovative ideas into successful working projects with
+            trust and collaboration at the core.
           </p>
-          {/* <div className="footer-social">
-            <a href="#" aria-label="Facebook">
-              <img src="/facebook-icon.png" alt="Facebook" />
-            </a>
-            <a href="#" aria-label="Twitter">
-              <img src="/twitter-icon.png" alt="Twitter" />
-            </a>
-            <a href="#" aria-label="LinkedIn">
-              <img src="/linkedin-icon.png" alt="LinkedIn" />
-            </a>
-          </div> */}
         </div>
+
         <div className="footer-section">
           <h4>What We Do</h4>
           <ul>
             <li>
-              <a href="#">Web Design</a>
+              <a href="#">Client–Freelancer Matching</a>
             </li>
             <li>
-              <a href="#">App Design</a>
+              <a href="#">Project Management</a>
             </li>
             <li>
-              <a href="#">Social Media Manage</a>
+              <a href="#">Collaboration Tools</a>
             </li>
             <li>
-              <a href="#">Market Analysis Project</a>
+              <a href="#">Secure Payments</a>
             </li>
           </ul>
         </div>
+
         <div className="footer-section">
           <h4>Company</h4>
           <ul>
@@ -464,27 +423,29 @@ export default function Explore() {
               <a href="#">About Us</a>
             </li>
             <li>
-              <a href="#">Career</a>
+              <a href="#">Careers</a>
             </li>
             <li>
-              <a href="#">Become Investor</a>
+              <a href="#">Join as Partner</a>
             </li>
           </ul>
         </div>
+
         <div className="footer-section">
           <h4>Support</h4>
           <ul>
             <li>
-              <a href="#">FAQ</a>
+              <a href="#">Help Center</a>
             </li>
             <li>
-              <a href="#">Policy</a>
+              <a href="#">Policies</a>
             </li>
             <li>
-              <a href="#">Business</a>
+              <a href="#">Guides & Resources</a>
             </li>
           </ul>
         </div>
+
         <div className="footer-section">
           <h4>Contact</h4>
           <ul>
@@ -492,7 +453,10 @@ export default function Explore() {
               <a href="#">WhatsApp</a>
             </li>
             <li>
-              <a href="#">Support 24</a>
+              <a href="#">24/7 Support</a>
+            </li>
+            <li>
+              <a href="#">Email Us</a>
             </li>
           </ul>
         </div>

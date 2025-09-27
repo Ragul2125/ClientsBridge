@@ -20,8 +20,7 @@ const Layout = ({ project, children }) => {
               {" "}
               <p className="client-profileoverview-inner-des-head">Deadline</p>
               <p className="client-profileoverview-inner-des-subtxt">
-                {project.deadline ? project.deadline.substring(0, 120) : "N/A"}
-                {project.deadline.substring(0, 10)}
+                {project.deadline ? project.deadline.substring(0, 10) : "N/A"}
               </p>
             </div>
             <div>

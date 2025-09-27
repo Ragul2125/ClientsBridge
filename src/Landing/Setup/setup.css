@@ -357,3 +357,221 @@
 .frg-popup-box button:hover {
   background-color: #0056b3;
 }
+
+/* --- Main Container --- */
+.setup-container {
+  background: url("../../assets/blueBG.gif") no-repeat center center/cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Outfit", sans-serif;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.logo {
+  max-width: 180px;
+  margin-bottom: 1.5rem;
+}
+
+.setup-box {
+  width: 100%;
+  max-width: 1000px;
+  background-color: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.setup-content {
+  width: 100%;
+  text-align: center;
+}
+
+.setup-content h1 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.setup-content p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Empty State --- */
+.empty-projects-view {
+  border: 2px dashed var(--medium-gray);
+  border-radius: var(--border-radius);
+  padding: 3rem 1rem;
+}
+
+.add-project-button {
+  background: var(--light-gray);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin: auto;
+  color: var(--primary-color);
+}
+
+.add-project-button:hover {
+  background-color: #e9eff3;
+}
+
+.add-project-button .plus-icon {
+  font-size: 1.5rem;
+}
+
+/* --- Projects Table --- */
+.projects-table-container {
+  overflow-x: auto; /* Allows horizontal scrolling on small screens */
+}
+
+.project-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+}
+
+.project-table th,
+.project-table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.project-table th {
+  background-color: var(--light-gray);
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.skills-cell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.skill-tag {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  background: none;
+  border: 1px solid var(--medium-gray);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.action-btn.edit-btn:hover {
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+.action-btn.delete-btn:hover {
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+/* --- Bottom Actions --- */
+.bottom-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-family: "Outfit", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+.btn-primary:disabled {
+  background-color: var(--medium-gray);
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: var(--light-gray);
+  color: var(--primary-color);
+}
+.btn-secondary:hover {
+  background-color: #e0e6eb;
+}
+
+/* --- Responsive Table --- */
+@media (max-width: 768px) {
+  .project-table thead {
+    display: none; /* Hide table headers on mobile */
+  }
+  .project-table,
+  .project-table tbody,
+  .project-table tr,
+  .project-table td {
+    display: block;
+    width: 100%;
+  }
+  .project-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+  }
+  .project-table td {
+    text-align: right;
+    position: relative;
+    border-bottom: 1px solid #eee;
+  }
+  .project-table td::before {
+    content: attr(data-label); /* Use data-label for headers */
+    position: absolute;
+    left: 1rem;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+  .actions-cell {
+    justify-content: flex-end;
+  }
+}
