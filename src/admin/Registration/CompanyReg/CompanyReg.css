@@ -35,6 +35,7 @@
   aspect-ratio: 1/1.1;
   width: calc(100% / 4.7);
   /* width: 260px; */
+  
   padding: 3em 2em;
   background-color: #ffffff;
   border-radius: 13px;
@@ -49,6 +50,7 @@
   background-size: cover;
   background-position: center;
   animation: cup 0.4s ease-in;
+  overflow-y: scroll;
 }
 
 .freelancerdp {
@@ -76,6 +78,8 @@
 }
 
 .freelancerusername {
+  width: 100%;
+  text-wrap: wrap !important;
   font-weight: 500;
 }
 
