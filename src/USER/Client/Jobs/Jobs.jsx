@@ -30,7 +30,7 @@ export default function Jobs() {
               to="active"
               className={location.pathname.includes("active") ? "active" : ""}
             >
-              <p>Active Jobs</p>
+              <p>Active Bits</p>
               <p>|</p>
             </Link>
             <Link
