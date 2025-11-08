@@ -304,15 +304,21 @@ export default function Addnew() {
                       <input
                         type="file"
                         name="uploadFiles"
-                        className=" addnew-input"
+                        className="addnew-input"
                         onChange={handleFileChange}
                         multiple
                       />
                     </div>
                     <br />
-                    <div>
-                      <TagsInput onTagsChange={handleTagsChange} />
-                    </div>
+                  </div>
+                  <label
+                    htmlFor="uploadFiles"
+                    className="addnew-projectname-label"
+                  >
+                    Tags *
+                  </label>
+                  <div>
+                    <TagsInput onTagsChange={handleTagsChange} />
                   </div>
                 </>
               )}

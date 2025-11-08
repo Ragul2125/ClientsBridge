@@ -33,6 +33,22 @@ const LandingPage = () => {
       title: "Industry Solutions",
       des: "We offer tailored services that solve unique challenges in every sector.",
     },
+    {
+      title: "Web and App Development",
+      des: "We build responsive websites and mobile apps tailored to your business needs.",
+    },
+    {
+      title: "Full-stack Development",
+      des: "We deliver complete end-to-end solutions across both front-end and back-end.",
+    },
+    {
+      title: "Cloud and DevOps",
+      des: "We streamline infrastructure with scalable cloud solutions and CI/CD automation.",
+    },
+    {
+      title: "AI and Data Automation",
+      des: "We harness AI tools to automate workflows and unlock actionable insights.",
+    },
   ];
 
   const IT = [
@@ -178,7 +194,7 @@ const LandingPage = () => {
         {/* <div className="our-services">
           <h1>Technology and Development</h1>
         </div> */}
-        <div className="non-IT-cards">
+        {/* <div className="non-IT-cards">
           {IT.map((item, index) => (
             <div className="card" key={index}>
               <div className="icons">
@@ -190,7 +206,7 @@ const LandingPage = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
         <p>
           Unlock the full potential of ClientsBridge — explore all our services
           designed to accelerate your success.
