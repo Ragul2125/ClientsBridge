@@ -16,6 +16,7 @@ export default function useAxiosFetch(url, options = {}, immediate = true) {
       setError("");
       try {
         const parsedOptions = JSON.parse(stableOptions);
+        console.log("sending req");
         const response = await axiosInstance({
           url,
           method: parsedOptions.method || "GET",
@@ -23,14 +24,21 @@ export default function useAxiosFetch(url, options = {}, immediate = true) {
           ...overrideOptions,
           signal,
         });
+        console.log(response.data);
         setData(response.data);
         return response.data;
       } catch (err) {
+        console.log(err);
         if (err.name === "CanceledError") {
           return null;
         }
-        if (err.response?.status === 401) {
-          navigate("/login");
+        if (
+          err.response?.status === 401 ||
+          err.response?.status === 302 ||
+          err.response?.status === 404
+        ) {
+          console.log("error");
+          window.location.href = "/login";
         }
         setError(
           err.response?.data?.message ||

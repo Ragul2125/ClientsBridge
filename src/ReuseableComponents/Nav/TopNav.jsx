@@ -5,7 +5,7 @@ import back from "../../assets/image/back.svg";
 import profileImg from "../../assets/image/profileImg.svg";
 import more from "../../assets/image/More.svg";
 import { GoArrowUpRight } from "react-icons/go";
-import { Link, useNavigate,useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 const TopNav = () => {
@@ -27,22 +27,29 @@ const TopNav = () => {
 
   const { data, error, loading, refetch } = useAxiosFetch("/log");
 
-  console.log(data);
+  {
+    !loading && console.log(data);
+  }
 
   const navigate = useNavigate();
   const location = useLocation();
 
-
   const handleOpenProfile = () => {
     const currentPath = location.pathname; // get current URL path
 
-    console.log(currentPath)
+    console.log(currentPath);
 
-    if (currentPath.includes("client") || currentPath.includes("company") || currentPath.includes("freelancer") || currentPath.includes("Client") || currentPath.includes("Company") || currentPath.includes("Freelancer") ){
+    if (
+      currentPath.includes("client") ||
+      currentPath.includes("company") ||
+      currentPath.includes("freelancer") ||
+      currentPath.includes("Client") ||
+      currentPath.includes("Company") ||
+      currentPath.includes("Freelancer")
+    ) {
       navigate("myprofile");
     }
   };
-
 
   return (
     <>
