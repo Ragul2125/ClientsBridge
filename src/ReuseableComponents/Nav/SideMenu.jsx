@@ -18,31 +18,32 @@ const adminNav = [
     label: "Dashboard",
     icon: <LuLayoutDashboard />,
     path: "/admin",
-    match: (path) => path === "/admin" || path === "dashboard",
+    match: (path) =>
+      path.toLowerCase() === "/admin" || path.toLowerCase() === "dashboard",
   },
   {
     label: "Registration",
     icon: <MdOutlineAppRegistration />,
     path: "/admin/registration/client",
-    match: (path) => path.includes("/registration"),
+    match: (path) => path.toLowerCase().includes("/registration"),
   },
   {
     label: "Inbox",
     icon: <AiOutlineMessage />,
     path: "/admin/inbox",
-    match: (path) => path.includes("/inbox"),
+    match: (path) => path.toLowerCase().includes("/inbox"),
   },
   {
     label: "Job List",
     icon: <GiWallet />,
     path: "/admin/jobs/pending",
-    match: (path) => path.includes("/jobs"),
+    match: (path) => path.toLowerCase().includes("/jobs"),
   },
   {
     label: "Transaction",
     icon: <IoShieldCheckmark />,
     path: "/admin/transaction",
-    match: (path) => path.includes("/transaction"),
+    match: (path) => path.toLowerCase().includes("/transaction"),
   },
 ];
 
@@ -51,20 +52,23 @@ const clientNav = [
     label: "Dashboard",
     path: "/client/dashboard",
     icon: <LuLayoutDashboard />,
-    match: (path) => path === "/Client" || path.includes("/client/dashboard"),
+    match: (path) =>
+      path.toLowerCase() === "/client" ||
+      path.toLowerCase().includes("/client/dashboard"),
   },
   {
     label: "Inbox",
     path: "/client/chat",
     icon: <AiOutlineMessage />,
     match: (path) =>
-      path.includes("/client/chat") || path === "/client/chat/:id",
+      path.toLowerCase().includes("/client/chat") ||
+      path.toLowerCase() === "/client/chat/:id",
   },
   {
     label: "Jobs",
     path: "/client/jobs/unassigned",
     icon: <GiWallet />,
-    match: (path) => path.includes("/client/jobs"),
+    match: (path) => path.toLowerCase().includes("/client/jobs"),
   },
   /* {
       name: "Transaction",
@@ -78,19 +82,21 @@ const companyNav = [
     label: "Dashboard",
     path: "/company/home",
     icon: <BiHomeAlt2 />,
-    match: (path) => path.includes("/company/home") || path === "/company",
+    match: (path) =>
+      path.toLowerCase().includes("/company/home") ||
+      path.toLowerCase() === "/company",
   },
   {
     label: "Inbox",
     path: "/company/chat",
     icon: <AiOutlineMessage />,
-    match: (path) => path.includes("/company/chat"),
+    match: (path) => path.toLowerCase().includes("/company/chat"),
   },
   {
     label: "Jobs",
     path: "/company/jobs/bidded",
     icon: <GiWallet />,
-    match: (path) => path.includes("/company/jobs"),
+    match: (path) => path.toLowerCase().includes("/company/jobs"),
   },
   /* {
         name: "Transaction",
@@ -104,23 +110,24 @@ const freelancerNav = [
     path: "/freelancer/home",
     icon: <BiHomeAlt2 />,
     match: (path) =>
-      path.includes("/freelancer/home") || path === "/freelancer",
+      path.toLowerCase().includes("/freelancer/home") ||
+      path.toLowerCase() === "/freelancer",
   },
   {
     label: "Inbox",
     path: "/freelancer/chat",
     icon: <AiOutlineMessage />,
-    match: (path) => path.includes("/freelancer/chat"),
+    match: (path) => path.toLowerCase().includes("/freelancer/chat"),
   },
   {
     label: "Jobs",
     path: "/freelancer/jobs/bidded",
     icon: <GiWallet />,
     match: (path) =>
-      path === "/freelancer/jobs/bidded" ||
-      path === "/freelancer/jobs/bidded/:id" ||
-      path === "/freelancer/jobs/ongoing" ||
-      path === "/freelancer/jobs/completed",
+      path.toLowerCase() === "/freelancer/jobs/bidded" ||
+      path.toLowerCase() === "/freelancer/jobs/bidded/:id" ||
+      path.toLowerCase() === "/freelancer/jobs/ongoing" ||
+      path.toLowerCase() === "/freelancer/jobs/completed",
   },
   /* {
         name: "Transaction",
@@ -197,9 +204,14 @@ const SideMenu = () => {
             {item.icon}
           </Link>
         ))}
-        {["Client", "Company", "Freelancer","client", "company", "freelancer"].some((role) =>
-          location.pathname.includes(role)
-        ) ? (
+        {[
+          "Client",
+          "Company",
+          "Freelancer",
+          "client",
+          "company",
+          "freelancer",
+        ].some((role) => location.pathname.includes(role)) ? (
           <div className="Logout" style={{ color: "white", cursor: "pointer" }}>
             <h2 onClick={logout}>
               <IoLogOutOutline />

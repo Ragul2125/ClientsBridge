@@ -62,7 +62,9 @@ export default function Dashboard() {
         setProjectHistory(response.data);
       } catch (error) {
         console.error("Error fetching project history:", error);
-        setError("Failed to fetch project history.");
+        if (!error.message.includes("404")) {
+          setError("Failed to fetch project history.");
+        }
       } finally {
         setIsLoading(false);
       }
