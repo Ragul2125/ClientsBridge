@@ -135,19 +135,20 @@ const freelancerNav = [
         icon: <IoShieldCheckmark />,
       }, */
 ];
-const navItems = location.pathname
-  .toLowerCase()
-  .includes("admin" || "dashboard")
-  ? adminNav
-  : location.pathname.toLowerCase().includes("client")
-  ? clientNav
-  : location.pathname.toLowerCase().includes("company")
-  ? companyNav
-  : freelancerNav;
 
 const SideMenu = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
+  const navItems = location.pathname
+    .toLowerCase()
+    .includes("admin" || "dashboard")
+    ? adminNav
+    : location.pathname.toLowerCase().includes("client")
+    ? clientNav
+    : location.pathname.toLowerCase().includes("company")
+    ? companyNav
+    : freelancerNav;
 
   const logout = () => {
     localStorage.clear();
