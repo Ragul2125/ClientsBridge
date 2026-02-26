@@ -3,6 +3,7 @@ import dp from "../../../assets/dp.png";
 import { FaEye } from "react-icons/fa";
 import axios from "axios";
 import useAxiosFetch from "../../../hooks/useAxiosFetch";
+import Load from "../../../USER/ReuseableComponents/Loaders/Load.jsx";
 
 const JobAssignPopup = ({ togglePopup, jobId }) => {
   const [selectedFreelancers, setSelectedFreelancers] = useState([]);
@@ -25,6 +26,7 @@ const JobAssignPopup = ({ togglePopup, jobId }) => {
   };
 
   const handleSubmit = async () => {
+    if (!window.confirm("Are you sure you want to assign these freelancers to the job?")) return;
     setIsSubmitting(true);
     setError(null);
     try {
@@ -57,7 +59,7 @@ const JobAssignPopup = ({ togglePopup, jobId }) => {
       <div className="assign-popup-content">
         <h2 className="assign-popup-title">Assign Freelancers</h2>
         {loading ? (
-          <p className="loading-message">Loading...</p>
+          <div style={{ height: "200px", position: "relative" }}><Load type="load" /></div>
         ) : fetchError ? (
           <p className="error-message">{fetchError}</p>
         ) : (

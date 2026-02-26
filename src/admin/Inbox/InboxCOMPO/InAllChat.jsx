@@ -67,6 +67,7 @@ export default function InboxAllChat() {
   };
 
   const handleDelete = () => {
+    if (!window.confirm("Are you sure you want to delete the selected chats?")) return;
     if (currentPath.includes("bin")) {
       const restoredChats = selectedChats.map((id) => {
         const chat = deletedChats.find((chat) => chat.conversationId === id);
@@ -90,7 +91,7 @@ export default function InboxAllChat() {
   };
 
   if (isLoading) {
-    return <Load type='load'/>
+    return <Load type='load' />
   }
 
   if (error) {
@@ -111,12 +112,12 @@ export default function InboxAllChat() {
             />
           </div>
           <div className="allchatoptionscon">
-            <div className="allchatopt">
+            {/* <div className="allchatopt">
               <MdMoveToInbox />
             </div>
             <div className="allchatopt">
               <MdInfo />
-            </div>
+            </div> */}
             {currentPath.includes("bin") ? (
               <div className="allchatopt" onClick={handleDelete}>
                 <TbRestore />

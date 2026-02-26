@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { choice } from "../../../api/registerations";
 import useAxiosFetch from "../../../../hooks/useAxiosFetch";
 import toast from "react-hot-toast";
+import Load from "../../../../USER/ReuseableComponents/Loaders/Load";
 
 const ClientProfile = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const ClientProfile = () => {
   } = useAxiosFetch(`/admin/getRegisteration/${id}?role=client`);
 
   const send = async (selection) => {
+    if (!window.confirm(`Are you sure you want to ${selection} this client?`)) return;
     try {
       const res = await choice(selection, id, "client");
       if (res === true || res === false) {
@@ -31,7 +33,7 @@ const ClientProfile = () => {
     }
   };
 
-  if (loading) return <h2>Loading...</h2>;
+  if (loading) return <Load type="load" />;
   if (error) return <h2>Error fetching client data</h2>;
   if (!client) return <h2>No client data found</h2>;
 

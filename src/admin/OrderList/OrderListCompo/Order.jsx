@@ -7,6 +7,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import JobAssignPopup from "./JobAssignPopup";
 import useAxiosFetch from "../../../hooks/useAxiosFetch";
+import Load from "../../../USER/ReuseableComponents/Loaders/Load";
 
 export default function Orders({ type }) {
   const id = window.location.pathname.split("/").pop();
@@ -29,10 +30,10 @@ export default function Orders({ type }) {
   };
 
   const handleMarkAsCompleted = async () => {
+    if (!window.confirm("Are you sure you want to mark this job as completed?")) return;
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/admin/markcompleted/${
-          jobDetail._id
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/markcompleted/${jobDetail._id
         }`,
         {},
         {
@@ -50,10 +51,10 @@ export default function Orders({ type }) {
   };
 
   const handleSendToBidding = async () => {
+    if (!window.confirm("Are you sure you want to send this job to bidding?")) return;
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/admin/sendToBidding/${
-          jobDetail._id
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/sendToBidding/${jobDetail._id
         }`,
         {},
         {
@@ -70,7 +71,7 @@ export default function Orders({ type }) {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Load type="load" />;
   if (error) return <p className="error">{error}</p>;
   if (!jobDetail?._id) return null;
 
@@ -152,7 +153,7 @@ export default function Orders({ type }) {
                 <button className="orderbtn" onClick={handleSendToBidding}>
                   Open Bidding
                 </button>
-                <button className="orderbtn ordercancle">Cancel</button>
+                <button className="orderbtn ordercancle" onClick={() => window.confirm("Are you sure you want to cancel this job?")}>Cancel</button>
               </div>
             </>
           ) : type === "active" ? (

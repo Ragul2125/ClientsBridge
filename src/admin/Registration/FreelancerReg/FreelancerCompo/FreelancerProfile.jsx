@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAxiosFetch from "../../../../hooks/useAxiosFetch";
 import { choice } from "../../../api/registerations";
+import Load from "../../../../USER/ReuseableComponents/Loaders/Load";
 
 const FreelancerProfile = () => {
   const { id } = useParams();
@@ -15,6 +16,7 @@ const FreelancerProfile = () => {
   } = useAxiosFetch(`/admin/getRegisteration/${id}?role=freelancer`);
 
   const send = async (selection) => {
+    if (!window.confirm(`Are you sure you want to ${selection} this freelancer?`)) return;
     try {
       const ress = await choice(selection, id, "freelancer");
       console.log(ress);
@@ -29,7 +31,7 @@ const FreelancerProfile = () => {
     }
   };
 
-  if (loading) return <h2>Loading...</h2>;
+  if (loading) return <Load type="load" />;
   if (error) return <h2 style={{ color: "red" }}>{error}</h2>;
   if (!freelancer) return <h2>No freelancer data found.</h2>;
 

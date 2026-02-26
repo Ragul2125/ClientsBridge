@@ -6,6 +6,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import dp from "../../../assets/dp.png"; // Assuming this is the path to your default profile image
 import "../Inbox.css";
+import Load from "../../../USER/ReuseableComponents/Loaders/Load";
 
 export default function Inchat() {
   const { conversationId } = useParams();
@@ -71,7 +72,7 @@ export default function Inchat() {
   };
 
   if (isLoading) {
-    return <div>Loading conversation...</div>;
+    return <Load type="load" />;
   }
 
   if (error) {
@@ -95,9 +96,8 @@ export default function Inchat() {
           {conversation.messages.map((msg, index) => (
             <div
               key={index}
-              className={`messagecon ${
-                msg.msgByUserId === currentUserId ? "oppositemsgcon" : ""
-              }`}
+              className={`messagecon ${msg.msgByUserId === currentUserId ? "oppositemsgcon" : ""
+                }`}
             >
               <div className="chatuserprofile">
                 <img

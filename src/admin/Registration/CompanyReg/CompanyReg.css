@@ -34,7 +34,7 @@
   /* min-width: 240px; */
   aspect-ratio: 1/1.1;
   width: calc(100% / 4.7);
-  /* width: 260px; */
+  width: 260px;
   
   padding: 3em 2em;
   background-color: #ffffff;

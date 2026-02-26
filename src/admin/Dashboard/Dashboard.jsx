@@ -9,19 +9,11 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <p
-        style={{
-          height: "100vh",
-          width: "100%",
-          display: "grid",
-          placeItems: "center",
-        }}
-      >
+      <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
         <Load type="load" />
-      </p>
+      </div>
     );
   }
-
   if (error) {
     return (
       <p

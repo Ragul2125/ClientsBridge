@@ -3,8 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAxiosFetch from "../../../../hooks/useAxiosFetch";
 import { choice } from "../../../api/registerations";
+import Load from "../../../../USER/ReuseableComponents/Loaders/Load";
 
-const CompanyProfile = () => {
+const CompanyProfile = () => {  
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -15,6 +16,7 @@ const CompanyProfile = () => {
   } = useAxiosFetch(`/admin/getRegisteration/${id}?role=company`);
 
   const send = async (selection) => {
+    if (!window.confirm(`Are you sure you want to ${selection} this company?`)) return;
     try {
       const ress = await choice(selection, id, "company");
       if (ress === true || ress === false) {
@@ -28,7 +30,7 @@ const CompanyProfile = () => {
     }
   };
 
-  if (loading) return <h2>Loading...</h2>;
+  if (loading) return <Load type="load" />;
   if (error) return <h2 style={{ color: "red" }}>{error}</h2>;
   if (!company) return <h2>No company data found.</h2>;
 
