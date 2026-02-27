@@ -1,4 +1,3 @@
-
 .home-container {
   height: 100vh;
   width: 100vw;
@@ -255,10 +254,6 @@
 }
 
 .home-howcanwehelp-container {
-  background-image: url("./USER/assets/howcanwehelpbg.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   height: 100vh;
   width: 100%;
   display: flex;
@@ -375,6 +370,7 @@
   border-radius: 8px;
   padding: 20px;
   text-align: left;
+
   span {
     display: flex;
     align-items: center;
@@ -479,19 +475,23 @@
   align-items: center;
   gap: 0.5em;
   margin-bottom: 2em;
-  
+
 }
-.section-description{
+
+.section-description {
   /* color: #312f9c; */
-    text-align: center;
-  }
+  text-align: center;
+}
+
 .section-tit {
   color: black;
   font-size: 2em;
+
   span {
     color: #312f9c;
   }
 }
+
 .explore-service-div {
   margin-top: 2em;
   width: 100%;
@@ -500,6 +500,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .buisness-compilance-card,
 .content-publishing-card {
   width: 500px;
@@ -513,6 +514,7 @@
   border-radius: 10px;
   padding: 1.5em;
 }
+
 .service-card-title {
   width: 100%;
   display: flex;
@@ -520,6 +522,7 @@
   gap: 0.5em;
   color: #161527;
 }
+
 .content-list,
 .buisness-list {
   width: 100%;
@@ -527,6 +530,7 @@
   display: flex;
   flex-wrap: wrap;
   padding-left: 1em;
+
   li {
     width: 50%;
     margin-top: 1em;
@@ -534,6 +538,7 @@
     font-weight: 200;
   }
 }
+
 .learn-more {
   width: 100%;
   display: flex;
@@ -556,10 +561,12 @@
 .section-tit {
   color: black;
   font-size: 2em;
+
   span {
     color: #312f9c;
   }
 }
+
 .explore-service-div {
   margin-top: 2em;
   width: 100%;
@@ -570,6 +577,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .service-card {
   width: 500px;
   height: 320px;
@@ -597,6 +605,7 @@
   gap: 0.5em;
   color: #161527;
 }
+
 .list-card {
   width: 100%;
   /* background-color: #4f94de; */
@@ -607,6 +616,7 @@
   overflow-y: scroll;
   gap: 1em;
   padding-left: 1em;
+
   li {
     width: 45%;
     margin-top: 1em;
@@ -614,6 +624,7 @@
     font-weight: 200;
   }
 }
+
 .learn-more {
   width: 100%;
   display: flex;
@@ -625,53 +636,64 @@
 
 
 @media (max-width : 1100px) {
-  .service-card{
+  .service-card {
     width: 85%;
   }
 }
-@media (max-width:800px) {
-    .home-carousel-container{
-        height: 80%;
-    }
-    .home-carousel{
-        height: auto;
-    }
-    .home-carousel-slideimg{
-        display: none;
-    }
-    .home-carousel-slidetxt{
-       .home-carousel-head,.home-carousel-detials{
-        font-size: 20px;
-       }
 
+@media (max-width:800px) {
+  .home-carousel-container {
+    height: 80%;
+  }
+
+  .home-carousel {
+    height: auto;
+  }
+
+  .home-carousel-slideimg {
+    display: none;
+  }
+
+  .home-carousel-slidetxt {
+
+    .home-carousel-head,
+    .home-carousel-detials {
+      font-size: 20px;
     }
-    .home-whatwecando-do-container{
-        flex-direction: column;
-        gap: 2em;
+
+  }
+
+  .home-whatwecando-do-container {
+    flex-direction: column;
+    gap: 2em;
+  }
+
+  .home-whatwedo-do2-container {
+    flex-direction: column;
+
+    .whatwedo-do2-txt-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+
+      .whatwedo-do2-headtxt {
+        margin-right: 0;
+      }
     }
-    .home-whatwedo-do2-container{
-        flex-direction: column;
-        .whatwedo-do2-txt-container{
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            align-items: center;
-            justify-content: center;
-            .whatwedo-do2-headtxt{
-                margin-right: 0;
-            }
-        }
-    }
-    .whatwedo-do2-img{
-        width: 100%;
-    }
+  }
+
+  .whatwedo-do2-img {
+    width: 100%;
+  }
 }
 
 
 
 .footer {
-  background:var(--blue);
+  background: var(--blue);
   color: #fff;
   padding: 40px 20px;
   display: grid;
@@ -715,6 +737,7 @@
   .footer {
     text-align: center;
   }
+
   .footer-section {
     margin-bottom: 20px;
   }
