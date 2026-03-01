@@ -10,6 +10,7 @@ import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 const TopNav = () => {
   const [gsearch, setgsearch] = useState("");
+  const [path, setPath] = useState("");
 
   const suggestions = [
     { name: "Client Registration", path: "/registration/client" },
@@ -35,19 +36,24 @@ const TopNav = () => {
   const location = useLocation();
 
   const handleOpenProfile = () => {
-    const currentPath = location.pathname; // get current URL path
+    const currentPath = location.pathname;
+    let selectedPath = "";
 
-    console.log(currentPath);
+    if (currentPath.includes("client") || currentPath.includes("Client")) {
+      selectedPath = "client";
+    } else if (currentPath.includes("company") || currentPath.includes("Company")) {
+      selectedPath = "company";
+    } else if (currentPath.includes("freelancer") || currentPath.includes("Freelancer")) {
+      selectedPath = "freelancer";
+    }
 
-    if (
-      currentPath.includes("client") ||
-      currentPath.includes("company") ||
-      currentPath.includes("freelancer") ||
-      currentPath.includes("Client") ||
-      currentPath.includes("Company") ||
-      currentPath.includes("Freelancer")
-    ) {
-      navigate("myprofile");
+    if (selectedPath) {
+      setPath(selectedPath);
+      if (!currentPath.includes("myProfile")) {
+        navigate(`/${selectedPath}/myProfile`);
+      }
+    } else {
+      console.warn("Could not determine user role from path", currentPath);
     }
   };
 
@@ -78,7 +84,7 @@ const TopNav = () => {
             onClick={handleOpenProfile}
           />
           <div className="profile-about">
-            <h4>{data?.name || "Jayasree"}</h4>
+            <h4>{data?.name || "Feron"}</h4>
             <p>{data?.role || "Admin"}</p>
           </div>
         </div>

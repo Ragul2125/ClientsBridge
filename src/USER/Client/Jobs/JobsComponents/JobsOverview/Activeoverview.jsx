@@ -4,6 +4,7 @@ import axios from "axios";
 import "./Overview.css";
 import dp from "../../../../assets/userdp.svg";
 import GlobalPopup from "../../../../ReuseableComponents/Popup/GlobalPopup";
+import { LoaderCircle } from "lucide-react";
 
 const View = () => {
   const { viewid } = useParams();
@@ -14,6 +15,7 @@ const View = () => {
   const [error, setError] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedBid, setSelectedBid] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const API_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
@@ -61,6 +63,7 @@ const View = () => {
       return;
     }
 
+    setIsSubmitting(true);
     try {
       const token = localStorage.getItem("token");
       console.log("Selected Bid UserId:", userId);
@@ -75,6 +78,8 @@ const View = () => {
       navigate("/client/jobs/ongoing");
     } catch (error) {
       console.error("Error accepting job:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -207,14 +212,16 @@ const View = () => {
           text={`Are you sure you want to accept the job for ${selectedBid.name}?`}
           buttons={[
             {
-              label: "Confirm",
+              label: isSubmitting ? <LoaderCircle className="spinner-icon auth-loading" /> : "Confirm",
               className: "confirm-button",
               onClick: handleAccept,
+              disabled: isSubmitting,
             },
             {
               label: "Cancel",
               className: "cancel-button",
               onClick: closePopup,
+              disabled: isSubmitting,
             },
           ]}
         />

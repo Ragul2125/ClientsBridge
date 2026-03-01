@@ -1,11 +1,13 @@
 .registration {
   font-family: "Outfit", serif;
+
   .registration-nav {
     height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #001f54;
+
     .logo {
       height: 80px;
       margin: 0 20px;
@@ -97,6 +99,7 @@
     .form-container {
       padding: 20px 50px;
     }
+
     .form-row {
       gap: 20px;
       flex-direction: column;
@@ -106,9 +109,11 @@
       width: 100%;
     }
   }
+
   .remove-btn {
     background-color: none;
   }
+
   .popup {
     position: fixed;
     top: 0;
@@ -158,21 +163,22 @@
 .tags-input-container {
   display: flex;
   flex-direction: column;
-  
+
   align-items: start;
   gap: 8px;
   /* padding: 12px; */
   /* background-color: #e7e5e5; */
   border-radius: 8px;
-  width:100%;
+  width: 100%;
+
   /* max-width: 600px; */
   /* margin: 0 auto; */
   /* border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-  input{
+  input {
     width: 50%;
     background-color: #e7e5e5;
-    border-radius:8px;
+    border-radius: 8px;
   }
 }
 
@@ -210,11 +216,13 @@
 .tags-input-box input::placeholder {
   color: #aaa;
 }
+
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
+
 .remove-tag {
   margin: 0 5px;
 }
@@ -278,4 +286,23 @@
     padding: 6px 10px;
     font-size: 0.8rem;
   }
+}
+
+.spinner-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.auth-loading {
+  display: block;
+  margin: 0 auto;
 }

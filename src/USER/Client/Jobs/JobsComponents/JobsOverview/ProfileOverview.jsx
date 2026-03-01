@@ -3,6 +3,7 @@ import dp from "../../../../assets/userdp.svg";
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { LoaderCircle } from "lucide-react";
 
 const Api_Url = import.meta.env.VITE_BACKEND_URL;
 
@@ -12,6 +13,7 @@ export default function ProfileOverview() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -49,10 +51,13 @@ export default function ProfileOverview() {
   };
 
   const handleDeleteJob = async () => {
+    if (!window.confirm("Are you sure you want to delete this job?")) return;
+    setIsDeleting(true);
     try {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("User is not authenticated. Please log in.");
+        setIsDeleting(false);
         return;
       }
 
@@ -71,6 +76,8 @@ export default function ProfileOverview() {
       alert(
         "Failed to delete job: " + (err.response?.data?.message || err.message)
       );
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -107,7 +114,9 @@ export default function ProfileOverview() {
             </p>
             {showDropdown && (
               <div className="dropdown-menu">
-                <button onClick={handleDeleteJob}>Delete Job</button>
+                <button onClick={handleDeleteJob} disabled={isDeleting}>
+                  {isDeleting ? <LoaderCircle className="spinner-icon auth-loading" /> : "Delete Job"}
+                </button>
               </div>
             )}
           </div>

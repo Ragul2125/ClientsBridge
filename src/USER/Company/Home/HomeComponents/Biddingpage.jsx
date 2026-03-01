@@ -7,12 +7,14 @@ import GlobalPopup from "../../../ReuseableComponents/Popup/GlobalPopup";
 import JobDetailsLayout from "../../../ReuseableComponents/job/JobDetailsLayout";
 import useAxiosFetch from "../../../../hooks/useAxiosFetch";
 import Load from "../../../ReuseableComponents/Loaders/Load";
+import { LoaderCircle } from "lucide-react";
 
 const BidView = () => {
   const { jobid } = useParams();
   const [bidAmount, setBidAmount] = useState("");
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     data: project,
@@ -22,6 +24,7 @@ const BidView = () => {
   } = useAxiosFetch(`/jobs/getDetails/${jobid}`);
 
   const handleBidSubmit = async () => {
+    setIsSubmitting(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/biddings/bid`,
@@ -43,6 +46,8 @@ const BidView = () => {
       console.error("Error submitting bid:", error);
       setError("Failed to submit the bid.");
       toast.error("Failed to submit the bid.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -105,14 +110,16 @@ const BidView = () => {
           className="confirm-bid-popup"
           buttons={[
             {
-              label: "Confirm",
+              label: isSubmitting ? <LoaderCircle className="spinner-icon auth-loading" /> : "Confirm",
               className: "confirm",
               onClick: handleBidSubmit,
+              disabled: isSubmitting,
             },
             {
               label: "Cancel",
               className: "cancel",
               onClick: closePopup,
+              disabled: isSubmitting,
             },
           ]}
         />

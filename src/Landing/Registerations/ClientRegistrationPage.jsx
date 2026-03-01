@@ -1,11 +1,12 @@
 // The structure will be nearly identical to FreelancerRegistrationPage,
 // but with fields specific to clients as per your requirements (e.g., no "skills").
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import "./registration.css";
 import logo from "../../assets/logo.png";
 import TagsInput from "./TagsInput";
+import { LoaderCircle } from "lucide-react";
 
 const ClientRegistrationPage = () => {
   const [formData, setFormData] = useState({});
@@ -13,6 +14,7 @@ const ClientRegistrationPage = () => {
   const [loading, setLoading] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const passwordRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -141,6 +143,12 @@ const ClientRegistrationPage = () => {
               name="mailId"
               placeholder="Enter Email Address"
               onChange={handleChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  passwordRef.current?.focus();
+                }
+              }}
               required
             />
           </div>
@@ -162,10 +170,11 @@ const ClientRegistrationPage = () => {
               placeholder="Enter Password"
               onChange={handleChange}
               required
+              ref={passwordRef}
             />
           </div>
           <button type="submit" className="submit-btn" disabled={loading}>
-            {loading ? <div className="spinner-res" /> : "Submit Registration"}
+            {loading ? <LoaderCircle className="spinner-icon auth-loading" /> : "Submit Registration"}
           </button>
         </form>
       </div>

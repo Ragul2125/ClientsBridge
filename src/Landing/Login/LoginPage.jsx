@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import logo from "../../assets/logo.png";
 import "./login.css";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {
@@ -11,6 +11,8 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [socialLoading, setSocialLoading] = useState(null);
+  const passwordRef = useRef(null);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -60,15 +62,15 @@ const LoginPage = () => {
   };
 
   const googleLogin = () => {
-    window.location.href = `${
-      import.meta.env.VITE_BACKEND_URL
-    }/api/auth/login/google`;
+    setSocialLoading("google");
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL
+      }/api/auth/login/google`;
   };
 
   const linkedinLogin = () => {
-    window.location.href = `${
-      import.meta.env.VITE_BACKEND_URL
-    }/api/auth/login/linkedin`;
+    setSocialLoading("linkedin");
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL
+      }/api/auth/login/linkedin`;
   };
 
   return (
@@ -87,6 +89,12 @@ const LoginPage = () => {
             className="auth-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                passwordRef.current?.focus();
+              }
+            }}
           />
           <div className="password-wrapper">
             <input
@@ -95,6 +103,7 @@ const LoginPage = () => {
               className="auth-input"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              ref={passwordRef}
             />
             <span
               className="eye-icon"
@@ -104,17 +113,29 @@ const LoginPage = () => {
             </span>
           </div>
           <button type="submit" className="auth-btn-primary" disabled={loading}>
-            {loading ? <div className="spinner-res" /> : "Login"}
+            {loading ? <LoaderCircle className="spinner-icon auth-loading" /> : "Login"}
           </button>
         </form>
         <div className="social-container">
-          <button className="social-btn google" onClick={googleLogin}>
-            <i className="fa-brands fa-google"></i>{" "}
-            <span>Login with Google</span>
+          <button className="social-btn google" onClick={googleLogin} disabled={socialLoading !== null}>
+            {socialLoading === "google" ? (
+              <LoaderCircle className="spinner-icon auth-loading" />
+            ) : (
+              <>
+                <i className="fa-brands fa-google"></i>{" "}
+                <span>Login with Google</span>
+              </>
+            )}
           </button>
-          <button className="social-btn linkedin" onClick={linkedinLogin}>
-            <i className="fa-brands fa-linkedin"></i>{" "}
-            <span>Login with LinkedIn</span>
+          <button className="social-btn linkedin" onClick={linkedinLogin} disabled={socialLoading !== null}>
+            {socialLoading === "linkedin" ? (
+              <LoaderCircle className="spinner-icon auth-loading" />
+            ) : (
+              <>
+                <i className="fa-brands fa-linkedin"></i>{" "}
+                <span>Login with LinkedIn</span>
+              </>
+            )}
           </button>
         </div>
         <Link to={"/forgot"} className="auth-forgot">
