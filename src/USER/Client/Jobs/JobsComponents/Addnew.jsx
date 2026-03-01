@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import TagsInput from "../../../../Landing/Registerations/TagsInput";
+import { toast } from "react-hot-toast";
+import { LoaderCircle } from "lucide-react";
 
 export default function Addnew() {
   const [step, setStep] = useState(1);
@@ -33,7 +35,7 @@ export default function Addnew() {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("User is not authenticated. Please log in.");
+        toast.error("User is not authenticated. Please log in.");
         navigate("/login", { replace: true });
         return;
       }
@@ -46,7 +48,7 @@ export default function Addnew() {
         !formData.projectCategory ||
         formData.tags.length === 0
       ) {
-        alert("Please fill all the required fields.");
+        toast.error("Please fill all the required fields.");
         return;
       }
 
@@ -79,14 +81,15 @@ export default function Addnew() {
           withCredentials: true,
         }
       );
+      toast.success("Job published successfully!");
       navigate("/client/jobs/unassigned", { replace: true });
       console.log(response.data);
     } catch (error) {
       console.error("Error publishing job:", error);
-      alert(
+      toast.error(
         error.response?.data?.message ||
-          error.message ||
-          "An unexpected error occurred. Please try again."
+        error.message ||
+        "An unexpected error occurred. Please try again."
       );
     } finally {
       setIsSubmitting(false);
@@ -108,7 +111,7 @@ export default function Addnew() {
           return newStep;
         });
       } else {
-        alert("Please fill in all required fields.");
+        toast.error("Please fill in all required fields.");
       }
     } else if (step === 2) {
       if (
@@ -122,7 +125,7 @@ export default function Addnew() {
           return newStep;
         });
       } else {
-        alert("Please fill in all required fields.");
+        toast.error("Please fill in all required fields.");
       }
     } else {
       setStep((prevStep) => {
@@ -157,13 +160,13 @@ export default function Addnew() {
 
     const validFiles = files.filter((file) => allowedTypes.includes(file.type));
     if (validFiles.length !== files.length) {
-      alert(
+      toast.error(
         "Some files were not allowed. Only PDFs and Word documents are accepted."
       );
     }
 
     if (validFiles.length + formData.uploadFiles.length > 5) {
-      alert("You can upload a maximum of 5 files.");
+      toast.error("You can upload a maximum of 5 files.");
       return;
     }
 
@@ -380,10 +383,10 @@ export default function Addnew() {
                 {step === 3 ? (
                   <p
                     onClick={handlePublish}
-                    className="addnew-nxt-btn addnew-btn"
-                    disabled={isSubmitting}
+                    className="addnew-nxt-btn addnew-btn flex-center-btn"
+                    style={{ opacity: isSubmitting ? 0.7 : 1, display: "flex", justifyContent: "center", alignItems: "center", gap: "5px" }}
                   >
-                    Publish
+                    {isSubmitting ? <LoaderCircle className="spinner-icon auth-loading" /> : "Publish"}
                   </p>
                 ) : (
                   <p onClick={nextstep} className="addnew-nxt-btn addnew-btn">

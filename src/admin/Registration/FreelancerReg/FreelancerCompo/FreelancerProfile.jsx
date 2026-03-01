@@ -1,13 +1,16 @@
+import React, { useState } from "react";
 import "../FreelancerReg.css";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAxiosFetch from "../../../../hooks/useAxiosFetch";
 import { choice } from "../../../api/registerations";
 import Load from "../../../../USER/ReuseableComponents/Loaders/Load";
+import { LoaderCircle } from "lucide-react";
 
 const FreelancerProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [actionLoading, setActionLoading] = useState(null);
 
   const {
     data: freelancer,
@@ -17,6 +20,7 @@ const FreelancerProfile = () => {
 
   const send = async (selection) => {
     if (!window.confirm(`Are you sure you want to ${selection} this freelancer?`)) return;
+    setActionLoading(selection);
     try {
       const ress = await choice(selection, id, "freelancer");
       console.log(ress);
@@ -28,6 +32,8 @@ const FreelancerProfile = () => {
       }
     } catch (err) {
       toast.error("Something went wrong!");
+    } finally {
+      setActionLoading(null);
     }
   };
 
@@ -91,16 +97,16 @@ const FreelancerProfile = () => {
         ))}
         <div className="freelancerprobtn-con">
           <p
-            onClick={() => send("reject")}
+            onClick={() => !actionLoading && send("reject")}
             className="freelancerprobtn declinebtn"
           >
-            Decline
+            {actionLoading === "reject" ? <LoaderCircle className="spinner-icon auth-loading" /> : "Decline"}
           </p>
           <p
-            onClick={() => send("accept")}
+            onClick={() => !actionLoading && send("accept")}
             className="freelancerprobtn acceptbtn"
           >
-            Accept
+            {actionLoading === "accept" ? <LoaderCircle className="spinner-icon auth-loading" /> : "Accept"}
           </p>
         </div>
       </div>

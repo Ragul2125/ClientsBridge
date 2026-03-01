@@ -8,6 +8,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import useAxiosFetch from "../../../../../hooks/useAxiosFetch";
+import { toast } from "react-hot-toast";
+import { LoaderCircle } from "lucide-react";
 
 export default function JobLayout() {
   const { viewid } = useParams();
@@ -19,6 +21,8 @@ export default function JobLayout() {
   const [ReviewPanel, setReviewPanel] = useState(false);
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
+  const [isCompleting, setIsCompleting] = useState(false);
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false);
 
   useEffect(() => {
     if (location.pathname.includes("/client/jobs/ongoing")) {
@@ -59,6 +63,7 @@ export default function JobLayout() {
   };
 
   const handleReviewSubmit = async () => {
+    setIsSubmittingReview(true);
     try {
       const res = await axios.post(
         `${API_URL}/api/review/${jobData.assignedTo._id}/addReviews`,
@@ -72,10 +77,13 @@ export default function JobLayout() {
           },
         }
       );
-      console.log("Review submitted");
+      toast.success("Review submitted!");
       setReviewPanel(false);
     } catch (error) {
       console.error(error.message);
+      toast.error("Failed to submit review.");
+    } finally {
+      setIsSubmittingReview(false);
     }
   };
 
@@ -84,6 +92,8 @@ export default function JobLayout() {
   };
 
   const handleCompleteJob = async () => {
+    if (!window.confirm("Are you sure you want to mark this job as completed?")) return;
+    setIsCompleting(true);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
@@ -93,14 +103,16 @@ export default function JobLayout() {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      alert(response.data.message);
+      toast.success(response.data.message || "Job marked as completed.");
 
       refetch(); // Refresh the job data
       setJobs("completed");
       navigate("/client/jobs/unassigned");
     } catch (error) {
       console.error("Error completing the job:", error);
-      alert("Failed to mark the job as completed.");
+      toast.error(error.response?.data?.message || "Failed to mark the job as completed.");
+    } finally {
+      setIsCompleting(false);
     }
   };
 
@@ -206,9 +218,8 @@ export default function JobLayout() {
           <p className="client-oncooverview-side-chatbtn" onClick={handleChat}>
             <IoChatboxEllipsesOutline /> Chat
           </p>
-          <button className="complete-btn" onClick={handleCompleteJob}>
-            {" "}
-            Mark as completed
+          <button className="complete-btn" onClick={handleCompleteJob} disabled={isCompleting}>
+            {isCompleting ? <LoaderCircle className="spinner-icon auth-loading" /> : "Mark as completed"}
           </button>
         </section>
       )}
@@ -260,8 +271,8 @@ export default function JobLayout() {
               >
                 Cancel
               </p>
-              <p onClick={handleReviewSubmit} className="review-submit">
-                Submit
+              <p onClick={!isSubmittingReview ? handleReviewSubmit : undefined} className="review-submit" style={{ opacity: isSubmittingReview ? 0.7 : 1 }}>
+                {isSubmittingReview ? <LoaderCircle className="spinner-icon auth-loading" /> : "Submit"}
               </p>
             </div>
           </div>

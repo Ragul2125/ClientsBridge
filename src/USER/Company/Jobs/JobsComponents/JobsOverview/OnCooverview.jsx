@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import Load from "../../../../ReuseableComponents/Loaders/Load";
+import { LoaderCircle } from "lucide-react";
 
 export default function ProfileOverview() {
   const [jobDetails, setJobDetails] = useState(null);
@@ -16,6 +17,7 @@ export default function ProfileOverview() {
   const [jobs, setJobs] = useState("");
   const [ReviewPanel, setReviewPanel] = useState(false);
   const [rating, setRating] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const location = useLocation();
   const { jbid: id } = useParams(); // Assuming the job ID comes from the URL
@@ -32,8 +34,7 @@ export default function ProfileOverview() {
     const fetchJobDetails = async () => {
       try {
         const response = await axios.get(
-          `${
-            import.meta.env.VITE_BACKEND_URL
+          `${import.meta.env.VITE_BACKEND_URL
           }/api/jobs/getOnGoingJobDetail/${id}`,
           {
             headers: {
@@ -53,11 +54,11 @@ export default function ProfileOverview() {
   }, [id, location.pathname]);
 
   const handleReviewSubmit = async () => {
+    setIsSubmitting(true);
     try {
       console.log(review, rating);
       const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/review/${
-          jobDetails.clientID._id
+        `${import.meta.env.VITE_BACKEND_URL}/api/review/${jobDetails.clientID._id
         }/addReviews`,
         {
           stars: rating,
@@ -73,6 +74,8 @@ export default function ProfileOverview() {
       setReviewPanel(false);
     } catch (error) {
       console.error(error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -225,8 +228,8 @@ export default function ProfileOverview() {
               >
                 Cancel
               </p>
-              <p onClick={handleReviewSubmit} className="review-submit">
-                Submit
+              <p onClick={!isSubmitting ? handleReviewSubmit : undefined} className="review-submit" style={{ opacity: isSubmitting ? 0.7 : 1 }}>
+                {isSubmitting ? <LoaderCircle className="spinner-icon auth-loading" /> : "Submit"}
               </p>
             </div>
           </div>

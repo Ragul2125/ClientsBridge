@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import "./registration.css";
 import logo from "../../assets/logo.png";
 import TagsInput from "./TagsInput";
+import { LoaderCircle } from "lucide-react";
 const FreelancerRegistrationPage = () => {
   const [formData, setFormData] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const passwordRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -143,6 +145,12 @@ const FreelancerRegistrationPage = () => {
               name="mailId"
               placeholder="Enter Email Address"
               onChange={handleChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  passwordRef.current?.focus();
+                }
+              }}
               required
             />
           </div>
@@ -164,10 +172,11 @@ const FreelancerRegistrationPage = () => {
               placeholder="Enter Password"
               onChange={handleChange}
               required
+              ref={passwordRef}
             />
           </div>
           <button type="submit" className="submit-btn" disabled={loading}>
-            {loading ? <div className="spinner-res" /> : "Submit Registration"}
+            {loading ? <LoaderCircle className="spinner-icon auth-loading" /> : "Submit Registration"}
           </button>
         </form>
       </div>

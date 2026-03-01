@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 import "./setup.css";
 import logo from "../../assets/logo.png";
+import { LoaderCircle } from "lucide-react";
 
 const ChangePassword = () => {
   const { secret } = useParams();
@@ -82,7 +83,7 @@ const ChangePassword = () => {
                 className="submit-button"
                 disabled={isLoading} // 6. Disable button and change text
               >
-                {isLoading ? "Updating..." : "Submit"}
+                {isLoading ? <LoaderCircle className="spinner-icon auth-loading" /> : "Submit"}
               </button>
             </div>
           </div>

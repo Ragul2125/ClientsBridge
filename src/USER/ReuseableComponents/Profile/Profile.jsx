@@ -5,6 +5,8 @@ import Rating from "@mui/material/Rating";
 import { FaRegEdit } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-hot-toast";
+import { LoaderCircle } from "lucide-react";
 
 const Profile = () => {
   const [profileData, setProfileData] = useState({});
@@ -15,14 +17,16 @@ const Profile = () => {
   const [newProfile, setNewProfile] = useState({});
   const [isEditablePersonal, setIsEditablePersonal] = useState(false);
 
+  const [isUpdatingPersonal, setIsUpdatingPersonal] = useState(false);
+  const [isUpdatingProfessional, setIsUpdatingProfessional] = useState(false);
+
   const toggleEditModePersonal = () => {
     setIsEditablePersonal(!isEditablePersonal);
-    setNewUser(userData);
   };
 
   const personalContentChange = (e, field) => {
-    setProfileData({
-      ...profileData,
+    setUserData({
+      ...userData,
       [field]: e.target.innerText,
     });
   };
@@ -34,26 +38,21 @@ const Profile = () => {
   const toggleEditModProfessional = () => {
     setIsEditableProfessional(!isEditableProfessional);
   };
-  const ProfessionalContentChange = (e, field, index) => {
-    const updatedValue = e.target.textContent;
-    setProfessionalDetails((prevDetails) =>
-      prevDetails.map((professional, i) =>
-        i === index ? { ...professional, [field]: updatedValue } : professional
-      )
-    );
+  const ProfessionalContentChange = (e, field) => {
+    setProfileData({
+      ...profileData,
+      [field]: e.target.innerText,
+    });
   };
 
-  // const ProfessionalContentChange = (e, field) => {
-  //   setProfessionalDetails({
-  //     ...professionalDetails,
-  //     [field]: e.target.innerText,
-  //   });
-  // };
   // -----------------update-change------------------
-  const handleUpdate = () => {
-    console.log("Updated profile data:", profileData);
-    alert("Profile updated!");
+  const handleUpdatePersonal = async () => {
+    await updateProfileUsers(userData);
     setIsEditablePersonal(false);
+  };
+
+  const handleUpdateProfessional = async () => {
+    await updateProfileDetails(profileData);
     setIsEditableProfessional(false);
   };
 
@@ -88,52 +87,50 @@ const Profile = () => {
     }
   };
 
-  // Update profile description
-  const updateProfileUsers = async (newUser) => {
+  // Update profile users
+  const updateProfileUsers = async (updatedData) => {
+    setIsUpdatingPersonal(true);
     try {
       const response = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/profile/updateUserDetails`,
+        updatedData,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        },
-        {
-          newUser,
         }
       );
-      if (response.status == 200) {
+      if (response.status === 200) {
         setUserData(response.data);
+        toast.success("Personal details updated!");
       }
     } catch (error) {
-      showPopup(
-        error.response?.data?.message || "Failed to update profile",
-        "error"
-      );
+      toast.error(error.response?.data?.message || "Failed to update profile");
+    } finally {
+      setIsUpdatingPersonal(false);
     }
   };
   // Update profile description
-  const updateProfileDetails = async (newProfile) => {
+  const updateProfileDetails = async (updatedProfile) => {
+    setIsUpdatingProfessional(true);
     try {
       const response = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/profile/updateProdileDetails`,
+        updatedProfile,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        },
-        {
-          newProfile,
         }
       );
-      if (response.status == 200) {
+      if (response.status === 200) {
         setProfileData(response.data);
+        toast.success("Professional details updated!");
       }
     } catch (error) {
-      showPopup(
-        error.response?.data?.message || "Failed to update profile",
-        "error"
-      );
+      toast.error(error.response?.data?.message || "Failed to update profile");
+    } finally {
+      setIsUpdatingProfessional(false);
     }
   };
 
@@ -245,8 +242,8 @@ const Profile = () => {
             </div>
             <div className="btn">
               {isEditablePersonal && (
-                <button onClick={handleUpdate} style={{ marginTop: "1em" }}>
-                  Update
+                <button onClick={handleUpdatePersonal} style={{ marginTop: "1em" }} disabled={isUpdatingPersonal}>
+                  {isUpdatingPersonal ? <LoaderCircle className="spinner-icon auth-loading" /> : "Update"}
                 </button>
               )}
             </div>
@@ -412,8 +409,8 @@ const Profile = () => {
 
             <div className="btn">
               {isEditableProfessional && (
-                <button onClick={handleUpdate} style={{ marginTop: "1em" }}>
-                  Update
+                <button onClick={handleUpdateProfessional} style={{ marginTop: "1em" }} disabled={isUpdatingProfessional}>
+                  {isUpdatingProfessional ? <LoaderCircle className="spinner-icon auth-loading" /> : "Update"}
                 </button>
               )}
             </div>

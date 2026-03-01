@@ -233,6 +233,26 @@
   }
 
   .social-btn span {
-    display: none; /* Keep only icons for small screens */
+    display: none;
+    /* Keep only icons for small screens */
   }
+}
+
+.spinner-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.auth-loading {
+  display: block;
+  margin: 0 auto;
 }

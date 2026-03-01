@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./setup.css";
 import logo from "../../assets/logo.png";
+import { LoaderCircle } from "lucide-react";
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [popupMessage, setPopupMessage] = useState("");
   const [popupVisible, setPopupVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleForgotPassword = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/auth/reset`,
@@ -22,6 +25,7 @@ const ForgotPassword = () => {
     } catch (error) {
       setPopupMessage("An error occurred. Please try again later.");
     } finally {
+      setIsLoading(false);
       setPopupVisible(true);
     }
   };
@@ -42,8 +46,8 @@ const ForgotPassword = () => {
               />
             </div>
             <div className="row">
-              <button onClick={handleForgotPassword} className="submit-button">
-                Submit
+              <button onClick={handleForgotPassword} className="submit-button" disabled={isLoading}>
+                {isLoading ? <LoaderCircle className="spinner-icon auth-loading" /> : "Submit"}
               </button>
             </div>
           </div>

@@ -8,11 +8,13 @@ import toast from "react-hot-toast";
 import JobAssignPopup from "./JobAssignPopup";
 import useAxiosFetch from "../../../hooks/useAxiosFetch";
 import Load from "../../../USER/ReuseableComponents/Loaders/Load";
+import PublicProfile from "../../../USER/ReuseableComponents/Profile/PublicProfile";
 
 export default function Orders({ type }) {
   const id = window.location.pathname.split("/").pop();
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedProfileId, setSelectedProfileId] = useState(null);
 
   const {
     data: jobDetail,
@@ -135,7 +137,12 @@ export default function Orders({ type }) {
               <p className="profile-contact">
                 {jobDetail.clientID.mailId} | {jobDetail.clientID.phoneNumber}
               </p>
-              <button className="profile-btn">View Profile</button>
+              <button
+                className="profile-btn"
+                onClick={() => setSelectedProfileId(jobDetail.clientID._id)}
+              >
+                View Profile
+              </button>
             </div>
           </div>
           {type === "pending" ? (
@@ -196,7 +203,14 @@ export default function Orders({ type }) {
                   {jobDetail.assignedTo.mailId} |{" "}
                   {jobDetail.assignedTo.phoneNumber}
                 </p>
-                <button className="profile-btn">View Profile</button>
+                <button
+                  className="profile-btn"
+                  onClick={() => {
+                    setSelectedProfileId(jobDetail.assignedTo._id);
+                  }}
+                >
+                  View Profile
+                </button>
               </div>
               {type === "satisfied" && (
                 <button className="profile-btn" onClick={handleMarkAsCompleted}>
@@ -210,6 +224,12 @@ export default function Orders({ type }) {
         </div>
         {isPopupOpen && (
           <JobAssignPopup togglePopup={togglePopup} jobId={jobDetail._id} />
+        )}
+        {selectedProfileId && (
+          <PublicProfile
+            viewid={selectedProfileId}
+            onClose={() => setSelectedProfileId(null)}
+          />
         )}
       </main>
     </>

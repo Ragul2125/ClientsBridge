@@ -16,6 +16,7 @@ const GlobalPopup = ({
               key={index}
               className={`global-popup-button ${button.className || ""}`}
               onClick={button.onClick}
+              disabled={button.disabled}
             >
               {button.label}
             </button>
