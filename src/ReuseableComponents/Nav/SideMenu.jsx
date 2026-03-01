@@ -19,31 +19,31 @@ const adminNav = [
     icon: <LuLayoutDashboard />,
     path: "/admin",
     match: (path) =>
-      path.toLowerCase() === "/admin" || path.toLowerCase() === "dashboard",
+      path.toLowerCase() === "/admin" || path.toLowerCase().startsWith("/admin/dashboard"),
   },
   {
     label: "Registration",
     icon: <MdOutlineAppRegistration />,
     path: "/admin/registration/client",
-    match: (path) => path.toLowerCase().includes("/registration"),
+    match: (path) => path.toLowerCase().startsWith("/admin/registration"),
   },
   {
     label: "Inbox",
     icon: <AiOutlineMessage />,
     path: "/admin/inbox",
-    match: (path) => path.toLowerCase().includes("/inbox"),
+    match: (path) => path.toLowerCase().startsWith("/admin/inbox"),
   },
   {
     label: "Job List",
     icon: <GiWallet />,
     path: "/admin/jobs/pending",
-    match: (path) => path.toLowerCase().includes("/jobs"),
+    match: (path) => path.toLowerCase().startsWith("/admin/jobs"),
   },
   {
     label: "Transaction",
     icon: <IoShieldCheckmark />,
     path: "/admin/transaction",
-    match: (path) => path.toLowerCase().includes("/transaction"),
+    match: (path) => path.toLowerCase().startsWith("/admin/transaction"),
   },
 ];
 
@@ -54,21 +54,19 @@ const clientNav = [
     icon: <LuLayoutDashboard />,
     match: (path) =>
       path.toLowerCase() === "/client" ||
-      path.toLowerCase().includes("/client/dashboard"),
+      path.toLowerCase().startsWith("/client/dashboard"),
   },
   {
     label: "Inbox",
     path: "/client/chat",
     icon: <AiOutlineMessage />,
-    match: (path) =>
-      path.toLowerCase().includes("/client/chat") ||
-      path.toLowerCase() === "/client/chat/:id",
+    match: (path) => path.toLowerCase().startsWith("/client/chat"),
   },
   {
     label: "Jobs",
     path: "/client/jobs/unassigned",
     icon: <GiWallet />,
-    match: (path) => path.toLowerCase().includes("/client/jobs"),
+    match: (path) => path.toLowerCase().startsWith("/client/jobs"),
   },
   /* {
       name: "Transaction",
@@ -83,20 +81,20 @@ const companyNav = [
     path: "/company/home",
     icon: <BiHomeAlt2 />,
     match: (path) =>
-      path.toLowerCase().includes("/company/home") ||
+      path.toLowerCase().startsWith("/company/home") ||
       path.toLowerCase() === "/company",
   },
   {
     label: "Inbox",
     path: "/company/chat",
     icon: <AiOutlineMessage />,
-    match: (path) => path.toLowerCase().includes("/company/chat"),
+    match: (path) => path.toLowerCase().startsWith("/company/chat"),
   },
   {
     label: "Jobs",
     path: "/company/jobs/bidded",
     icon: <GiWallet />,
-    match: (path) => path.toLowerCase().includes("/company/jobs"),
+    match: (path) => path.toLowerCase().startsWith("/company/jobs"),
   },
   /* {
         name: "Transaction",
@@ -110,24 +108,20 @@ const freelancerNav = [
     path: "/freelancer/home",
     icon: <BiHomeAlt2 />,
     match: (path) =>
-      path.toLowerCase().includes("/freelancer/home") ||
+      path.toLowerCase().startsWith("/freelancer/home") ||
       path.toLowerCase() === "/freelancer",
   },
   {
     label: "Inbox",
     path: "/freelancer/chat",
     icon: <AiOutlineMessage />,
-    match: (path) => path.toLowerCase().includes("/freelancer/chat"),
+    match: (path) => path.toLowerCase().startsWith("/freelancer/chat"),
   },
   {
     label: "Jobs",
     path: "/freelancer/jobs/bidded",
     icon: <GiWallet />,
-    match: (path) =>
-      path.toLowerCase() === "/freelancer/jobs/bidded" ||
-      path.toLowerCase() === "/freelancer/jobs/bidded/:id" ||
-      path.toLowerCase() === "/freelancer/jobs/ongoing" ||
-      path.toLowerCase() === "/freelancer/jobs/completed",
+    match: (path) => path.toLowerCase().startsWith("/freelancer/jobs"),
   },
   /* {
         name: "Transaction",
@@ -145,10 +139,10 @@ const SideMenu = () => {
     .includes("admin" || "dashboard")
     ? adminNav
     : location.pathname.toLowerCase().includes("client")
-    ? clientNav
-    : location.pathname.toLowerCase().includes("company")
-    ? companyNav
-    : freelancerNav;
+      ? clientNav
+      : location.pathname.toLowerCase().includes("company")
+        ? companyNav
+        : freelancerNav;
 
   const logout = () => {
     localStorage.clear();
@@ -198,9 +192,8 @@ const SideMenu = () => {
           <Link
             key={index}
             to={item.path}
-            className={`navbtmicon ${
-              item.match(location.pathname) ? "activeb" : ""
-            }`}
+            className={`navbtmicon ${item.match(location.pathname) ? "activeb" : ""
+              }`}
           >
             {item.icon}
           </Link>

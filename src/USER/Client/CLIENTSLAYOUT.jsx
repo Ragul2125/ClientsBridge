@@ -17,6 +17,7 @@ import UserProfile from "../ReuseableComponents/Profile/Profile";
 import MessagePage from "../Chat/components/MessagePage";
 import Home from "../Chat/Home";
 import JobLayout from "./Jobs/JobsComponents/JobsOverview/JobLayout";
+import Addprojects from "../../Landing/Setup/SetupProjects";
 
 export default function ClientLayout() {
   return (
@@ -40,10 +41,10 @@ export default function ClientLayout() {
           <Route path="jobs/ongoing/:viewid" element={<JobLayout />} />
           <Route path="jobs/completed/:viewid" element={<JobLayout />} />
           <Route path="myProfile" element={<UserProfile />} />
+          <Route path="myProfile/addprojects" element={<Addprojects />} />
           <Route path="chat" element={<Home />}>
             <Route path=":userId" element={<MessagePage />} />
           </Route>
-          {/* <Route path="addprojects" element={<Addprojects />} /> */}
         </Routes>
       </div>
     </div>
