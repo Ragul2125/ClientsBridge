@@ -29,7 +29,7 @@ const TopNav = () => {
   const { data, error, loading, refetch } = useAxiosFetch("/log");
 
   {
-    !loading && console.log(data);
+    !loading && console.log(data.name);
   }
 
   const navigate = useNavigate();

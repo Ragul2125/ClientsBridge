@@ -131,8 +131,8 @@ export default function JobLayout() {
             <span className="client-profileoverview-inner-time">
               {new Date(jobData.deadline).toLocaleDateString()}
             </span>
+         
           </p>
-          <p className="client-profileoverview-inner-threedot">...</p>
         </div>
 
         {/* --------------------------------------------------------------------DESC------------------ */}

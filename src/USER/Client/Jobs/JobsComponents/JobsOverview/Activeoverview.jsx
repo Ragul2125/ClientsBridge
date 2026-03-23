@@ -123,8 +123,8 @@ const View = () => {
             <span className="client-profileoverview-inner-time">
               {new Date(project.deadline).toLocaleDateString()}
             </span>
+         
           </p>
-          <p className="client-profileoverview-inner-threedot">...</p>
         </div>
 
         {/* --------------------------------------------------------------------DESC------------------ */}

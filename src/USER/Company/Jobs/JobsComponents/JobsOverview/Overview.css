@@ -14,9 +14,9 @@
 
 .client-profileoverview-inner {
   height: auto;
-  background-color: #ffffff;
+  background-color: white;
   padding: 2.5em;
-  margin: 0 4em;
+  /* margin: 0 4em; */
   margin-top: 3.5em;
   border-radius: 30px 30px 0 0;
   display: grid;
@@ -28,7 +28,8 @@
   row-gap: 0.5em;
   column-gap: 1em;
   font-family: "poppins";
-  overflow: scroll;
+  overflow: scroll; 
+  margin-bottom: 5em;
   @media (max-width:1100px) {
     overflow:visible;
   }
@@ -60,6 +61,8 @@
 }
 
 .client-profileoverview-inner-des-file {
+  /* margin-bottom: 5em; */
+  padding-bottom: 2em;
   p a {
          text-decoration: none;
         position: relative;
@@ -118,7 +121,7 @@
 
 .client-profileoverview-inner-des {
   grid-area: des;
-  margin-left: 1.5em;
+  /* margin-left: 1.5em; */
   font-family: "poppins";
 }
 
@@ -229,6 +232,7 @@
   margin: 1em;
   border-radius: 20px;
   transition-duration: 0.2s;
+  overflow-y: scroll;
 }
 
 .client-oncooverview-inner:hover {

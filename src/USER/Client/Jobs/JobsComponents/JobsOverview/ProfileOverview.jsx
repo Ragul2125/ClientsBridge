@@ -104,14 +104,15 @@ export default function ProfileOverview() {
             <span className="client-profileoverview-inner-time">
               {new Date(job.deadline).toLocaleDateString()}
             </span>
-          </p>
-          <div className="client-profileoverview-inner-actions">
-            <p
+            {/* <p
               className="client-profileoverview-inner-threedot"
               onClick={handleDropdownToggle}
             >
               ...
-            </p>
+            </p> */}
+          </p>
+          <div className="client-profileoverview-inner-actions">
+            
             {showDropdown && (
               <div className="dropdown-menu">
                 <button onClick={handleDeleteJob} disabled={isDeleting}>

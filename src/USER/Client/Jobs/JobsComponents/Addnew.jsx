@@ -75,7 +75,6 @@ export default function Addnew() {
         formDataObj,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
           withCredentials: true,

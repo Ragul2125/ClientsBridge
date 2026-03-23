@@ -7,8 +7,8 @@ const Layout = ({ project, children }) => {
           <span className="client-profileoverview-inner-time">
             3 hours ago{" "}
           </span>
+      
         </p>
-        <p className="client-profileoverview-inner-threedot">...</p>
 
         <div className="client-profileoverview-inner-des">
           <p className="client-profileoverview-inner-des-head">Overview</p>
